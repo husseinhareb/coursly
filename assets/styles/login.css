@@ -1,0 +1,150 @@
+/* login.css */
+/* --- Overall Page --- */
+body {
+    background-color: #E4E7EA; /* White background like Moodle */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.login-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+/* --- Logo / Header --- */
+.login-logo img {
+    max-width: 150px;
+    margin-bottom: 20px;
+}
+
+/* --- Form Container --- */
+.login-form {
+    width: 100%;
+    background-color: #FFFFFF; /* Light gray box behind form */
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+}
+
+.login-form h2 {
+    margin: 0 0 15px 0;
+    font-size: 1.2rem;
+    color: #333;
+    text-align: center;
+}
+
+/* --- Form Fields --- */
+.form-group {
+    margin-bottom: 15px;
+}
+.form-label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #FFFCC8; /* Yellowish background for inputs */
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* --- Error Alert --- */
+.alert {
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+.alert-danger {
+    background-color: #f2dede;
+    border: 1px solid #ebccd1;
+    color: #a94442;
+}
+
+/* --- Login Button --- */
+.btn-login {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff; /* Moodle-like blue button */
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+.btn-login:hover {
+    background-color: #0056b3;
+}
+
+/* --- Lost Password Link --- */
+.lost-password {
+    display: block;
+    margin-top: 10px;
+    text-align: right;
+    font-size: 0.9rem;
+}
+.lost-password a {
+    color: #007bff;
+    text-decoration: none;
+}
+.lost-password a:hover {
+    text-decoration: underline;
+}
+
+/* --- Alternate Login Buttons --- */
+.alternate-logins {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.alternate-logins p {
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+.alternate-logins .btn-alt {
+    display: block;
+    width: 100%;
+    margin: 5px 0;
+    padding: 10px;
+    background-color: #e7e7e7;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+}
+.alternate-logins .btn-alt:hover {
+    background-color: #d7d7d7;
+}
+
+/* --- Footer with language & cookies notice --- */
+.login-footer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    font-size: 0.9rem;
+    color: #555;
+}
+.login-footer select,
+.login-footer a {
+    color: #007bff;
+    text-decoration: none;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+.login-footer a:hover {
+    text-decoration: underline;
+}
+.login-separator {
+    margin: 20px 0;
+    border-top: 1px solid #ddd;
+}

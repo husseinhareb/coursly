@@ -1,0 +1,10 @@
+# translations/messages.en.yaml
+login:
+    title: "Log in"
+    email_label: "Email"
+    password_label: "Password"
+    button: "Log in"
+    lost_password: "Lost password?"
+    logged_in_as: "You are logged in as %username%"
+    logout: "Logout"
+    cookies_notice: "Cookies notice"

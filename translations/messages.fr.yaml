@@ -1,0 +1,10 @@
+# translations/messages.fr.yaml
+login:
+    title: "Se connecter"
+    email_label: "E-mail"
+    password_label: "Mot de passe"
+    button: "Se connecter"
+    lost_password: "Mot de passe oublié ?"
+    logged_in_as: "Vous êtes connecté en tant que %username%"
+    logout: "Déconnexion"
+    cookies_notice: "Notice concernant les cookies"
