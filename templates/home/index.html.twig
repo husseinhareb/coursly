@@ -10,7 +10,7 @@
 {% block body %}
 <header class="header">
     <div class="header-content">
-        <a class="site-logo" href="{{ path('app_home') }}">MySite</a>
+        <a class="site-logo" href="{{ path('app_home') }}">Mooooooooooodle</a>
         <button class="menu-toggle" aria-label="Toggle navigation">
             <span class="toggle-bar"></span>
             <span class="toggle-bar"></span>
@@ -24,8 +24,9 @@
                             <img src="{{ asset('uploads/profile_pics/' ~ app.user.profilePic) }}" 
                                  alt="Profile Picture" class="profile-pic">
                         {% else %}
-                            <img src="{{ asset('images/default-avatar.png') }}" 
-                                 alt="Default Avatar" class="profile-pic">
+                            <div class="profile-pic avatar-initials">
+                                {{ app.user.userIdentifier|first|upper }}
+                            </div>
                         {% endif %}
                         <span class="user-info">Logged in as {{ app.user.userIdentifier }}</span>
                     </li>
@@ -53,7 +54,6 @@
 </main>
 
 <script>
-    // Mobile menu toggle
     document.querySelector('.menu-toggle').addEventListener('click', function() {
         document.querySelector('.main-nav').classList.toggle('active');
     });

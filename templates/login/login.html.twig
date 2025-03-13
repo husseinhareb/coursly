@@ -55,6 +55,10 @@
                     autocomplete="current-password"
                     required
                 >
+                <div class="show-password">
+                    <input type="checkbox" id="togglePassword">
+                    <label for="togglePassword">Show password</label>
+                </div>
             </div>
 
             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
@@ -81,4 +85,22 @@
         </div>
     </div>
 </div>
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const togglePassword = document.querySelector('#togglePassword');
+            const passwordInput = document.querySelector('#password');
+            
+            togglePassword.addEventListener('change', function() {
+                if (this.checked) {
+                    passwordInput.type = 'text';
+                } else {
+                    passwordInput.type = 'password';
+                }
+            });
+        });
+    </script>
+{% endblock %}
 {% endblock %}

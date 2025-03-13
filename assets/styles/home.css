@@ -60,12 +60,7 @@ body {
     gap: 0.75rem;
 }
 
-.profile-pic {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-}
+
 
 /* Mobile menu */
 .menu-toggle {
@@ -134,3 +129,26 @@ body {
         align-items: flex-start;
     }
 }
+
+
+/* Avatar Initials Styles */
+.avatar-initials {
+    background: #2563eb;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+}
+
+.profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+/* Keep existing styles and add these modifications */
