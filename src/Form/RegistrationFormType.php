@@ -47,12 +47,12 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('plainPassword', PasswordType::class, [
+            ->add('plainPassword', TextType::class, [
                 'mapped' => false,
-                'attr'   => ['autocomplete' => 'new-password'],
+                'attr'   => ['readonly' => true],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter a password',
+                        'message' => 'Password is auto-generated',
                     ]),
                     new Length([
                         'min' => 6,
@@ -70,14 +70,6 @@ class RegistrationFormType extends AbstractType
                 ],
                 'placeholder' => 'Choose your role',
                 'label'       => 'Role',
-            ])
-            ->add('agreeTerms', CheckboxType::class, [
-                'mapped'      => false,
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'You should agree to our terms.',
-                    ]),
-                ],
             ])
         ;
     }

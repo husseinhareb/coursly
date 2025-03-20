@@ -24,16 +24,38 @@
             {{ form_row(registrationForm.email) }}
         </div>
         <div class="form-group">
-            {{ form_row(registrationForm.plainPassword, { label: 'Password' }) }}
+            {# The plainPassword field is now a text input that will be auto-filled #}
+            {{ form_row(registrationForm.plainPassword, { label: 'Password (auto-generated)' }) }}
         </div>
         <div class="form-group">
             {{ form_row(registrationForm.role) }} 
-        </div>
-        <div class="form-group checkbox-group">
-            {{ form_row(registrationForm.agreeTerms) }}
         </div>
 
         <button type="submit" class="btn">Register</button>
     {{ form_end(registrationForm) }}
 </div>
+
+<script>
+    function updatePassword() {
+        const firstNameEl = document.getElementById('registration_form_firstName');
+        const lastNameEl = document.getElementById('registration_form_lastName');
+        const passwordEl = document.getElementById('registration_form_plainPassword');
+        
+        if (firstNameEl && lastNameEl && passwordEl) {
+            const firstName = firstNameEl.value.trim();
+            const lastName = lastNameEl.value.trim();
+
+            if (firstName !== '' && lastName !== '') {
+                const combined = firstName + lastName;
+                const autoPassword = combined + combined.length;
+                passwordEl.value = autoPassword;
+            } else {
+                passwordEl.value = '';
+            }
+        }
+    }
+
+    document.getElementById('registration_form_firstName').addEventListener('input', updatePassword);
+    document.getElementById('registration_form_lastName').addEventListener('input', updatePassword);
+</script>
 {% endblock %}
