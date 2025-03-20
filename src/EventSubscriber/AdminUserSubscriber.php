@@ -1,0 +1,58 @@
+<?php
+
+namespace App\EventSubscriber;
+
+use App\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+
+class AdminUserSubscriber implements EventSubscriberInterface
+{
+    private EntityManagerInterface $entityManager;
+    private UserPasswordHasherInterface $passwordHasher;
+    private static bool $adminInitialized = false;
+
+    public function __construct(EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher)
+    {
+        $this->entityManager = $entityManager;
+        $this->passwordHasher = $passwordHasher;
+    }
+
+    public function onKernelRequest(RequestEvent $event): void
+    {
+        if (self::$adminInitialized) {
+            return;
+        }
+        self::$adminInitialized = true;
+
+        $adminEmail = 'admin@coursly.com';
+        $adminUser = $this->entityManager->getRepository(User::class)
+            ->findOneBy(['email' => $adminEmail]);
+
+        if (!$adminUser) {
+            $adminUser = new User();
+            $adminUser->setEmail($adminEmail);
+            // Set default values for the new required fields
+            $adminUser->setFirstName('Admin');
+            $adminUser->setLastName('User');
+
+            // Set the admin role and hash the password
+            $adminUser->setRoles(['ROLE_ADMIN']);
+            $plainPassword = 'admincoursly';
+            $hashedPassword = $this->passwordHasher->hashPassword($adminUser, $plainPassword);
+            $adminUser->setPassword($hashedPassword);
+
+            $this->entityManager->persist($adminUser);
+            $this->entityManager->flush();
+        }
+    }
+
+    public static function getSubscribedEvents(): array
+    {
+        return [
+            'kernel.request' => 'onKernelRequest',
+        ];
+    }
+}
