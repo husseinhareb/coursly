@@ -34,6 +34,11 @@
                     <li class="menu-item">
                         <a class="menu-link" href="{{ path('app_logout') }}">Logout</a>
                     </li>
+                    {% if 'ROLE_ADMIN' in app.user.roles %}
+                        <li class="menu-item">
+                            <a class="menu-link" href="{{ path('app_register') }}"> Add user </a>
+                        </li>
+                    {% endif %}
                 {% else %}
                     <li class="menu-item">
                         <a class="menu-link" href="{{ path('app_login') }}">Login</a>
@@ -46,7 +51,7 @@
 
 <main class="main-content">
     {% if app.user %}
-        <h1 class="welcome-heading">Hello, {{ app.user.userIdentifier }}!</h1>
+        <h1 class="welcome-heading">Hello, {{ app.user.firstName }}!</h1>
         <p class="user-detail">Your email: {{ app.user.userIdentifier }}</p>
         <p class="user-detail">Your role: {{ app.user.roles|join(', ') }}</p>
     {% else %}

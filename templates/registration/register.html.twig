@@ -2,17 +2,38 @@
 
 {% block title %}Register{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('styles/register.css') }}">
+{% endblock %}
+
 {% block body %}
+<div class="registration-container">
     <h1>Register</h1>
 
     {{ form_errors(registrationForm) }}
 
     {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, { label: 'Password' }) }}
-        {{ form_row(registrationForm.role) }} 
-        {{ form_row(registrationForm.agreeTerms) }}
+        <div class="form-group">
+            {{ form_row(registrationForm.firstName) }}
+        </div>
+        <div class="form-group">
+            {{ form_row(registrationForm.lastName) }}
+        </div>
+        <div class="form-group">
+            {{ form_row(registrationForm.email) }}
+        </div>
+        <div class="form-group">
+            {{ form_row(registrationForm.plainPassword, { label: 'Password' }) }}
+        </div>
+        <div class="form-group">
+            {{ form_row(registrationForm.role) }} 
+        </div>
+        <div class="form-group checkbox-group">
+            {{ form_row(registrationForm.agreeTerms) }}
+        </div>
 
         <button type="submit" class="btn">Register</button>
     {{ form_end(registrationForm) }}
+</div>
 {% endblock %}
