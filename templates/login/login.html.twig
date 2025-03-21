@@ -24,13 +24,16 @@
     <!-- Already logged in message -->
     {% if app.user %}
         <div class="alert alert-info">
-            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+            You are logged in as {{ app.user.userIdentifier }}, 
+            <a href="{{ path('app_logout') }}">Logout</a>
         </div>
     {% endif %}
 
-    <!-- Login Form -->
-    <div class="login-form">
+    <!-- White container for the form AND the footer -->
+    <div class="login-box">
         <h2>Please sign in</h2>
+
+        <!-- Login Form -->
         <form method="post">
             <div class="form-group">
                 <label for="username" class="form-label">Email</label>
@@ -45,6 +48,7 @@
                     autofocus
                 >
             </div>
+
             <div class="form-group">
                 <label for="password" class="form-label">Password</label>
                 <input
@@ -65,40 +69,38 @@
 
             <button class="btn btn-lg btn-primary" type="submit">Sign in</button>
         </form>
-    </div>
 
-    <div class="login-separator"></div>
+        <div class="login-separator"></div>
 
-    <!-- Footer with Language Selector & Cookies Notice -->
-    <div class="login-footer">
-        <div class="language-selector">
-            <form id="language-form" action="" method="get">
-                <select name="locale" onchange="window.location.href = '{{ path('change_language', {'locale': 'PLACEHOLDER'}) }}'.replace('PLACEHOLDER', this.value)">
-                    <option value="en">English (en)</option>
-                    <option value="fr">Français (fr)</option>
-                    {# Add more languages as needed #}
-                </select>
-            </form>
-        </div>
-        <div class="cookies-notice">
-            <a href="#">{{ 'login.cookies_notice'|trans }}</a>
+        <!-- Footer with Language Selector & Cookies Notice (inside the same box) -->
+        <div class="login-footer">
+            <div class="language-selector">
+                <form id="language-form" action="" method="get">
+                    <select name="locale" onchange="window.location.href = '{{ path('change_language', {'locale': 'PLACEHOLDER'}) }}'.replace('PLACEHOLDER', this.value)">
+                        <option value="en">English (en)</option>
+                        <option value="fr">Français (fr)</option>
+                        <!-- Add more languages as needed -->
+                    </select>
+                </form>
+            </div>
+            <div class="cookies-notice">
+                <a href="#">{{ 'login.cookies_notice'|trans }}</a>
+            </div>
         </div>
     </div>
 </div>
 
-
+{% block javascripts %}
+    {{ parent() }}
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const togglePassword = document.querySelector('#togglePassword');
             const passwordInput = document.querySelector('#password');
-            
+
             togglePassword.addEventListener('change', function() {
-                if (this.checked) {
-                    passwordInput.type = 'text';
-                } else {
-                    passwordInput.type = 'password';
-                }
+                passwordInput.type = this.checked ? 'text' : 'password';
             });
         });
     </script>
+{% endblock %}
 {% endblock %}

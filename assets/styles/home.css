@@ -1,4 +1,3 @@
-/* Base styles */
 * {
     margin: 0;
     padding: 0;
@@ -10,11 +9,10 @@ body {
     line-height: 1.6;
 }
 
-/* Header styles */
 .header {
     background: rgba(255, 45, 45, 0.95);
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    padding: 1rem;
+    padding: 0.3rem;
     position: fixed;
     width: 100%;
     top: 0;
@@ -22,7 +20,6 @@ body {
 }
 
 .header-content {
-    max-width: 1200px;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
@@ -36,7 +33,6 @@ body {
     text-decoration: none;
 }
 
-/* Menu styles */
 .menu {
     list-style: none;
     display: flex;
@@ -62,7 +58,6 @@ body {
 
 
 
-/* Mobile menu */
 .menu-toggle {
     display: none;
     background: none;
@@ -79,7 +74,6 @@ body {
     margin: 5px 0;
 }
 
-/* Main content */
 .main-content {
     max-width: 1200px;
     margin: 6rem auto 2rem;
@@ -97,7 +91,6 @@ body {
     color: #4a5568;
 }
 
-/* Responsive design */
 @media (max-width: 768px) {
     .menu-toggle {
         display: block;
@@ -112,6 +105,7 @@ body {
         background: white;
         padding: 1rem;
         box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        height: 40px;
     }
 
     .main-nav.active {
@@ -131,7 +125,6 @@ body {
 }
 
 
-/* Avatar Initials Styles */
 .avatar-initials {
     background: #2563eb;
     color: white;
@@ -151,4 +144,8 @@ body {
     flex-shrink: 0;
 }
 
-/* Keep existing styles and add these modifications */
+
+.login-logo img {
+    width: 50px;
+    height: 40px;
+}
