@@ -86,8 +86,7 @@
     </div>
 </div>
 
-{% block javascripts %}
-    {{ parent() }}
+
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const togglePassword = document.querySelector('#togglePassword');
@@ -102,5 +101,4 @@
             });
         });
     </script>
-{% endblock %}
 {% endblock %}

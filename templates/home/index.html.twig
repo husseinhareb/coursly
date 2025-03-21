@@ -10,7 +10,7 @@
 {% block body %}
 <header class="header">
     <div class="header-content">
-        <a class="site-logo" href="{{ path('app_home') }}">Mooooooooooodle</a>
+        <a class="site-logo" href="{{ path('app_home') }}">Coursly</a>
         <button class="menu-toggle" aria-label="Toggle navigation">
             <span class="toggle-bar"></span>
             <span class="toggle-bar"></span>
@@ -25,10 +25,10 @@
                                  alt="Profile Picture" class="profile-pic">
                         {% else %}
                             <div class="profile-pic avatar-initials">
-                                {{ app.user.userIdentifier|first|upper }}
+                                {{ app.user.firstName|first|upper }}
                             </div>
                         {% endif %}
-                        <span class="user-info">Logged in as {{ app.user.userIdentifier }}</span>
+                        <span class="user-info">{{ app.user.firstName }}</span>
                         <span class="user-role">Role: {{ app.user.roles|join(', ') }}</span>
                     </li>
                     <li class="menu-item">
