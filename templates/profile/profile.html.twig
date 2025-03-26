@@ -1,4 +1,3 @@
-{# templates/profile/profile.html.twig #}
 {% extends 'base.html.twig' %}
 
 {% block title %}My Profile{% endblock %}
@@ -12,12 +11,14 @@
 <main class="profile-content">
     <h1>Your Profile</h1>
 
+    {# Flash messages #}
     {% for label, flashes in app.flashes %}
         {% for flash in flashes %}
             <div class="alert alert-{{ label }}">{{ flash }}</div>
         {% endfor %}
     {% endfor %}
 
+    {# Profile Picture #}
     <div class="profile-picture">
         {% if user.profilePic %}
             <img 
@@ -30,9 +31,10 @@
         {% endif %}
     </div>
 
+    {# Determine whether to show the edit form due to validation errors #}
     {% set showEditForm = form.vars.submitted and not form.vars.valid %}
 
-    {# READ-ONLY VIEW section #}
+    {# Read-Only View Section #}
     <div id="profile-view" style="display: {{ showEditForm ? 'none' : 'block' }};">
         <ul class="user-info">
             <li><strong>First Name:</strong> {{ user.firstName }}</li>
@@ -55,7 +57,7 @@
         </button>
     </div>
 
-    {# EDIT FORM section #}
+    {# Edit Form Section #}
     <div id="profile-edit" style="display: {{ showEditForm ? 'block' : 'none' }};">
         {{ form_start(form) }}
             {{ form_row(form.firstName) }}
@@ -73,6 +75,7 @@
     </div>
 </main>
 
+{# JavaScript to toggle between view and edit modes #}
 <script>
     window.addEventListener('load', function() {
         document.body.addEventListener('click', function(e) {
