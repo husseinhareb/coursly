@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My Profile{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('styles/profile.css') }}">
+{% endblock %}
+
+{% block body %}
+<main class="profile-content">
+    <h1>Your Profile</h1>
+
+    <div class="profile-picture">
+        {% if app.user.profilePic %}
+            <img 
+                src="{{ asset('uploads/profile_pics/' ~ app.user.profilePic) }}" 
+                alt="Profile Picture" 
+                class="profile-img"
+            >
+        {% else %}
+            <p class="no-picture">No profile picture available.</p>
+        {% endif %}
+    </div>
+
+    <div class="upload-form">
+        {{ form_start(form) }}
+            {{ form_row(form.profilePic) }}
+            <button type="submit" class="upload-btn">Upload New Picture</button>
+        {{ form_end(form) }}
+    </div>
+
+    <ul class="user-info">
+        <li><strong>First Name:</strong> {{ app.user.firstName }}</li>
+        <li><strong>Last Name:</strong> {{ app.user.lastName }}</li>
+        <li><strong>Email:</strong> {{ app.user.email }}</li>
+        <li><strong>Roles:</strong> {{ app.user.roles|join(', ') }}</li>
+        <li>
+            <strong>Enrolled Courses:</strong>
+            {% if app.user.enrolledCourses is not empty %}
+                {{ app.user.enrolledCourses|join(', ') }}
+            {% else %}
+                None
+            {% endif %}
+        </li>
+    </ul>
+</main>
+{% endblock %}

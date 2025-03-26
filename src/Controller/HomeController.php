@@ -16,7 +16,7 @@ final class HomeController extends AbstractController
             return $this->redirectToRoute('app_change_password');
         }
         
-        return $this->render('home/index.html.twig', [
+        return $this->render('home/home.html.twig', [
             'controller_name' => 'HomeController',
         ]);
     }

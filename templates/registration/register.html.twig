@@ -14,23 +14,23 @@
     {{ form_errors(registrationForm) }}
 
     {{ form_start(registrationForm) }}
-        <div class="form-group">
+        <div class="reg-form-group">
             {{ form_row(registrationForm.firstName, {'attr': {'id': 'registration_form_firstName'}}) }}
         </div>
-        <div class="form-group">
+        <div class="reg-form-group">
             {{ form_row(registrationForm.lastName, {'attr': {'id': 'registration_form_lastName'}}) }}
         </div>
-        <div class="form-group">
+        <div class="reg-form-group">
             {{ form_row(registrationForm.email, {'attr': {'id': 'registration_form_email'}}) }}
         </div>
-        <div class="form-group">
+        <div class="reg-form-group">
             {# The plainPassword field is now a text input that will be auto-filled #}
             {{ form_row(registrationForm.plainPassword, {
                 'label': 'Password (auto-generated)',
                 'attr': {'id': 'registration_form_plainPassword'}
             }) }}
         </div>
-        <div class="form-group">
+        <div class="reg-form-group">
             {{ form_row(registrationForm.role, {'attr': {'id': 'registration_form_role'}}) }} 
         </div>
 

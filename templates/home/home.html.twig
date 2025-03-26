@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('styles/home.css') }}">
+{% endblock %}
+
+{% block body %}
+<main class="main-content">
+    {% if app.user %}
+        <h1 class="welcome-heading">Hello, {{ app.user.firstName }}!</h1>
+        <p class="user-detail">Your email: {{ app.user.userIdentifier }}</p>
+        <p class="user-detail">Your role: {{ app.user.roles|join(', ') }}</p>
+    {% else %}
+        <h1 class="welcome-heading">Welcome to the homepage!</h1>
+        <p class="login-prompt">Please log in to see your account details.</p>
+    {% endif %}
+</main>
+{% endblock %}
