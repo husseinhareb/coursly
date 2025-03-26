@@ -9,19 +9,16 @@
 
 {% block body %}
 <div class="login-wrapper">
-    <!-- Logo -->
     <div class="login-logo">
         <img src="{{ asset('images/logo-portrait.png') }}" alt="Logo">
     </div>
 
-    <!-- Error Message (if any) -->
     {% if error %}
         <div class="alert alert-danger">
             {{ error.messageKey|trans(error.messageData, 'security') }}
         </div>
     {% endif %}
 
-    <!-- Already logged in message -->
     {% if app.user %}
         <div class="alert alert-info">
             You are logged in as {{ app.user.userIdentifier }}, 
@@ -29,7 +26,6 @@
         </div>
     {% endif %}
 
-    <!-- White container for the form AND the footer -->
     <div class="login-box">
         <h2>Please sign in</h2>
 

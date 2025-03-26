@@ -1,3 +1,4 @@
+{# templates/profile/profile.html.twig #}
 {% extends 'base.html.twig' %}
 
 {% block title %}My Profile{% endblock %}
@@ -11,10 +12,16 @@
 <main class="profile-content">
     <h1>Your Profile</h1>
 
+    {% for label, flashes in app.flashes %}
+        {% for flash in flashes %}
+            <div class="alert alert-{{ label }}">{{ flash }}</div>
+        {% endfor %}
+    {% endfor %}
+
     <div class="profile-picture">
-        {% if app.user.profilePic %}
+        {% if user.profilePic %}
             <img 
-                src="{{ asset('uploads/profile_pics/' ~ app.user.profilePic) }}" 
+                src="{{ asset('uploads/profile_pics/' ~ user.profilePic) }}" 
                 alt="Profile Picture" 
                 class="profile-img"
             >
@@ -23,26 +30,61 @@
         {% endif %}
     </div>
 
-    <div class="upload-form">
-        {{ form_start(form) }}
-            {{ form_row(form.profilePic) }}
-            <button type="submit" class="upload-btn">Upload New Picture</button>
-        {{ form_end(form) }}
+    {% set showEditForm = form.vars.submitted and not form.vars.valid %}
+
+    {# READ-ONLY VIEW section #}
+    <div id="profile-view" style="display: {{ showEditForm ? 'none' : 'block' }};">
+        <ul class="user-info">
+            <li><strong>First Name:</strong> {{ user.firstName }}</li>
+            <li><strong>Last Name:</strong> {{ user.lastName }}</li>
+            <li><strong>Email:</strong> {{ user.email }}</li>
+            <li><strong>Phone Number:</strong> {{ user.phoneNumber ?: 'Not provided' }}</li>
+            <li><strong>Address:</strong> {{ user.address ?: 'Not provided' }}</li>
+            <li><strong>Roles:</strong> {{ user.roles|join(', ') }}</li>
+            <li>
+                <strong>Enrolled Courses:</strong>
+                {% if user.enrolledCourses is not empty %}
+                    {{ user.enrolledCourses|join(', ') }}
+                {% else %}
+                    None
+                {% endif %}
+            </li>
+        </ul>
+        <button type="button" id="edit-button" class="btn btn-primary">
+            Edit Profile
+        </button>
     </div>
 
-    <ul class="user-info">
-        <li><strong>First Name:</strong> {{ app.user.firstName }}</li>
-        <li><strong>Last Name:</strong> {{ app.user.lastName }}</li>
-        <li><strong>Email:</strong> {{ app.user.email }}</li>
-        <li><strong>Roles:</strong> {{ app.user.roles|join(', ') }}</li>
-        <li>
-            <strong>Enrolled Courses:</strong>
-            {% if app.user.enrolledCourses is not empty %}
-                {{ app.user.enrolledCourses|join(', ') }}
-            {% else %}
-                None
-            {% endif %}
-        </li>
-    </ul>
+    {# EDIT FORM section #}
+    <div id="profile-edit" style="display: {{ showEditForm ? 'block' : 'none' }};">
+        {{ form_start(form) }}
+            {{ form_row(form.firstName) }}
+            {{ form_row(form.lastName) }}
+            {{ form_row(form.phoneNumber) }}
+            {{ form_row(form.address) }}
+            {{ form_row(form.profilePic) }}
+
+            <button type="submit" class="btn btn-success">Save</button>
+        {{ form_end(form) }}
+
+        <button type="button" id="cancel-button" class="btn btn-secondary">
+            Cancel
+        </button>
+    </div>
 </main>
+
+<script>
+    window.addEventListener('load', function() {
+        document.body.addEventListener('click', function(e) {
+            if (e.target.closest('#edit-button')) {
+                document.getElementById('profile-view').style.display = 'none';
+                document.getElementById('profile-edit').style.display = 'block';
+            }
+            if (e.target.closest('#cancel-button')) {
+                document.getElementById('profile-edit').style.display = 'none';
+                document.getElementById('profile-view').style.display = 'block';
+            }
+        });
+    });
+</script>
 {% endblock %}

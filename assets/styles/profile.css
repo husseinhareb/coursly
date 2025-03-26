@@ -27,10 +27,15 @@
 }
 
 .profile-img {
-    max-width: 150px;
-    border-radius: 50%;
+    width: 150px;             /* Force a square width */
+    height: 150px;            /* Force a square height */
+    object-fit: cover;        /* Ensures the image fills the square without distortion */
+    border-radius: 50%;       /* Makes it a circle */
     border: 2px solid #ccc;
+    display: block;           /* (Optional) helps center if you use margin: 0 auto */
+    margin: 0 auto;           /* (Optional) to center the image horizontally */
 }
+
 
 .no-picture {
     font-style: italic;

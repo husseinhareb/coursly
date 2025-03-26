@@ -50,7 +50,7 @@
                                     <i class="fa-solid fa-chevron-down"></i>
                                 </button>
                                 <ul class="profile-dropdown">
-                                    <li><a href="{{ path('profile_edit') }}">Profile</a></li>
+                                    <li><a href="{{ path('profile') }}">Profile</a></li>
                                     <li><a href="{{ path('app_logout') }}">Logout</a></li>
                                 </ul>
                             </li>
@@ -73,15 +73,18 @@
         {% block body %}{% endblock %}
 
         {% block javascripts %}
-            <script>
-                // Toggle mobile nav
-                document.querySelector('.menu-toggle').addEventListener('click', function() {
-                    document.querySelector('.main-nav').classList.toggle('active');
-                });
+           <script>
+            document.addEventListener("turbo:load", function() {
+                const menuToggle = document.querySelector('.menu-toggle');
+                if (menuToggle) {
+                    menuToggle.addEventListener('click', function() {
+                        document.querySelector('.main-nav').classList.toggle('active');
+                    });
+                }
 
-                // Toggle profile dropdown and flip arrow
                 const arrowButton = document.querySelector('.arrow-button');
-                if (arrowButton) {
+                if (arrowButton && !arrowButton.dataset.initialized) {
+                    arrowButton.dataset.initialized = "true";
                     const profileDropdown = document.querySelector('.profile-dropdown');
                     const arrowIcon = arrowButton.querySelector('i');
                     arrowButton.addEventListener('click', function() {
@@ -89,7 +92,8 @@
                         arrowIcon.classList.toggle('flipped');
                     });
                 }
-            </script>
+            });
+        </script>
         {% endblock %}
     </body>
 </html>

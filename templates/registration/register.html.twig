@@ -24,7 +24,6 @@
             {{ form_row(registrationForm.email, {'attr': {'id': 'registration_form_email'}}) }}
         </div>
         <div class="reg-form-group">
-            {# The plainPassword field is now a text input that will be auto-filled #}
             {{ form_row(registrationForm.plainPassword, {
                 'label': 'Password (auto-generated)',
                 'attr': {'id': 'registration_form_plainPassword'}
