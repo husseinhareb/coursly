@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Users{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('styles/admin.css') }}">
+{% endblock %}
+
+{% block body %}
+<main class="admin-content">
+    <h1>Edit Users</h1>
+    
+    <table class="users-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Profile Picture</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>Roles</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>
+                        {% if user.profilePic %}
+                            <img src="{{ asset('uploads/profile_pics/' ~ user.profilePic) }}" alt="Profile Picture" class="table-profile-pic">
+                        {% else %}
+                            N/A
+                        {% endif %}
+                    </td>
+                    <td>{{ user.firstName }}</td>
+                    <td>{{ user.lastName }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.phoneNumber ?: 'N/A' }}</td>
+                    <td>{{ user.address ?: 'N/A' }}</td>
+                    <td>{{ user.roles|join(', ') }}</td>
+                    <td>
+                        <a href="{{ path('admin_edit_user', { 'id': user.id }) }}" class="btn btn-primary">Edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="9">No users found.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</main>
+{% endblock %}

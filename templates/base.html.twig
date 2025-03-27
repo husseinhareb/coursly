@@ -36,6 +36,9 @@
                                 <li class="menu-item">
                                     <a class="menu-link" href="{{ path('app_register') }}">Add user</a>
                                 </li>
+                                <li class="menu-item">
+                                    <a class="menu-link" href="{{ path('app_edit_users') }}">Edit users</a>
+                                </li>
                             {% endif %}
                             <li class="menu-item profile-section">
                                 {% if app.user.profilePic %}
@@ -50,7 +53,7 @@
                                     <i class="fa-solid fa-chevron-down"></i>
                                 </button>
                                 <ul class="profile-dropdown">
-                                    <li><a href="{{ path('profile') }}">Profile</a></li>
+                                    <li><a href="{{ path('app_profile') }}">Profile</a></li>
                                     <li><a href="{{ path('app_logout') }}">Logout</a></li>
                                 </ul>
                             </li>
@@ -74,26 +77,38 @@
 
         {% block javascripts %}
            <script>
-            document.addEventListener("turbo:load", function() {
-                const menuToggle = document.querySelector('.menu-toggle');
-                if (menuToggle) {
-                    menuToggle.addEventListener('click', function() {
-                        document.querySelector('.main-nav').classList.toggle('active');
-                    });
-                }
+                document.addEventListener("turbo:load", function() {
+                    const menuToggle = document.querySelector('.menu-toggle');
+                    if (menuToggle) {
+                        menuToggle.addEventListener('click', function() {
+                            document.querySelector('.main-nav').classList.toggle('active');
+                        });
+                    }
 
-                const arrowButton = document.querySelector('.arrow-button');
-                if (arrowButton && !arrowButton.dataset.initialized) {
-                    arrowButton.dataset.initialized = "true";
-                    const profileDropdown = document.querySelector('.profile-dropdown');
-                    const arrowIcon = arrowButton.querySelector('i');
-                    arrowButton.addEventListener('click', function() {
-                        profileDropdown.classList.toggle('active');
-                        arrowIcon.classList.toggle('flipped');
-                    });
-                }
-            });
-        </script>
+                    const arrowButton = document.querySelector('.arrow-button');
+                    if (arrowButton && !arrowButton.dataset.initialized) {
+                        arrowButton.dataset.initialized = "true";
+                        const profileDropdown = document.querySelector('.profile-dropdown');
+                        const arrowIcon = arrowButton.querySelector('i');
+
+                        arrowButton.addEventListener('click', function(e) {
+                            e.stopPropagation();
+                            profileDropdown.classList.toggle('active');
+                            arrowIcon.classList.toggle('flipped');
+                        });
+
+                        document.addEventListener('click', function(e) {
+                            // If the click is outside the arrow button and the dropdown, close the dropdown
+                            if (!arrowButton.contains(e.target) && !profileDropdown.contains(e.target)) {
+                                if (profileDropdown.classList.contains('active')) {
+                                    profileDropdown.classList.remove('active');
+                                    arrowIcon.classList.remove('flipped');
+                                }
+                            }
+                        });
+                    }
+                });
+            </script>
         {% endblock %}
     </body>
 </html>
