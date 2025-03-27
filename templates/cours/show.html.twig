@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title "Cours :" ~cours.titre %}
+
+{% block body %}
+    <h1>{{ cours.titre }}</h1>
+    <p> 
+        {{ cours.contenu | nl2br  }}
+    </p>
+{% endblock %}
