@@ -1,15 +1,15 @@
 <?php
-
+// src/Entity/Course.php
 namespace App\Entity;
 
-use App\Repository\CoursRepository;
+use App\Repository\CourseRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Serializer\Annotation\Groups;
 
-#[ORM\Entity(repositoryClass: CoursRepository::class)]
-class Cours
+#[ORM\Entity(repositoryClass: CourseRepository::class)]
+class Course
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -17,10 +17,10 @@ class Cours
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $titre = null;
+    private ?string $title = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $contenu = null;
+    private ?string $content = null;
 
     #[ORM\Column(length: 255)]
     private ?string $slug = null;
@@ -41,25 +41,25 @@ class Cours
         return $this->id;
     }
 
-    public function getTitre(): ?string
+    public function getTitle(): ?string
     {
-        return $this->titre;
+        return $this->title;
     }
 
-    public function setTitre(string $titre): static
+    public function setTitle(string $title): static
     {
-        $this->titre = $titre;
+        $this->title = $title;
         return $this;
     }
 
-    public function getContenu(): ?string
+    public function getContent(): ?string
     {
-        return $this->contenu;
+        return $this->content;
     }
 
-    public function setContenu(string $contenu): static
+    public function setContent(string $content): static
     {
-        $this->contenu = $contenu;
+        $this->content = $content;
         return $this;
     }
 

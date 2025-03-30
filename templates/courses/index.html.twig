@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My Courses{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('styles/courses.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1 class="text-center mb-4">My Courses</h1>
+
+    <!-- Search field -->
+    <div class="mb-4">
+        <input type="text" id="search" class="form-control" placeholder="Search for a course...">
+    </div>
+
+    <!-- Display courses as cards -->
+    <div class="course-container">
+        {% for course in courses %}
+            {% set color = colors[loop.index0 % colors|length] %}
+            <div class="course-card">
+                <div class="course-header" style="background-color: {{ color }};"></div>
+                <div class="course-body">
+                    <h5 class="course-title">
+                        <a href="{{ path('courses.show', { id: course.getId(), slug: course.getSlug() }) }}">
+                            {{ course.getTitle() }}
+                        </a>
+                    </h5>
+                    <p class="course-subtitle">{{ course.getSlug() }}</p>
+                </div>
+            </div>
+        {% else %}
+            <p class="text-center">No courses available.</p>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    let searchInput = document.getElementById("search");
+
+    searchInput.addEventListener("input", function () {
+        let query = this.value.toLowerCase().trim();
+        let cards = document.querySelectorAll(".course-card");
+
+        cards.forEach(card => {
+            let title = card.querySelector(".course-title").innerText.toLowerCase();
+            card.style.display = title.includes(query) ? "block" : "none";
+        });
+    });
+});
+</script>
+
+{% endblock %}
