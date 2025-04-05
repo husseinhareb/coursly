@@ -28,7 +28,12 @@ class RegistrationController extends AbstractController
             $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
 
             $selectedRole = $form->get('role')->getData();
-            $user->setRoles([$selectedRole]);
+            if ($selectedRole === 'ROLE_ADMIN_PROFESSOR') {
+                $user->setRoles(['ROLE_ADMIN', 'ROLE_PROFESSOR']);
+            } else {
+                $user->setRoles([$selectedRole]);
+            }
+
 
             $entityManager->persist($user);
             $entityManager->flush();

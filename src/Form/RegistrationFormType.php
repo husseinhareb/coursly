@@ -64,13 +64,15 @@ class RegistrationFormType extends AbstractType
             ->add('role', ChoiceType::class, [
                 'mapped' => false,
                 'choices' => [
-                    'Administrator' => 'ROLE_ADMIN',
-                    'Student'       => 'ROLE_STUDENT',
-                    'Professor'     => 'ROLE_PROFESSOR',
+                    'Administrator'         => 'ROLE_ADMIN',
+                    'Student'               => 'ROLE_STUDENT',
+                    'Professor'             => 'ROLE_PROFESSOR',
+                    'Admin & Professor'     => 'ROLE_ADMIN_PROFESSOR',
                 ],
                 'placeholder' => 'Choose your role',
                 'label'       => 'Role',
             ])
+            
         ;
     }
 

@@ -8,7 +8,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Repository\CourseRepository;
-
+use Doctrine\Persistence\ManagerRegistry; 
+use App\Entity\Course;
+use App\Form\CourseType;
 final class CourseController extends AbstractController
 {
     #[Route('/courses', name: 'courses.index')]
@@ -65,4 +67,43 @@ final class CourseController extends AbstractController
 
         return $this->json($data);
     }
+
+    #[Route('/courses/new', name: 'courses.new')]
+    public function new(Request $request, ManagerRegistry $doctrine): Response
+    {
+        $course = new Course();
+        $course->setCreatedAt(new \DateTimeImmutable());
+        $course->setUpdatedAt(new \DateTimeImmutable());
+
+        $form = $this->createForm(CourseType::class, $course);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Handle file upload if an image was provided
+            $imageFile = $form->get('image')->getData();
+            if ($imageFile) {
+                $newFilename = uniqid() . '.' . $imageFile->guessExtension();
+                try {
+                    $imageFile->move(
+                        $this->getParameter('courses_images_directory'),
+                        $newFilename
+                    );
+                    $course->setImagePath($newFilename);
+                } catch (FileException $e) {
+                    // Optionally log the error or notify the user
+                }
+            }
+
+            $entityManager = $doctrine->getManager();
+            $entityManager->persist($course);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('courses.index');
+        }
+
+        return $this->render('courses/new.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
 }
