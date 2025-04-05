@@ -1,3 +1,4 @@
+{# templates/registration/register.html.twig #}
 {% extends 'base.html.twig' %}
 
 {% block title %}Register{% endblock %}
@@ -19,6 +20,9 @@
         </div>
         <div class="reg-form-group">
             {{ form_row(registrationForm.lastName, {'attr': {'id': 'registration_form_lastName'}}) }}
+        </div>
+        <div class="reg-form-group">
+            {{ form_row(registrationForm.username, {'attr': {'id': 'registration_form_username'}}) }}
         </div>
         <div class="reg-form-group">
             {{ form_row(registrationForm.email, {'attr': {'id': 'registration_form_email'}}) }}
@@ -46,7 +50,6 @@
         if (firstNameEl && lastNameEl && passwordEl) {
             const firstName = firstNameEl.value.trim();
             const lastName = lastNameEl.value.trim();
-
             if (firstName !== '' && lastName !== '') {
                 const combined = firstName + lastName;
                 const autoPassword = combined + combined.length;
@@ -57,7 +60,30 @@
         }
     }
 
-    document.getElementById('registration_form_firstName').addEventListener('input', updatePassword);
-    document.getElementById('registration_form_lastName').addEventListener('input', updatePassword);
+    function updateUsername() {
+        const firstNameEl = document.getElementById('registration_form_firstName');
+        const lastNameEl = document.getElementById('registration_form_lastName');
+        const usernameEl = document.getElementById('registration_form_username');
+
+        if (firstNameEl && lastNameEl && usernameEl) {
+            const firstName = firstNameEl.value.trim();
+            const lastName = lastNameEl.value.trim();
+            if (firstName !== '' && lastName !== '') {
+                const randomNumber = Math.floor(Math.random() * (999 - 10 + 1)) + 10;
+                usernameEl.value = firstName.toLowerCase() + '.' + lastName.toLowerCase() + randomNumber;
+            } else {
+                usernameEl.value = '';
+            }
+        }
+    }
+
+    document.getElementById('registration_form_firstName').addEventListener('input', function() {
+        updatePassword();
+        updateUsername();
+    });
+    document.getElementById('registration_form_lastName').addEventListener('input', function() {
+        updatePassword();
+        updateUsername();
+    });
 </script>
 {% endblock %}

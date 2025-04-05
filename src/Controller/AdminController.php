@@ -16,7 +16,7 @@ use App\Form\ProfileType;
 
 class AdminController extends AbstractController
 {
-    #[Route('/admin/edit-user/{id}', name: 'admin_edit_user')]
+    #[Route('/admin/{username}/edit-user/{id}', name: 'admin_edit_user')]
     #[IsGranted('ROLE_ADMIN')]
     public function editUser(
         Request $request,
@@ -68,7 +68,7 @@ class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/edit-users', name: 'app_edit_users')]
+    #[Route('/admin/{username}/edit-users', name: 'app_edit_users')]
     #[IsGranted('ROLE_ADMIN')]
     public function editUsers(UserRepository $userRepository): Response
     {

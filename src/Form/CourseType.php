@@ -22,7 +22,7 @@ class CourseType extends AbstractType
              ->add('image', FileType::class, [
                   'label' => 'Course Image (Optional)',
                   'required' => false,
-                  'mapped' => false, // not mapped to the entity
+                  'mapped' => false, 
                   'constraints' => [
                       new File([
                            'maxSize' => '5M',

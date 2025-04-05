@@ -43,7 +43,7 @@
                     <td>{{ user.address ?: 'N/A' }}</td>
                     <td>{{ user.roles|join(', ') }}</td>
                     <td>
-                        <a href="{{ path('admin_edit_user', { 'id': user.id }) }}" class="btn btn-primary">Edit</a>
+                        <a href="{{ path('admin_edit_user', {'username': app.user.username, 'id': user.id}) }}" class="btn btn-primary">Edit</a>
                     </td>
                 </tr>
             {% else %}

@@ -14,7 +14,7 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 
 class ProfileController extends AbstractController
 {
-    #[Route('/profile', name: 'app_profile')]
+    #[Route('/{username}/profile', name: 'app_profile')]
     public function profile(
         Request $request,
         EntityManagerInterface $em,

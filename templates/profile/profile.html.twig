@@ -55,7 +55,7 @@
         <button type="button" id="edit-button" class="btn btn-primary">
             Edit Profile
         </button>
-        <a href="{{ path('app_change_password') }}" class="btn btn-secondary">
+        <a href="{{ path('app_change_password' , {'username': app.user.username})  }}" class="btn btn-secondary">
             Change Password
         </a>
     </div>
