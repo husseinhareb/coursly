@@ -58,7 +58,7 @@ class CourseRepository extends ServiceEntityRepository
     public function searchCourses(string $term): array
     {
         return $this->createQueryBuilder('c')
-            ->where('c.title LIKE :term OR c.slug LIKE :term')
+            ->where('c.title LIKE :term OR c.code LIKE :term')
             ->setParameter('term', '%' . $term . '%')
             ->getQuery()
             ->getResult();

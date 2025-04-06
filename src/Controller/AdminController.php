@@ -3,16 +3,16 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Form\AdminUserType;
+use App\Entity\Enrollment;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\String\Slugger\SluggerInterface;
 use App\Repository\UserRepository;
+use App\Repository\CourseRepository;
 use App\Form\ProfileType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class AdminController extends AbstractController
 {
@@ -21,34 +21,35 @@ class AdminController extends AbstractController
     public function editUser(
         Request $request,
         EntityManagerInterface $em,
-        SluggerInterface $slugger,
         UserRepository $userRepository,
         int $id
     ): Response {
-        // Fetch the user to be edited
+        // Fetch the user to be edited.
         $user = $userRepository->find($id);
         if (!$user) {
             throw $this->createNotFoundException("User not found");
         }
 
-        // Create the same ProfileType form
+        // Create the profile form.
         $form = $this->createForm(ProfileType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Handle file upload for profile picture if needed
+            // Handle profile picture upload.
             $profilePicFile = $form->get('profilePic')->getData();
             if ($profilePicFile) {
                 $originalFilename = pathinfo($profilePicFile->getClientOriginalName(), PATHINFO_FILENAME);
-                $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $safeFilename . '-' . uniqid() . '.' . $profilePicFile->guessExtension();
+                // Use the subject's code directly.
+                // Replace 'SUBJECT_CODE' with the actual subject code if available.
+                $subjectCode = 'SUBJECT_CODE';
+                $newFilename = $subjectCode . '-' . uniqid() . '.' . $profilePicFile->guessExtension();
 
                 try {
                     $profilePicFile->move(
                         $this->getParameter('profile_pics_directory'),
                         $newFilename
                     );
-                } catch (FileException $e) {
+                } catch (\Symfony\Component\HttpFoundation\File\Exception\FileException $e) {
                     $this->addFlash('error', 'There was an error uploading the file.');
                 }
                 $user->setProfilePic($newFilename);
@@ -58,8 +59,11 @@ class AdminController extends AbstractController
             $em->flush();
             $this->addFlash('success', 'User profile updated successfully!');
 
-            // Redirect back to this edit page (or to a user list, as you prefer)
-            return $this->redirectToRoute('admin_edit_user', ['id' => $user->getId()]);
+            // Redirect back to the edit page.
+            return $this->redirectToRoute('admin_edit_user', [
+                'username' => $this->getUser()->getUsername(),
+                'id' => $user->getId()
+            ]);
         }
 
         return $this->render('profile/profile.html.twig', [
@@ -78,4 +82,96 @@ class AdminController extends AbstractController
         ]);
     }
 
+    #[Route('/admin/{username}/manage-enrollments/{id}', name: 'admin_manage_enrollments')]
+    #[IsGranted('ROLE_ADMIN')]
+    public function manageEnrollments(User $user, CourseRepository $courseRepo): Response
+    {
+        // Fetch all courses.
+        $courses = $courseRepo->findAll();
+
+        return $this->render('admin/edit_enrollments.html.twig', [
+            'user' => $user,
+            'courses' => $courses,
+        ]);
+    }
+
+    #[Route('/admin/{username}/add-enrollment/{id}/{courseId}', name: 'admin_add_enrollment', methods: ['POST'])]
+    #[IsGranted('ROLE_ADMIN')]
+    public function addEnrollment(
+        Request $request,
+        User $user,
+        int $courseId,
+        EntityManagerInterface $em,
+        CourseRepository $courseRepo
+    ): Response {
+        // Prevent admin users from enrolling in courses
+        if (in_array('ROLE_ADMIN', $user->getRoles())) {
+            $this->addFlash('warning', 'Admins cannot enroll in courses.');
+            return $this->redirectToRoute('admin_manage_enrollments', [
+                'username' => $this->getUser()->getUsername(),
+                'id' => $user->getId()
+            ]);
+        }
+
+        // Check if the enrollment already exists.
+        foreach ($user->getEnrollments() as $enrollment) {
+            if ($enrollment->getCourse()->getId() === $courseId) {
+                $this->addFlash('info', 'Course is already enrolled.');
+                return $this->redirectToRoute('admin_manage_enrollments', [
+                    'username' => $this->getUser()->getUsername(),
+                    'id' => $user->getId()
+                ]);
+            }
+        }
+
+        $course = $courseRepo->find($courseId);
+        if (!$course) {
+            $this->addFlash('warning', 'Course not found.');
+            return $this->redirectToRoute('admin_manage_enrollments', [
+                'username' => $this->getUser()->getUsername(),
+                'id' => $user->getId()
+            ]);
+        }
+
+        $enrollment = new Enrollment();
+        $enrollment->setUser($user);
+        $enrollment->setCourse($course);
+        $em->persist($enrollment);
+        $em->flush();
+
+        $this->addFlash('success', 'Course added successfully.');
+        return $this->redirectToRoute('admin_manage_enrollments', [
+            'username' => $this->getUser()->getUsername(),
+            'id' => $user->getId()
+        ]);
+    }
+
+    #[Route('/admin/{username}/remove-enrollment/{id}/{courseId}', name: 'admin_remove_enrollment', methods: ['POST'])]
+    #[IsGranted('ROLE_ADMIN')]
+    public function removeEnrollment(
+        Request $request,
+        User $user,
+        int $courseId,
+        EntityManagerInterface $em
+    ): Response {
+        $found = false;
+        foreach ($user->getEnrollments() as $enrollment) {
+            if ($enrollment->getCourse()->getId() === $courseId) {
+                $em->remove($enrollment);
+                $user->removeEnrollment($enrollment);
+                $found = true;
+                break;
+            }
+        }
+        if ($found) {
+            $em->flush();
+            $this->addFlash('success', 'Enrollment removed successfully.');
+        } else {
+            $this->addFlash('warning', 'Enrollment not found.');
+        }
+        return $this->redirectToRoute('admin_manage_enrollments', [
+            'username' => $this->getUser()->getUsername(),
+            'id' => $user->getId()
+        ]);
+    }
 }

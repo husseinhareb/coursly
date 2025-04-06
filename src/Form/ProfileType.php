@@ -29,7 +29,6 @@ class ProfileType extends AbstractType
                 'required' => false,
                 'label' => 'Address',
             ])
-
             ->add('profilePic', FileType::class, [
                 'label' => 'Profile Picture (Image file)',
                 'mapped' => false,

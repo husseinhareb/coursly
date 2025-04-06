@@ -8,31 +8,35 @@
 {% endblock %}
 
 {% block body %}
-<div class="container mt-4">
-    <h1 class="text-center mb-4">My Courses</h1>
-
-    <!-- Search field -->
-    <div class="mb-4">
-        <input type="text" id="search" class="form-control" placeholder="Search for a course...">
+<div class="course-page">
+    <!-- Header container with page title and Add Course button -->
+    <div class="course-header-container">
+        <h1 class="page-title">My Courses</h1>
+        <a href="{{ path('courses.new') }}" class="btn-add-course">Add Course</a>
     </div>
 
-    <!-- Display courses as cards -->
-    <div class="course-container">
+    <!-- Search bar -->
+    <div class="search-bar">
+        <input type="text" id="search" class="search-input" placeholder="Search for a course...">
+    </div>
+
+    <!-- Grid of course cards -->
+    <div class="course-grid">
         {% for course in courses %}
             {% set color = colors[loop.index0 % colors|length] %}
             <div class="course-card">
                 <div class="course-header" style="background-color: {{ color }};"></div>
-                <div class="course-body">
+                <div class="course-content">
                     <h5 class="course-title">
-                        <a href="{{ path('courses.show', { id: course.getId(), slug: course.getSlug() }) }}">
-                            {{ course.getTitle() }}
+                        <a href="{{ path('courses.show', { id: course.id, code: course.code }) }}">
+                            {{ course.title }}
                         </a>
                     </h5>
-                    <p class="course-subtitle">{{ course.getSlug() }}</p>
+                    <p class="course-subtitle">{{ course.code }}</p>
                 </div>
             </div>
         {% else %}
-            <p class="text-center">No courses available.</p>
+            <p class="no-courses-message">No courses available.</p>
         {% endfor %}
     </div>
 </div>
@@ -52,5 +56,4 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 </script>
-
 {% endblock %}

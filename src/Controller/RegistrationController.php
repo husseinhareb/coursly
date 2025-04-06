@@ -30,7 +30,7 @@ class RegistrationController extends AbstractController
             // Ensure a username is set. If empty, generate it.
             if (!$user->getUsername()) {
                 $randomNumber = rand(10, 999);
-                $generatedUsername = strtolower($user->getFirstName()) . '.' . strtolower($user->getLastName()) . $randomNumber;
+                $generatedUsername = strtolower($user->getFirstName()) . '_' . strtolower($user->getLastName()) . $randomNumber;
                 $user->setUsername($generatedUsername);
             }
 

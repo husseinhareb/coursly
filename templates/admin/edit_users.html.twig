@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Users{% endblock %}
+{% block title %}Users{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -9,7 +9,8 @@
 
 {% block body %}
 <main class="admin-content">
-    <h1>Edit Users</h1>
+    <h1>Users</h1>
+    <a href="{{ path('app_register', {'username': app.user.username}) }}" class="btn btn-primary" style="margin-bottom: 1rem;">Add User</a>
     
     <table class="users-table">
         <thead>
@@ -22,6 +23,7 @@
                 <th>Phone</th>
                 <th>Address</th>
                 <th>Roles</th>
+                <th>Enrolled Courses</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -43,12 +45,21 @@
                     <td>{{ user.address ?: 'N/A' }}</td>
                     <td>{{ user.roles|join(', ') }}</td>
                     <td>
+                        {% if user.enrollments|length > 0 %}
+                            {% for enrollment in user.enrollments %}
+                                {{ enrollment.course.code }}{% if not loop.last %}, {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            None
+                        {% endif %}
+                    </td>
+                    <td>
                         <a href="{{ path('admin_edit_user', {'username': app.user.username, 'id': user.id}) }}" class="btn btn-primary">Edit</a>
                     </td>
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="9">No users found.</td>
+                    <td colspan="10">No users found.</td>
                 </tr>
             {% endfor %}
         </tbody>

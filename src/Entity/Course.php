@@ -1,5 +1,5 @@
 <?php
-// src/Entity/Course.php
+
 namespace App\Entity;
 
 use App\Repository\CourseRepository;
@@ -23,7 +23,7 @@ class Course
     private ?string $content = null;
     
     #[ORM\Column(length: 255)]
-    private ?string $slug = null;
+    private ?string $code = null;
     
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
@@ -71,14 +71,14 @@ class Course
         return $this;
     }
     
-    public function getSlug(): ?string
+    public function getCode(): ?string
     {
-        return $this->slug;
+        return $this->code;
     }
     
-    public function setSlug(string $slug): self
+    public function setCode(string $code): self
     {
-        $this->slug = $slug;
+        $this->code = $code;
         return $this;
     }
     

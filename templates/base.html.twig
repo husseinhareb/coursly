@@ -31,43 +31,45 @@
                 </button>
                 <nav class="main-nav">
                     <ul class="menu">
-                        {% if app.user %}
-                            {% if 'ROLE_ADMIN' in app.user.roles %}
-                                <li class="menu-item">
-                                    <a class="menu-link" href="{{ path('app_register', {'username': app.user.username}) }}">Add user</a>
-                                </li>
-                                <li class="menu-item">
-                                    <a class="menu-link" href="{{ path('app_edit_users', {'username': app.user.username}) }}">Edit users</a>
-                                </li>
-                            {% endif %}
-                            <li class="menu-item profile-section">
-                                {% if app.user.profilePic %}
-                                    <img src="{{ asset('uploads/profile_pics/' ~ app.user.profilePic) }}" 
-                                         alt="Profile Picture" class="profile-pic">
-                                {% else %}
-                                    <div class="profile-pic avatar-initials">
-                                        {{ app.user.firstName|first|upper ~ app.user.lastName|first|upper }}
-                                    </div>
-                                {% endif %}
-                                <button class="arrow-button" aria-label="Profile options">
-                                    <i class="fa-solid fa-chevron-down"></i>
-                                </button>
-                                <ul class="profile-dropdown">
-                                    <li><a href="{{ path('app_profile', {'username': app.user.username}) }}">Profile</a></li>
-                                    <li><a href="{{ path('app_logout') }}">Logout</a></li>
-                                </ul>
-                            </li>
-                            <li class="menu-item separator"></li>
+                  {% if app.user %}
+                        {% if 'ROLE_ADMIN' in app.user.roles %}
                             <li class="menu-item">
-                                <a class="menu-link" href="{{ path('app_logout') }}">
-                                    <i class="fa-solid fa-arrow-right-from-bracket" style="color: #393c43;"></i>
-                                </a>
+                                <a class="menu-link" href="{{ path('app_edit_users', {'username': app.user.username}) }}">Users</a>
                             </li>
-                        {% else %}
                             <li class="menu-item">
-                                <a class="menu-link" href="{{ path('app_login') }}">Login</a>
+                                <a class="menu-link" href="{{ path('courses.index') }}">Courses</a>
                             </li>
                         {% endif %}
+                        <li class="menu-item profile-section">
+                            {% if app.user.profilePic %}
+                                <img src="{{ asset('uploads/profile_pics/' ~ app.user.profilePic) }}" 
+                                    alt="Profile Picture" class="profile-pic">
+                            {% else %}
+                                <div class="profile-pic avatar-initials">
+                                    {{ app.user.firstName|first|upper ~ app.user.lastName|first|upper }}
+                                </div>
+                            {% endif %}
+                            <button class="arrow-button" aria-label="Profile options">
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </button>
+                            <ul class="profile-dropdown">
+                                <li><a href="{{ path('app_profile', {'username': app.user.username}) }}">Profile</a></li>
+                                <li><a href="{{ path('app_logout') }}">Logout</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-item separator"></li>
+                        <li class="menu-item">
+                            <a class="menu-link" href="{{ path('app_logout') }}">
+                                <i class="fa-solid fa-arrow-right-from-bracket" style="color: #393c43;"></i>
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="menu-item">
+                            <a class="menu-link" href="{{ path('app_login') }}">Login</a>
+                        </li>
+                    {% endif %}
+
+
                     </ul>
                 </nav>
             </div>

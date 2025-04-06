@@ -10,16 +10,15 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\String\Slugger\SluggerInterface;
 
 class ProfileController extends AbstractController
 {
     #[Route('/{username}/profile', name: 'app_profile')]
     public function profile(
         Request $request,
-        EntityManagerInterface $em,
-        SluggerInterface $slugger
+        EntityManagerInterface $em
     ): Response {
+        /** @var User $user */
         $user = $this->getUser();
 
         $form = $this->createForm(ProfileType::class, $user);
@@ -29,8 +28,10 @@ class ProfileController extends AbstractController
             $profilePicFile = $form->get('profilePic')->getData();
             if ($profilePicFile) {
                 $originalFilename = pathinfo($profilePicFile->getClientOriginalName(), PATHINFO_FILENAME);
-                $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $safeFilename.'-'.uniqid().'.'.$profilePicFile->guessExtension();
+                // Use the subject's code directly.
+                // Replace 'SUBJECT_CODE' with the actual subject code if available.
+                $subjectCode = 'SUBJECT_CODE';
+                $newFilename = $subjectCode . '-' . uniqid() . '.' . $profilePicFile->guessExtension();
 
                 try {
                     $profilePicFile->move(
@@ -49,7 +50,7 @@ class ProfileController extends AbstractController
 
             $this->addFlash('success', 'Profile updated successfully!');
 
-            return $this->redirectToRoute('app_profile');
+            return $this->redirectToRoute('app_profile', ['username' => $user->getUsername()]);
         }
 
         return $this->render('profile/profile.html.twig', [

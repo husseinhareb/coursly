@@ -1,5 +1,5 @@
 <?php
-// src/Entity/User.php
+
 namespace App\Entity;
 
 use App\Repository\UserRepository;
@@ -75,9 +75,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
     
-    /**
-     * Returns the unique identifier for authentication.
-     */
     public function getUserIdentifier(): string
     {
         return (string) $this->email;
@@ -204,7 +201,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             $this->enrollments[] = $enrollment;
             $enrollment->setUser($this);
         }
-    
         return $this;
     }
     
@@ -215,7 +211,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $enrollment->setUser(null);
             }
         }
-    
         return $this;
     }
 }

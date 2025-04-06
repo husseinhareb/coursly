@@ -70,7 +70,7 @@
             const lastName = lastNameEl.value.trim();
             if (firstName !== '' && lastName !== '') {
                 const randomNumber = Math.floor(Math.random() * (999 - 10 + 1)) + 10;
-                usernameEl.value = firstName.toLowerCase() + '.' + lastName.toLowerCase() + randomNumber;
+                usernameEl.value = firstName.toLowerCase() + '_' + lastName.toLowerCase() + randomNumber;
             } else {
                 usernameEl.value = '';
             }

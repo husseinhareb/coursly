@@ -11,31 +11,24 @@
 <main class="profile-content">
     <h1>Your Profile</h1>
 
-    {# Flash messages #}
+    {# Display any flash messages #}
     {% for label, flashes in app.flashes %}
         {% for flash in flashes %}
             <div class="alert alert-{{ label }}">{{ flash }}</div>
         {% endfor %}
     {% endfor %}
 
-    {# Profile Picture #}
+    {# Profile Picture Section #}
     <div class="profile-picture">
         {% if user.profilePic %}
-            <img 
-                src="{{ asset('uploads/profile_pics/' ~ user.profilePic) }}" 
-                alt="Profile Picture" 
-                class="profile-img"
-            >
+            <img src="{{ asset('uploads/profile_pics/' ~ user.profilePic) }}" alt="Profile Picture" class="profile-img">
         {% else %}
             <p class="no-picture">No profile picture available.</p>
         {% endif %}
     </div>
 
-    {# Determine whether to show the edit form due to validation errors #}
-    {% set showEditForm = form.vars.submitted and not form.vars.valid %}
-
     {# Read-Only View Section #}
-    <div id="profile-view" style="display: {{ showEditForm ? 'none' : 'block' }};">
+    <div id="profile-view">
         <ul class="user-info">
             <li><strong>First Name:</strong> {{ user.firstName }}</li>
             <li><strong>Last Name:</strong> {{ user.lastName }}</li>
@@ -45,40 +38,30 @@
             <li><strong>Roles:</strong> {{ user.roles|join(', ') }}</li>
             <li>
                 <strong>Enrolled Courses:</strong>
-                {% if user.enrolledCourses is not empty %}
-                    {{ user.enrolledCourses|join(', ') }}
-                {% else %}
-                    None
-                {% endif %}
+                <a href="{{ path('admin_manage_enrollments', {'username': app.user.username, 'id': user.id}) }}" class="btn-manage-enrollments">
+                    Manage Enrollments
+                </a>
             </li>
         </ul>
-        <button type="button" id="edit-button" class="btn btn-primary">
-            Edit Profile
-        </button>
-        <a href="{{ path('app_change_password' , {'username': app.user.username})  }}" class="btn btn-secondary">
-            Change Password
-        </a>
+        <button type="button" id="edit-button" class="btn btn-primary">Edit Profile</button>
+        <a href="{{ path('app_change_password', {'username': app.user.username}) }}" class="btn btn-secondary">Change Password</a>
     </div>
 
     {# Edit Form Section #}
-    <div id="profile-edit" style="display: {{ showEditForm ? 'block' : 'none' }};">
+    <div id="profile-edit" style="display: none;">
         {{ form_start(form) }}
             {{ form_row(form.firstName) }}
             {{ form_row(form.lastName) }}
             {{ form_row(form.phoneNumber) }}
             {{ form_row(form.address) }}
             {{ form_row(form.profilePic) }}
-
             <button type="submit" class="btn btn-success">Save</button>
         {{ form_end(form) }}
 
-        <button type="button" id="cancel-button" class="btn btn-secondary">
-            Cancel
-        </button>
+        <button type="button" id="cancel-button" class="btn btn-secondary">Cancel</button>
     </div>
 </main>
 
-{# JavaScript to toggle between view and edit modes #}
 <script>
     function initProfileToggle() {
         document.body.removeEventListener('click', profileToggleHandler);

@@ -34,7 +34,7 @@ class AdminUserSubscriber implements EventSubscriberInterface
         if (!$adminUser) {
             $adminUser = new User();
             $adminUser->setEmail($adminEmail);
-            $adminUser->setUsername('admin');
+            $adminUser->setUsername('admin_coursly');
 
             $adminUser->setFirstName('Admin');
             $adminUser->setLastName('User');
