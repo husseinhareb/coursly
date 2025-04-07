@@ -1,5 +1,5 @@
 <?php
-
+// src/Controller/CourseController.php
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,34 +15,34 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 final class CourseController extends AbstractController
 {
-    #[Route('/courses', name: 'courses.index')]
+    #[Route('/courses', name: 'courses_index')]
     public function index(Request $request, CourseRepository $repository): Response
     {
         $courses = $repository->findAll();
         // Define a set of colors for course cards.
         $colors = ['#3498db', '#e74c3c', '#2ecc71', '#f39c12', '#9b59b6', '#1abc9c', '#d35400', '#8e44ad'];
 
-        return $this->render('courses/index.html.twig', [
+        return $this->render('courses/courses.html.twig', [
             'courses' => $courses,
             'colors' => $colors,
         ]);
     }
 
-    #[Route('/courses/{code}-{id}', name: 'courses.show', requirements: ['code' => '[a-z0-9\-]+'])]
-    public function show(string $code, int $id, CourseRepository $repository): Response
-    {  
+    #[Route('/courses/{id}/{code}', name: 'courses_show', requirements: ['code' => '^(?!edit$).+'])]
+    public function show(int $id, string $code, CourseRepository $repository): Response
+    {
         $course = $repository->find($id);
         if (!$course) {
             throw $this->createNotFoundException('The requested course does not exist.');
         }
         if ($course->getCode() !== $code) {
-            return $this->redirectToRoute('courses.show', [
+            return $this->redirectToRoute('courses_show', [
                 'code' => $course->getCode(),
                 'id' => $course->getId()
             ], 301);
         }
         
-        return $this->render('courses/show.html.twig', [
+        return $this->render('courses/course.html.twig', [
             'course' => $course
         ]);
     }
@@ -64,7 +64,7 @@ final class CourseController extends AbstractController
         return $this->json($data);
     }
 
-    #[Route('/courses/new', name: 'courses.new')]
+    #[Route('/courses/new', name: 'courses_new')]
     public function new(Request $request, ManagerRegistry $doctrine): Response
     {
         $course = new Course();
@@ -94,11 +94,57 @@ final class CourseController extends AbstractController
             $entityManager->persist($course);
             $entityManager->flush();
 
-            return $this->redirectToRoute('courses.index');
+            return $this->redirectToRoute('courses_index');
         }
 
         return $this->render('courses/new.html.twig', [
             'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/courses/{id}/edit', name: 'courses_edit')]
+    public function edit(
+        int $id,
+        Request $request,
+        CourseRepository $repository,
+        ManagerRegistry $doctrine
+    ): Response {
+        $course = $repository->find($id);
+        if (!$course) {
+            throw $this->createNotFoundException('Course not found.');
+        }
+        
+        $form = $this->createForm(CourseType::class, $course);
+        $form->handleRequest($request);
+        
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Handle file upload if a new image is provided
+            $imageFile = $form->get('image')->getData();
+            if ($imageFile) {
+                $newFilename = uniqid() . '.' . $imageFile->guessExtension();
+                try {
+                    $imageFile->move(
+                        $this->getParameter('courses_images_directory'),
+                        $newFilename
+                    );
+                    $course->setImagePath($newFilename);
+                } catch (FileException $e) {
+                    // Log the error or notify the user as needed.
+                }
+            }
+            
+            $entityManager = $doctrine->getManager();
+            $entityManager->flush();
+            
+            return $this->redirectToRoute('courses_show', [
+                'id' => $course->getId(),
+                'code' => $course->getCode()
+            ]);
+        }
+        
+        return $this->render('courses/edit.html.twig', [
+            'form' => $form->createView(),
+            'course' => $course,
         ]);
     }
 }

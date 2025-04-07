@@ -1,19 +1,17 @@
-/* Reset some defaults */
+/* Reset defaults */
 body, h1, h2, h3, h4, h5, p, ul, li {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: sans-serif;
+    font-family: Arial, sans-serif;
 }
 
-/* Ensure the content starts below a fixed navbar (adjust the margin-top as needed) */
 .course-page {
     margin: 80px auto 20px auto;
     width: 90%;
     max-width: 1200px;
 }
 
-/* Header container for page title and Add Course button */
 .course-header-container {
     display: flex;
     justify-content: space-between;
@@ -21,16 +19,15 @@ body, h1, h2, h3, h4, h5, p, ul, li {
     margin-bottom: 20px;
 }
 
-/* Page title styling */
 .page-title {
-    font-size: 1.8rem;
+    font-size: 2rem;
     font-weight: bold;
+    color: #333;
 }
 
-/* Add Course button styling */
 .btn-add-course {
-    background-color: #4CAF50; /* Green color */
-    color: white;
+    background-color: #fd8c29;
+    color: #fff;
     padding: 10px 16px;
     text-decoration: none;
     border-radius: 4px;
@@ -39,10 +36,9 @@ body, h1, h2, h3, h4, h5, p, ul, li {
 }
 
 .btn-add-course:hover {
-    background-color: #45a049;
+    background-color: #fa841d;
 }
 
-/* Search bar styling */
 .search-bar {
     display: flex;
     justify-content: center;
@@ -53,12 +49,13 @@ body, h1, h2, h3, h4, h5, p, ul, li {
     width: 300px;
     padding: 8px;
     font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
-/* Grid layout for course cards */
 .course-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
 }
 
@@ -78,19 +75,17 @@ body, h1, h2, h3, h4, h5, p, ul, li {
     transform: translateY(-2px);
 }
 
-/* Colored header banner for each card */
 .course-header {
     height: 60px;
 }
 
-/* Main content area within each card */
 .course-content {
     padding: 10px;
 }
 
 .course-title {
-    margin: 0;
-    font-size: 1.1rem;
+    margin: 0 0 5px 0;
+    font-size: 1.4rem;
     font-weight: 600;
     color: #333;
 }
@@ -106,15 +101,26 @@ body, h1, h2, h3, h4, h5, p, ul, li {
 
 .course-subtitle {
     margin: 5px 0 0;
+    font-size: 1.1rem;
     color: #666;
-    font-size: 0.9rem;
 }
 
-/* Message for no available courses */
 .no-courses-message {
     grid-column: 1 / -1;
     text-align: center;
     margin-top: 20px;
     font-style: italic;
     font-size: 1.1rem;
+}
+
+@media (max-width: 992px) {
+    .course-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .course-grid {
+        grid-template-columns: 1fr;
+    }
 }

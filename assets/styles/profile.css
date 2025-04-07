@@ -12,6 +12,7 @@
     background-color: #fff;
     padding: 2rem;
     border-radius: 8px;
+    margin-top: 80px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -101,21 +102,21 @@
 }
 
 .btn-primary {
-    background-color: #007bff;
+    background-color: #fd8c29;
     color: #fff;
 }
 
 .btn-primary:hover {
-    background-color: #0056b3;
+    background-color: #f5821e;
 }
 
 .btn-success {
-    background-color: #28a745;
+    background-color: #ff8113;
     color: #fff;
 }
 
 .btn-success:hover {
-    background-color: #218838;
+    background-color: #fc7805;
 }
 
 .btn-secondary {
@@ -166,5 +167,5 @@ form input:focus,
 form textarea:focus,
 form select:focus {
     outline: none;
-    border-color: #007bff;
+    border-color: #fd8c29;
 }

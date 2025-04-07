@@ -10,7 +10,7 @@
 {% block body %}
 <main class="admin-content">
     <h1>Users</h1>
-    <a href="{{ path('app_register', {'username': app.user.username}) }}" class="btn btn-primary" style="margin-bottom: 1rem;">Add User</a>
+    <a id="add_user_btn" href="{{ path('app_register', {'username': app.user.username}) }}" class="btn btn-add-user" style="margin-bottom: 1rem;">Add User</a>
     
     <table class="users-table">
         <thead>
@@ -54,7 +54,7 @@
                         {% endif %}
                     </td>
                     <td>
-                        <a href="{{ path('admin_edit_user', {'username': app.user.username, 'id': user.id}) }}" class="btn btn-primary">Edit</a>
+                        <a id="edit_user_btn_{{ user.id }}" href="{{ path('admin_edit_user', {'username': app.user.username, 'id': user.id}) }}" class="btn btn-edit-user">Edit</a>
                     </td>
                 </tr>
             {% else %}

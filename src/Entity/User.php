@@ -53,10 +53,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Enrollment::class, cascade: ['persist', 'remove'])]
     private Collection $enrollments;
+
+    #[ORM\Column]
+    private ?\DateTimeImmutable $createdAt = null;
+    
+    #[ORM\Column]
+    private ?\DateTimeImmutable $updatedAt = null;
     
     public function __construct()
     {
         $this->enrollments = new ArrayCollection();
+        $this->createdAt = new \DateTimeImmutable();
+        $this->updatedAt = new \DateTimeImmutable();
     }
     
     public function getId(): ?int
@@ -211,6 +219,28 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $enrollment->setUser(null);
             }
         }
+        return $this;
+    }
+    
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+    
+    public function setCreatedAt(\DateTimeImmutable $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+        return $this;
+    }
+    
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updatedAt;
+    }
+    
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
         return $this;
     }
 }

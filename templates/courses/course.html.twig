@@ -1,0 +1,30 @@
+{# templates/courses/course.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ course.title }}{% endblock %}
+
+{% block body %}
+    <h1>{{ course.title }}</h1>
+    <p>{{ course.content }}</p>
+
+    {# Button to create a new post (visible to professors/admins) #}
+    {% if is_granted('ROLE_PROFESSOR') or is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('post.new', { id: course.id }) }}" class="btn btn-primary">Create New Post</a>
+    {% endif %}
+
+    <h2>Posts</h2>
+    <ul>
+        {% for post in course.posts %}
+            <li>
+                <strong>{{ post.title }}</strong> ({{ post.type }})<br>
+                {{ post.description }}
+                {% if post.type == 'file' and post.filePath %}
+                    <br><a href="{{ asset('uploads/posts/' ~ post.filePath) }}">Download File</a>
+                {% endif %}
+                <br><small>Posted on {{ post.createdAt|date('Y-m-d H:i') }}</small>
+            </li>
+        {% else %}
+            <li>No posts yet.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

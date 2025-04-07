@@ -1,3 +1,4 @@
+{# templates/courses/courses.html.twig #}
 {% extends 'base.html.twig' %}
 
 {% block title %}My Courses{% endblock %}
@@ -12,7 +13,7 @@
     <!-- Header container with page title and Add Course button -->
     <div class="course-header-container">
         <h1 class="page-title">My Courses</h1>
-        <a href="{{ path('courses.new') }}" class="btn-add-course">Add Course</a>
+        <a href="{{ path('courses_new') }}" class="btn-add-course">Add Course</a>
     </div>
 
     <!-- Search bar -->
@@ -28,11 +29,13 @@
                 <div class="course-header" style="background-color: {{ color }};"></div>
                 <div class="course-content">
                     <h5 class="course-title">
-                        <a href="{{ path('courses.show', { id: course.id, code: course.code }) }}">
+                        <a href="{{ path('courses_show', { id: course.id, code: course.code }) }}">
                             {{ course.title }}
                         </a>
                     </h5>
                     <p class="course-subtitle">{{ course.code }}</p>
+                    {# Edit button for each course #}
+                        <a href="{{ path('courses_edit', { id: course.id }) }}" class="btn-edit">Edit</a>
                 </div>
             </div>
         {% else %}

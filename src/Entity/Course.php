@@ -1,5 +1,5 @@
 <?php
-
+// src/Entity/Course.php
 namespace App\Entity;
 
 use App\Repository\CourseRepository;
@@ -20,7 +20,7 @@ class Course
     private ?string $title = null;
     
     #[ORM\Column(length: 255)]
-    private ?string $content = null;
+    private ?string $description = null;
     
     #[ORM\Column(length: 255)]
     private ?string $code = null;
@@ -39,9 +39,13 @@ class Course
     #[ORM\OneToMany(mappedBy: 'course', targetEntity: Enrollment::class, cascade: ['persist', 'remove'])]
     private Collection $enrollments;
     
+    #[ORM\OneToMany(mappedBy: 'course', targetEntity: Post::class)]
+    private Collection $posts;
+    
     public function __construct()
     {
         $this->enrollments = new ArrayCollection();
+        $this->posts = new ArrayCollection();
     }
     
     public function getId(): ?int
@@ -60,14 +64,14 @@ class Course
         return $this;
     }
     
-    public function getContent(): ?string
+    public function getDescription(): ?string
     {
-        return $this->content;
+        return $this->description;
     }
     
-    public function setContent(string $content): self
+    public function setDescription(string $description): self
     {
-        $this->content = $content;
+        $this->description = $description;
         return $this;
     }
     
@@ -137,20 +141,29 @@ class Course
         return $this->enrollments;
     }
     
-    public function addEnrollment(Enrollment $enrollment): self
+    /**
+     * @return Collection|Post[]
+     */
+    public function getPosts(): Collection
     {
-        if (!$this->enrollments->contains($enrollment)) {
-            $this->enrollments[] = $enrollment;
-            $enrollment->setCourse($this);
+        return $this->posts;
+    }
+    
+    public function addPost(Post $post): self
+    {
+        if (!$this->posts->contains($post)) {
+            $this->posts[] = $post;
+            $post->setCourse($this);
         }
         return $this;
     }
     
-    public function removeEnrollment(Enrollment $enrollment): self
+    public function removePost(Post $post): self
     {
-        if ($this->enrollments->removeElement($enrollment)) {
-            if ($enrollment->getCourse() === $this) {
-                $enrollment->setCourse(null);
+        if ($this->posts->removeElement($post)) {
+            // set the owning side to null (unless already changed)
+            if ($post->getCourse() === $this) {
+                $post->setCourse(null);
             }
         }
         return $this;

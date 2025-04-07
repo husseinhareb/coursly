@@ -1,12 +1,13 @@
-/* assets/styles/admin.css */
-
-/*edit_users*/
+/*-------------------------------*/
+/*      Admin Content Styles     */
+/*-------------------------------*/
 .admin-content {
     max-width: 1000px;
     margin: 2rem auto;
     padding: 1rem;
     background: #fff;
     border-radius: 8px;
+    margin-top: 80px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
@@ -49,18 +50,56 @@
     text-align: center;
 }
 
-.btn-primary {
-    background-color: #007bff;
+/*-------------------------------*/
+/*   Unique Button Styles        */
+/*-------------------------------*/
+
+.btn-add-user {
+    background-color: #fd8c29; 
     color: #fff;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
 }
 
-.btn-primary:hover {
-    background-color: #0056b3;
+.btn-add-user:hover {
+    background-color: #ff861c;
 }
 
+/* For Editing a User */
+.btn-edit-user {
+    background-color: #fd8c29; 
+    color: #fff;
+    padding: 0.4rem 0.8rem;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
 
-/*edit_enrollements*/
-/* Enrollments Page Container */
+.btn-edit-user:hover {
+    background-color: #ee7a14;
+}
+
+.btn-edit-enrollments {
+    background-color: #ffc107; 
+    color: #212529;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn-edit-enrollments:hover {
+    background-color: #e0a800;
+}
+
+/*-------------------------------*/
+/*      Enrollments Page         */
+/*-------------------------------*/
 .enrollments-page {
     max-width: 1000px;
     margin: 2rem auto;
@@ -70,7 +109,6 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Page Header */
 .enrollments-page .page-header {
     border-bottom: 2px solid #007bff;
     padding-bottom: 0.5rem;
@@ -83,14 +121,12 @@
     margin: 0;
 }
 
-/* Section Headings */
 .enrollments-page section h2 {
     font-size: 1.4rem;
     color: #007bff;
     margin-bottom: 1rem;
 }
 
-/* Lists for Enrollments and Courses */
 .enrollments-list,
 .courses-list {
     list-style: none;
@@ -112,13 +148,11 @@
     border-bottom: none;
 }
 
-/* Course Title Styling */
 .course-title {
     font-weight: 500;
     color: #333;
 }
 
-/* Enrollment Action Form */
 .enrollment-action {
     margin: 0;
 }
@@ -129,7 +163,6 @@
     cursor: pointer;
 }
 
-/* Notification Messages */
 .no-enrollments,
 .all-enrolled {
     font-style: italic;
@@ -141,7 +174,6 @@
     text-align: center;
 }
 
-/* Page Actions (Back to Profile Button) */
 .page-actions {
     text-align: center;
     margin-top: 2rem;

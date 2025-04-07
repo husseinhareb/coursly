@@ -85,7 +85,7 @@
     {% endif %}
     
     <div class="page-actions">
-        <a href="{{ path('admin_edit_user', {'username': app.user.username, 'id': user.id}) }}" class="btn btn-secondary">
+        <a id="edit_enrollments_btn" href="{{ path('admin_edit_user', {'username': app.user.username, 'id': user.id}) }}" class="btn btn-edit-enrollments">
             <i class="fas fa-arrow-left"></i> Back to Profile
         </a>
     </div>
