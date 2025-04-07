@@ -15,34 +15,29 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class PostController extends AbstractController
 {
-    #[Route('/courses/{id}/posts/new', name: 'post.new')]
+    #[Route('/courses/{id}/posts/new', name: 'post_new')]
     public function new(
         int $id,
         Request $request,
         CourseRepository $courseRepository,
         ManagerRegistry $doctrine
     ): Response {
-         // Find the course by ID
          $course = $courseRepository->find($id);
          if (!$course) {
               throw $this->createNotFoundException('Course not found');
          }
          
-         // Create a new Post and associate it with the course
          $post = new Post();
          $post->setCourse($course);
          
-         // Optionally set the author as the currently logged-in user
          if ($this->getUser()) {
              $post->setAuthor($this->getUser());
          }
          
-         // Create and handle the form
          $form = $this->createForm(PostType::class, $post);
          $form->handleRequest($request);
          
          if ($form->isSubmitted() && $form->isValid()) {
-              // If the post type is "file", handle file upload for the attachment
               if ($post->getType() === 'file') {
                   $attachment = $form->get('attachment')->getData();
                   if ($attachment) {
@@ -54,7 +49,6 @@ class PostController extends AbstractController
                           );
                           $post->setFilePath($newFilename);
                       } catch (FileException $e) {
-                          // Optionally log the error
                       }
                   }
               }
@@ -63,7 +57,6 @@ class PostController extends AbstractController
               $entityManager->persist($post);
               $entityManager->flush();
               
-              // Redirect to the course detail page
               return $this->redirectToRoute('courses_show', [
                   'id' => $course->getId(),
                   'code' => $course->getCode()

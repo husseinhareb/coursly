@@ -17,7 +17,7 @@ class CourseType extends AbstractType
     {
          $builder
              ->add('title', TextType::class)
-             ->add('content', TextareaType::class)
+             ->add('description', TextareaType::class)
              ->add('code', TextType::class)
              ->add('image', FileType::class, [
                   'label' => 'Course Image (Optional)',

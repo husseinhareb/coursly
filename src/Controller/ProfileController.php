@@ -28,8 +28,6 @@ class ProfileController extends AbstractController
             $profilePicFile = $form->get('profilePic')->getData();
             if ($profilePicFile) {
                 $originalFilename = pathinfo($profilePicFile->getClientOriginalName(), PATHINFO_FILENAME);
-                // Use the subject's code directly.
-                // Replace 'SUBJECT_CODE' with the actual subject code if available.
                 $subjectCode = 'SUBJECT_CODE';
                 $newFilename = $subjectCode . '-' . uniqid() . '.' . $profilePicFile->guessExtension();
 

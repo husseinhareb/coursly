@@ -1,203 +1,203 @@
 /* assests/styles/navbar.css*/
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    line-height: 1.6;
+  line-height: 1.6;
 }
 
 .site-logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #333;
-    text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  text-decoration: none;
 }
 
 .menu {
-    list-style: none;
-    display: flex;
-    gap: 0.75rem;
-    align-items: center;
+  list-style: none;
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
 }
 
 .menu-link {
-    text-decoration: none;
-    color: #333;
-    transition: color 0.3s ease;
+  text-decoration: none;
+  color: #333;
+  transition: color 0.3s ease;
 }
 
 .menu-link:hover {
-    color: #2563eb;
+  color: #2563eb;
 }
 
 .menu-toggle {
-    display: none;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0.5rem;
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
 }
 
 .toggle-bar {
-    display: block;
-    width: 25px;
-    height: 2px;
-    background: #333;
+  display: block;
+  width: 25px;
+  height: 2px;
+  background: #333;
 }
 
 .navbar-welcome-heading {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    color: #1a365d;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #1a365d;
 }
 
 @media (max-width: 768px) {
-    .menu-toggle {
-        display: block;
-    }
+  .menu-toggle {
+    display: block;
+  }
 
-    .main-nav {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: white;
-        padding: 1rem;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        height: 40px;
-        margin-bottom: 40px;
-    }
+  .main-nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    height: 40px;
+    margin-bottom: 40px;
+  }
 
-    .main-nav.active {
-        display: block;
-    }
+  .main-nav.active {
+    display: block;
+  }
 
-    .menu {
-        flex-direction: column;
-        gap: 1rem;
-        align-items: flex-start;
-    }
+  .menu {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
 
-    .profile-section {
-        flex-direction: column;
-        align-items: flex-start;
-    }
+  .profile-section {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 
 .avatar-initials {
-    background: #393c43;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.2rem;
-    text-transform: uppercase;
+  background: #393c43;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  text-transform: uppercase;
 }
 
 .profile-pic {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-    flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
 }
 
 .header {
-    background: #fd8c29;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
+  background: #fd8c29;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
 }
 
 .header-content {
-    display: flex;
-    align-items: center;      
-    justify-content: space-between;
-    min-height: 50px;        
-    padding: 0 1rem;      
-    margin: 0;              
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 50px;
+  padding: 0 1rem;
+  margin: 0;
 }
 
 .navbar-logo img {
-    height: 30px;          
-    display: block;          
+  height: 30px;
+  display: block;
 }
 
 .profile-section {
-    display: flex;
-    align-items: center;
-    gap: 0.25rem; 
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
 }
 
 .separator {
-    border-left: 2px solid #333; 
-    height: 24px;
+  border-left: 2px solid #333;
+  height: 24px;
 }
 
 .arrow-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .arrow-button i {
-    color: #333; 
-    transition: color 0.3s ease;
+  color: #333;
+  transition: color 0.3s ease;
 }
 
 .arrow-button:hover i {
-    color: #2563eb; 
+  color: #2563eb;
 }
 
 .profile-dropdown {
-    display: none;
-    position: absolute;     
-    top: 50px;         
-    background-color: #fff;
-    border: 1px solid #ccc;
-    list-style: none;
-    margin-top: 0.5rem;
-    padding: 0.5rem;
-    border-radius: 4px;
-    z-index: 999;         
+  display: none;
+  position: absolute;
+  top: 50px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  list-style: none;
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 4px;
+  z-index: 999;
 }
 
 .profile-dropdown li a {
-    display: block;
-    padding: 0.5rem;
-    text-decoration: none;
-    color: #333;
+  display: block;
+  padding: 0.5rem;
+  text-decoration: none;
+  color: #333;
 }
 
 .profile-dropdown li a:hover {
-    background-color: #f1f1f1;
+  background-color: #f1f1f1;
 }
 
 .profile-dropdown.active {
-    display: block;
+  display: block;
 }
 
 .profile-section {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 0.25rem; 
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
 }
 
 .arrow-button i {
-    transition: transform 0.3s ease;
+  transition: transform 0.3s ease;
 }
 .arrow-button i.flipped {
-    transform: rotate(180deg);
+  transform: rotate(180deg);
 }

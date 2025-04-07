@@ -23,11 +23,9 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var string $plainPassword */
             $plainPassword = $form->get('plainPassword')->getData();
             $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
 
-            // Ensure a username is set. If empty, generate it.
             if (!$user->getUsername()) {
                 $randomNumber = rand(10, 999);
                 $generatedUsername = strtolower($user->getFirstName()) . '_' . strtolower($user->getLastName()) . $randomNumber;

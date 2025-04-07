@@ -3,9 +3,16 @@
 
 {% block title %}Edit Course: {{ course.title }}{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('styles/course.css') }}">
+{% endblock %}
+
 {% block body %}
+<div class="course-container">
     <div class="course-form-container">
         <h1>Edit Course</h1>
+        {{ form_errors(form) }}
         {{ form_start(form) }}
             <div class="form-group">
                 {{ form_label(form.title) }}
@@ -13,9 +20,9 @@
                 {{ form_errors(form.title) }}
             </div>
             <div class="form-group">
-                {{ form_label(form.content) }}
-                {{ form_widget(form.content, {'attr': {'class': 'input-field'}}) }}
-                {{ form_errors(form.content) }}
+                {{ form_label(form.description) }}
+                {{ form_widget(form.description, {'attr': {'class': 'input-field'}}) }}
+                {{ form_errors(form.description) }}
             </div>
             <div class="form-group">
                 {{ form_label(form.code) }}
@@ -30,5 +37,8 @@
             <button type="submit" class="submit-button">Update Course</button>
         {{ form_end(form) }}
     </div>
-    <a href="{{ path('courses_show', { id: course.id, code: course.code }) }}">Back to Course</a>
+    <div class="back-link">
+        <a href="{{ path('courses_show', { id: course.id, code: course.code }) }}" class="btn">Back to Course</a>
+    </div>
+</div>
 {% endblock %}

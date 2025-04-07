@@ -24,7 +24,6 @@
                     {% for enrollment in user.enrollments %}
                         <li>
                             <span class="course-title"><i class="fas fa-book"></i> {{ enrollment.course.title }}</span>
-                            {# Enrollment removal is disabled for admin users #}
                             <button type="button" class="btn btn-secondary" title="Remove Enrollment" disabled>
                                 <i class="fas fa-trash-alt"></i>
                             </button>

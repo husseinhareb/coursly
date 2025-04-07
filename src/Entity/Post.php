@@ -21,7 +21,6 @@ class Post
     #[ORM\Column(type: "text")]
     private ?string $content = null;
     
-    // Discriminator field: "message" or "file"
     #[ORM\Column(length: 50)]
     private ?string $type = null;
     
@@ -31,7 +30,6 @@ class Post
     #[ORM\Column]
     private ?\DateTimeImmutable $updatedAt = null;
     
-    // For file posts only (optional)
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $filePath = null;
     

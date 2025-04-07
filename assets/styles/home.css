@@ -1,24 +1,25 @@
 /* assests/styles/home.css */
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .main-content {
-    max-width: 1200px;
-    margin: 6rem auto 2rem;
-    padding: 0 1rem;
+  max-width: 1200px;
+  margin: 6rem auto 2rem;
+  padding: 0 1rem;
 }
 
 .welcome-heading {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    color: #1a365d;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #1a365d;
 }
 
-.user-detail, .login-prompt {
-    font-size: 1.1rem;
-    color: #393c43;
+.user-detail,
+.login-prompt {
+  font-size: 1.1rem;
+  color: #393c43;
 }

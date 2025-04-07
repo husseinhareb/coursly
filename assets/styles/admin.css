@@ -2,52 +2,52 @@
 /*      Admin Content Styles     */
 /*-------------------------------*/
 .admin-content {
-    max-width: 1000px;
-    margin: 2rem auto;
-    padding: 1rem;
-    background: #fff;
-    border-radius: 8px;
-    margin-top: 80px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 1rem;
+  background: #fff;
+  border-radius: 8px;
+  margin-top: 80px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .admin-content h1 {
-    text-align: center;
-    margin-bottom: 1.5rem;
-    color: #333;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #333;
 }
 
 .users-table {
-    width: 100%;
-    border-collapse: collapse;
+  width: 100%;
+  border-collapse: collapse;
 }
 
 .users-table thead {
-    background-color: #f5f5f5;
+  background-color: #f5f5f5;
 }
 
-.users-table th, 
+.users-table th,
 .users-table td {
-    padding: 0.75rem;
-    text-align: left;
-    border: 1px solid #ddd;
+  padding: 0.75rem;
+  text-align: left;
+  border: 1px solid #ddd;
 }
 
 .table-profile-pic {
-    width: 50px;
-    height: 50px;
-    object-fit: cover;
-    border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 .btn {
-    display: inline-block;
-    padding: 0.5rem 0.75rem;
-    text-decoration: none;
-    border-radius: 4px;
-    font-size: 0.9rem;
-    transition: background-color 0.3s ease;
-    text-align: center;
+  display: inline-block;
+  padding: 0.5rem 0.75rem;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+  text-align: center;
 }
 
 /*-------------------------------*/
@@ -55,126 +55,126 @@
 /*-------------------------------*/
 
 .btn-add-user {
-    background-color: #fd8c29; 
-    color: #fff;
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 4px;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
+  background-color: #fd8c29;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
 }
 
 .btn-add-user:hover {
-    background-color: #ff861c;
+  background-color: #ff861c;
 }
 
 /* For Editing a User */
 .btn-edit-user {
-    background-color: #fd8c29; 
-    color: #fff;
-    padding: 0.4rem 0.8rem;
-    border: none;
-    border-radius: 4px;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
+  background-color: #fd8c29;
+  color: #fff;
+  padding: 0.4rem 0.8rem;
+  border: none;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
 }
 
 .btn-edit-user:hover {
-    background-color: #ee7a14;
+  background-color: #ee7a14;
 }
 
 .btn-edit-enrollments {
-    background-color: #ffc107; 
-    color: #212529;
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 4px;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
+  background-color: #ffc107;
+  color: #212529;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
 }
 
 .btn-edit-enrollments:hover {
-    background-color: #e0a800;
+  background-color: #e0a800;
 }
 
 /*-------------------------------*/
 /*      Enrollments Page         */
 /*-------------------------------*/
 .enrollments-page {
-    max-width: 1000px;
-    margin: 2rem auto;
-    padding: 1rem;
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 1rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .enrollments-page .page-header {
-    border-bottom: 2px solid #007bff;
-    padding-bottom: 0.5rem;
-    margin-bottom: 1.5rem;
+  border-bottom: 2px solid #007bff;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .enrollments-page .page-header h1 {
-    font-size: 1.8rem;
-    color: #333;
-    margin: 0;
+  font-size: 1.8rem;
+  color: #333;
+  margin: 0;
 }
 
 .enrollments-page section h2 {
-    font-size: 1.4rem;
-    color: #007bff;
-    margin-bottom: 1rem;
+  font-size: 1.4rem;
+  color: #007bff;
+  margin-bottom: 1rem;
 }
 
 .enrollments-list,
 .courses-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .enrollments-list li,
 .courses-list li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.75rem;
-    border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  border-bottom: 1px solid #eee;
 }
 
 .enrollments-list li:last-child,
 .courses-list li:last-child {
-    border-bottom: none;
+  border-bottom: none;
 }
 
 .course-title {
-    font-weight: 500;
-    color: #333;
+  font-weight: 500;
+  color: #333;
 }
 
 .enrollment-action {
-    margin: 0;
+  margin: 0;
 }
 
 .enrollment-action button {
-    border: none;
-    background: transparent;
-    cursor: pointer;
+  border: none;
+  background: transparent;
+  cursor: pointer;
 }
 
 .no-enrollments,
 .all-enrolled {
-    font-style: italic;
-    color: #777;
-    padding: 0.5rem;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    text-align: center;
+  font-style: italic;
+  color: #777;
+  padding: 0.5rem;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  text-align: center;
 }
 
 .page-actions {
-    text-align: center;
-    margin-top: 2rem;
+  text-align: center;
+  margin-top: 2rem;
 }

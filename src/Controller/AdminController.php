@@ -24,23 +24,18 @@ class AdminController extends AbstractController
         UserRepository $userRepository,
         int $id
     ): Response {
-        // Fetch the user to be edited.
         $user = $userRepository->find($id);
         if (!$user) {
             throw $this->createNotFoundException("User not found");
         }
 
-        // Create the profile form.
         $form = $this->createForm(ProfileType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Handle profile picture upload.
             $profilePicFile = $form->get('profilePic')->getData();
             if ($profilePicFile) {
                 $originalFilename = pathinfo($profilePicFile->getClientOriginalName(), PATHINFO_FILENAME);
-                // Use the subject's code directly.
-                // Replace 'SUBJECT_CODE' with the actual subject code if available.
                 $subjectCode = 'SUBJECT_CODE';
                 $newFilename = $subjectCode . '-' . uniqid() . '.' . $profilePicFile->guessExtension();
 
@@ -59,7 +54,6 @@ class AdminController extends AbstractController
             $em->flush();
             $this->addFlash('success', 'User profile updated successfully!');
 
-            // Redirect back to the edit page.
             return $this->redirectToRoute('admin_edit_user', [
                 'username' => $this->getUser()->getUsername(),
                 'id' => $user->getId()
@@ -86,7 +80,6 @@ class AdminController extends AbstractController
     #[IsGranted('ROLE_ADMIN')]
     public function manageEnrollments(User $user, CourseRepository $courseRepo): Response
     {
-        // Fetch all courses.
         $courses = $courseRepo->findAll();
 
         return $this->render('admin/edit_enrollments.html.twig', [
@@ -104,7 +97,6 @@ class AdminController extends AbstractController
         EntityManagerInterface $em,
         CourseRepository $courseRepo
     ): Response {
-        // Prevent admin users from enrolling in courses
         if (in_array('ROLE_ADMIN', $user->getRoles())) {
             $this->addFlash('warning', 'Admins cannot enroll in courses.');
             return $this->redirectToRoute('admin_manage_enrollments', [
@@ -113,7 +105,6 @@ class AdminController extends AbstractController
             ]);
         }
 
-        // Check if the enrollment already exists.
         foreach ($user->getEnrollments() as $enrollment) {
             if ($enrollment->getCourse()->getId() === $courseId) {
                 $this->addFlash('info', 'Course is already enrolled.');

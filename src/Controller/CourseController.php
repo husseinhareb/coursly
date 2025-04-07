@@ -19,7 +19,6 @@ final class CourseController extends AbstractController
     public function index(Request $request, CourseRepository $repository): Response
     {
         $courses = $repository->findAll();
-        // Define a set of colors for course cards.
         $colors = ['#3498db', '#e74c3c', '#2ecc71', '#f39c12', '#9b59b6', '#1abc9c', '#d35400', '#8e44ad'];
 
         return $this->render('courses/courses.html.twig', [
@@ -47,7 +46,7 @@ final class CourseController extends AbstractController
         ]);
     }
     
-    #[Route('/search-courses', name: 'search_courses', methods: ['GET'])]
+    #[Route('/search-courses', name: 'courses_search', methods: ['GET'])]
     public function searchCourses(Request $request, CourseRepository $courseRepository): JsonResponse
     {
         $term = $request->query->get('q', '');
@@ -75,7 +74,6 @@ final class CourseController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Handle file upload for the course image.
             $imageFile = $form->get('image')->getData();
             if ($imageFile) {
                 $newFilename = uniqid() . '.' . $imageFile->guessExtension();
@@ -86,7 +84,6 @@ final class CourseController extends AbstractController
                     );
                     $course->setImagePath($newFilename);
                 } catch (FileException $e) {
-                    // Optionally log the error or notify the user.
                 }
             }
 
@@ -98,8 +95,10 @@ final class CourseController extends AbstractController
         }
 
         return $this->render('courses/new.html.twig', [
-            'form' => $form->createView(),
+            'form'   => $form->createView(),
+            'course' => $course,
         ]);
+        
     }
 
     #[Route('/courses/{id}/edit', name: 'courses_edit')]
@@ -118,7 +117,6 @@ final class CourseController extends AbstractController
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
-            // Handle file upload if a new image is provided
             $imageFile = $form->get('image')->getData();
             if ($imageFile) {
                 $newFilename = uniqid() . '.' . $imageFile->guessExtension();
@@ -129,7 +127,6 @@ final class CourseController extends AbstractController
                     );
                     $course->setImagePath($newFilename);
                 } catch (FileException $e) {
-                    // Log the error or notify the user as needed.
                 }
             }
             

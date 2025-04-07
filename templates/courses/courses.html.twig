@@ -10,18 +10,15 @@
 
 {% block body %}
 <div class="course-page">
-    <!-- Header container with page title and Add Course button -->
     <div class="course-header-container">
         <h1 class="page-title">My Courses</h1>
         <a href="{{ path('courses_new') }}" class="btn-add-course">Add Course</a>
     </div>
 
-    <!-- Search bar -->
     <div class="search-bar">
         <input type="text" id="search" class="search-input" placeholder="Search for a course...">
     </div>
 
-    <!-- Grid of course cards -->
     <div class="course-grid">
         {% for course in courses %}
             {% set color = colors[loop.index0 % colors|length] %}
@@ -34,7 +31,6 @@
                         </a>
                     </h5>
                     <p class="course-subtitle">{{ course.code }}</p>
-                    {# Edit button for each course #}
                         <a href="{{ path('courses_edit', { id: course.id }) }}" class="btn-edit">Edit</a>
                 </div>
             </div>
