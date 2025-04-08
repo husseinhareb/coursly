@@ -10,7 +10,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\CourseRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Entity\Course;
+use App\Entity\Post;
 use App\Form\CourseType;
+use App\Form\PostType;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 final class CourseController extends AbstractController
@@ -19,11 +21,11 @@ final class CourseController extends AbstractController
     public function index(Request $request, CourseRepository $repository): Response
     {
         $courses = $repository->findAll();
-        $colors = ['#3498db', '#e74c3c', '#2ecc71', '#f39c12', '#9b59b6', '#1abc9c', '#d35400', '#8e44ad'];
+        $colors  = ['#3498db', '#e74c3c', '#2ecc71', '#f39c12', '#9b59b6', '#1abc9c', '#d35400', '#8e44ad'];
 
         return $this->render('courses/courses.html.twig', [
             'courses' => $courses,
-            'colors' => $colors,
+            'colors'  => $colors,
         ]);
     }
 
@@ -37,7 +39,7 @@ final class CourseController extends AbstractController
         if ($course->getCode() !== $code) {
             return $this->redirectToRoute('courses_show', [
                 'code' => $course->getCode(),
-                'id' => $course->getId()
+                'id'   => $course->getId()
             ], 301);
         }
         
@@ -53,6 +55,7 @@ final class CourseController extends AbstractController
         if (empty($term)) {
             return $this->json([]);
         }
+
         $courses = $courseRepository->searchCourses($term);
         $data = array_map(fn($course) => [
             'id'    => $course->getId(),
@@ -76,7 +79,7 @@ final class CourseController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $imageFile = $form->get('image')->getData();
             if ($imageFile) {
-                $newFilename = uniqid() . '.' . $imageFile->guessExtension();
+                $newFilename = uniqid().'.'.$imageFile->guessExtension();
                 try {
                     $imageFile->move(
                         $this->getParameter('courses_images_directory'),
@@ -84,6 +87,7 @@ final class CourseController extends AbstractController
                     );
                     $course->setImagePath($newFilename);
                 } catch (FileException $e) {
+                    // Optionally handle file upload exception
                 }
             }
 
@@ -98,7 +102,6 @@ final class CourseController extends AbstractController
             'form'   => $form->createView(),
             'course' => $course,
         ]);
-        
     }
 
     #[Route('/courses/{id}/edit', name: 'courses_edit')]
@@ -119,7 +122,7 @@ final class CourseController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $imageFile = $form->get('image')->getData();
             if ($imageFile) {
-                $newFilename = uniqid() . '.' . $imageFile->guessExtension();
+                $newFilename = uniqid().'.'.$imageFile->guessExtension();
                 try {
                     $imageFile->move(
                         $this->getParameter('courses_images_directory'),
@@ -127,6 +130,7 @@ final class CourseController extends AbstractController
                     );
                     $course->setImagePath($newFilename);
                 } catch (FileException $e) {
+                    // Optionally handle file upload exception
                 }
             }
             
@@ -134,14 +138,15 @@ final class CourseController extends AbstractController
             $entityManager->flush();
             
             return $this->redirectToRoute('courses_show', [
-                'id' => $course->getId(),
+                'id'   => $course->getId(),
                 'code' => $course->getCode()
             ]);
         }
         
         return $this->render('courses/edit.html.twig', [
-            'form' => $form->createView(),
+            'form'   => $form->createView(),
             'course' => $course,
         ]);
     }
+
 }

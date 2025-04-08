@@ -1,53 +1,28 @@
+{# templates/courses/course.html.twig #}
 {% extends 'base.html.twig' %}
 
 {% block title %}{{ course.title }}{% endblock %}
 
-{% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('styles/course.css') }}">
-{% endblock %}
-
 {% block body %}
-<div class="course-page-container">
-    <div class="course-header">
-        <h1 class="course-title">{{ course.title }}</h1>
-        <p class="course-description">{{ course.description }}</p>
-    </div>
+    <h1>{{ course.title }}</h1>
 
-    {# Only show the "Create New Post" button to professors/admins #}
+    {# Button to create a new post (visible to professors/admins) #}
     {% if is_granted('ROLE_PROFESSOR') or is_granted('ROLE_ADMIN') %}
-        <div class="create-post-button">
-            <a href="{{ path('post_new', { id: course.id, code: course.code }) }}" class="btn create-btn" data-turbo="false">
-                Create New Post
-            </a>
-        </div>
+        <a href="{{ path('post_new', { code: course.code, id: course.id }) }}" class="btn btn-primary">Create New Post</a>
     {% endif %}
 
-    <div class="posts-section">
-        <h2>Posts</h2>
-        {% if course.posts is empty %}
-            <p>No posts yet.</p>
+    <h2>Posts</h2>
+    <ul>
+        {% for post in course.posts %}
+            <li>
+                <strong>{{ post.title }}</strong> ({{ post.type }})<br>
+                {% if post.type == 'file' and post.filePath %}
+                    <br><a href="{{ asset('uploads/posts/' ~ post.filePath) }}">Download File</a>
+                {% endif %}
+                <br><small>Posted on {{ post.createdAt|date('Y-m-d H:i') }}</small>
+            </li>
         {% else %}
-            <ul class="posts-list">
-                {% for post in course.posts %}
-                    <li class="post-item">
-                        <div class="post-header">
-                            <strong>{{ post.title }}</strong>
-                            <span class="post-type">({{ post.type }})</span>
-                        </div>
-                        <div class="post-description">
-                            {{ post.description }}
-                        </div>
-                        {% if post.type == 'file' and post.filePath %}
-                            <div class="post-file">
-                                <a href="{{ asset('uploads/posts/' ~ post.filePath) }}">Download File</a>
-                            </div>
-                        {% endif %}
-                        <small class="post-date">Posted on {{ post.createdAt|date('Y-m-d H:i') }}</small>
-                    </li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-    </div>
-</div>
+            <li>No posts yet.</li>
+        {% endfor %}
+    </ul>
 {% endblock %}
