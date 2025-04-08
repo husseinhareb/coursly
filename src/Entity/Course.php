@@ -39,6 +39,7 @@ class Course
     #[ORM\OneToMany(mappedBy: 'course', targetEntity: Enrollment::class, cascade: ['persist', 'remove'])]
     private Collection $enrollments;
     
+    // The posts collection on Course is the inverse side of the relationship.
     #[ORM\OneToMany(mappedBy: 'course', targetEntity: Post::class)]
     private Collection $posts;
     

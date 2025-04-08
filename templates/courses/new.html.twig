@@ -1,7 +1,7 @@
 {# templates/posts/new.html.twig #}
 {% extends 'base.html.twig' %}
 
-{% block title %}New Post for {{ course.title }}{% endblock %}
+{% block title %}New course{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -10,7 +10,7 @@
 
 {% block body %}
 <div class="post-container">
-    <h1>Create a New Post for {{ course.title }}</h1>
+    <h1>Create a New Course</h1>
 
     {{ form_errors(form) }}
 

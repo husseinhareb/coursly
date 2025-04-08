@@ -1,11 +1,9 @@
-{# templates/courses/course.html.twig #}
 {% extends 'base.html.twig' %}
 
 {% block title %}{{ course.title }}{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
-    {# Link your new CSS file here #}
     <link rel="stylesheet" href="{{ asset('styles/course.css') }}">
 {% endblock %}
 
@@ -19,7 +17,9 @@
     {# Only show the "Create New Post" button to professors/admins #}
     {% if is_granted('ROLE_PROFESSOR') or is_granted('ROLE_ADMIN') %}
         <div class="create-post-button">
-            <a href="{{ path('post_new', { id: course.id }) }}" class="btn create-btn">Create New Post</a>
+            <a href="{{ path('post_new', { id: course.id, code: course.code }) }}" class="btn create-btn" data-turbo="false">
+                Create New Post
+            </a>
         </div>
     {% endif %}
 
