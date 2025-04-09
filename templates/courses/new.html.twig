@@ -1,30 +1,15 @@
-{# templates/posts/new.html.twig #}
+{#templates/courses/new.html.twig#}
 {% extends 'base.html.twig' %}
 
 {% block title %}New course{% endblock %}
 
-{% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('styles/post.css') }}">
-{% endblock %}
-
 {% block body %}
-<div class="post-container">
     <h1>Create a New Course</h1>
-
     {{ form_errors(form) }}
-
     {{ form_start(form) }}
-        <div class="post-form-group">
-            {{ form_row(form.title) }}
-        </div>
-        <div class="post-form-group">
-            {{ form_row(form.description) }}
-        </div>
-        <div class="post-form-group">
-            {{ form_row(form.code) }}
-        </div>
-        <button type="submit" class="btn">Create Course</button>
+        {{ form_row(form.title) }}
+        {{ form_row(form.description) }}
+        {{ form_row(form.code) }}
+        <button type="submit">Create Course</button>
     {{ form_end(form) }}
-</div>
 {% endblock %}

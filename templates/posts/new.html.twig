@@ -3,16 +3,33 @@
 
 {% block title %}New Post for {{ course.title }}{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('styles/post.css') }}">
+{% endblock %}
+
 {% block body %}
+<div class="post-container">
     <h1>Create a New Post for {{ course.title }}</h1>
 
+    {{ form_errors(form) }}
+
     {{ form_start(form) }}
-        {{ form_row(form.title) }}
-        {{ form_row(form.content) }}
-        {{ form_row(form.type) }}
-        {{ form_row(form.attachment) }}
-        <button class="btn">Create Post</button>
+        <div class="post-form-group">
+            {{ form_row(form.title, {'attr': {'id': 'post_form_title'}}) }}
+        </div>
+        <div class="post-form-group">
+            {{ form_row(form.content, {'attr': {'id': 'post_form_content'}}) }}
+        </div>
+        <div class="post-form-group">
+            {{ form_row(form.type, {'attr': {'id': 'post_form_type'}}) }}
+        </div>
+        <div class="post-form-group">
+            {{ form_row(form.attachment, {'attr': {'id': 'post_form_attachment'}}) }}
+        </div>
+        <button type="submit" class="btn">Create Post</button>
     {{ form_end(form) }}
 
     <a href="{{ path('courses_show', { id: course.id, code: course.code }) }}">Back to Course</a>
+</div>
 {% endblock %}

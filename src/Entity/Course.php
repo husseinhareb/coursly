@@ -32,7 +32,7 @@ class Course
     private ?\DateTimeImmutable $updatedAt = null;
     
     #[ORM\Column(type: "string", length: 255, nullable: true)]
-    private ?string $imagePath = null;
+    private ?string $background = null;
     
     private ?File $image = null;
     
@@ -109,14 +109,14 @@ class Course
         return $this;
     }
     
-    public function getImagePath(): ?string
+    public function getBackground(): ?string
     {
-        return $this->imagePath;
+        return $this->background;
     }
     
-    public function setImagePath(?string $imagePath): self
+    public function setBackground(?string $background): self
     {
-        $this->imagePath = $imagePath;
+        $this->background = $background;
         return $this;
     }
     

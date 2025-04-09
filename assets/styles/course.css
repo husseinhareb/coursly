@@ -1,9 +1,7 @@
-/*assets/styles/course.css*/
-
 .course-page {
   margin: 80px auto 20px auto;
   width: 90%;
-  max-width: 1200px;
+  max-width: 90%;
 }
 
 .course-header-container {
@@ -68,8 +66,15 @@
   transform: translateY(-2px);
 }
 
+/* Use the modern aspect-ratio property to maintain a 16:9 ratio,
+ and limit the maximum height to make the header smaller */
 .course-header {
-  height: 60px;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  max-height: 150px; /* Adjust this value as needed */
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .course-content {
@@ -79,8 +84,7 @@
 .course-title {
   margin: 0 0 5px 0;
   font-size: 1.4rem;
-  font-weight: 600;
-  color: #333;
+  color: #007BC0;
 }
 
 .course-title a {
@@ -108,202 +112,12 @@
 
 @media (max-width: 992px) {
   .course-grid {
-    grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 576px) {
   .course-grid {
-    grid-template-columns: 1fr;
+      grid-template-columns: 1fr;
   }
-}
-
-.course-container {
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
-  margin-top: 80px;
-}
-
-.course-form-container {
-  background: #fff;
-  border-radius: 12px;
-  padding: 40px 30px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-.course-form-container h1 {
-  text-align: center;
-  margin-bottom: 30px;
-  color: #333;
-  font-weight: 600;
-  font-size: 1.8em;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.form-group {
-  margin-bottom: 20px;
-}
-
-.course-form-container form label {
-  display: block;
-  margin-bottom: 8px;
-  color: #555;
-  font-weight: 600;
-}
-
-.input-field {
-  width: 100%;
-  padding: 12px 15px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 1em;
-  transition: all 0.3s ease;
-}
-
-.input-field:focus {
-  outline: none;
-  border-color: #4ca1af;
-  box-shadow: 0 0 8px rgba(76, 161, 175, 0.3);
-}
-
-.submit-button {
-  background-color: #e77e23;
-  color: #fff;
-  padding: 15px;
-  border: none;
-  border-radius: 8px;
-  font-size: 1.1em;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
-  text-transform: uppercase;
-  width: 100%;
-}
-
-.submit-button:hover {
-  background-color: #fd8c29;
-  transform: translateY(-2px);
-}
-
-.back-link {
-  text-align: center;
-  margin-top: 20px;
-}
-
-.btn {
-  background-color: #fd8c29;
-  color: #fff;
-  padding: 12px 20px;
-  border-radius: 8px;
-  text-decoration: none;
-  transition: background 0.3s ease, transform 0.2s ease;
-  font-weight: 600;
-}
-
-.btn:hover {
-  background-color: #f57b10;
-  transform: translateY(-2px);
-}
-
-.course-page-container {
-  width: 80%;
-  margin: 40px auto;
-  background: #fff;
-  border-radius: 12px;
-  padding: 30px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  margin-top: 80px;
-}
-
-.course-header {
-  margin-bottom: 20px;
-  border-bottom: 2px solid #ddd;
-  padding-bottom: 10px;
-}
-
-.course-title {
-  font-size: 2em;
-  color: #333;
-  margin-bottom: 10px;
-}
-
-.course-description {
-  font-size: 1.1em;
-  color: #555;
-}
-
-.create-post-button {
-  text-align: right;
-  margin-bottom: 20px;
-}
-
-.create-btn {
-  background-color: #e77e23;
-  color: #fff;
-  padding: 12px 20px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: background 0.3s ease, transform 0.2s ease;
-}
-
-.create-btn:hover {
-  background-color: #fd8c29;
-  transform: translateY(-2px);
-}
-
-.posts-section h2 {
-  margin-bottom: 15px;
-  color: #333;
-  font-weight: 600;
-  font-size: 1.5em;
-}
-
-.posts-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.post-item {
-  background: #f7f7f7;
-  border-left: 4px solid #e77e23;
-  padding: 15px;
-  margin-bottom: 15px;
-  border-radius: 4px;
-}
-
-.post-header {
-  font-size: 1.2em;
-  margin-bottom: 8px;
-  color: #333;
-}
-
-.post-type {
-  font-size: 0.9em;
-  color: #777;
-  margin-left: 5px;
-}
-
-.post-description {
-  font-size: 1em;
-  color: #555;
-  margin-bottom: 10px;
-}
-
-.post-file a {
-  color: #e77e23;
-  text-decoration: none;
-  font-weight: 600;
-}
-
-.post-file a:hover {
-  text-decoration: underline;
-}
-
-.post-date {
-  font-size: 0.9em;
-  color: #999;
 }

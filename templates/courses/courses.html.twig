@@ -1,4 +1,3 @@
-{# templates/courses/courses.html.twig #}
 {% extends 'base.html.twig' %}
 
 {% block title %}My Courses{% endblock %}
@@ -21,9 +20,13 @@
 
     <div class="course-grid">
         {% for course in courses %}
-            {% set color = colors[loop.index0 % colors|length] %}
+            {% set bg = colors[loop.index0 % colors|length] %}
             <div class="course-card">
-                <div class="course-header" style="background-color: {{ color }};"></div>
+                {% if bg|slice(0, 1) == '#' %}
+                    <div class="course-header" style="background-color: {{ bg }};"></div>
+                {% else %}
+                    <div class="course-header" style="background-image: url('{{ asset('uploads/course_pics/' ~ bg) }}');"></div>
+                {% endif %}
                 <div class="course-content">
                     <h5 class="course-title">
                         <a href="{{ path('courses_show', { id: course.id, code: course.code }) }}">
@@ -31,7 +34,7 @@
                         </a>
                     </h5>
                     <p class="course-subtitle">{{ course.code }}</p>
-                        <a href="{{ path('courses_edit', { id: course.id }) }}" class="btn-edit">Edit</a>
+                    <a href="{{ path('courses_edit', { id: course.id }) }}" class="btn-edit">Edit</a>
                 </div>
             </div>
         {% else %}

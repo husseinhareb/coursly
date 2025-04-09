@@ -18,10 +18,22 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 final class CourseController extends AbstractController
 {
     #[Route('/courses', name: 'courses_index')]
-    public function index(Request $request, CourseRepository $repository): Response
+    public function index(Request $request, CourseRepository $repository, ManagerRegistry $doctrine): Response
     {
         $courses = $repository->findAll();
-        $colors  = ['#3498db', '#e74c3c', '#2ecc71', '#f39c12', '#9b59b6', '#1abc9c', '#d35400', '#8e44ad'];
+        $colors = [];
+        $entityManager = $doctrine->getManager();
+
+        foreach ($courses as $course) {
+            // Check if the course background is empty.
+            // If it is, generate a random color and save it.
+            if (empty($course->getBackground())) {
+                $course->setBackground($this->generateRandomColor());
+                $entityManager->persist($course);
+            }
+            $colors[] = $course->getBackground();
+        }
+        $entityManager->flush();
 
         return $this->render('courses/courses.html.twig', [
             'courses' => $courses,
@@ -77,19 +89,23 @@ final class CourseController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Check for an uploaded image.
             $imageFile = $form->get('image')->getData();
             if ($imageFile) {
                 $newFilename = uniqid().'.'.$imageFile->guessExtension();
                 try {
+                    // Use the new parameter which points to public/uploads/course_pics
                     $imageFile->move(
-                        $this->getParameter('courses_images_directory'),
+                        $this->getParameter('course_pics_directory'),
                         $newFilename
                     );
-                    $course->setImagePath($newFilename);
+                    // Save the file name so it can later be used as a background image.
+                    $course->setBackground($newFilename);
                 } catch (FileException $e) {
-                    // Optionally handle file upload exception
+                    // Optionally handle the file upload exception.
                 }
             }
+            // If no image is uploaded, leave background empty. It will get a random color in index().
 
             $entityManager = $doctrine->getManager();
             $entityManager->persist($course);
@@ -120,20 +136,22 @@ final class CourseController extends AbstractController
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
+            // Check for an uploaded image.
             $imageFile = $form->get('image')->getData();
             if ($imageFile) {
                 $newFilename = uniqid().'.'.$imageFile->guessExtension();
                 try {
                     $imageFile->move(
-                        $this->getParameter('courses_images_directory'),
+                        $this->getParameter('course_pics_directory'),
                         $newFilename
                     );
-                    $course->setImagePath($newFilename);
+                    $course->setBackground($newFilename);
                 } catch (FileException $e) {
-                    // Optionally handle file upload exception
+                    // Optionally handle file upload exception.
                 }
             }
-            
+            // If no image is uploaded, keep the existing background (image or color).
+
             $entityManager = $doctrine->getManager();
             $entityManager->flush();
             
@@ -148,5 +166,15 @@ final class CourseController extends AbstractController
             'course' => $course,
         ]);
     }
-
+    
+    /**
+     * Generate a random hex color.
+     *
+     * @return string
+     */
+    private function generateRandomColor(): string
+    {
+        // The %06X ensures a 6-digit hexadecimal number and uppercase letters.
+        return sprintf('#%06X', mt_rand(0, 0xFFFFFF));
+    }
 }
