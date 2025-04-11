@@ -1,10 +1,10 @@
-.course-page {
+.courses-page {
   margin: 80px auto 20px auto;
   width: 90%;
   max-width: 90%;
 }
 
-.course-header-container {
+.courses-header-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -17,7 +17,7 @@
   color: #333;
 }
 
-.btn-add-course {
+.btn-add-courses {
   background-color: #fd8c29;
   color: #fff;
   padding: 10px 16px;
@@ -27,7 +27,7 @@
   transition: background-color 0.2s ease;
 }
 
-.btn-add-course:hover {
+.btn-add-courses:hover {
   background-color: #fa841d;
 }
 
@@ -45,13 +45,13 @@
   border-radius: 4px;
 }
 
-.course-grid {
+.courses-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 }
 
-.course-card {
+.courses-card {
   border: 1px solid #ccc;
   border-radius: 6px;
   overflow: hidden;
@@ -62,11 +62,11 @@
   transition: transform 0.2s ease-in-out;
 }
 
-.course-card:hover {
+.courses-card:hover {
   transform: translateY(-2px);
 }
 
-.course-header {
+.courses-header {
   width: 100%;
   aspect-ratio: 16 / 9;
   max-height: 150px; 
@@ -75,26 +75,26 @@
   background-repeat: no-repeat;
 }
 
-.course-content {
+.courses-content {
   padding: 10px;
 }
 
-.course-title {
+.courses-title {
   margin: 0 0 5px 0;
   font-size: 1.4rem;
   color: #007BC0;
 }
 
-.course-title a {
+.courses-title a {
   text-decoration: none;
   color: inherit;
 }
 
-.course-title a:hover {
+.courses-title a:hover {
   text-decoration: underline;
 }
 
-.course-subtitle {
+.courses-subtitle {
   margin: 5px 0 0;
   font-size: 1.1rem;
   color: #666;
@@ -109,27 +109,21 @@
 }
 
 @media (max-width: 992px) {
-  .course-grid {
+  .courses-grid {
       grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 576px) {
-  .course-grid {
+  .courses-grid {
       grid-template-columns: 1fr;
   }
 }
 
 
 /*----------------------------------*/
-
-body {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-}
+/* edit and new course style page   */
+/*----------------------------------*/
 
 .course-container {
   background: #fff;
@@ -248,4 +242,116 @@ body {
   margin-bottom: 10px;
   font-size: 0.9em;
   text-align: center;
+}
+
+/*----------------------------------*/
+/* course home page style          */
+/*--------------------------------*/
+
+
+
+.course-page-container {
+  max-width: 800px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+}
+
+.course-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 20px;
+  margin-bottom: 30px;
+}
+
+.course-title {
+  font-size: 2.5em;
+  color: #333;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.create-post-btn {
+  background-color: #e77e23;
+  color: #fff;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.create-post-btn:hover {
+  background-color: #fd8c29;
+}
+
+.posts-section h2 {
+  font-size: 1.8em;
+  margin-bottom: 20px;
+  color: #333;
+  text-transform: uppercase;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+.posts-list {
+  list-style: none;
+}
+
+.post-item {
+  background: #f1f1f1;
+  margin-bottom: 20px;
+  padding: 15px 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.post-item:hover {
+  transform: translateY(-3px);
+}
+
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.post-title {
+  font-size: 1.3em;
+  font-weight: bold;
+  color: #333;
+}
+
+.post-type {
+  font-size: 0.9em;
+  color: #777;
+}
+
+.post-download {
+  display: inline-block;
+  margin-bottom: 10px;
+  color: #4ca1af;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.post-download:hover {
+  color: #2a7a8a;
+}
+
+.post-date small {
+  color: #999;
+}
+
+.no-posts {
+  text-align: center;
+  font-style: italic;
+  padding: 20px;
+  color: #666;
 }

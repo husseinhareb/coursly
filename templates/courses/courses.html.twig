@@ -8,32 +8,32 @@
 {% endblock %}
 
 {% block body %}
-<div class="course-page">
-    <div class="course-header-container">
+<div class="courses-page">
+    <div class="courses-header-container">
         <h1 class="page-title">My Courses</h1>
-        <a href="{{ path('courses_new') }}" class="btn-add-course">Add Course</a>
+        <a href="{{ path('courses_new') }}" class="btn-add-courses">Add Course</a>
     </div>
 
     <div class="search-bar">
         <input type="text" id="search" class="search-input" placeholder="Search for a course...">
     </div>
 
-    <div class="course-grid">
+    <div class="courses-grid">
         {% for course in courses %}
             {% set bg = colors[loop.index0 % colors|length] %}
-            <div class="course-card">
+            <div class="courses-card">
                 {% if bg|slice(0, 1) == '#' %}
-                    <div class="course-header" style="background-color: {{ bg }};"></div>
+                    <div class="courses-header" style="background-color: {{ bg }};"></div>
                 {% else %}
-                    <div class="course-header" style="background-image: url('{{ asset('uploads/course_pics/' ~ bg) }}');"></div>
+                    <div class="courses-header" style="background-image: url('{{ asset('uploads/course_pics/' ~ bg) }}');"></div>
                 {% endif %}
-                <div class="course-content">
-                    <h5 class="course-title">
+                <div class="courses-content">
+                    <h5 class="courses-title">
                         <a href="{{ path('courses_show', { id: course.id, code: course.code }) }}">
                             {{ course.title }}
                         </a>
                     </h5>
-                    <p class="course-subtitle">{{ course.code }}</p>
+                    <p class="courses-subtitle">{{ course.code }}</p>
                     <a href="{{ path('courses_edit', { id: course.id }) }}" class="btn-edit">Edit</a>
                 </div>
             </div>
@@ -49,10 +49,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     searchInput.addEventListener("input", function () {
         let query = this.value.toLowerCase().trim();
-        let cards = document.querySelectorAll(".course-card");
+        let cards = document.querySelectorAll(".courses-card");
 
         cards.forEach(card => {
-            let title = card.querySelector(".course-title").innerText.toLowerCase();
+            let title = card.querySelector(".courses-title").innerText.toLowerCase();
             card.style.display = title.includes(query) ? "block" : "none";
         });
     });

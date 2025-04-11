@@ -1,26 +1,41 @@
-{#templates/courses/course.html.twig#}
 {% extends 'base.html.twig' %}
 
 {% block title %}{{ course.title }}{% endblock %}
 
-{% block body %}
-    <h1>{{ course.title }}</h1>
-    {% if is_granted('ROLE_PROFESSOR') or is_granted('ROLE_ADMIN') %}
-        <a href="{{ path('post_new', { code: course.code, id: course.id }) }}">Create New Post</a>
-    {% endif %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('styles/course_page.css') }}">
+{% endblock %}
 
-    <h2>Posts</h2>
-    <ul>
-        {% for post in course.posts %}
-            <li>
-                <strong>{{ post.title }}</strong> ({{ post.type }})
-                {% if post.type == 'file' and post.filePath %}
-                    <a href="{{ asset('uploads/posts/' ~ post.filePath) }}">Download File</a>
-                {% endif %}
-                <small>Posted on {{ post.createdAt|date('Y-m-d H:i') }}</small>
-            </li>
-        {% else %}
-            <li>No posts yet.</li>
-        {% endfor %}
-    </ul>
+{% block body %}
+<div class="course-page-container">
+    <header class="course-header">
+        <h1 class="course-title">{{ course.title }}</h1>
+        {% if is_granted('ROLE_PROFESSOR') or is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('post_new', { code: course.code, id: course.id }) }}" class="create-post-btn">Create New Post</a>
+        {% endif %}
+    </header>
+    
+    <section class="posts-section">
+        <h2>Posts</h2>
+        <ul class="posts-list">
+            {% for post in course.posts %}
+                <li class="post-item">
+                    <div class="post-header">
+                        <strong class="post-title">{{ post.title }}</strong>
+                        <span class="post-type">({{ post.type }})</span>
+                    </div>
+                    {% if post.type == 'file' and post.filePath %}
+                        <a class="post-download" href="{{ asset('uploads/posts/' ~ post.filePath) }}">Download File</a>
+                    {% endif %}
+                    <div class="post-date">
+                        <small>Posted on {{ post.createdAt|date('Y-m-d H:i') }}</small>
+                    </div>
+                </li>
+            {% else %}
+                <li class="no-posts">No posts yet.</li>
+            {% endfor %}
+        </ul>
+    </section>
+</div>
 {% endblock %}
