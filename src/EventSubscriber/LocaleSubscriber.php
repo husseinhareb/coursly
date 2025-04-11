@@ -11,12 +11,12 @@ class LocaleSubscriber implements EventSubscriberInterface
     public function onKernelRequest(RequestEvent $event)
     {
         $request = $event->getRequest();
-        // Only set the locale if it's already in the session
+
+        // If the locale is set in the session, update the request locale.
         if ($locale = $request->getSession()->get('_locale')) {
             $request->setLocale($locale);
         }
     }
-    
 
     public static function getSubscribedEvents(): array
     {

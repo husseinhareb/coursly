@@ -1,10 +1,19 @@
 # translations/messages.en.yaml
 login:
-    title: "Log in"
+    title: "Log in!"
+    sign_in: "Please sign in"
     email_label: "Email"
     password_label: "Password"
-    button: "Log in"
-    lost_password: "Lost password?"
+    show_password: "Show password"
+    button: "Sign in"
     logged_in_as: "You are logged in as %username%"
     logout: "Logout"
     cookies_notice: "Cookies notice"
+    
+home:
+    title: "Home"
+    hello: "Hello, %name%!"
+    email: "Your email: %email%"
+    role: "Your role: %role%"
+    welcome: "Welcome to the homepage!"
+    login_prompt: "Please log in to see your account details."

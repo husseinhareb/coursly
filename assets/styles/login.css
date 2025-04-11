@@ -11,8 +11,9 @@ body {
   flex-direction: column;
   align-items: center;
   padding: 40px 20px;
-  max-width: 400px;
+  max-width: 20%;
   margin: 0 auto;
+  margin-top: 80px;
 }
 
 .login-logo img {

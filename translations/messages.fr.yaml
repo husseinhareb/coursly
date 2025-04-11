@@ -1,10 +1,18 @@
 # translations/messages.fr.yaml
 login:
-    title: "Se connecter"
+    title: "Se connecter !"
+    sign_in: "Veuillez vous connecter"
     email_label: "E-mail"
     password_label: "Mot de passe"
+    show_password: "Afficher le mot de passe"
     button: "Se connecter"
-    lost_password: "Mot de passe oublié ?"
     logged_in_as: "Vous êtes connecté en tant que %username%"
     logout: "Déconnexion"
     cookies_notice: "Notice concernant les cookies"
+home:
+    title: "Accueil"
+    hello: "Bonjour, %name% !"
+    email: "Votre adresse e-mail : %email%"
+    role: "Votre rôle : %role%"
+    welcome: "Bienvenue sur la page d'accueil !"
+    login_prompt: "Veuillez vous connecter pour voir les détails de votre compte."

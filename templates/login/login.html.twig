@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}{{ 'login.title'|trans }}{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -21,17 +21,17 @@
 
     {% if app.user %}
         <div class="alert alert-info">
-            You are logged in as {{ app.user.userIdentifier }}, 
-            <a href="{{ path('app_logout') }}">Logout</a>
+            {{ 'login.logged_in_as'|trans({'%username%': app.user.userIdentifier}) }},
+            <a href="{{ path('app_logout') }}">{{ 'login.logout'|trans }}</a>
         </div>
     {% endif %}
 
     <div class="login-box">
-        <h2>Please sign in</h2>
+        <h2>{{ 'login.sign_in'|trans }}</h2>
 
         <form method="post">
             <div class="form-group">
-                <label for="username" class="form-label">Email</label>
+                <label for="username" class="form-label">{{ 'login.email_label'|trans }}</label>
                 <input
                     type="email"
                     name="_username"
@@ -45,7 +45,7 @@
             </div>
 
             <div class="form-group">
-                <label for="password" class="form-label">Password</label>
+                <label for="password" class="form-label">{{ 'login.password_label'|trans }}</label>
                 <input
                     type="password"
                     name="_password"
@@ -56,13 +56,13 @@
                 >
                 <div class="show-password">
                     <input type="checkbox" id="togglePassword">
-                    <label for="togglePassword">Show password</label>
+                    <label for="togglePassword">{{ 'login.show_password'|trans }}</label>
                 </div>
             </div>
 
             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-            <button class="btn btn-lg btn-primary" type="submit">Sign in</button>
+            <button class="btn btn-lg btn-primary" type="submit">{{ 'login.button'|trans }}</button>
         </form>
 
         <div class="login-separator"></div>
@@ -71,8 +71,8 @@
             <div class="language-selector">
                 <form id="language-form" action="" method="get">
                     <select name="locale" onchange="window.location.href = '{{ path('change_language', {'locale': 'PLACEHOLDER'}) }}'.replace('PLACEHOLDER', this.value)">
-                        <option value="en">English (en)</option>
-                        <option value="fr">Français (fr)</option>
+                        <option value="en" {% if app.request.locale == 'en' %}selected{% endif %}>English (en)</option>
+                        <option value="fr" {% if app.request.locale == 'fr' %}selected{% endif %}>Français (fr)</option>
                         <!-- Add more languages as needed -->
                     </select>
                 </form>
