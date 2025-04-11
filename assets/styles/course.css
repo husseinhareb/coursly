@@ -66,12 +66,10 @@
   transform: translateY(-2px);
 }
 
-/* Use the modern aspect-ratio property to maintain a 16:9 ratio,
- and limit the maximum height to make the header smaller */
 .course-header {
   width: 100%;
   aspect-ratio: 16 / 9;
-  max-height: 150px; /* Adjust this value as needed */
+  max-height: 150px; 
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -120,4 +118,134 @@
   .course-grid {
       grid-template-columns: 1fr;
   }
+}
+
+
+/*----------------------------------*/
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.course-container {
+  background: #fff;
+  border-radius: 12px;
+  padding: 40px 30px;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.course-container h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #333;
+  font-weight: 600;
+  font-size: 2em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.course-form-group {
+  margin-bottom: 20px;
+}
+
+.course-container form label {
+  display: block;
+  margin-bottom: 8px;
+  color: #555;
+  font-weight: 600;
+}
+
+.course-container form input[type="text"],
+.course-container form input[type="email"],
+.course-container form input[type="password"],
+.course-container form select,
+.course-container form textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1em;
+  transition: all 0.3s ease;
+}
+
+.course-container form textarea {
+  height: 70px;
+  line-height: 1.2em;
+  resize: none;
+  overflow-y: auto;
+}
+
+.course-container form input[type="text"]:focus,
+.course-container form input[type="email"]:focus,
+.course-container form input[type="password"]:focus,
+.course-container form select:focus,
+.course-container form textarea:focus {
+  outline: none;
+  border-color: #4ca1af;
+  box-shadow: 0 0 8px rgba(76, 161, 175, 0.3);
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox-group input[type="checkbox"] {
+  width: auto;
+  margin-right: 10px;
+}
+
+.course-image-container {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.course-image {
+  max-width: 100%;
+  height: auto;
+  display: inline-block;
+  border-radius: 8px;
+}
+
+.course-container form button.btn {
+  background-color: #e77e23;
+  color: #fff;
+  padding: 15px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+  text-transform: uppercase;
+  width: 100%;
+}
+
+.course-container form button.btn:hover {
+  background-color: #fd8c29;
+  transform: translateY(-2px);
+}
+
+.form-error {
+  color: #e74c3c;
+  margin-bottom: 10px;
+  font-size: 0.9em;
+  text-align: center;
 }

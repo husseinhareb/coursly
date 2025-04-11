@@ -1,15 +1,39 @@
-{#templates/courses/new.html.twig#}
 {% extends 'base.html.twig' %}
 
-{% block title %}New course{% endblock %}
+{% block title %}New Course{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('styles/course.css') }}">
+{% endblock %}
 
 {% block body %}
+<div class="course-container">
     <h1>Create a New Course</h1>
+    
     {{ form_errors(form) }}
     {{ form_start(form) }}
-        {{ form_row(form.title) }}
-        {{ form_row(form.description) }}
-        {{ form_row(form.code) }}
-        <button type="submit">Create Course</button>
+    
+        <div class="course-form-group">
+            {{ form_row(form.title) }}
+        </div>
+        
+        <div class="course-form-group">
+            {{ form_row(form.description, {'attr': {'rows': 3}}) }}
+        </div>
+        
+        <div class="course-form-group">
+            {{ form_row(form.code) }}
+        </div>
+        
+        <div class="course-form-group">
+            {{ form_row(form.image, {
+                'label': 'Course Image (Optional)'
+            }) }}
+        </div>
+        
+        <button type="submit" class="btn">Create Course</button>
+        
     {{ form_end(form) }}
+</div>
 {% endblock %}

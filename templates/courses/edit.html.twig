@@ -1,33 +1,39 @@
-{#templates/courses/edit.html.twig#}
 {% extends 'base.html.twig' %}
 
 {% block title %}Edit Course: {{ course.title }}{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('styles/course.css') }}">
+{% endblock %}
+
 {% block body %}
+<div class="course-container">
     <h1>Edit Course</h1>
     {{ form_errors(form) }}
     {{ form_start(form) }}
-        <div>
+        <div class="course-form-group">
             {{ form_label(form.title) }}
             {{ form_widget(form.title) }}
             {{ form_errors(form.title) }}
         </div>
-        <div>
+        <div class="course-form-group">
             {{ form_label(form.description) }}
-            {{ form_widget(form.description) }}
+            {{ form_widget(form.description, {'attr': {'rows': 3}}) }}
             {{ form_errors(form.description) }}
         </div>
-        <div>
+        <div class="course-form-group">
             {{ form_label(form.code) }}
             {{ form_widget(form.code) }}
             {{ form_errors(form.code) }}
         </div>
-        <div>
+        <div class="course-form-group">
             {{ form_label(form.image) }}
             {{ form_widget(form.image) }}
             {{ form_errors(form.image) }}
         </div>
-        <button type="submit">Update Course</button>
+        <button type="submit" class="btn">Update Course</button>
     {{ form_end(form) }}
-    <a href="{{ path('courses_show', { id: course.id, code: course.code }) }}">Back to Course</a>
+    <a href="{{ path('courses_show', { id: course.id, code: course.code }) }}" class="back-link">Back to Course</a>
+</div>
 {% endblock %}
