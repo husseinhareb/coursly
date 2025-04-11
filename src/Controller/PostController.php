@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Post;
-use App\Entity\Course;
 use App\Form\PostType;
 use App\Repository\CourseRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -42,19 +41,24 @@ class PostController extends AbstractController
          $form->handleRequest($request);
          
          if ($form->isSubmitted() && $form->isValid()) {
-              // If the post type is "file", handle file upload for the attachment
+              // If the post type is "file" handle the file upload
               if ($post->getType() === 'file') {
                   $attachment = $form->get('attachment')->getData();
                   if ($attachment) {
                       $newFilename = uniqid() . '.' . $attachment->guessExtension();
                       try {
                           $attachment->move(
-                              $this->getParameter('posts_files_directory'),
+                              $this->getParameter('post_files_directory'),
                               $newFilename
                           );
                           $post->setFilePath($newFilename);
                       } catch (FileException $e) {
-                          // Optionally log the error
+                          // Add a flash message and re-display the form if there’s an error during file move.
+                          $this->addFlash('error', 'File upload error: ' . $e->getMessage());
+                          return $this->render('posts/new.html.twig', [
+                              'form' => $form->createView(),
+                              'course' => $course,
+                          ]);
                       }
                   }
               }
@@ -63,7 +67,7 @@ class PostController extends AbstractController
               $entityManager->persist($post);
               $entityManager->flush();
               
-              // Redirect to the course detail page
+              // Redirect to the course detail page after successful post creation.
               return $this->redirectToRoute('courses_show', [
                   'id' => $course->getId(),
                   'code' => $course->getCode()

@@ -4,7 +4,7 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('styles/course_page.css') }}">
+    <link rel="stylesheet" href="{{ asset('styles/course.css') }}">
 {% endblock %}
 
 {% block body %}
@@ -26,7 +26,7 @@
                         <span class="post-type">({{ post.type }})</span>
                     </div>
                     {% if post.type == 'file' and post.filePath %}
-                        <a class="post-download" href="{{ asset('uploads/posts/' ~ post.filePath) }}">Download File</a>
+                        <a class="post-download" href="{{ asset('uploads/post_files/' ~ post.filePath) }}">Download File</a>
                     {% endif %}
                     <div class="post-date">
                         <small>Posted on {{ post.createdAt|date('Y-m-d H:i') }}</small>

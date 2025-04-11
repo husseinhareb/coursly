@@ -34,8 +34,8 @@ class Post
     private ?string $filePath = null;
     
     // Many posts belong to one course.
-    // Added the 'inversedBy' attribute pointing to the 'posts' property in Course.
-    #[ORM\ManyToOne(targetEntity: Course::class, inversedBy: "post")]
+    // The Course entity has a property named "posts", so we use inversedBy: "posts"
+    #[ORM\ManyToOne(targetEntity: Course::class, inversedBy: "posts")]
     #[ORM\JoinColumn(nullable: false)]
     private ?Course $course = null;
     

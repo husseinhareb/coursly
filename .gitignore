@@ -27,5 +27,6 @@
 
 /public/uploads/profile_pics/*
 /public/uploads/course_pics/*
+/public/uploads/post_files/*
 
 /.idea/

@@ -26,19 +26,14 @@ class PostType extends AbstractType
                    ],
              ])
              ->add('attachment', FileType::class, [
-                 'label' => 'Attachment (Only for file posts)',
+                 'label' => 'Attachment (Optional)',
                  'mapped' => false,
                  'required' => false,
                  'constraints' => [
                      new File([
                          'maxSize' => '10M',
-                         'mimeTypes' => [
-                             'application/zip',
-                             'application/x-zip-compressed',
-                             'multipart/x-zip',
-                             'application/octet-stream'
-                         ],
-                         'mimeTypesMessage' => 'Please upload a valid ZIP file',
+                         // Removed MIME type restrictions so any file is accepted.
+                         // You can optionally add other file constraints if needed.
                      ])
                  ],
              ]);
