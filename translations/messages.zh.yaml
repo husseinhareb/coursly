@@ -16,6 +16,7 @@ home:
   role: "您的角色: %role%"
   welcome: "欢迎来到首页！"
   login_prompt: "请登录以查看您的账户详情"
+  recent_courses_heading: "最近查看的课程 "
 
 navbar:
   title: "欢迎！"

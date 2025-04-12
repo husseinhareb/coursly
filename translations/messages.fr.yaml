@@ -16,6 +16,7 @@ home:
   role: "Votre rôle : %role%"
   welcome: "Bienvenue sur la page d'accueil !"
   login_prompt: "Veuillez vous connecter pour voir les détails de votre compte."
+  recent_courses_heading: "Cours consultés récemment "
 
 navbar:
   title: "Bienvenue !"

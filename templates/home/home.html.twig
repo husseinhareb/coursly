@@ -19,6 +19,25 @@
         <p class="user-detail">
             {{ 'home.role'|trans({'%role%': app.user.roles|join(', ')}) }}
         </p>
+
+        {% if recentCourses is defined and recentCourses|length > 0 %}
+            <section class="recent-courses">
+                <h2>{{ 'home.recent_courses_heading'|trans }}</h2>
+                <ul class="course-list">
+                    {% for course in recentCourses %}
+                        <li>
+                            <a href="{{ path('courses_show', { id: course.id, code: course.code }) }}">
+                                {{ course.title }} ({{ course.code }})
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </section>
+        {% else %}
+            <p class="no-recent-courses">
+                {{ 'home.no_recent_courses'|trans }}
+            </p>
+        {% endif %}
     {% else %}
         <h1 class="welcome-heading">
             {{ 'home.welcome'|trans }}

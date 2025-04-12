@@ -13,6 +13,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use App\Entity\Course;
 use App\Form\CourseType;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use App\Entity\UserCourseAccess;        
 
 final class CourseController extends AbstractController
 {
@@ -40,7 +41,7 @@ final class CourseController extends AbstractController
     }
 
     #[Route('/courses/{id}/{code}', name: 'courses_show', requirements: ['code' => '^(?!edit$).+'])]
-    public function show(int $id, string $code, CourseRepository $repository): Response
+    public function show(int $id, string $code, CourseRepository $repository, Request $request, ManagerRegistry $doctrine): Response
     {
         $course = $repository->find($id);
         if (!$course) {
@@ -52,11 +53,33 @@ final class CourseController extends AbstractController
                 'id'   => $course->getId(),
             ], 301);
         }
-
+        
+        // Persist the access info if the user is logged in.
+        $user = $this->getUser();
+        if ($user) {
+            $entityManager = $doctrine->getManager();
+            $accessRepository = $entityManager->getRepository(UserCourseAccess::class);
+            $accessRecord = $accessRepository->findOneBy([
+                'user'   => $user,
+                'course' => $course,
+            ]);
+            
+            if (!$accessRecord) {
+                $accessRecord = new UserCourseAccess();
+                $accessRecord->setUser($user);
+                $accessRecord->setCourse($course);
+            }
+            // Update the timestamp to indicate the latest access.
+            $accessRecord->setAccessedAt(new \DateTime());
+            $entityManager->persist($accessRecord);
+            $entityManager->flush();
+        }
+        
         return $this->render('courses/course.html.twig', [
             'course' => $course,
         ]);
     }
+
 
     #[Route('/search-courses', name: 'courses_search', methods: ['GET'])]
     public function searchCourses(Request $request, CourseRepository $courseRepository): JsonResponse
