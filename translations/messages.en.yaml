@@ -33,6 +33,7 @@ registration:
   title: "Register"
   header: "Register"
   button: "Register"
+  password_label: "Password (auto-generated)"
   first_name:
     label: "First Name"
     not_blank: "Please enter your first name"
@@ -101,6 +102,8 @@ course:
     heading: "Create a New Course"
     image_label: "Course Image (Optional)"
     submit: "Create Course"
+    description: "Description"
+    code: "Code"
   show:
     new_post: "Create New Post"
     posts_heading: "Posts"
@@ -164,3 +167,5 @@ admin:
       title: "Add Enrollment"
     all_enrolled: "All courses are already enrolled."
     back_to_profile: "Back to Profile"
+
+

@@ -17,13 +17,13 @@ class CourseType extends AbstractType
     {
          $builder
              ->add('title', TextType::class, [
-                 'label' => 'course.title.label',
+                 'label' => 'course.new.title',
              ])
              ->add('description', TextareaType::class, [
-                 'label' => 'course.description.label',
+                 'label' => 'course.new.description',
              ])
              ->add('code', TextType::class, [
-                 'label' => 'course.code.label',
+                 'label' => 'course.new.code',
              ])
              ->add('image', FileType::class, [
                   'label' => 'course.image_label',

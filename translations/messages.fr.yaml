@@ -33,6 +33,7 @@ registration:
   title: "Inscription"
   header: "Inscription"
   button: "S'inscrire"
+  password_label: "Mot de passe (généré automatiquement)"
   first_name:
     label: "Prénom"
     not_blank: "Veuillez entrer votre prénom"
@@ -62,7 +63,7 @@ registration:
 profile:
   title: "Mon Profil"
   header: "Votre Profil"
-  picture_alt: "Photo de profil"
+  profile_pic: "Photo de profil"
   no_picture: "Aucune photo de profil disponible."
   first_name: "Prénom"
   last_name: "Nom de famille"
