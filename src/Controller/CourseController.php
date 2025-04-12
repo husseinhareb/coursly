@@ -7,12 +7,11 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use App\Repository\CourseRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Entity\Course;
-use App\Entity\Post;
 use App\Form\CourseType;
-use App\Form\PostType;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 final class CourseController extends AbstractController
@@ -25,8 +24,7 @@ final class CourseController extends AbstractController
         $entityManager = $doctrine->getManager();
 
         foreach ($courses as $course) {
-            // Check if the course background is empty.
-            // If it is, generate a random color and save it.
+            // If the course background is empty, generate a random color and persist it.
             if (empty($course->getBackground())) {
                 $course->setBackground($this->generateRandomColor());
                 $entityManager->persist($course);
@@ -51,15 +49,15 @@ final class CourseController extends AbstractController
         if ($course->getCode() !== $code) {
             return $this->redirectToRoute('courses_show', [
                 'code' => $course->getCode(),
-                'id'   => $course->getId()
+                'id'   => $course->getId(),
             ], 301);
         }
-        
+
         return $this->render('courses/course.html.twig', [
-            'course' => $course
+            'course' => $course,
         ]);
     }
-    
+
     #[Route('/search-courses', name: 'courses_search', methods: ['GET'])]
     public function searchCourses(Request $request, CourseRepository $courseRepository): JsonResponse
     {
@@ -79,6 +77,7 @@ final class CourseController extends AbstractController
     }
 
     #[Route('/courses/new', name: 'courses_new')]
+    #[IsGranted("ROLE_ADMIN")]
     public function new(Request $request, ManagerRegistry $doctrine): Response
     {
         $course = new Course();
@@ -89,24 +88,22 @@ final class CourseController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Check for an uploaded image.
+            // Process the uploaded image if provided.
             $imageFile = $form->get('image')->getData();
             if ($imageFile) {
                 $newFilename = uniqid().'.'.$imageFile->guessExtension();
                 try {
-                    // Use the new parameter which points to public/uploads/course_pics
                     $imageFile->move(
                         $this->getParameter('course_pics_directory'),
                         $newFilename
                     );
-                    // Save the file name so it can later be used as a background image.
                     $course->setBackground($newFilename);
                 } catch (FileException $e) {
-                    // Optionally handle the file upload exception.
+                    // Optionally log or handle the file upload exception.
                 }
             }
-            // If no image is uploaded, leave background empty. It will get a random color in index().
-
+            // Persist the course. If no image is uploaded, the background remains empty
+            // and will be assigned a random color in the index() method.
             $entityManager = $doctrine->getManager();
             $entityManager->persist($course);
             $entityManager->flush();
@@ -120,7 +117,8 @@ final class CourseController extends AbstractController
         ]);
     }
 
-    #[Route('/courses/{id}/edit', name: 'courses_edit')]
+    #[Route('/courses/edit/{id}', name: 'courses_edit')]
+    #[IsGranted("ROLE_ADMIN")]
     public function edit(
         int $id,
         Request $request,
@@ -131,12 +129,12 @@ final class CourseController extends AbstractController
         if (!$course) {
             throw $this->createNotFoundException('Course not found.');
         }
-        
+
         $form = $this->createForm(CourseType::class, $course);
         $form->handleRequest($request);
-        
+
         if ($form->isSubmitted() && $form->isValid()) {
-            // Check for an uploaded image.
+            // Process the uploaded image if provided.
             $imageFile = $form->get('image')->getData();
             if ($imageFile) {
                 $newFilename = uniqid().'.'.$imageFile->guessExtension();
@@ -147,26 +145,25 @@ final class CourseController extends AbstractController
                     );
                     $course->setBackground($newFilename);
                 } catch (FileException $e) {
-                    // Optionally handle file upload exception.
+                    // Optionally log or handle file upload exception.
                 }
             }
-            // If no image is uploaded, keep the existing background (image or color).
-
+            // Keep the existing background if no new image is uploaded.
             $entityManager = $doctrine->getManager();
             $entityManager->flush();
-            
+
             return $this->redirectToRoute('courses_show', [
                 'id'   => $course->getId(),
                 'code' => $course->getCode()
             ]);
         }
-        
+
         return $this->render('courses/edit.html.twig', [
             'form'   => $form->createView(),
             'course' => $course,
         ]);
     }
-    
+
     /**
      * Generate a random hex color.
      *
@@ -174,7 +171,7 @@ final class CourseController extends AbstractController
      */
     private function generateRandomColor(): string
     {
-        // The %06X ensures a 6-digit hexadecimal number and uppercase letters.
+        // The %06X ensures a 6-digit hexadecimal number with uppercase letters.
         return sprintf('#%06X', mt_rand(0, 0xFFFFFF));
     }
 }

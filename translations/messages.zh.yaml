@@ -1,0 +1,169 @@
+login:
+  title: "登录"
+  sign_in: "请登录"
+  email_label: "电子邮件"
+  password_label: "密码"
+  show_password: "显示密码"
+  button: "登录"
+  logged_in_as: "您已登录为 %username%"
+  logout: "登出"
+  cookies_notice: "Cookie 通知"
+
+home:
+  title: "首页"
+  hello: "你好，%name%!"
+  email: "您的电子邮件: %email%"
+  role: "您的角色: %role%"
+  welcome: "欢迎来到首页！"
+  login_prompt: "请登录以查看您的账户详情"
+
+navbar:
+  title: "欢迎！"
+  toggle_navigation: "切换导航"
+  logo_alt: "网站标志"
+  users: "用户"
+  courses: "课程"
+  profile_picture_alt: "个人头像"
+  profile_options: "个人选项"
+  profile: "个人资料"
+  logout: "登出"
+  login: "登录"
+
+registration:
+  title: "注册"
+  header: "注册"
+  button: "注册"
+  password_label: "密码（自动生成）"
+  first_name:
+    label: "名字"
+    not_blank: "请输入您的名字"
+  last_name:
+    label: "姓氏"
+    not_blank: "请输入您的姓氏"
+  username:
+    label: "用户名"
+    not_blank: "请输入用户名"
+    min_length: "用户名至少需要 {{ limit }} 个字符"
+  email:
+    label: "电子邮件"
+    not_blank: "请输入电子邮件"
+    invalid: "请输入有效的电子邮件地址"
+  plain_password:
+    label: "密码（自动生成）"
+    not_blank: "密码已自动生成"
+    min_length: "密码至少需要 {{ limit }} 个字符"
+  role:
+    label: "角色"
+    placeholder: "请选择您的角色"
+    administrator: "管理员"
+    student: "学生"
+    professor: "教授"
+    admin_professor: "管理员及教授"
+
+profile:
+  title: "我的个人资料"
+  header: "您的个人资料"
+  picture_alt: "个人头像"
+  no_picture: "没有个人头像可显示"
+  first_name: "名字"
+  last_name: "姓氏"
+  email: "电子邮件"
+  phone_number: "电话号码"
+  address: "地址"
+  roles: "角色"
+  not_provided: "未提供"
+  enrolled_courses: "已注册课程"
+  manage_enrollments: "管理注册"
+  edit_profile: "编辑个人资料"
+  change_password: "更改密码"
+  save: "保存"
+  cancel: "取消"
+
+post:
+  title:
+    label: "标题"
+  content:
+    label: "内容"
+  type:
+    label: "类型"
+    message: "消息"
+    file: "文件"
+  attachment:
+    label: "附件（可选）"
+  new:
+    title: "为 %course% 创建新帖子"
+    heading: "为 %course% 创建新帖子"
+    submit: "发布帖子"
+    back_to_course: "返回课程"
+
+course:
+  new:
+    title: "新课程"
+    heading: "创建新课程"
+    image_label: "课程图片（可选）"
+    submit: "创建课程"
+    description: "描述"
+    code: "课程代码"
+  show:
+    new_post: "创建新帖子"
+    posts_heading: "帖子"
+    download_file: "下载文件"
+    posted_on: "发表于 %date%"
+    no_posts: "尚无帖子"
+  edit:
+    title: "编辑课程：%course%"
+    heading: "编辑课程"
+    label:
+      title: "标题"
+      description: "描述"
+      code: "课程代码"
+      image: "课程图片"
+    submit: "更新课程"
+    back: "返回课程"
+
+courses:
+  my:
+    title: "我的课程"
+    heading: "我的课程"
+    add_course: "添加课程"
+    search_placeholder: "搜索课程..."
+    no_courses: "暂无可用课程"
+    edit: "编辑"
+
+admin:
+  users:
+    title: "用户"
+    header: "用户"
+    add_user: "添加用户"
+    table:
+      id: "编号"
+      profile_picture: "头像"
+      first_name: "名字"
+      last_name: "姓氏"
+      email: "电子邮件"
+      phone: "电话"
+      address: "地址"
+      roles: "角色"
+      enrolled_courses: "已注册课程"
+      actions: "操作"
+    alt:
+      profile_picture: "头像"
+    no_profile_picture: "无"
+    no_phone: "无"
+    no_address: "无"
+    no_enrollments: "无"
+    edit: "编辑"
+    no_users: "未找到用户"
+  enrollments:
+    title: "管理 %firstName% %lastName% 的注册"
+    header: "管理 %firstName% %lastName% 的注册"
+    admin_warning: "管理员用户不能注册课程"
+    current_heading: "当前注册"
+    none_current: "无已注册课程"
+    remove:
+      title: "移除注册"
+    available_heading: "可用课程"
+    add:
+      title: "添加注册"
+    all_enrolled: "所有课程已注册"
+    back_to_profile: "返回个人资料"

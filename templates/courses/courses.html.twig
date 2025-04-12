@@ -11,7 +11,9 @@
 <div class="courses-page">
     <div class="courses-header-container">
         <h1 class="page-title">{{ 'courses.my.heading'|trans }}</h1>
-        <a href="{{ path('courses_new') }}" class="btn-add-courses">{{ 'courses.my.add_course'|trans }}</a>
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('courses_new') }}" class="btn-add-courses">{{ 'courses.my.add_course'|trans }}</a>
+        {% endif %}
     </div>
 
     <div class="search-bar">
@@ -34,7 +36,9 @@
                         </a>
                     </h5>
                     <p class="courses-subtitle">{{ course.code }}</p>
-                    <a href="{{ path('courses_edit', { id: course.id }) }}" class="btn-edit">{{ 'courses.my.edit'|trans }}</a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('courses_edit', { id: course.id }) }}" class="btn-edit">{{ 'courses.my.edit'|trans }}</a>
+                    {% endif %}
                 </div>
             </div>
         {% else %}

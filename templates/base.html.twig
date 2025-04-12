@@ -19,72 +19,81 @@
     <body>
         <header class="header">
             <div class="header-content">
-                <a class="site-logo" href="{{ path('app_home') }}">
-                    <div class="navbar-logo">
-                        <img src="{{ asset('images/logo-landscape.png') }}" alt="{{ 'navbar.logo_alt'|trans }}">
-                    </div>
-                </a>
-                <button class="menu-toggle" aria-label="{{ 'navbar.toggle_navigation'|trans }}">
-                    <span class="toggle-bar"></span>
-                    <span class="toggle-bar"></span>
-                    <span class="toggle-bar"></span>
-                </button>
-                <nav class="main-nav">
-                    <ul class="menu">
-                        {% if app.user %}
-                            {% if 'ROLE_ADMIN' in app.user.roles %}
+                <!-- Left container with logo and home button -->
+                <div class="header-left">
+                    <a class="site-logo" href="{{ path('app_home') }}">
+                        <div class="navbar-logo">
+                            <img src="{{ asset('images/logo-landscape.png') }}" alt="{{ 'navbar.logo_alt'|trans }}">
+                        </div>
+                    </a>
+                    <a class="home-button" href="{{ path('app_home') }}">
+                        {{ 'home.title'|trans }}
+                    </a>
+                </div>
+                <!-- Right container for menu toggle and navigation -->
+                <div class="header-right">
+                    <button class="menu-toggle" aria-label="{{ 'navbar.toggle_navigation'|trans }}">
+                        <span class="toggle-bar"></span>
+                        <span class="toggle-bar"></span>
+                        <span class="toggle-bar"></span>
+                    </button>
+                    <nav class="main-nav">
+                        <ul class="menu">
+                            {% if app.user %}
+                                {% if 'ROLE_ADMIN' in app.user.roles %}
+                                    <li class="menu-item">
+                                        <a class="menu-link" href="{{ path('app_edit_users', {'username': app.user.username}) }}">
+                                            {{ 'navbar.users'|trans }}
+                                        </a>
+                                    </li>
+                                {% endif %}
+                                    <li class="menu-item">
+                                        <a class="menu-link" href="{{ path('courses_index') }}">
+                                            {{ 'navbar.courses'|trans }}
+                                        </a>
+                                    </li>
+                                <li class="menu-item profile-section">
+                                    {% if app.user.profilePic %}
+                                        <img src="{{ asset('uploads/profile_pics/' ~ app.user.profilePic) }}" 
+                                             alt="{{ 'navbar.profile_picture_alt'|trans }}" class="profile-pic">
+                                    {% else %}
+                                        <div class="profile-pic avatar-initials">
+                                            {{ app.user.firstName|first|upper ~ app.user.lastName|first|upper }}
+                                        </div>
+                                    {% endif %}
+                                    <button class="arrow-button" aria-label="{{ 'navbar.profile_options'|trans }}">
+                                        <i class="fa-solid fa-chevron-down"></i>
+                                    </button>
+                                    <ul class="profile-dropdown">
+                                        <li>
+                                            <a href="{{ path('app_profile', {'username': app.user.username}) }}">
+                                                {{ 'navbar.profile'|trans }}
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ path('app_logout') }}">
+                                                {{ 'navbar.logout'|trans }}
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="menu-item separator"></li>
                                 <li class="menu-item">
-                                    <a class="menu-link" href="{{ path('app_edit_users', {'username': app.user.username}) }}">
-                                        {{ 'navbar.users'|trans }}
+                                    <a class="menu-link" href="{{ path('app_logout') }}">
+                                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                        <span class="sr-only">{{ 'navbar.logout'|trans }}</span>
                                     </a>
                                 </li>
+                            {% else %}
                                 <li class="menu-item">
-                                    <a class="menu-link" href="{{ path('courses_index') }}">
-                                        {{ 'navbar.courses'|trans }}
+                                    <a class="menu-link" href="{{ path('app_login') }}">
+                                        {{ 'navbar.login'|trans }}
                                     </a>
                                 </li>
                             {% endif %}
-                            <li class="menu-item profile-section">
-                                {% if app.user.profilePic %}
-                                    <img src="{{ asset('uploads/profile_pics/' ~ app.user.profilePic) }}" 
-                                         alt="{{ 'navbar.profile_picture_alt'|trans }}" class="profile-pic">
-                                {% else %}
-                                    <div class="profile-pic avatar-initials">
-                                        {{ app.user.firstName|first|upper ~ app.user.lastName|first|upper }}
-                                    </div>
-                                {% endif %}
-                                <button class="arrow-button" aria-label="{{ 'navbar.profile_options'|trans }}">
-                                    <i class="fa-solid fa-chevron-down"></i>
-                                </button>
-                                <ul class="profile-dropdown">
-                                    <li>
-                                        <a href="{{ path('app_profile', {'username': app.user.username}) }}">
-                                            {{ 'navbar.profile'|trans }}
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ path('app_logout') }}">
-                                            {{ 'navbar.logout'|trans }}
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="menu-item separator"></li>
-                            <li class="menu-item">
-                                <a class="menu-link" href="{{ path('app_logout') }}">
-                                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                                    <span class="sr-only">{{ 'navbar.logout'|trans }}</span>
-                                </a>
-                            </li>
-                        {% else %}
-                            <li class="menu-item">
-                                <a class="menu-link" href="{{ path('app_login') }}">
-                                    {{ 'navbar.login'|trans }}
-                                </a>
-                            </li>
-                        {% endif %}
-                    </ul>
-                </nav>
+                        </ul>
+                    </nav>
+                </div>
             </div>
         </header>
 
