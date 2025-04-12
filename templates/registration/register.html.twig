@@ -1,7 +1,7 @@
 {# templates/registration/register.html.twig #}
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}{{ 'registration.title'|trans }}{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -10,7 +10,7 @@
 
 {% block body %}
 <div class="registration-container">
-    <h1>Register</h1>
+    <h1>{{ 'registration.header'|trans }}</h1>
 
     {{ form_errors(registrationForm) }}
 
@@ -29,7 +29,7 @@
         </div>
         <div class="reg-form-group">
             {{ form_row(registrationForm.plainPassword, {
-                'label': 'Password (auto-generated)',
+                'label': 'registration.password_label'|trans,
                 'attr': {'id': 'registration_form_plainPassword'}
             }) }}
         </div>
@@ -37,7 +37,7 @@
             {{ form_row(registrationForm.role, {'attr': {'id': 'registration_form_role'}}) }} 
         </div>
 
-        <button type="submit" class="btn">Register</button>
+        <button type="submit" class="btn">{{ 'registration.button'|trans }}</button>
     {{ form_end(registrationForm) }}
 </div>
 

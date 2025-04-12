@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Users{% endblock %}
+{% block title %}{{ 'admin.users.title'|trans }}{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -9,22 +9,24 @@
 
 {% block body %}
 <main class="admin-content">
-    <h1>Users</h1>
-    <a id="add_user_btn" href="{{ path('app_register', {'username': app.user.username}) }}" class="btn btn-add-user" style="margin-bottom: 1rem;">Add User</a>
+    <h1>{{ 'admin.users.header'|trans }}</h1>
+    <a id="add_user_btn" href="{{ path('app_register', {'username': app.user.username}) }}" class="btn btn-add-user" style="margin-bottom: 1rem;">
+        {{ 'admin.users.add_user'|trans }}
+    </a>
     
     <table class="users-table">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Profile Picture</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Address</th>
-                <th>Roles</th>
-                <th>Enrolled Courses</th>
-                <th>Actions</th>
+                <th>{{ 'admin.users.table.id'|trans }}</th>
+                <th>{{ 'admin.users.table.profile_picture'|trans }}</th>
+                <th>{{ 'admin.users.table.first_name'|trans }}</th>
+                <th>{{ 'admin.users.table.last_name'|trans }}</th>
+                <th>{{ 'admin.users.table.email'|trans }}</th>
+                <th>{{ 'admin.users.table.phone'|trans }}</th>
+                <th>{{ 'admin.users.table.address'|trans }}</th>
+                <th>{{ 'admin.users.table.roles'|trans }}</th>
+                <th>{{ 'admin.users.table.enrolled_courses'|trans }}</th>
+                <th>{{ 'admin.users.table.actions'|trans }}</th>
             </tr>
         </thead>
         <tbody>
@@ -33,16 +35,16 @@
                     <td>{{ user.id }}</td>
                     <td>
                         {% if user.profilePic %}
-                            <img src="{{ asset('uploads/profile_pics/' ~ user.profilePic) }}" alt="Profile Picture" class="table-profile-pic">
+                            <img src="{{ asset('uploads/profile_pics/' ~ user.profilePic) }}" alt="{{ 'admin.users.alt.profile_picture'|trans }}" class="table-profile-pic">
                         {% else %}
-                            N/A
+                            {{ 'admin.users.no_profile_picture'|trans }}
                         {% endif %}
                     </td>
                     <td>{{ user.firstName }}</td>
                     <td>{{ user.lastName }}</td>
                     <td>{{ user.email }}</td>
-                    <td>{{ user.phoneNumber ?: 'N/A' }}</td>
-                    <td>{{ user.address ?: 'N/A' }}</td>
+                    <td>{{ user.phoneNumber ?: ('admin.users.no_phone'|trans) }}</td>
+                    <td>{{ user.address ?: ('admin.users.no_address'|trans) }}</td>
                     <td>{{ user.roles|join(', ') }}</td>
                     <td>
                         {% if user.enrollments|length > 0 %}
@@ -50,16 +52,18 @@
                                 {{ enrollment.course.code }}{% if not loop.last %}, {% endif %}
                             {% endfor %}
                         {% else %}
-                            None
+                            {{ 'admin.users.no_enrollments'|trans }}
                         {% endif %}
                     </td>
                     <td>
-                        <a id="edit_user_btn_{{ user.id }}" href="{{ path('admin_edit_user', {'username': app.user.username, 'id': user.id}) }}" class="btn btn-edit-user">Edit</a>
+                        <a id="edit_user_btn_{{ user.id }}" href="{{ path('admin_edit_user', {'username': app.user.username, 'id': user.id}) }}" class="btn btn-edit-user">
+                            {{ 'admin.users.edit'|trans }}
+                        </a>
                     </td>
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="10">No users found.</td>
+                    <td colspan="10">{{ 'admin.users.no_users'|trans }}</td>
                 </tr>
             {% endfor %}
         </tbody>

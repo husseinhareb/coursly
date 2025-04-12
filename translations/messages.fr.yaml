@@ -1,18 +1,166 @@
-# translations/messages.fr.yaml
 login:
-    title: "Se connecter !"
-    sign_in: "Veuillez vous connecter"
-    email_label: "E-mail"
-    password_label: "Mot de passe"
-    show_password: "Afficher le mot de passe"
-    button: "Se connecter"
-    logged_in_as: "Vous êtes connecté en tant que %username%"
-    logout: "Déconnexion"
-    cookies_notice: "Notice concernant les cookies"
+  title: "Se connecter !"
+  sign_in: "Veuillez vous connecter"
+  email_label: "E-mail"
+  password_label: "Mot de passe"
+  show_password: "Afficher le mot de passe"
+  button: "Se connecter"
+  logged_in_as: "Vous êtes connecté en tant que %username%"
+  logout: "Déconnexion"
+  cookies_notice: "Notice concernant les cookies"
+
 home:
-    title: "Accueil"
-    hello: "Bonjour, %name% !"
-    email: "Votre adresse e-mail : %email%"
-    role: "Votre rôle : %role%"
-    welcome: "Bienvenue sur la page d'accueil !"
-    login_prompt: "Veuillez vous connecter pour voir les détails de votre compte."
+  title: "Accueil"
+  hello: "Bonjour, %name% !"
+  email: "Votre adresse e-mail : %email%"
+  role: "Votre rôle : %role%"
+  welcome: "Bienvenue sur la page d'accueil !"
+  login_prompt: "Veuillez vous connecter pour voir les détails de votre compte."
+
+navbar:
+  title: "Bienvenue !"
+  toggle_navigation: "Basculer la navigation"
+  logo_alt: "Logo du site"
+  users: "Utilisateurs"
+  courses: "Cours"
+  profile_picture_alt: "Photo de profil"
+  profile_options: "Options du profil"
+  profile: "Profil"
+  logout: "Déconnexion"
+  login: "Se connecter"
+
+registration:
+  title: "Inscription"
+  header: "Inscription"
+  button: "S'inscrire"
+  first_name:
+    label: "Prénom"
+    not_blank: "Veuillez entrer votre prénom"
+  last_name:
+    label: "Nom de famille"
+    not_blank: "Veuillez entrer votre nom de famille"
+  username:
+    label: "Nom d'utilisateur"
+    not_blank: "Veuillez entrer un nom d'utilisateur"
+    min_length: "Votre nom d'utilisateur doit comporter au moins {{ limit }} caractères"
+  email:
+    label: "Email"
+    not_blank: "Veuillez entrer un email"
+    invalid: "Veuillez entrer une adresse email valide"
+  plain_password:
+    label: "Mot de passe (généré automatiquement)"
+    not_blank: "Le mot de passe est généré automatiquement"
+    min_length: "Votre mot de passe doit comporter au moins {{ limit }} caractères"
+  role:
+    label: "Rôle"
+    placeholder: "Choisissez votre rôle"
+    administrator: "Administrateur"
+    student: "Étudiant"
+    professor: "Professeur"
+    admin_professor: "Administrateur & Professeur"
+
+profile:
+  title: "Mon Profil"
+  header: "Votre Profil"
+  picture_alt: "Photo de profil"
+  no_picture: "Aucune photo de profil disponible."
+  first_name: "Prénom"
+  last_name: "Nom de famille"
+  email: "Email"
+  phone_number: "Téléphone"
+  address: "Adresse"
+  roles: "Rôles"
+  not_provided: "Non fourni"
+  enrolled_courses: "Cours inscrits"
+  manage_enrollments: "Gérer les inscriptions"
+  edit_profile: "Modifier le profil"
+  change_password: "Changer le mot de passe"
+  save: "Enregistrer"
+  cancel: "Annuler"
+
+post:
+  title:
+    label: "Titre"
+  content:
+    label: "Contenu"
+  type:
+    label: "Type"
+    message: "Message"
+    file: "Fichier"
+  attachment:
+    label: "Pièce jointe (facultative)"
+  new:
+    title: "Nouveau post pour %course%"
+    heading: "Créer un nouveau post pour %course%"
+    submit: "Créer le post"
+    back_to_course: "Retour au cours"
+
+course:
+  new:
+    title: "Nouveau cours"
+    heading: "Créer un nouveau cours"
+    image_label: "Image du cours (facultatif)"
+    submit: "Créer le cours"
+  show:
+    new_post: "Créer un nouveau post"
+    posts_heading: "Articles"
+    download_file: "Télécharger le fichier"
+    posted_on: "Posté le %date%"
+    no_posts: "Aucun article pour le moment."
+  edit:
+    title: "Modifier le cours : %course%"
+    heading: "Modifier le cours"
+    label:
+      title: "Titre"
+      description: "Description"
+      code: "Code"
+      image: "Image du cours"
+    submit: "Mettre à jour le cours"
+    back: "Retour au cours"
+
+courses:
+  my:
+    title: "Mes cours"
+    heading: "Mes cours"
+    add_course: "Ajouter un cours"
+    search_placeholder: "Rechercher un cours..."
+    no_courses: "Aucun cours disponible."
+    edit: "Modifier"
+
+admin:
+  users:
+    title: "Utilisateurs"
+    header: "Utilisateurs"
+    add_user: "Ajouter un utilisateur"
+    table:
+      id: "ID"
+      profile_picture: "Photo de profil"
+      first_name: "Prénom"
+      last_name: "Nom"
+      email: "Email"
+      phone: "Téléphone"
+      address: "Adresse"
+      roles: "Rôles"
+      enrolled_courses: "Cours inscrits"
+      actions: "Actions"
+    alt:
+      profile_picture: "Photo de profil"
+    no_profile_picture: "N/D"
+    no_phone: "N/D"
+    no_address: "N/D"
+    no_enrollments: "Aucun"
+    edit: "Modifier"
+    no_users: "Aucun utilisateur trouvé."
+  enrollments:
+    title: "Gérer les inscriptions pour %firstName% %lastName%"
+    header: "Gérer les inscriptions pour %firstName% %lastName%"
+    admin_warning: "Les utilisateurs administrateurs ne peuvent pas être inscrits à des cours."
+    current_heading: "Inscriptions actuelles"
+    none_current: "Aucun cours inscrit."
+    remove:
+      title: "Retirer l'inscription"
+    available_heading: "Cours disponibles"
+    add:
+      title: "Ajouter l'inscription"
+    all_enrolled: "Tous les cours sont déjà inscrits."
+    back_to_profile: "Retour au profil"

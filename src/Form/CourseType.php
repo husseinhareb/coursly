@@ -16,13 +16,19 @@ class CourseType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
          $builder
-             ->add('title', TextType::class)
-             ->add('description', TextareaType::class)
-             ->add('code', TextType::class)
+             ->add('title', TextType::class, [
+                 'label' => 'course.title.label',
+             ])
+             ->add('description', TextareaType::class, [
+                 'label' => 'course.description.label',
+             ])
+             ->add('code', TextType::class, [
+                 'label' => 'course.code.label',
+             ])
              ->add('image', FileType::class, [
-                  'label' => 'Course Image (Optional)',
+                  'label' => 'course.image_label',
                   'required' => false,
-                  'mapped' => false, 
+                  'mapped' => false,
                   'constraints' => [
                       new File([
                            'maxSize' => '5M',
@@ -30,7 +36,7 @@ class CourseType extends AbstractType
                                 'image/jpeg',
                                 'image/png',
                            ],
-                           'mimeTypesMessage' => 'Please upload a valid image (JPEG or PNG).',
+                           'mimeTypesMessage' => 'course.image_mime_error',
                       ])
                   ],
              ]);
@@ -40,6 +46,7 @@ class CourseType extends AbstractType
     {
          $resolver->setDefaults([
               'data_class' => Course::class,
+              'translation_domain' => 'messages',
          ]);
     }
 }

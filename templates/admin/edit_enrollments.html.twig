@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Manage Enrollments for {{ user.firstName }} {{ user.lastName }}{% endblock %}
+{% block title %}{{ 'admin.enrollments.title'|trans({'%firstName%': user.firstName, '%lastName%': user.lastName}) }}{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -10,40 +10,44 @@
 {% block body %}
 <div class="enrollments-page">
     <header class="page-header">
-        <h1>Manage Enrollments for {{ user.firstName }} {{ user.lastName }}</h1>
+        <h1>{{ 'admin.enrollments.header'|trans({'%firstName%': user.firstName, '%lastName%': user.lastName}) }}</h1>
     </header>
     
     {% if 'ROLE_ADMIN' in user.roles %}
         <div class="alert alert-warning">
-            Admin users cannot be enrolled in courses.
+            {{ 'admin.enrollments.admin_warning'|trans }}
         </div>
         <section class="current-enrollments">
-            <h2>Current Enrollments</h2>
+            <h2>{{ 'admin.enrollments.current_heading'|trans }}</h2>
             {% if user.enrollments|length > 0 %}
                 <ul class="enrollments-list">
                     {% for enrollment in user.enrollments %}
                         <li>
-                            <span class="course-title"><i class="fas fa-book"></i> {{ enrollment.course.title }}</span>
-                            <button type="button" class="btn btn-secondary" title="Remove Enrollment" disabled>
+                            <span class="course-title">
+                                <i class="fas fa-book"></i> {{ enrollment.course.title }}
+                            </span>
+                            <button type="button" class="btn btn-secondary" title="{{ 'admin.enrollments.remove.title'|trans }}" disabled>
                                 <i class="fas fa-trash-alt"></i>
                             </button>
                         </li>
                     {% endfor %}
                 </ul>
             {% else %}
-                <p class="no-enrollments"><i class="fas fa-info-circle"></i> No enrolled courses.</p>
+                <p class="no-enrollments"><i class="fas fa-info-circle"></i> {{ 'admin.enrollments.none_current'|trans }}</p>
             {% endif %}
         </section>
     {% else %}
         <section class="current-enrollments">
-            <h2>Current Enrollments</h2>
+            <h2>{{ 'admin.enrollments.current_heading'|trans }}</h2>
             {% if user.enrollments|length > 0 %}
                 <ul class="enrollments-list">
                     {% for enrollment in user.enrollments %}
                         <li>
-                            <span class="course-title"><i class="fas fa-book"></i> {{ enrollment.course.title }}</span>
+                            <span class="course-title">
+                                <i class="fas fa-book"></i> {{ enrollment.course.title }}
+                            </span>
                             <form action="{{ path('admin_remove_enrollment', {'username': app.user.username, 'id': user.id, 'courseId': enrollment.course.id}) }}" method="post" class="enrollment-action">
-                                <button type="submit" class="btn btn-danger" title="Remove Enrollment">
+                                <button type="submit" class="btn btn-danger" title="{{ 'admin.enrollments.remove.title'|trans }}">
                                     <i class="fas fa-trash-alt"></i>
                                 </button>
                             </form>
@@ -51,12 +55,12 @@
                     {% endfor %}
                 </ul>
             {% else %}
-                <p class="no-enrollments"><i class="fas fa-info-circle"></i> No enrolled courses.</p>
+                <p class="no-enrollments"><i class="fas fa-info-circle"></i> {{ 'admin.enrollments.none_current'|trans }}</p>
             {% endif %}
         </section>
     
         <section class="available-courses">
-            <h2>Available Courses</h2>
+            <h2>{{ 'admin.enrollments.available_heading'|trans }}</h2>
             {% set enrolledIds = user.enrollments|map(enrollment => enrollment.course.id) %}
             {% set availableCourses = [] %}
             {% for course in courses %}
@@ -68,9 +72,11 @@
                 <ul class="courses-list">
                     {% for course in availableCourses %}
                         <li>
-                            <span class="course-title"><i class="fas fa-book-open"></i> {{ course.title }}</span>
+                            <span class="course-title">
+                                <i class="fas fa-book-open"></i> {{ course.title }}
+                            </span>
                             <form action="{{ path('admin_add_enrollment', {'username': app.user.username, 'id': user.id, 'courseId': course.id}) }}" method="post" class="enrollment-action">
-                                <button type="submit" class="btn btn-success" title="Add Enrollment">
+                                <button type="submit" class="btn btn-success" title="{{ 'admin.enrollments.add.title'|trans }}">
                                     <i class="fa-solid fa-plus"></i>
                                 </button>
                             </form>
@@ -78,14 +84,14 @@
                     {% endfor %}
                 </ul>
             {% else %}
-                <p class="all-enrolled"><i class="fas fa-check-circle"></i> All courses are already enrolled.</p>
+                <p class="all-enrolled"><i class="fas fa-check-circle"></i> {{ 'admin.enrollments.all_enrolled'|trans }}</p>
             {% endif %}
         </section>
     {% endif %}
     
     <div class="page-actions">
         <a id="edit_enrollments_btn" href="{{ path('admin_edit_user', {'username': app.user.username, 'id': user.id}) }}" class="btn btn-edit-enrollments">
-            <i class="fas fa-arrow-left"></i> Back to Profile
+            <i class="fas fa-arrow-left"></i> {{ 'admin.enrollments.back_to_profile'|trans }}
         </a>
     </div>
 </div>

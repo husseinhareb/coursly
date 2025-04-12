@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Course{% endblock %}
+{% block title %}{{ 'course.new.title'|trans }}{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -9,7 +9,7 @@
 
 {% block body %}
 <div class="course-container">
-    <h1>Create a New Course</h1>
+    <h1>{{ 'course.new.heading'|trans }}</h1>
     
     {{ form_errors(form) }}
     {{ form_start(form) }}
@@ -27,12 +27,10 @@
         </div>
         
         <div class="course-form-group">
-            {{ form_row(form.image, {
-                'label': 'Course Image (Optional)'
-            }) }}
+            {{ form_row(form.image, {'label': 'course.new.image_label'|trans}) }}
         </div>
         
-        <button type="submit" class="btn">Create Course</button>
+        <button type="submit" class="btn">{{ 'course.new.submit'|trans }}</button>
         
     {{ form_end(form) }}
 </div>

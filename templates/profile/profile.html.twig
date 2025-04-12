@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}My Profile{% endblock %}
+{% block title %}{{ 'profile.title'|trans }}{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -9,7 +9,7 @@
 
 {% block body %}
 <main class="profile-content">
-    <h1>Your Profile</h1>
+    <h1>{{ 'profile.header'|trans }}</h1>
 
     {# Display any flash messages #}
     {% for label, flashes in app.flashes %}
@@ -21,30 +21,38 @@
     {# Profile Picture Section #}
     <div class="profile-picture">
         {% if user.profilePic %}
-            <img src="{{ asset('uploads/profile_pics/' ~ user.profilePic) }}" alt="Profile Picture" class="profile-img">
+            <img src="{{ asset('uploads/profile_pics/' ~ user.profilePic) }}" alt="{{ 'profile.picture_alt'|trans }}" class="profile-img">
         {% else %}
-            <p class="no-picture">No profile picture available.</p>
+            <p class="no-picture">{{ 'profile.no_picture'|trans }}</p>
         {% endif %}
     </div>
 
     {# Read-Only View Section #}
     <div id="profile-view">
         <ul class="user-info">
-            <li><strong>First Name:</strong> {{ user.firstName }}</li>
-            <li><strong>Last Name:</strong> {{ user.lastName }}</li>
-            <li><strong>Email:</strong> {{ user.email }}</li>
-            <li><strong>Phone Number:</strong> {{ user.phoneNumber ?: 'Not provided' }}</li>
-            <li><strong>Address:</strong> {{ user.address ?: 'Not provided' }}</li>
-            <li><strong>Roles:</strong> {{ user.roles|join(', ') }}</li>
+            <li><strong>{{ 'profile.first_name'|trans }}:</strong> {{ user.firstName }}</li>
+            <li><strong>{{ 'profile.last_name'|trans }}:</strong> {{ user.lastName }}</li>
+            <li><strong>{{ 'profile.email'|trans }}:</strong> {{ user.email }}</li>
             <li>
-                <strong>Enrolled Courses:</strong>
+                <strong>{{ 'profile.phone_number'|trans }}:</strong>
+                {{ user.phoneNumber ?: ('profile.not_provided'|trans) }}
+            </li>
+            <li>
+                <strong>{{ 'profile.address'|trans }}:</strong>
+                {{ user.address ?: ('profile.not_provided'|trans) }}
+            </li>
+            <li>
+                <strong>{{ 'profile.roles'|trans }}:</strong> {{ user.roles|join(', ') }}
+            </li>
+            <li>
+                <strong>{{ 'profile.enrolled_courses'|trans }}:</strong>
                 <a href="{{ path('admin_manage_enrollments', {'username': app.user.username, 'id': user.id}) }}" class="btn-manage-enrollments">
-                    Manage Enrollments
+                    {{ 'profile.manage_enrollments'|trans }}
                 </a>
             </li>
         </ul>
-        <button type="button" id="edit-button" class="btn btn-primary">Edit Profile</button>
-        <a href="{{ path('app_change_password', {'username': app.user.username}) }}" class="btn btn-secondary">Change Password</a>
+        <button type="button" id="edit-button" class="btn btn-primary">{{ 'profile.edit_profile'|trans }}</button>
+        <a href="{{ path('app_change_password', {'username': app.user.username}) }}" class="btn btn-secondary">{{ 'profile.change_password'|trans }}</a>
     </div>
 
     {# Edit Form Section #}
@@ -55,10 +63,10 @@
             {{ form_row(form.phoneNumber) }}
             {{ form_row(form.address) }}
             {{ form_row(form.profilePic) }}
-            <button type="submit" class="btn btn-success">Save</button>
+            <button type="submit" class="btn btn-success">{{ 'profile.save'|trans }}</button>
         {{ form_end(form) }}
 
-        <button type="button" id="cancel-button" class="btn btn-secondary">Cancel</button>
+        <button type="button" id="cancel-button" class="btn btn-secondary">{{ 'profile.cancel'|trans }}</button>
     </div>
 </main>
 

@@ -17,23 +17,31 @@ class PostType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
          $builder
-             ->add('title', TextType::class)
-             ->add('content', TextareaType::class)
+             ->add('title', TextType::class, [
+                 'label' => 'post.title.label', // use key instead of literal text
+             ])
+             ->add('content', TextareaType::class, [
+                 'label' => 'post.content.label',
+             ])
              ->add('type', ChoiceType::class, [
+                   'label' => 'post.type.label',
                    'choices' => [
-                        'Message' => 'message',
-                        'File' => 'file',
+                        'post.type.message' => 'message', // keys for choice options
+                        'post.type.file'    => 'file',
                    ],
+                   // ensures the keys are translated too
+                   'choice_translation_domain' => 'messages',
              ])
              ->add('attachment', FileType::class, [
-                 'label' => 'Attachment (Optional)',
+                 'label' => 'post.attachment.label',
                  'mapped' => false,
                  'required' => false,
                  'constraints' => [
                      new File([
                          'maxSize' => '10M',
-                         // Removed MIME type restrictions so any file is accepted.
-                         // You can optionally add other file constraints if needed.
+                         // MIME type constraints removed intentionally
+                         // Add more constraints if needed
+                         // 'mimeTypesMessage' => 'post.attachment.mime_error',
                      ])
                  ],
              ]);
@@ -43,6 +51,7 @@ class PostType extends AbstractType
     {
          $resolver->setDefaults([
               'data_class' => Post::class,
+              'translation_domain' => 'messages', // the domain where keys will be looked up
          ]);
     }
 }

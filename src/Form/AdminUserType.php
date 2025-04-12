@@ -1,5 +1,6 @@
 <?php
 
+// src/Form/AdminUserType.php
 namespace App\Form;
 
 use App\Entity\User;
@@ -17,21 +18,21 @@ class AdminUserType extends AbstractType
     {
          $builder
              ->add('firstName', TextType::class, [
-                 'label' => 'First Name',
+                 'label' => 'admin_user.first_name', 
              ])
              ->add('lastName', TextType::class, [
-                 'label' => 'Last Name',
+                 'label' => 'admin_user.last_name',
              ])
              ->add('phoneNumber', TextType::class, [
                  'required' => false,
-                 'label' => 'Phone Number',
+                 'label' => 'admin_user.phone_number',
              ])
              ->add('address', TextType::class, [
                  'required' => false,
-                 'label' => 'Address',
+                 'label' => 'admin_user.address',
              ])
              ->add('roles', ChoiceType::class, [
-                 'label' => 'Roles',
+                 'label' => 'admin_user.roles',
                  'choices' => [
                      'User' => 'ROLE_USER',
                      'Admin' => 'ROLE_ADMIN',
@@ -40,7 +41,7 @@ class AdminUserType extends AbstractType
                  'expanded' => true,
              ])
              ->add('profilePic', FileType::class, [
-                 'label' => 'Profile Picture (Image file)',
+                 'label' => 'admin_user.profile_pic', 
                  'mapped' => false,
                  'required' => false,
                  'constraints' => [
@@ -51,7 +52,7 @@ class AdminUserType extends AbstractType
                              'image/png',
                              'image/gif',
                          ],
-                         'mimeTypesMessage' => 'Please upload a valid image file (JPEG, PNG, or GIF)',
+                         'mimeTypesMessage' => 'admin_user.profile_pic.mime_error', 
                      ])
                  ],
              ])
@@ -62,6 +63,7 @@ class AdminUserType extends AbstractType
     {
          $resolver->setDefaults([
               'data_class' => User::class,
+              'translation_domain' => 'messages',
          ]);
     }
 }

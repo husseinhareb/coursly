@@ -1,5 +1,5 @@
 <?php
-
+// src/Form/RegistrationFormType.php
 namespace App\Form;
 
 use App\Entity\User;
@@ -20,55 +20,58 @@ class RegistrationFormType extends AbstractType
         $builder
             ->add('firstName', TextType::class, [
                 'constraints' => [
-                    new NotBlank(['message' => 'Please enter your first name']),
+                    new NotBlank(['message' => 'registration.first_name.not_blank']),
                 ],
-                'label' => 'First Name',
+                'label' => 'registration.first_name.label',
             ])
             ->add('lastName', TextType::class, [
                 'constraints' => [
-                    new NotBlank(['message' => 'Please enter your last name']),
+                    new NotBlank(['message' => 'registration.last_name.not_blank']),
                 ],
-                'label' => 'Last Name',
+                'label' => 'registration.last_name.label',
             ])
             ->add('username', TextType::class, [
                 'constraints' => [
-                    new NotBlank(['message' => 'Please enter a username']),
+                    new NotBlank(['message' => 'registration.username.not_blank']),
                     new Length([
                         'min' => 3,
-                        'minMessage' => 'Your username should be at least {{ limit }} characters',
+                        'minMessage' => 'registration.username.min_length',
                         'max' => 255,
                     ]),
                 ],
-                'label' => 'Username',
+                'label' => 'registration.username.label',
             ])
             ->add('email', EmailType::class, [
                 'constraints' => [
-                    new NotBlank(['message' => 'Please enter an email']),
-                    new Email(['message' => 'Please enter a valid email address']),
+                    new NotBlank(['message' => 'registration.email.not_blank']),
+                    new Email(['message' => 'registration.email.invalid']),
                 ],
+                'label' => 'registration.email.label',
             ])
             ->add('plainPassword', TextType::class, [
                 'mapped' => false,
                 'attr'   => ['readonly' => true],
                 'constraints' => [
-                    new NotBlank(['message' => 'Password is auto-generated']),
+                    new NotBlank(['message' => 'registration.plain_password.not_blank']),
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
+                        'minMessage' => 'registration.plain_password.min_length',
                         'max' => 4096,
                     ]),
                 ],
+                'label' => 'registration.plain_password.label',
             ])
             ->add('role', ChoiceType::class, [
                 'mapped' => false,
                 'choices' => [
-                    'Administrator'         => 'ROLE_ADMIN',
-                    'Student'               => 'ROLE_STUDENT',
-                    'Professor'             => 'ROLE_PROFESSOR',
-                    'Admin & Professor'     => 'ROLE_ADMIN_PROFESSOR',
+                    'registration.role.administrator'      => 'ROLE_ADMIN',
+                    'registration.role.student'            => 'ROLE_STUDENT',
+                    'registration.role.professor'          => 'ROLE_PROFESSOR',
+                    'registration.role.admin_professor'    => 'ROLE_ADMIN_PROFESSOR',
                 ],
-                'placeholder' => 'Choose your role',
-                'label'       => 'Role',
+                'placeholder' => 'registration.role.placeholder',
+                'label'       => 'registration.role.label',
+                'choice_translation_domain' => 'messages',
             ]);
     }
 
@@ -76,6 +79,7 @@ class RegistrationFormType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => User::class,
+            'translation_domain' => 'messages',
         ]);
     }
 }

@@ -1,19 +1,166 @@
-# translations/messages.en.yaml
 login:
-    title: "Log in!"
-    sign_in: "Please sign in"
-    email_label: "Email"
-    password_label: "Password"
-    show_password: "Show password"
-    button: "Sign in"
-    logged_in_as: "You are logged in as %username%"
-    logout: "Logout"
-    cookies_notice: "Cookies notice"
-    
+  title: "Log in!"
+  sign_in: "Please sign in"
+  email_label: "Email"
+  password_label: "Password"
+  show_password: "Show password"
+  button: "Sign in"
+  logged_in_as: "You are logged in as %username%"
+  logout: "Logout"
+  cookies_notice: "Cookies notice"
+
 home:
-    title: "Home"
-    hello: "Hello, %name%!"
-    email: "Your email: %email%"
-    role: "Your role: %role%"
-    welcome: "Welcome to the homepage!"
-    login_prompt: "Please log in to see your account details."
+  title: "Home"
+  hello: "Hello, %name%!"
+  email: "Your email: %email%"
+  role: "Your role: %role%"
+  welcome: "Welcome to the homepage!"
+  login_prompt: "Please log in to see your account details."
+
+navbar:
+  title: "Welcome!"
+  toggle_navigation: "Toggle navigation"
+  logo_alt: "Site logo"
+  users: "Users"
+  courses: "Courses"
+  profile_picture_alt: "Profile picture"
+  profile_options: "Profile options"
+  profile: "Profile"
+  logout: "Logout"
+  login: "Login"
+
+registration:
+  title: "Register"
+  header: "Register"
+  button: "Register"
+  first_name:
+    label: "First Name"
+    not_blank: "Please enter your first name"
+  last_name:
+    label: "Last Name"
+    not_blank: "Please enter your last name"
+  username:
+    label: "Username"
+    not_blank: "Please enter a username"
+    min_length: "Your username should be at least {{ limit }} characters"
+  email:
+    label: "Email"
+    not_blank: "Please enter an email"
+    invalid: "Please enter a valid email address"
+  plain_password:
+    label: "Password (auto-generated)"
+    not_blank: "Password is auto-generated"
+    min_length: "Your password should be at least {{ limit }} characters"
+  role:
+    label: "Role"
+    placeholder: "Choose your role"
+    administrator: "Administrator"
+    student: "Student"
+    professor: "Professor"
+    admin_professor: "Admin & Professor"
+
+profile:
+  title: "My Profile"
+  header: "Your Profile"
+  picture_alt: "Profile Picture"
+  no_picture: "No profile picture available."
+  first_name: "First Name"
+  last_name: "Last Name"
+  email: "Email"
+  phone_number: "Phone Number"
+  address: "Address"
+  roles: "Roles"
+  not_provided: "Not provided"
+  enrolled_courses: "Enrolled Courses"
+  manage_enrollments: "Manage Enrollments"
+  edit_profile: "Edit Profile"
+  change_password: "Change Password"
+  save: "Save"
+  cancel: "Cancel"
+
+post:
+  title:
+    label: "Title"
+  content:
+    label: "Content"
+  type:
+    label: "Type"
+    message: "Message"
+    file: "File"
+  attachment:
+    label: "Attachment (Optional)"
+  new:
+    title: "New Post for %course%"
+    heading: "Create a New Post for %course%"
+    submit: "Create Post"
+    back_to_course: "Back to Course"
+
+course:
+  new:
+    title: "New Course"
+    heading: "Create a New Course"
+    image_label: "Course Image (Optional)"
+    submit: "Create Course"
+  show:
+    new_post: "Create New Post"
+    posts_heading: "Posts"
+    download_file: "Download File"
+    posted_on: "Posted on %date%"
+    no_posts: "No posts yet."
+  edit:
+    title: "Edit Course: %course%"
+    heading: "Edit Course"
+    label:
+      title: "Title"
+      description: "Description"
+      code: "Code"
+      image: "Course Image"
+    submit: "Update Course"
+    back: "Back to Course"
+
+courses:
+  my:
+    title: "My Courses"
+    heading: "My Courses"
+    add_course: "Add Course"
+    search_placeholder: "Search for a course..."
+    no_courses: "No courses available."
+    edit: "Edit"
+
+admin:
+  users:
+    title: "Users"
+    header: "Users"
+    add_user: "Add User"
+    table:
+      id: "ID"
+      profile_picture: "Profile Picture"
+      first_name: "First Name"
+      last_name: "Last Name"
+      email: "Email"
+      phone: "Phone"
+      address: "Address"
+      roles: "Roles"
+      enrolled_courses: "Enrolled Courses"
+      actions: "Actions"
+    alt:
+      profile_picture: "Profile Picture"
+    no_profile_picture: "N/A"
+    no_phone: "N/A"
+    no_address: "N/A"
+    no_enrollments: "None"
+    edit: "Edit"
+    no_users: "No users found."
+  enrollments:
+    title: "Manage Enrollments for %firstName% %lastName%"
+    header: "Manage Enrollments for %firstName% %lastName%"
+    admin_warning: "Admin users cannot be enrolled in courses."
+    current_heading: "Current Enrollments"
+    none_current: "No enrolled courses."
+    remove:
+      title: "Remove Enrollment"
+    available_heading: "Available Courses"
+    add:
+      title: "Add Enrollment"
+    all_enrolled: "All courses are already enrolled."
+    back_to_profile: "Back to Profile"

@@ -12,12 +12,14 @@
     <header class="course-header">
         <h1 class="course-title">{{ course.title }}</h1>
         {% if is_granted('ROLE_PROFESSOR') or is_granted('ROLE_ADMIN') %}
-            <a href="{{ path('post_new', { code: course.code, id: course.id }) }}" class="create-post-btn">Create New Post</a>
+            <a href="{{ path('post_new', { code: course.code, id: course.id }) }}" class="create-post-btn">
+                {{ 'course.show.new_post'|trans }}
+            </a>
         {% endif %}
     </header>
     
     <section class="posts-section">
-        <h2>Posts</h2>
+        <h2>{{ 'course.show.posts_heading'|trans }}</h2>
         <ul class="posts-list">
             {% for post in course.posts %}
                 <li class="post-item">
@@ -26,14 +28,18 @@
                         <span class="post-type">({{ post.type }})</span>
                     </div>
                     {% if post.type == 'file' and post.filePath %}
-                        <a class="post-download" href="{{ asset('uploads/post_files/' ~ post.filePath) }}">Download File</a>
+                        <a class="post-download" href="{{ asset('uploads/post_files/' ~ post.filePath) }}">
+                            {{ 'course.show.download_file'|trans }}
+                        </a>
                     {% endif %}
                     <div class="post-date">
-                        <small>Posted on {{ post.createdAt|date('Y-m-d H:i') }}</small>
+                        <small>
+                            {{ 'course.show.posted_on'|trans({'%date%': post.createdAt|date('Y-m-d H:i')}) }}
+                        </small>
                     </div>
                 </li>
             {% else %}
-                <li class="no-posts">No posts yet.</li>
+                <li class="no-posts">{{ 'course.show.no_posts'|trans }}</li>
             {% endfor %}
         </ul>
     </section>

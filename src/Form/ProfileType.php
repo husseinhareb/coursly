@@ -1,5 +1,5 @@
 <?php
-
+// src/Form/ProfileType.php
 namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
@@ -16,21 +16,21 @@ class ProfileType extends AbstractType
     {
         $builder
             ->add('firstName', TextType::class, [
-                'label' => 'First Name',
+                'label' => 'profile.first_name',
             ])
             ->add('lastName', TextType::class, [
-                'label' => 'Last Name',
+                'label' => 'profile.last_name',
             ])
             ->add('phoneNumber', TextType::class, [
                 'required' => false,
-                'label' => 'Phone Number',
+                'label' => 'profile.phone_number',
             ])
             ->add('address', TextType::class, [
                 'required' => false,
-                'label' => 'Address',
+                'label' => 'profile.address',
             ])
             ->add('profilePic', FileType::class, [
-                'label' => 'Profile Picture (Image file)',
+                'label' => 'profile.profile_pic',
                 'mapped' => false,
                 'required' => false,
                 'constraints' => [
@@ -41,17 +41,17 @@ class ProfileType extends AbstractType
                             'image/png',
                             'image/gif',
                         ],
-                        'mimeTypesMessage' => 'Please upload a valid image file (JPEG, PNG, or GIF)',
+                        'mimeTypesMessage' => 'profile.profile_pic.mime_error',
                     ])
                 ],
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class' => User::class,
+            'translation_domain' => 'messages',
         ]);
     }
 }

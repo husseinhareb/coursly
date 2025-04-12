@@ -1,7 +1,6 @@
-{# templates/posts/new.html.twig #}
 {% extends 'base.html.twig' %}
 
-{% block title %}New Post for {{ course.title }}{% endblock %}
+{% block title %}{{ 'post.new.title'|trans({'%course%': course.title}) }}{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -10,7 +9,7 @@
 
 {% block body %}
 <div class="post-container">
-    <h1>Create a New Post for {{ course.title }}</h1>
+    <h1>{{ 'post.new.heading'|trans({'%course%': course.title}) }}</h1>
 
     {{ form_errors(form) }}
 
@@ -27,9 +26,11 @@
         <div class="post-form-group">
             {{ form_row(form.attachment, {'attr': {'id': 'post_form_attachment'}}) }}
         </div>
-        <button type="submit" class="btn">Create Post</button>
+        <button type="submit" class="btn">{{ 'post.new.submit'|trans }}</button>
     {{ form_end(form) }}
 
-    <a href="{{ path('courses_show', { id: course.id, code: course.code }) }}">Back to Course</a>
+    <a href="{{ path('courses_show', { id: course.id, code: course.code }) }}">
+        {{ 'post.new.back_to_course'|trans }}
+    </a>
 </div>
 {% endblock %}
