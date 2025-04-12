@@ -51,9 +51,21 @@ document.addEventListener("DOMContentLoaded", function () {
         let query = this.value.toLowerCase().trim();
         let cards = document.querySelectorAll(".courses-card");
 
+        // Debug: log the current query
+        console.debug("Search query:", query);
+
         cards.forEach(card => {
-            let title = card.querySelector(".courses-title").innerText.toLowerCase();
-            card.style.display = title.includes(query) ? "block" : "none";
+            let titleElement = card.querySelector(".courses-title");
+            let subtitleElement = card.querySelector(".courses-subtitle");
+
+            let titleText = titleElement ? titleElement.textContent.toLowerCase().trim() : '';
+            let codeText = subtitleElement ? subtitleElement.textContent.toLowerCase().trim() : '';
+            let combinedText = titleText + " " + codeText;
+
+            // Debug: log the combined text of the card
+            console.debug("Card text:", combinedText);
+
+            card.style.display = combinedText.includes(query) ? "block" : "none";
         });
     });
 });

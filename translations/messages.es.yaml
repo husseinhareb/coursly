@@ -1,0 +1,169 @@
+login:
+  title: "¡Iniciar sesión!"
+  sign_in: "Por favor, inicia sesión"
+  email_label: "Correo electrónico"
+  password_label: "Contraseña"
+  show_password: "Mostrar contraseña"
+  button: "Iniciar sesión"
+  logged_in_as: "Has iniciado sesión como %username%"
+  logout: "Cerrar sesión"
+  cookies_notice: "Aviso de cookies"
+
+home:
+  title: "Inicio"
+  hello: "¡Hola, %name%!"
+  email: "Tu correo: %email%"
+  role: "Tu rol: %role%"
+  welcome: "¡Bienvenido a la página principal!"
+  login_prompt: "Por favor, inicia sesión para ver los detalles de tu cuenta."
+
+navbar:
+  title: "¡Bienvenido!"
+  toggle_navigation: "Alternar navegación"
+  logo_alt: "Logo del sitio"
+  users: "Usuarios"
+  courses: "Cursos"
+  profile_picture_alt: "Foto de perfil"
+  profile_options: "Opciones de perfil"
+  profile: "Perfil"
+  logout: "Cerrar sesión"
+  login: "Iniciar sesión"
+
+registration:
+  title: "Registro"
+  header: "Registro"
+  button: "Registrarse"
+  password_label: "Contraseña (generada automáticamente)"
+  first_name:
+    label: "Nombre"
+    not_blank: "Por favor, introduce tu nombre"
+  last_name:
+    label: "Apellido"
+    not_blank: "Por favor, introduce tu apellido"
+  username:
+    label: "Nombre de usuario"
+    not_blank: "Por favor, introduce un nombre de usuario"
+    min_length: "Tu nombre de usuario debe tener al menos {{ limit }} caracteres"
+  email:
+    label: "Correo electrónico"
+    not_blank: "Por favor, introduce un correo electrónico"
+    invalid: "Por favor, introduce una dirección de correo electrónico válida"
+  plain_password:
+    label: "Contraseña (generada automáticamente)"
+    not_blank: "La contraseña se genera automáticamente"
+    min_length: "Tu contraseña debe tener al menos {{ limit }} caracteres"
+  role:
+    label: "Rol"
+    placeholder: "Elige tu rol"
+    administrator: "Administrador"
+    student: "Estudiante"
+    professor: "Profesor"
+    admin_professor: "Administrador y Profesor"
+
+profile:
+  title: "Mi Perfil"
+  header: "Tu Perfil"
+  picture_alt: "Foto de perfil"
+  no_picture: "No hay foto de perfil disponible."
+  first_name: "Nombre"
+  last_name: "Apellido"
+  email: "Correo electrónico"
+  phone_number: "Número de teléfono"
+  address: "Dirección"
+  roles: "Roles"
+  not_provided: "No proporcionado"
+  enrolled_courses: "Cursos inscritos"
+  manage_enrollments: "Gestionar inscripciones"
+  edit_profile: "Editar perfil"
+  change_password: "Cambiar contraseña"
+  save: "Guardar"
+  cancel: "Cancelar"
+
+post:
+  title:
+    label: "Título"
+  content:
+    label: "Contenido"
+  type:
+    label: "Tipo"
+    message: "Mensaje"
+    file: "Archivo"
+  attachment:
+    label: "Archivo adjunto (Opcional)"
+  new:
+    title: "Nueva publicación para %course%"
+    heading: "Crear una nueva publicación para %course%"
+    submit: "Crear publicación"
+    back_to_course: "Volver al curso"
+
+course:
+  new:
+    title: "Nuevo curso"
+    heading: "Crear un nuevo curso"
+    image_label: "Imagen del curso (Opcional)"
+    submit: "Crear curso"
+    description: "Descripción"
+    code: "Código"
+  show:
+    new_post: "Crear nueva publicación"
+    posts_heading: "Publicaciones"
+    download_file: "Descargar archivo"
+    posted_on: "Publicado el %date%"
+    no_posts: "Aún no hay publicaciones."
+  edit:
+    title: "Editar curso: %course%"
+    heading: "Editar curso"
+    label:
+      title: "Título"
+      description: "Descripción"
+      code: "Código"
+      image: "Imagen del curso"
+    submit: "Actualizar curso"
+    back: "Volver al curso"
+
+courses:
+  my:
+    title: "Mis cursos"
+    heading: "Mis cursos"
+    add_course: "Agregar curso"
+    search_placeholder: "Buscar un curso..."
+    no_courses: "No hay cursos disponibles."
+    edit: "Editar"
+
+admin:
+  users:
+    title: "Usuarios"
+    header: "Usuarios"
+    add_user: "Agregar usuario"
+    table:
+      id: "ID"
+      profile_picture: "Foto de perfil"
+      first_name: "Nombre"
+      last_name: "Apellido"
+      email: "Correo electrónico"
+      phone: "Teléfono"
+      address: "Dirección"
+      roles: "Roles"
+      enrolled_courses: "Cursos inscritos"
+      actions: "Acciones"
+    alt:
+      profile_picture: "Foto de perfil"
+    no_profile_picture: "N/D"
+    no_phone: "N/D"
+    no_address: "N/D"
+    no_enrollments: "Ninguno"
+    edit: "Editar"
+    no_users: "No se encontraron usuarios."
+  enrollments:
+    title: "Gestionar inscripciones para %firstName% %lastName%"
+    header: "Gestionar inscripciones para %firstName% %lastName%"
+    admin_warning: "Los usuarios administradores no pueden inscribirse en cursos."
+    current_heading: "Inscripciones actuales"
+    none_current: "No hay cursos inscritos."
+    remove:
+      title: "Eliminar inscripción"
+    available_heading: "Cursos disponibles"
+    add:
+      title: "Agregar inscripción"
+    all_enrolled: "Todos los cursos ya están inscritos."
+    back_to_profile: "Volver al perfil"

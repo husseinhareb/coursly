@@ -73,6 +73,7 @@
                     <select name="locale" onchange="window.location.href = '{{ path('change_language', {'locale': 'PLACEHOLDER'}) }}'.replace('PLACEHOLDER', this.value)">
                         <option value="en" {% if app.request.locale == 'en' %}selected{% endif %}>English (en)</option>
                         <option value="fr" {% if app.request.locale == 'fr' %}selected{% endif %}>Français (fr)</option>
+                        <option value="es" {% if app.request.locale == 'es' %}selected{% endif %}>Español (es)</option>
                         <!-- Add more languages as needed -->
                     </select>
                 </form>

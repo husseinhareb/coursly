@@ -7,8 +7,13 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: CourseRepository::class)]
+#[UniqueEntity(
+    fields: ['code'],
+    message: 'This course code already exists.'
+)]
 class Course
 {
     #[ORM\Id]
@@ -22,7 +27,7 @@ class Course
     #[ORM\Column(length: 255)]
     private ?string $description = null;
     
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, unique: true)]
     private ?string $code = null;
     
     #[ORM\Column]
