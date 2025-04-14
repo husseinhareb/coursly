@@ -13,7 +13,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use App\Entity\Course;
 use App\Form\CourseType;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
-use App\Entity\UserCourseAccess;        
+use App\Entity\UserCourseAccess;
 
 final class CourseController extends AbstractController
 {
@@ -40,17 +40,22 @@ final class CourseController extends AbstractController
         ]);
     }
 
-    #[Route('/courses/{id}/{code}', name: 'courses_show', requirements: ['code' => '^(?!edit$).+'])]
-    public function show(int $id, string $code, CourseRepository $repository, Request $request, ManagerRegistry $doctrine): Response
-    {
+    #[Route('/courses/{id}/{code}', name: 'courses_show', requirements: ['id' => '\d+', 'code' => '^(?!edit$).+'])]
+    public function show(
+        int $id,
+        string $code,
+        CourseRepository $repository,
+        Request $request,
+        ManagerRegistry $doctrine
+    ): Response {
         $course = $repository->find($id);
         if (!$course) {
             throw $this->createNotFoundException('The requested course does not exist.');
         }
         if ($course->getCode() !== $code) {
             return $this->redirectToRoute('courses_show', [
-                'code' => $course->getCode(),
                 'id'   => $course->getId(),
+                'code' => $course->getCode(),
             ], 301);
         }
         
@@ -79,7 +84,31 @@ final class CourseController extends AbstractController
             'course' => $course,
         ]);
     }
-
+    
+    // New route to display course details and the list of enrolled users.
+    #[Route('/courses/enrolled/{id}/{code}/', name: 'courses_enrolled', requirements: ['id' => '\d+', 'code' => '^(?!edit$).+'])]
+    public function enrolled(
+        int $id,
+        string $code,
+        CourseRepository $repository
+    ): Response {
+        $course = $repository->find($id);
+        if (!$course) {
+            throw $this->createNotFoundException('The requested course does not exist.');
+        }
+        if ($course->getCode() !== $code) {
+            return $this->redirectToRoute('courses_enrolled', [
+                'id'   => $course->getId(),
+                'code' => $course->getCode(),
+            ], 301);
+        }
+        
+        // Assuming your Course entity has a method getUsers() to retrieve enrolled users.
+        return $this->render('courses/enrolled.html.twig', [
+            'course' => $course,
+            'users'  => $course->getUsers(),
+        ]);
+    }
 
     #[Route('/search-courses', name: 'courses_search', methods: ['GET'])]
     public function searchCourses(Request $request, CourseRepository $courseRepository): JsonResponse
@@ -114,7 +143,7 @@ final class CourseController extends AbstractController
             // Process the uploaded image if provided.
             $imageFile = $form->get('image')->getData();
             if ($imageFile) {
-                $newFilename = uniqid().'.'.$imageFile->guessExtension();
+                $newFilename = uniqid() . '.' . $imageFile->guessExtension();
                 try {
                     $imageFile->move(
                         $this->getParameter('course_pics_directory'),
@@ -160,7 +189,7 @@ final class CourseController extends AbstractController
             // Process the uploaded image if provided.
             $imageFile = $form->get('image')->getData();
             if ($imageFile) {
-                $newFilename = uniqid().'.'.$imageFile->guessExtension();
+                $newFilename = uniqid() . '.' . $imageFile->guessExtension();
                 try {
                     $imageFile->move(
                         $this->getParameter('course_pics_directory'),

@@ -146,6 +146,18 @@ class Course
     {
         return $this->enrollments;
     }
+
+    /**
+     * Get the users enrolled in the course.
+     * Assuming that the Enrollment entity has a 'user' relation.
+     *
+     * @return Collection|User[]
+     */
+    public function getUsers(): Collection
+    {
+        // Map through the enrollments and return the associated users
+        return $this->enrollments->map(fn(Enrollment $enrollment) => $enrollment->getUser());
+    }
     
     /**
      * @return Collection|Post[]

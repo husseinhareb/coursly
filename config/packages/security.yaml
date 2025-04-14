@@ -44,6 +44,7 @@ security:
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/courses/new, roles: ROLE_ADMIN}
         - { path: ^/courses/edit, roles: ROLE_ADMIN}
+        - { path: ^/posts/\d+/[^/]+/new, roles: [ROLE_PROFESSOR] }
 when@test:
     security:
         password_hashers:

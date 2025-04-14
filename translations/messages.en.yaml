@@ -130,6 +130,13 @@ courses:
     search_placeholder: "Search for a course..."
     no_courses: "No courses available."
     edit: "Edit"
+    infomessage: "Info"
+    info:
+      title: "Course Information"
+      description: "Description"
+      enrolled_users: "Enrolled Users"
+      no_enrolled_users: "No users enrolled yet."
+      back_to_courses: "Back to Courses"
 
 admin:
   users:

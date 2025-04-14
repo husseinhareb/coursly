@@ -11,7 +11,7 @@
 <div class="course-page-container">
     <header class="course-header">
         <h1 class="course-title">{{ course.title }}</h1>
-        {% if is_granted('ROLE_PROFESSOR') or is_granted('ROLE_ADMIN') %}
+        {% if is_granted('ROLE_PROFESSOR') %}
             <a href="{{ path('post_new', { code: course.code, id: course.id }) }}" class="create-post-btn">
                 {{ 'course.show.new_post'|trans }}
             </a>

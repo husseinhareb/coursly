@@ -1,3 +1,4 @@
+{# templates/courses/courses.html.twig #}
 {% extends 'base.html.twig' %}
 
 {% block title %}{{ 'courses.my.title'|trans }}{% endblock %}
@@ -36,9 +37,17 @@
                         </a>
                     </h5>
                     <p class="courses-subtitle">{{ course.code }}</p>
-                    {% if is_granted('ROLE_ADMIN') %}
-                        <a href="{{ path('courses_edit', { id: course.id }) }}" class="btn-edit">{{ 'courses.my.edit'|trans }}</a>
-                    {% endif %}
+                    <div class="course-actions">
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <a href="{{ path('courses_edit', { id: course.id }) }}" class="btn-edit">
+                                {{ 'courses.my.edit'|trans }}
+                            </a>
+                        {% endif %}
+                        {# Info button now directs to the enrolled route #}
+                        <a href="{{ path('courses_enrolled', { id: course.id, code: course.code }) }}" class="btn-info">
+                            {{ 'courses.my.infomessage'|trans }}
+                        </a>
+                    </div>
                 </div>
             </div>
         {% else %}
@@ -50,25 +59,16 @@
 <script>
 document.addEventListener("DOMContentLoaded", function () {
     let searchInput = document.getElementById("search");
-
     searchInput.addEventListener("input", function () {
         let query = this.value.toLowerCase().trim();
         let cards = document.querySelectorAll(".courses-card");
 
-        // Debug: log the current query
-        console.debug("Search query:", query);
-
         cards.forEach(card => {
             let titleElement = card.querySelector(".courses-title");
             let subtitleElement = card.querySelector(".courses-subtitle");
-
             let titleText = titleElement ? titleElement.textContent.toLowerCase().trim() : '';
             let codeText = subtitleElement ? subtitleElement.textContent.toLowerCase().trim() : '';
             let combinedText = titleText + " " + codeText;
-
-            // Debug: log the combined text of the card
-            console.debug("Card text:", combinedText);
-
             card.style.display = combinedText.includes(query) ? "block" : "none";
         });
     });

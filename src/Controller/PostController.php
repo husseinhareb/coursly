@@ -11,10 +11,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class PostController extends AbstractController
 {
     #[Route('/posts/{id}/{code}/new', name: 'post_new')]
+    #[Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_PROF')")]
     public function new(
         int $id,
         Request $request,
@@ -41,7 +43,7 @@ class PostController extends AbstractController
          $form->handleRequest($request);
          
          if ($form->isSubmitted() && $form->isValid()) {
-              // If the post type is "file" handle the file upload
+              // If the post type is "file", handle the file upload
               if ($post->getType() === 'file') {
                   $attachment = $form->get('attachment')->getData();
                   if ($attachment) {
