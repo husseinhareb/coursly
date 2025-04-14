@@ -18,14 +18,27 @@ use App\Entity\UserCourseAccess;
 final class CourseController extends AbstractController
 {
     #[Route('/courses', name: 'courses_index')]
-    public function index(Request $request, CourseRepository $repository, ManagerRegistry $doctrine): Response
-    {
+    public function index(
+        Request $request, 
+        CourseRepository $repository, 
+        ManagerRegistry $doctrine
+    ): Response {
+        // Retrieve all courses.
         $courses = $repository->findAll();
+        $user = $this->getUser();
+        
+        // If a user is logged in and is not an admin,
+        // filter courses to only include those the user is enrolled in.
+        if ($user && !$this->isGranted('ROLE_ADMIN')) {
+            $courses = array_filter($courses, function (Course $course) use ($user) {
+                // The getUsers() method in Course returns a Collection of enrolled users.
+                return $course->getUsers()->contains($user);
+            });
+        }
+        
         $colors = [];
         $entityManager = $doctrine->getManager();
-
         foreach ($courses as $course) {
-            // If the course background is empty, generate a random color and persist it.
             if (empty($course->getBackground())) {
                 $course->setBackground($this->generateRandomColor());
                 $entityManager->persist($course);
@@ -39,6 +52,7 @@ final class CourseController extends AbstractController
             'colors'  => $colors,
         ]);
     }
+    
 
     #[Route('/courses/{id}/{code}', name: 'courses_show', requirements: ['id' => '\d+', 'code' => '^(?!edit$).+'])]
     public function show(

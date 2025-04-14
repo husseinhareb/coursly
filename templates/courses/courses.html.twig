@@ -16,11 +16,9 @@
             <a href="{{ path('courses_new') }}" class="btn-add-courses">{{ 'courses.my.add_course'|trans }}</a>
         {% endif %}
     </div>
-
     <div class="search-bar">
         <input type="text" id="search" class="search-input" placeholder="{{ 'courses.my.search_placeholder'|trans }}">
     </div>
-
     <div class="courses-grid">
         {% for course in courses %}
             {% set bg = colors[loop.index0 % colors|length] %}
@@ -43,7 +41,7 @@
                                 {{ 'courses.my.edit'|trans }}
                             </a>
                         {% endif %}
-                        {# Info button now directs to the enrolled route #}
+                        {# Info button directs to the enrolled route #}
                         <a href="{{ path('courses_enrolled', { id: course.id, code: course.code }) }}" class="btn-info">
                             {{ 'courses.my.infomessage'|trans }}
                         </a>
@@ -62,7 +60,6 @@ document.addEventListener("DOMContentLoaded", function () {
     searchInput.addEventListener("input", function () {
         let query = this.value.toLowerCase().trim();
         let cards = document.querySelectorAll(".courses-card");
-
         cards.forEach(card => {
             let titleElement = card.querySelector(".courses-title");
             let subtitleElement = card.querySelector(".courses-subtitle");

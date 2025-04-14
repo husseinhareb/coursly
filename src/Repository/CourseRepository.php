@@ -63,4 +63,14 @@ class CourseRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+    public function findCoursesForUser(User $user): array
+    {
+        return $this->createQueryBuilder('c')
+            ->join('c.enrollments', 'e')
+            ->where('e.user = :user')
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getResult();
+    }
+
 }
