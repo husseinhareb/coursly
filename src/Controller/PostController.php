@@ -16,7 +16,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 class PostController extends AbstractController
 {
     #[Route('/posts/{id}/{code}/new', name: 'post_new')]
-    #[Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_PROF')")]
+    #[Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_PROFESSOR')")]
     public function new(
         int $id,
         Request $request,
