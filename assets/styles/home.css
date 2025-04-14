@@ -1,4 +1,4 @@
-/* assests/styles/home.css */
+/* assets/styles/home.css */
 
 * {
   margin: 0;
@@ -22,4 +22,78 @@
 .login-prompt {
   font-size: 1.1rem;
   color: #393c43;
+}
+
+.recent-courses {
+  margin-top: 2rem;
+}
+
+.recent-courses h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #333;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.courses-grid {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+}
+
+.courses-card {
+  flex: 0 0 300px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  overflow: hidden;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.courses-card:hover {
+  transform: translateY(-2px);
+}
+
+.courses-header {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.courses-content {
+  padding: 10px;
+}
+
+.courses-title {
+  margin: 0 0 5px;
+  font-size: 1.4rem;
+  color: #007BC0;
+}
+
+.courses-title a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.courses-title a:hover {
+  text-decoration: underline;
+}
+
+.courses-subtitle {
+  margin-top: 5px;
+  font-size: 1.1rem;
+  color: #666;
+}
+
+.no-recent-courses {
+  text-align: center;
+  margin-top: 20px;
+  font-style: italic;
+  font-size: 1.1rem;
 }

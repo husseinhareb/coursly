@@ -13,25 +13,31 @@
         <h1 class="welcome-heading">
             {{ 'home.hello'|trans({'%name%': app.user.firstName}) }}
         </h1>
-        <p class="user-detail">
-            {{ 'home.email'|trans({'%email%': app.user.userIdentifier}) }}
-        </p>
-        <p class="user-detail">
-            {{ 'home.role'|trans({'%role%': app.user.roles|join(', ')}) }}
-        </p>
-
+        
         {% if recentCourses is defined and recentCourses|length > 0 %}
             <section class="recent-courses">
                 <h2>{{ 'home.recent_courses_heading'|trans }}</h2>
-                <ul class="course-list">
+                <div class="courses-grid">
                     {% for course in recentCourses %}
-                        <li>
-                            <a href="{{ path('courses_show', { id: course.id, code: course.code }) }}">
-                                {{ course.title }} ({{ course.code }})
-                            </a>
-                        </li>
+                        {# Use course.background if exists, otherwise use a fallback color #}
+                        {% set bg = course.background is not empty ? course.background : '#ddd' %}
+                        <div class="courses-card">
+                            {% if bg|slice(0, 1) == '#' %}
+                                <div class="courses-header" style="background-color: {{ bg }};"></div>
+                            {% else %}
+                                <div class="courses-header" style="background-image: url('{{ asset('uploads/course_pics/' ~ bg) }}');"></div>
+                            {% endif %}
+                            <div class="courses-content">
+                                <h5 class="courses-title">
+                                    <a href="{{ path('courses_show', { id: course.id, code: course.code }) }}">
+                                        {{ course.title }}
+                                    </a>
+                                </h5>
+                                <p class="courses-subtitle">{{ course.code }}</p>
+                            </div>
+                        </div>
                     {% endfor %}
-                </ul>
+                </div>
             </section>
         {% else %}
             <p class="no-recent-courses">
@@ -39,12 +45,8 @@
             </p>
         {% endif %}
     {% else %}
-        <h1 class="welcome-heading">
-            {{ 'home.welcome'|trans }}
-        </h1>
-        <p class="login-prompt">
-            {{ 'home.login_prompt'|trans }}
-        </p>
+        <h1 class="welcome-heading">{{ 'home.welcome'|trans }}</h1>
+        <p class="login-prompt">{{ 'home.login_prompt'|trans }}</p>
     {% endif %}
 </main>
 {% endblock %}

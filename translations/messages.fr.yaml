@@ -1,22 +1,23 @@
 login:
-  title: "Se connecter !"
+  title: "Connectez-vous !"
   sign_in: "Veuillez vous connecter"
-  email_label: "E-mail"
+  email_label: "Email"
   password_label: "Mot de passe"
   show_password: "Afficher le mot de passe"
   button: "Se connecter"
   logged_in_as: "Vous êtes connecté en tant que %username%"
   logout: "Déconnexion"
-  cookies_notice: "Notice concernant les cookies"
+  cookies_notice: "Avis sur les cookies"
 
 home:
   title: "Accueil"
   hello: "Bonjour, %name% !"
-  email: "Votre adresse e-mail : %email%"
-  role: "Votre rôle : %role%"
+  email: "Votre email : %email%"
+  role: "Votre rôle : %role%"
   welcome: "Bienvenue sur la page d'accueil !"
   login_prompt: "Veuillez vous connecter pour voir les détails de votre compte."
-  recent_courses_heading: "Cours consultés récemment "
+  recent_courses_heading: "Cours récemment consultés"
+  no_recent_courses: "Aucun cours récemment consulté."
 
 navbar:
   title: "Bienvenue !"
@@ -28,7 +29,7 @@ navbar:
   profile_options: "Options du profil"
   profile: "Profil"
   logout: "Déconnexion"
-  login: "Se connecter"
+  login: "Connexion"
 
 registration:
   title: "Inscription"
@@ -64,12 +65,12 @@ registration:
 profile:
   title: "Mon Profil"
   header: "Votre Profil"
-  profile_pic: "Photo de profil"
+  picture_alt: "Photo de profil"
   no_picture: "Aucune photo de profil disponible."
   first_name: "Prénom"
   last_name: "Nom de famille"
   email: "Email"
-  phone_number: "Téléphone"
+  phone_number: "Numéro de téléphone"
   address: "Adresse"
   roles: "Rôles"
   not_provided: "Non fourni"
@@ -101,14 +102,16 @@ course:
   new:
     title: "Nouveau cours"
     heading: "Créer un nouveau cours"
-    image_label: "Image du cours (facultatif)"
+    image_label: "Image du cours (facultative)"
     submit: "Créer le cours"
+    description: "Description"
+    code: "Code"
   show:
     new_post: "Créer un nouveau post"
-    posts_heading: "Articles"
+    posts_heading: "Posts"
     download_file: "Télécharger le fichier"
     posted_on: "Posté le %date%"
-    no_posts: "Aucun article pour le moment."
+    no_posts: "Aucun post pour le moment."
   edit:
     title: "Modifier le cours : %course%"
     heading: "Modifier le cours"
@@ -128,6 +131,13 @@ courses:
     search_placeholder: "Rechercher un cours..."
     no_courses: "Aucun cours disponible."
     edit: "Modifier"
+    infomessage: "Infos"
+    info:
+      title: "Informations sur le cours"
+      description: "Description"
+      enrolled_users: "Utilisateurs inscrits"
+      no_enrolled_users: "Aucun utilisateur inscrit pour le moment."
+      back_to_courses: "Retour aux cours"
 
 admin:
   users:
@@ -138,7 +148,7 @@ admin:
       id: "ID"
       profile_picture: "Photo de profil"
       first_name: "Prénom"
-      last_name: "Nom"
+      last_name: "Nom de famille"
       email: "Email"
       phone: "Téléphone"
       address: "Adresse"
@@ -156,13 +166,13 @@ admin:
   enrollments:
     title: "Gérer les inscriptions pour %firstName% %lastName%"
     header: "Gérer les inscriptions pour %firstName% %lastName%"
-    admin_warning: "Les utilisateurs administrateurs ne peuvent pas être inscrits à des cours."
+    admin_warning: "Les administrateurs ne peuvent pas être inscrits aux cours."
     current_heading: "Inscriptions actuelles"
     none_current: "Aucun cours inscrit."
     remove:
       title: "Retirer l'inscription"
     available_heading: "Cours disponibles"
     add:
-      title: "Ajouter l'inscription"
+      title: "Ajouter une inscription"
     all_enrolled: "Tous les cours sont déjà inscrits."
     back_to_profile: "Retour au profil"
