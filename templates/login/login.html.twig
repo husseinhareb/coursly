@@ -68,7 +68,7 @@
         <div class="login-separator"></div>
 
         <div class="login-footer">
-            <div class="language-selector">
+            <div class="language-selector-login">
                 <form id="language-form" action="" method="get">
                     <select name="locale" onchange="window.location.href = '{{ path('change_language', {'locale': 'PLACEHOLDER'}) }}'.replace('PLACEHOLDER', this.value)">
                         <option value="en" {% if app.request.locale == 'en' %}selected{% endif %}>English (en)</option>

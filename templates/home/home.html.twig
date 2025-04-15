@@ -1,1 +1,52 @@
- 
+ {% extends 'base.html.twig' %}
+
+{% block title %}{{ 'home.title'|trans }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('styles/home.css') }}">
+{% endblock %}
+
+{% block body %}
+<main class="main-content">
+    {% if app.user %}
+        <h1 class="welcome-heading">
+            {{ 'home.hello'|trans({'%name%': app.user.firstName}) }}
+        </h1>
+        
+        {% if recentCourses is defined and recentCourses|length > 0 %}
+            <section class="recent-courses">
+                <h2>{{ 'home.recent_courses_heading'|trans }}</h2>
+                <div class="courses-grid">
+                    {% for course in recentCourses %}
+                        {# Use course.background if exists, otherwise use a fallback color #}
+                        {% set bg = course.background is not empty ? course.background : '#ddd' %}
+                        <div class="courses-card">
+                            {% if bg|slice(0, 1) == '#' %}
+                                <div class="courses-header" style="background-color: {{ bg }};"></div>
+                            {% else %}
+                                <div class="courses-header" style="background-image: url('{{ asset('uploads/course_pics/' ~ bg) }}');"></div>
+                            {% endif %}
+                            <div class="courses-content">
+                                <h5 class="courses-title">
+                                    <a href="{{ path('courses_show', { id: course.id, code: course.code }) }}">
+                                        {{ course.title }}
+                                    </a>
+                                </h5>
+                                <p class="courses-subtitle">{{ course.code }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </section>
+        {% else %}
+            <p class="no-recent-courses">
+                {{ 'home.no_recent_courses'|trans }}
+            </p>
+        {% endif %}
+    {% else %}
+        <h1 class="welcome-heading">{{ 'home.welcome'|trans }}</h1>
+        <p class="login-prompt">{{ 'home.login_prompt'|trans }}</p>
+    {% endif %}
+</main>
+{% endblock %}
