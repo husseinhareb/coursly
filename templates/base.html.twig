@@ -77,7 +77,7 @@
                                         <img src="{{ asset('uploads/profile_pics/' ~ app.user.profilePic) }}" 
                                              alt="{{ 'navbar.profile_picture_alt'|trans }}" class="profile-pic">
                                     {% else %}
-                                        <div class="profile-pic avatar-initials">
+                                        <div class="profile-pic-nav avatar-initials">
                                             {{ app.user.firstName|first|upper ~ app.user.lastName|first|upper }}
                                         </div>
                                     {% endif %}

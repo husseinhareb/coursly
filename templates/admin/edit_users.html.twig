@@ -37,7 +37,9 @@
                         {% if user.profilePic %}
                             <img src="{{ asset('uploads/profile_pics/' ~ user.profilePic) }}" alt="{{ 'admin.users.alt.profile_picture'|trans }}" class="table-profile-pic">
                         {% else %}
-                            {{ 'admin.users.no_profile_picture'|trans }}
+                            <div class="profile-pic avatar-initials">
+                                {{ user.firstName|first|upper ~ user.lastName|first|upper }}
+                            </div>
                         {% endif %}
                     </td>
                     <td>{{ user.firstName }}</td>

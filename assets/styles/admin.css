@@ -1,216 +1,224 @@
 /*---------------------------------------------*/
-/*        Base Mobile-First Styles             */
+/*        Neumorphic Base Styles               */
 /*---------------------------------------------*/
+body {
+  background: #e0e5ec;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  color: #4d4d4d;
+}
 
 .admin-content,
 .enrollments-page {
-  max-width: 100%;
-  margin: 1rem;
-  padding: 1rem;
-  background: #fff;
-  border-radius: 8px;
-  margin-top: 80px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.admin-content {
+  max-width: 1600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #e0e5ec;
+  border-radius: 25px;
+  box-shadow: 20px 20px 60px #bebebe,
+             -20px -20px 60px #ffffff;
   margin-top: 80px;
 }
 
+/*---------------------------------------------*/
+/*        Header & Button Styling              */
+/*---------------------------------------------*/
 .admin-content h1 {
-  text-align: center;
-  margin-bottom: 1.5rem;
-  color: #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 0 2rem 0;
+  padding: 1rem;
+  border-radius: 15px;
+  background: #e0e5ec;
+  box-shadow: 8px 8px 16px #bebebe,
+             -8px -8px 16px #ffffff;
 }
 
-.table-responsive {
-  overflow-x: auto;
+#add_user_btn {
+  margin-left: auto;
+  padding: 0.8rem 1.5rem;
+  border-radius: 15px;
+  background: #e0e5ec;
+  box-shadow: 5px 5px 10px #bebebe,
+             -5px -5px 10px #ffffff;
+  color: #fd8c29;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
 }
 
+#add_user_btn:hover {
+  box-shadow: inset 5px 5px 10px #bebebe,
+             inset -5px -5px 10px #ffffff;
+}
+
+/*---------------------------------------------*/
+/*        Neumorphic Table Design              */
+/*---------------------------------------------*/
 .users-table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0 15px;
+  margin-top: 1.5rem;
 }
 
-.users-table thead {
-  background-color: #f5f5f5;
-}
-
-.users-table th,
-.users-table td {
-  padding: 0.75rem;
+.users-table thead th {
+  padding: 1.2rem;
+  color: #6b6b6b;
+  font-weight: 600;
   text-align: left;
-  border: 1px solid #ddd;
+  vertical-align: middle;
+  background: #e0e5ec;
 }
 
+.users-table tbody tr {
+  background: #e0e5ec;
+  border-radius: 15px;
+  box-shadow: 8px 8px 16px #bebebe,
+             -8px -8px 16px #ffffff;
+  transition: all 0.3s ease;
+}
+
+.users-table tbody tr:hover {
+  transform: translateY(-2px);
+  box-shadow: 12px 12px 24px #bebebe,
+             -12px -12px 24px #ffffff;
+}
+
+.users-table td {
+  padding: 1.2rem;
+  vertical-align: middle;
+  color: #5a5a5a;
+}
+
+/*---------------------------------------------*/
+/*        Profile Image Styling                */
+/*---------------------------------------------*/
 .table-profile-pic {
   width: 50px;
   height: 50px;
   object-fit: cover;
   border-radius: 50%;
+  box-shadow: 5px 5px 10px #bebebe,
+             -5px -5px 10px #ffffff;
 }
 
-.btn {
-  display: inline-block;
-  padding: 0.5rem 0.75rem;
-  text-decoration: none;
-  border-radius: 4px;
-  font-size: 0.9rem;
-  transition: background-color 0.3s ease;
-  text-align: center;
+.profile-pic.avatar-initials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #e0e5ec;
+  font-weight: 600;
+  color: #6b6b6b;
+  box-shadow: 5px 5px 10px #bebebe,
+             -5px -5px 10px #ffffff;
 }
 
-.btn-add-user {
-  background-color: #fd8c29;
-  color: #fff;
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 4px;
-  text-decoration: none;
-  transition: background-color 0.3s ease;
-}
-
-.btn-add-user:hover {
-  background-color: #ff861c;
-}
-
+/*---------------------------------------------*/
+/*        Action Buttons Styling               */
+/*---------------------------------------------*/
 .btn-edit-user {
-  background-color: #fd8c29;
-  color: #fff;
-  padding: 0.4rem 0.8rem;
-  border: none;
-  border-radius: 4px;
+  padding: 0.8rem 1.2rem;
+  border-radius: 12px;
+  background: #e0e5ec;
+  box-shadow: 5px 5px 10px #bebebe,
+             -5px -5px 10px #ffffff;
+  color: #fd8c29;
   text-decoration: none;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .btn-edit-user:hover {
-  background-color: #ee7a14;
+  box-shadow: inset 5px 5px 10px #bebebe,
+             inset -5px -5px 10px #ffffff;
 }
 
-.btn-edit-enrollments {
-  background-color: #ffc107;
-  color: #212529;
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 4px;
-  text-decoration: none;
-  transition: background-color 0.3s ease;
-}
-
-.btn-edit-enrollments:hover {
-  background-color: #e0a800;
-}
-
+/*---------------------------------------------*/
+/*        Enrollment Page Styling              */
+/*---------------------------------------------*/
 .enrollments-page .page-header {
-  border-bottom: 2px solid #007bff;
-  padding-bottom: 0.5rem;
-  margin-bottom: 1.5rem;
-}
-
-.enrollments-page .page-header h1 {
-  font-size: 1.8rem;
-  color: #333;
-  margin: 0;
-}
-
-.enrollments-page section h2 {
-  font-size: 1.4rem;
-  color: #007bff;
-  margin-bottom: 1rem;
-}
-
-.enrollments-list,
-.courses-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+  padding: 1.5rem;
+  border-radius: 15px;
+  background: #e0e5ec;
+  box-shadow: 8px 8px 16px #bebebe,
+             -8px -8px 16px #ffffff;
+  margin-bottom: 2rem;
 }
 
 .enrollments-list li,
 .courses-list li {
+  padding: 1.2rem;
+  margin: 1rem 0;
+  border-radius: 15px;
+  background: #e0e5ec;
+  box-shadow: 5px 5px 10px #bebebe,
+             -5px -5px 10px #ffffff;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.75rem;
-  border-bottom: 1px solid #eee;
-}
-
-.enrollments-list li:last-child,
-.courses-list li:last-child {
-  border-bottom: none;
-}
-
-.course-title {
-  font-weight: 500;
-  color: #333;
-}
-
-.enrollment-action {
-  margin: 0;
 }
 
 .enrollment-action button {
-  border: none;
-  background: transparent;
-  cursor: pointer;
+  padding: 0.6rem 1rem;
+  border-radius: 10px;
+  background: #e0e5ec;
+  box-shadow: 3px 3px 6px #bebebe,
+             -3px -3px 6px #ffffff;
+  transition: all 0.2s ease;
 }
 
-.no-enrollments,
-.all-enrolled {
-  font-style: italic;
-  color: #777;
-  padding: 0.5rem;
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  text-align: center;
-}
-
-.page-actions {
-  text-align: center;
-  margin-top: 2rem;
+.enrollment-action button:hover {
+  box-shadow: inset 3px 3px 6px #bebebe,
+             inset -3px -3px 6px #ffffff;
 }
 
 /*---------------------------------------------*/
-/*           Media Queries                     */
+/*        Responsive Design                    */
 /*---------------------------------------------*/
-
-@media (min-width: 768px) {
+@media (max-width: 768px) {
   .admin-content,
   .enrollments-page {
-    max-width: 1600px;
-    margin: 2rem auto;
-    padding: 1rem;
-    margin-top: 80px;
+    padding: 1.5rem;
+    margin: 1.5rem;
+    border-radius: 20px;
   }
-  .users-table th,
+
+  .admin-content h1 {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+
+  #add_user_btn {
+    width: 100%;
+    text-align: center;
+    margin-left: 0;
+  }
+
+  .users-table {
+    display: block;
+    overflow-x: auto;
+  }
+
   .users-table td {
-    padding: 0.75rem;
+    padding: 1rem;
+    min-width: 120px;
   }
 }
 
-@media (max-width: 576px) {
-  .admin-content,
-  .enrollments-page {
-    margin: 1rem;
-    padding: 0.5rem;
+@media (max-width: 480px) {
+  .users-table td {
+    font-size: 0.9rem;
+    padding: 0.8rem;
   }
-  .btn,
-  .btn-add-user,
-  .btn-edit-user,
-  .btn-edit-enrollments {
-    padding: 0.4rem 0.5rem;
-    font-size: 0.85rem;
-  }
-  .table-profile-pic {
-    width: 40px;
-    height: 40px;
-  }
-  .enrollments-page .page-header h1 {
-    font-size: 1.6rem;
-  }
-  .enrollments-page section h2 {
-    font-size: 1.2rem;
+
+  .enrollments-list li,
+  .courses-list li {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
   }
 }
