@@ -1,10 +1,10 @@
-/* assests/styles/profile.css*/
-
+/* assets/styles/profile.css */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
 
 .profile-content {
   max-width: 800px;
@@ -129,6 +129,7 @@
 }
 
 /* Edit Form Styles */
+
 #profile-edit {
   margin-top: 1.5rem;
   transition: opacity 0.3s ease;
@@ -156,11 +157,9 @@ form input[type="file"],
 form textarea,
 form select {
   width: 100%;
-  padding: 0.5rem;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 1rem;
-  margin-bottom: 0.5rem;
 }
 
 form input:focus,
