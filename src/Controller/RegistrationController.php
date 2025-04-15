@@ -3,44 +3,71 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Role;
 use App\Form\RegistrationFormType;
+use App\Repository\RoleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class RegistrationController extends AbstractController
 {
+    private RoleRepository $roleRepository;
+
+    public function __construct(RoleRepository $roleRepository)
+    {
+        $this->roleRepository = $roleRepository;
+    }
+
     #[Route('/admin/{username}/register', name: 'app_register')]
     #[IsGranted('ROLE_ADMIN')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
-    {
+    public function register(
+        Request $request,
+        UserPasswordHasherInterface $passwordHasher,
+        EntityManagerInterface $em
+    ): Response {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Hash the auto‐generated password
             $plainPassword = $form->get('plainPassword')->getData();
-            $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
+            $user->setPassword($passwordHasher->hashPassword($user, $plainPassword));
 
+            // Ensure username
             if (!$user->getUsername()) {
-                $randomNumber = rand(10, 999);
-                $generatedUsername = strtolower($user->getFirstName()) . '_' . strtolower($user->getLastName()) . $randomNumber;
-                $user->setUsername($generatedUsername);
+                $rand = random_int(10, 999);
+                $user->setUsername(
+                    strtolower($user->getFirstName())
+                    .'_'.strtolower($user->getLastName())
+                    .$rand
+                );
             }
 
-            $selectedRole = $form->get('role')->getData();
-            if ($selectedRole === 'ROLE_ADMIN_PROFESSOR') {
-                $user->setRoles(['ROLE_ADMIN', 'ROLE_PROFESSOR']);
+            // Assign roles via Role entities
+            $selected = $form->get('role')->getData();
+            if ($selected === 'ROLE_ADMIN_PROFESSOR') {
+                $names = ['ROLE_ADMIN', 'ROLE_PROFESSOR'];
             } else {
-                $user->setRoles([$selectedRole]);
+                $names = [$selected];
+            }
+            foreach ($names as $roleName) {
+                $role = $this->roleRepository->findOneBy(['name' => $roleName]);
+                if ($role) {
+                    $user->addRole($role);
+                } else {
+                    // Optionally handle missing Role: throw or create
+                    throw $this->createNotFoundException("Role {$roleName} not found");
+                }
             }
 
-            $entityManager->persist($user);
-            $entityManager->flush();
+            $em->persist($user);
+            $em->flush();
 
             return $this->redirectToRoute('app_home');
         }
