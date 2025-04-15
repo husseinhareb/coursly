@@ -27,11 +27,26 @@
                         </div>
                     </a>
                     <a class="home-button" href="{{ path('app_home') }}">
-                        {{ 'home.title'|trans }}
+                        <i class="fa-solid fa-house"></i> {{ 'home.title'|trans }}
                     </a>
                 </div>
-                <!-- Right container for menu toggle and navigation -->
+                <!-- Right container for language selector, menu toggle, and navigation -->
                 <div class="header-right">
+                    <!-- Language Selector always visible -->
+                    <div class="language-selector">
+                        <i class="fa-solid fa-language lang-icon"></i>
+                        <form id="language-form" action="" method="get">
+                            <select name="locale"
+                                    onchange="window.location.href = '{{ path('change_language', {'locale': 'PLACEHOLDER'}) }}'.replace('PLACEHOLDER', this.value)">
+                                <option value="en" {% if app.request.locale == 'en' %}selected{% endif %}>English (en)</option>
+                                <option value="fr" {% if app.request.locale == 'fr' %}selected{% endif %}>Français (fr)</option>
+                                <option value="es" {% if app.request.locale == 'es' %}selected{% endif %}>Español (es)</option>
+                                <option value="zh" {% if app.request.locale == 'zh' %}selected{% endif %}>中国人 (zh)</option>
+                                <!-- Add more languages as needed -->
+                            </select>
+                        </form>
+                    </div>
+
                     <button class="menu-toggle" aria-label="{{ 'navbar.toggle_navigation'|trans }}">
                         <span class="toggle-bar"></span>
                         <span class="toggle-bar"></span>
@@ -39,19 +54,23 @@
                     </button>
                     <nav class="main-nav">
                         <ul class="menu">
+                        <li class="menu-item separator"></li>
+
                             {% if app.user %}
                                 {% if 'ROLE_ADMIN' in app.user.roles %}
                                     <li class="menu-item">
+                                        <i class="fa-solid fa-users"></i>
                                         <a class="menu-link" href="{{ path('app_edit_users', {'username': app.user.username}) }}">
                                             {{ 'navbar.users'|trans }}
                                         </a>
                                     </li>
                                 {% endif %}
-                                    <li class="menu-item">
-                                        <a class="menu-link" href="{{ path('courses_index') }}">
-                                            {{ 'navbar.courses'|trans }}
-                                        </a>
-                                    </li>
+                                <li class="menu-item">
+                                    <i class="fa-solid fa-book"></i>
+                                    <a class="menu-link" href="{{ path('courses_index') }}">
+                                        {{ 'navbar.courses'|trans }}
+                                    </a>
+                                </li>
                                 <li class="menu-item profile-section">
                                     {% if app.user.profilePic %}
                                         <img src="{{ asset('uploads/profile_pics/' ~ app.user.profilePic) }}" 
@@ -87,7 +106,7 @@
                             {% else %}
                                 <li class="menu-item">
                                     <a class="menu-link" href="{{ path('app_login') }}">
-                                        {{ 'navbar.login'|trans }}
+                                        <i class="fa-solid fa-sign-in-alt"></i> {{ 'navbar.login'|trans }}
                                     </a>
                                 </li>
                             {% endif %}
@@ -102,6 +121,7 @@
         {% block javascripts %}
             <script>
                 document.addEventListener("turbo:load", function() {
+                    // Toggle the main nav on mobile
                     const menuToggle = document.querySelector('.menu-toggle');
                     if (menuToggle) {
                         menuToggle.addEventListener('click', function() {
@@ -109,25 +129,21 @@
                         });
                     }
 
+                    // Profile dropdown
                     const arrowButton = document.querySelector('.arrow-button');
                     if (arrowButton && !arrowButton.dataset.initialized) {
                         arrowButton.dataset.initialized = "true";
                         const profileDropdown = document.querySelector('.profile-dropdown');
                         const arrowIcon = arrowButton.querySelector('i');
-
                         arrowButton.addEventListener('click', function(e) {
                             e.stopPropagation();
                             profileDropdown.classList.toggle('active');
                             arrowIcon.classList.toggle('flipped');
                         });
-
                         document.addEventListener('click', function(e) {
-                            // Close dropdown when clicking outside
                             if (!arrowButton.contains(e.target) && !profileDropdown.contains(e.target)) {
-                                if (profileDropdown.classList.contains('active')) {
-                                    profileDropdown.classList.remove('active');
-                                    arrowIcon.classList.remove('flipped');
-                                }
+                                profileDropdown.classList.remove('active');
+                                arrowIcon.classList.remove('flipped');
                             }
                         });
                     }

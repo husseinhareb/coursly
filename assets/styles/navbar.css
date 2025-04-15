@@ -1,5 +1,6 @@
-/* Reset and basic styles */
-
+/* ---------------------------
+   RESET & BASIC STYLES
+----------------------------*/
 * {
   margin: 0;
   padding: 0;
@@ -10,6 +11,41 @@ body {
   line-height: 1.6;
 }
 
+/* ---------------------------
+   LANGUAGE SELECTOR STYLES
+----------------------------*/
+.language-selector {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-right: 1rem;
+  background: transparent;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+}
+
+.language-selector i.lang-icon {
+  color: #333;
+  font-size: 1rem;
+}
+
+.language-selector select {
+  border: none;
+  background: transparent;
+  font-size: 1rem;
+  color: #333;
+  cursor: pointer;
+  outline: none;
+}
+
+.language-selector select:hover,
+.language-selector select:focus {
+  color: #2563eb;
+}
+
+/* ---------------------------
+   HEADER & NAVBAR
+----------------------------*/
 .site-logo {
   font-size: 1.5rem;
   font-weight: bold;
@@ -49,7 +85,6 @@ body {
   background: #333;
 }
 
-/* Header layout */
 .header {
   background: #fd8c29;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
