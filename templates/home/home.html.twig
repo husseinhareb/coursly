@@ -1,4 +1,4 @@
- {% extends 'base.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %}{{ 'home.title'|trans }}{% endblock %}
 
@@ -14,15 +14,15 @@
             {{ 'home.hello'|trans({'%name%': app.user.firstName}) }}
         </h1>
         
+        {# --- Recently Viewed Courses --- #}
         {% if recentCourses is defined and recentCourses|length > 0 %}
             <section class="recent-courses">
                 <h2>{{ 'home.recent_courses_heading'|trans }}</h2>
                 <div class="courses-grid">
                     {% for course in recentCourses %}
-                        {# Use course.background if exists, otherwise use a fallback color #}
                         {% set bg = course.background is not empty ? course.background : '#ddd' %}
                         <div class="courses-card">
-                            {% if bg|slice(0, 1) == '#' %}
+                            {% if bg|slice(0,1) == '#' %}
                                 <div class="courses-header" style="background-color: {{ bg }};"></div>
                             {% else %}
                                 <div class="courses-header" style="background-image: url('{{ asset('uploads/course_pics/' ~ bg) }}');"></div>
@@ -44,6 +44,34 @@
                 {{ 'home.no_recent_courses'|trans }}
             </p>
         {% endif %}
+
+        {# --- Announcements Section (new) --- #}
+        {% if announcements is defined and announcements|length > 0 %}
+            <section class="announcements">
+                <h2>{{ 'home.announcements_heading'|trans }}</h2>
+                <ul class="announcement-list">
+                    {% for ann in announcements %}
+                        <li class="announcement-item">
+                            <h3 class="announcement-title">
+                                {{ ann.title }}
+                            </h3>
+                            <p class="announcement-meta">
+                                {{ ann.createdAt|date('Y‑m‑d H:i') }}
+                                {% if ann.author %}
+                                    – {{ ann.author.firstName }} {{ ann.author.lastName }}
+                                {% endif %}
+                            </p>
+                            <p class="announcement-snippet">
+                                {{ ann.content|striptags|slice(0, 150) ~ (ann.content|striptags|length > 150 ? '…' : '') }}
+                            </p>
+                        </li>
+                    {% else %}
+                        <li class="no-announcements">{{ 'home.no_announcements'|trans }}</li>
+                    {% endfor %}
+                </ul>
+            </section>
+        {% endif %}
+        
     {% else %}
         <h1 class="welcome-heading">{{ 'home.welcome'|trans }}</h1>
         <p class="login-prompt">{{ 'home.login_prompt'|trans }}</p>

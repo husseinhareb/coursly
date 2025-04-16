@@ -97,3 +97,28 @@
   font-style: italic;
   font-size: 1.1rem;
 }
+
+.announcements {
+  margin-top: 3rem;
+}
+.announcement-list {
+  list-style: none;
+  padding: 0;
+}
+.announcement-item {
+  border-bottom: 1px solid #e0e0e0;
+  padding: 1rem 0;
+}
+.announcement-title {
+  margin: 0 0 0.25rem;
+  font-size: 1.2rem;
+}
+.announcement-meta {
+  font-size: 0.9rem;
+  color: #777;
+  margin-bottom: 0.5rem;
+}
+.announcement-snippet {
+  margin: 0;
+  color: #555;
+}

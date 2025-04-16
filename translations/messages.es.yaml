@@ -18,6 +18,7 @@ home:
   login_prompt: "Por favor, inicia sesión para ver los detalles de tu cuenta."
   recent_courses_heading: "Cursos vistos recientemente"
   no_recent_courses: "No has visto cursos recientemente."
+  announcements_heading: "Últimos anuncios"
 
 navbar:
   title: "¡Bienvenido!"

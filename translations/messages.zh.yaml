@@ -18,6 +18,7 @@ home:
   login_prompt: "请登录以查看您的帐户详细信息。"
   recent_courses_heading: "最近查看的课程"
   no_recent_courses: "暂无最近查看的课程。"
+  announcements_heading: "最新公告"
 
 navbar:
   title: "欢迎！"

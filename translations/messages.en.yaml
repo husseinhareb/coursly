@@ -18,6 +18,7 @@ home:
   login_prompt: "Please log in to see your account details."
   recent_courses_heading: "Recently viewed courses"
   no_recent_courses: "No recent courses viewed."
+  announcements_heading: "Latest announcements"
 navbar:
   title: "Welcome!"
   toggle_navigation: "Toggle navigation"

@@ -2,12 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Announcement;
+use App\Entity\UserCourseAccess;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Doctrine\Persistence\ManagerRegistry;  
-use App\Entity\UserCourseAccess;        
 
 final class HomeController extends AbstractController
 {
@@ -16,24 +17,34 @@ final class HomeController extends AbstractController
     {
         $user = $this->getUser();
         $recentCourses = [];
-        
+        $announcements  = [];
+
+        $em = $doctrine->getManager();
+
         if ($user) {
-            $entityManager = $doctrine->getManager();
-            $accessRepository = $entityManager->getRepository(UserCourseAccess::class);
-            $recentAccesses = $accessRepository->findBy(
+            // 1) Recent courses
+            $accessRepo = $em->getRepository(UserCourseAccess::class);
+            $recentAccesses = $accessRepo->findBy(
                 ['user' => $user],
                 ['accessedAt' => 'DESC'],
-                5 // Limit to 5 recent courses.
+                5
             );
-            
-            // Extract courses from the access records.
             foreach ($recentAccesses as $access) {
                 $recentCourses[] = $access->getCourse();
             }
+
+            // 2) Latest announcements
+            $annRepo = $em->getRepository(Announcement::class);
+            $announcements = $annRepo->findBy(
+                [],                    
+                ['createdAt' => 'DESC'],
+                5                       
+            );
         }
-        
-        return $this->render('/home/home.html.twig', [
+
+        return $this->render('home/home.html.twig', [
             'recentCourses' => $recentCourses,
+            'announcements' => $announcements,
         ]);
     }
 }
