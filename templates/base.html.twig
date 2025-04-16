@@ -75,7 +75,7 @@
                                 <li class="menu-item profile-section">
                                     {% if app.user.profilePic %}
                                         <img src="{{ asset('uploads/profile_pics/' ~ app.user.profilePic) }}" 
-                                             alt="{{ 'navbar.profile_picture_alt'|trans }}" class="profile-pic">
+                                             alt="{{ 'navbar.profile_picture_alt'|trans }}" class="profile-pic-nav">
                                     {% else %}
                                         <div class="profile-pic-nav avatar-initials">
                                             {{ app.user.firstName|first|upper ~ app.user.lastName|first|upper }}

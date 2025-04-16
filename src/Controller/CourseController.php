@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use App\Repository\CourseRepository;
+use App\Repository\UserCourseAccessRepository; 
 use Doctrine\Persistence\ManagerRegistry;
 use App\Entity\Course;
 use App\Form\CourseType;
@@ -104,7 +105,8 @@ final class CourseController extends AbstractController
     public function enrolled(
         int $id,
         string $code,
-        CourseRepository $repository
+        CourseRepository $repository,
+        UserCourseAccessRepository $accessRepo     
     ): Response {
         $course = $repository->find($id);
         if (!$course) {
@@ -116,13 +118,23 @@ final class CourseController extends AbstractController
                 'code' => $course->getCode(),
             ], 301);
         }
-        
-        // Assuming your Course entity has a method getUsers() to retrieve enrolled users.
+
+        $users = $course->getUsers();
+
+        // build a [ userId => DateTime ] map
+        $rows = $accessRepo->findLatestAccessByCourse($course);
+        $lastAccessed = [];
+        foreach ($rows as $r) {
+            $lastAccessed[$r['user_id']] = $r['lastAccessed'];
+        }
+
         return $this->render('courses/enrolled.html.twig', [
-            'course' => $course,
-            'users'  => $course->getUsers(),
+            'course'       => $course,
+            'users'        => $users,
+            'lastAccessed' => $lastAccessed,   
         ]);
     }
+
 
     #[Route('/search-courses', name: 'courses_search', methods: ['GET'])]
     public function searchCourses(Request $request, CourseRepository $courseRepository): JsonResponse
