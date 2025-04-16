@@ -14,11 +14,11 @@ use Symfony\Component\Validator\Constraints\File;
 
 class PostType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
          $builder
              ->add('title', TextType::class, [
-                 'label' => 'post.title.label', // use key instead of literal text
+                 'label' => 'post.title.label',
              ])
              ->add('content', TextareaType::class, [
                  'label' => 'post.content.label',
@@ -26,10 +26,9 @@ class PostType extends AbstractType
              ->add('type', ChoiceType::class, [
                    'label' => 'post.type.label',
                    'choices' => [
-                        'post.type.message' => 'message', // keys for choice options
+                        'post.type.message' => 'message',
                         'post.type.file'    => 'file',
                    ],
-                   // ensures the keys are translated too
                    'choice_translation_domain' => 'messages',
              ])
              ->add('attachment', FileType::class, [
@@ -47,11 +46,11 @@ class PostType extends AbstractType
              ]);
     }
     
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
          $resolver->setDefaults([
               'data_class' => Post::class,
-              'translation_domain' => 'messages', // the domain where keys will be looked up
+              'translation_domain' => 'messages',
          ]);
     }
 }
