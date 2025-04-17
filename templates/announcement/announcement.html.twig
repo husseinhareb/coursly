@@ -1,0 +1,37 @@
+{# templates/announcement/announcement.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'announcement.list.title'|trans }}{% endblock %}
+
+{% block body %}
+<div class="announcement-page">
+    <div class="page-header">
+        <h1>{{ 'announcement.list.heading'|trans }}</h1>
+        <a href="{{ path('announcement_new') }}" class="btn btn-primary">
+            <i class="fa-solid fa-plus"></i>
+            {{ 'announcement.list.new'|trans }}
+        </a>
+    </div>
+
+    {% if announcements is defined and announcements|length > 0 %}
+        <ul class="announcement-list">
+            {% for ann in announcements %}
+                <li class="announcement-item">
+                    <h2 class="announcement-title">{{ ann.title }}</h2>
+                    <p class="announcement-meta">
+                        {{ ann.createdAt|date('Y‑m‑d H:i') }}
+                        {% if ann.author %}
+                            – {{ ann.author.firstName }} {{ ann.author.lastName }}
+                        {% endif %}
+                    </p>
+                    <p class="announcement-snippet">
+                        {{ ann.content|striptags|slice(0, 150) ~ (ann.content|striptags|length > 150 ? '…' : '') }}
+                    </p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="no-announcements">{{ 'announcement.list.none'|trans }}</p>
+    {% endif %}
+</div>
+{% endblock %}

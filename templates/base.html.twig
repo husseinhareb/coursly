@@ -58,6 +58,12 @@
                         <li class="menu-item separator"></li>
 
                             {% if app.user %}
+                                <li class="menu-item">
+                                    <i class="fa-solid fa-newspaper"></i>
+                                    <a class="menu-link" href="{{ path('announcement_index') }}">
+                                        {{ 'navbar.announcement'|trans }}
+                                    </a>
+                                </li>
                                 {% if 'ROLE_ADMIN' in app.user.roles %}
                                     <li class="menu-item">
                                         <i class="fa-solid fa-users"></i>
@@ -72,6 +78,7 @@
                                         {{ 'navbar.courses'|trans }}
                                     </a>
                                 </li>
+  
                                 <li class="menu-item profile-section">
                                     {% if app.user.profilePic %}
                                         <img src="{{ asset('uploads/profile_pics/' ~ app.user.profilePic) }}" 
