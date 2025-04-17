@@ -60,6 +60,7 @@
 .courses-card {
   border: 1px solid #ccc;
   border-radius: 6px;
+  min-height: 280px;
   overflow: hidden;
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -75,7 +76,7 @@
 .courses-header {
   width: 100%;
   aspect-ratio: 16 / 9;
-  max-height: 150px; 
+  max-height: 150px;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -83,6 +84,10 @@
 
 .courses-content {
   padding: 10px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding-bottom: 0.5rem;
 }
 
 .courses-title {
@@ -115,17 +120,23 @@
 }
 
 .course-actions {
-  margin-top: 0.5rem;
+  margin-top: auto;
+  align-self: flex-start;
+  display: flex;
 }
 
 .course-actions a {
   display: inline-flex;
   align-items: center;
-  margin-right: 0.75rem; 
+  margin-right: 0.75rem;
   text-decoration: none;
   color: #007BC0;
   font-size: 0.95rem;
   transition: color 0.2s ease;
+}
+
+.course-actions a:last-child {
+  margin-right: 0;
 }
 
 .course-actions a:hover {
@@ -134,7 +145,7 @@
 
 .course-actions a i {
   margin-right: 4px;
-  font-size: 1rem;
+  font-size: 0.85em;
 }
 
 @media (max-width: 992px) {
@@ -277,8 +288,7 @@
 
 /*----------------------------------*/
 /* course home page style          */
-/*--------------------------------*/
-
+/*----------------------------------*/
 
 .course-page-container {
   max-width: 80%;
@@ -385,3 +395,4 @@
   padding: 20px;
   color: #666;
 }
+

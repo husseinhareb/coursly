@@ -38,8 +38,8 @@
                     <div class="course-actions">
                         {% if is_granted('ROLE_ADMIN') %}
                             <a href="{{ path('courses_edit', { id: course.id }) }}" class="btn-edit">
-                                <i class="fa-solid fa-pen"></i>
-                                {{ 'courses.my.edit'|trans }}
+                            <i class="fa-solid fa-pen"></i>
+                            {{ 'courses.my.edit'|trans }}
                             </a>
                         {% endif %}
                         <a href="{{ path('courses_enrolled', { id: course.id, code: course.code }) }}" class="btn-info">

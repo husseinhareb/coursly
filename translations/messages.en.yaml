@@ -19,6 +19,7 @@ home:
   recent_courses_heading: "Recently viewed courses"
   no_recent_courses: "No recent courses viewed."
   announcements_heading: "Latest announcements"
+  
 navbar:
   title: "Welcome!"
   toggle_navigation: "Toggle navigation"
@@ -176,5 +177,3 @@ admin:
       title: "Add Enrollment"
     all_enrolled: "All courses are already enrolled."
     back_to_profile: "Back to Profile"
-
-
