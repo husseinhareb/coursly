@@ -147,7 +147,16 @@ body {
              -8px -8px 16px #ffffff;
   margin-bottom: 2rem;
 }
-
+.no-enrollments{
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+.horizontal-line{
+  margin: 10px;
+  margin-left: 50px;
+  margin-right: 50px;
+  border: 2px solid #818385;
+}
 .enrollments-list li,
 .courses-list li {
   padding: 1.2rem;
