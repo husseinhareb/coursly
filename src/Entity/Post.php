@@ -5,6 +5,9 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\PostRepository;
+use App\Entity\Course;
+use App\Entity\User;
+use App\Entity\MessageCategory;
 
 #[ORM\Entity(repositoryClass: PostRepository::class)]
 #[ORM\Table(name: 'post')]
@@ -12,48 +15,48 @@ class Post
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type:'integer')]
+    #[ORM\Column(type: 'integer')]
     private ?int $id = null;
 
-    #[ORM\Column(type:'string', length:255)]
-    private string $title;
+    #[ORM\Column(type: 'string', length: 255)]
+    private ?string $title = null;
 
-    #[ORM\Column(type:'text')]
-    private string $content;
+    #[ORM\Column(type: 'text')]
+    private ?string $content = null;
 
-    #[ORM\Column(type:'string', length:50)]
-    private string $type; // e.g. 'message' or 'file'
+    #[ORM\Column(type: 'string', length: 50)]
+    private ?string $type = null;
 
-    #[ORM\Column(type:'string', length:255, nullable:true)]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $filePath = null;
 
-    #[ORM\Column(type:'datetime_immutable')]
+    #[ORM\Column(type: 'datetime_immutable')]
     private \DateTimeImmutable $createdAt;
 
-    #[ORM\Column(type:'datetime_immutable')]
+    #[ORM\Column(type: 'datetime_immutable')]
     private \DateTimeImmutable $updatedAt;
 
-    // --- Pinning ---
-    #[ORM\Column(type:'boolean')]
+    // — Pin/unpin support
+    #[ORM\Column(type: 'boolean')]
     private bool $isPinned = false;
 
     #[ORM\ManyToOne(targetEntity: User::class)]
     #[ORM\JoinColumn(name: 'pinned_by_id', referencedColumnName: 'id', nullable: true)]
     private ?User $pinnedBy = null;
 
-    #[ORM\Column(type:'datetime_immutable', nullable:true)]
+    #[ORM\Column(type: 'datetime_immutable', nullable: true)]
     private ?\DateTimeImmutable $pinnedAt = null;
 
-    // --- Custom ordering ---
-    #[ORM\Column(type:'integer')]
+    // — Custom ordering
+    #[ORM\Column(type: 'integer')]
     private int $position = 0;
 
-    // --- Category (message types) ---
-    #[ORM\ManyToOne(targetEntity: MessageCategory::class, inversedBy: 'posts')]
+    // — Category lookup
+    #[ORM\ManyToOne(targetEntity: MessageCategory::class)]
     #[ORM\JoinColumn(name: 'category_id', referencedColumnName: 'id', nullable: true)]
     private ?MessageCategory $category = null;
 
-    // --- Relationships ---
+    // — Relations
     #[ORM\ManyToOne(targetEntity: Course::class, inversedBy: 'posts')]
     #[ORM\JoinColumn(nullable: false)]
     private Course $course;
@@ -62,13 +65,8 @@ class Post
     #[ORM\JoinColumn(nullable: false)]
     private User $author;
 
-    public function __construct(string $title, string $content, string $type, User $author, Course $course)
+    public function __construct()
     {
-        $this->title     = $title;
-        $this->content   = $content;
-        $this->type      = $type;
-        $this->author    = $author;
-        $this->course    = $course;
         $this->createdAt = new \DateTimeImmutable();
         $this->updatedAt = new \DateTimeImmutable();
     }
@@ -78,52 +76,55 @@ class Post
         return $this->id;
     }
 
-    // --- Basic fields ---
-    public function getTitle(): string
+    // — Title
+    public function getTitle(): ?string
     {
         return $this->title;
     }
     public function setTitle(string $title): self
     {
-        $this->title     = $title;
-        $this->updatedAt = new \DateTimeImmutable();
+        $this->title = $title;
+        $this->touch();
         return $this;
     }
 
-    public function getContent(): string
+    // — Content
+    public function getContent(): ?string
     {
         return $this->content;
     }
     public function setContent(string $content): self
     {
-        $this->content   = $content;
-        $this->updatedAt = new \DateTimeImmutable();
+        $this->content = $content;
+        $this->touch();
         return $this;
     }
 
-    public function getType(): string
+    // — Type (message vs file)
+    public function getType(): ?string
     {
         return $this->type;
     }
     public function setType(string $type): self
     {
-        $this->type      = $type;
-        $this->updatedAt = new \DateTimeImmutable();
+        $this->type = $type;
+        $this->touch();
         return $this;
     }
 
+    // — File path
     public function getFilePath(): ?string
     {
         return $this->filePath;
     }
-    public function setFilePath(?string $path): self
+    public function setFilePath(?string $filePath): self
     {
-        $this->filePath  = $path;
-        $this->updatedAt = new \DateTimeImmutable();
+        $this->filePath = $filePath;
+        $this->touch();
         return $this;
     }
 
-    // --- Timestamps ---
+    // — Timestamps
     public function getCreatedAt(): \DateTimeImmutable
     {
         return $this->createdAt;
@@ -138,7 +139,7 @@ class Post
         return $this;
     }
 
-    // --- Pinning ---
+    // — Pin/unpin
     public function isPinned(): bool
     {
         return $this->isPinned;
@@ -150,7 +151,6 @@ class Post
         $this->pinnedAt = $flag ? new \DateTimeImmutable() : null;
         return $this;
     }
-
     public function getPinnedBy(): ?User
     {
         return $this->pinnedBy;
@@ -160,7 +160,7 @@ class Post
         return $this->pinnedAt;
     }
 
-    // --- Ordering ---
+    // — Custom ordering
     public function getPosition(): int
     {
         return $this->position;
@@ -171,35 +171,42 @@ class Post
         return $this;
     }
 
-    // --- Category ---
+    // — Category
     public function getCategory(): ?MessageCategory
     {
         return $this->category;
     }
-    public function setCategory(?MessageCategory $cat): self
+    public function setCategory(?MessageCategory $category): self
     {
-        $this->category = $cat;
+        $this->category = $category;
         return $this;
     }
 
-    // --- Relations ---
+    // — Course relation
     public function getCourse(): Course
     {
         return $this->course;
     }
-    public function setCourse(Course $c): self
+    public function setCourse(Course $course): self
     {
-        $this->course = $c;
+        $this->course = $course;
         return $this;
     }
 
+    // — Author relation
     public function getAuthor(): User
     {
         return $this->author;
     }
-    public function setAuthor(User $u): self
+    public function setAuthor(User $author): self
     {
-        $this->author = $u;
+        $this->author = $author;
         return $this;
+    }
+
+    // — Internal helper to update updatedAt
+    private function touch(): void
+    {
+        $this->updatedAt = new \DateTimeImmutable();
     }
 }

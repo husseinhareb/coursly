@@ -1,3 +1,4 @@
+
 {# templates/courses/courses.html.twig #}
 {% extends 'base.html.twig' %}
 
@@ -22,6 +23,7 @@
     <div class="courses-grid">
         {% for course in courses %}
             {% set bg = colors[loop.index0 % colors|length] %}
+            {% set alertCount = course.alerts|filter(a => a.isAcknowledgedBy(app.user) == false)|length %}
             <div class="courses-card">
                 {% if bg|slice(0, 1) == '#' %}
                     <div class="courses-header" style="background-color: {{ bg }};"></div>
@@ -33,13 +35,16 @@
                         <a href="{{ path('courses_show', { id: course.id, code: course.code }) }}">
                             {{ course.title }}
                         </a>
+                        {% if alertCount > 0 %}
+                            <span class="alert-badge">{{ alertCount }}</span>
+                        {% endif %}
                     </h5>
                     <p class="courses-subtitle">{{ course.code }}</p>
                     <div class="course-actions">
                         {% if is_granted('ROLE_ADMIN') %}
                             <a href="{{ path('courses_edit', { id: course.id }) }}" class="btn-edit">
-                            <i class="fa-solid fa-pen"></i>
-                            {{ 'courses.my.edit'|trans }}
+                                <i class="fa-solid fa-pen"></i>
+                                {{ 'courses.my.edit'|trans }}
                             </a>
                         {% endif %}
                         <a href="{{ path('courses_enrolled', { id: course.id, code: course.code }) }}" class="btn-info">

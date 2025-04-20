@@ -1,3 +1,4 @@
+
 {# templates/courses/enrolled.html.twig #}
 {% extends 'base.html.twig' %}
 
@@ -13,30 +14,31 @@
     <header class="course-info">
         <h1>{{ course.title }}</h1>
         <p>{{ course.description }}</p>
-        <p><strong>{{ 'courses.my.info.description'|trans }}:</strong> {{ course.description }}</p>
     </header>
     
     <section class="enrolled-users">
         <h2>{{ 'courses.my.info.enrolled_users'|trans }}</h2>
-            <ul class="users-list">
-                {% if users is not empty %}
-                    {% for user in users %}
-                        {% set ts = lastAccessed[user.id] ?? null %}
-                        <li>
-                            <div class="user-main">
-                                {{ user.firstName }} {{ user.lastName }} – {{ user.email }}
+        <ul class="users-list">
+            {% if users is not empty %}
+                {% for user in users %}
+                    {% set ts = lastAccessed[user.id] ?? null %}
+                    <li>
+                        <div class="user-main">
+                            {{ user.firstName }} {{ user.lastName }} – {{ user.email }}
+                        </div>
+                        {% if ts %}
+                            <div class="last-accessed">
+                                {{ 'Last accessed:' }} {{ ts|date('d/m/Y H:i') }}
                             </div>
-                            {% if ts %}
-                                <div class="last-accessed">
-                                    {{ 'Last accessed:' }} {{ ts|date('d/m/Y H:i') }}
-                                </div>
-                            {% endif %}
-                        </li>
-                    {% endfor %}
-                {% else %}
-                    <li>{{ 'courses.my.info.no_enrolled_users'|trans }}</li>
-                {% endif %}
-            </ul>
+                        {% else %}
+                            <div class="never-accessed">{{ 'Never accessed'|trans }}</div>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            {% else %}
+                <li>{{ 'courses.my.info.no_enrolled_users'|trans }}</li>
+            {% endif %}
+        </ul>
     </section>
     
     <div class="back-button">

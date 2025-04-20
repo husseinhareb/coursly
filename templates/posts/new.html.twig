@@ -1,3 +1,4 @@
+{# templates/posts/new.html.twig #}
 {% extends 'base.html.twig' %}
 
 {% block title %}{{ 'post.new.title'|trans({'%course%': course.title}) }}{% endblock %}
@@ -25,6 +26,12 @@
         </div>
         <div class="post-form-group">
             {{ form_row(form.attachment, {'attr': {'id': 'post_form_attachment'}}) }}
+        </div>
+        <div class="post-form-group">
+            {{ form_row(form.category, {'attr': {'id': 'post_form_category'}}) }}
+        </div>
+        <div class="post-form-group">
+            {{ form_row(form.isPinned, {'attr': {'id': 'post_form_pinned'}}) }}
         </div>
         <button type="submit" class="btn">{{ 'post.new.submit'|trans }}</button>
     {{ form_end(form) }}

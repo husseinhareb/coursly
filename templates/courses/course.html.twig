@@ -1,3 +1,4 @@
+{# templates/courses/course.html.twig #}
 {% extends 'base.html.twig' %}
 
 {% block title %}{{ course.title }}{% endblock %}
@@ -11,35 +12,99 @@
 <div class="course-page-container">
     <header class="course-header">
         <h1 class="course-title">{{ course.title }}</h1>
+
+        {# Add Post button for professors #}
         {% if is_granted('ROLE_PROFESSOR') %}
-            <a href="{{ path('post_new', { code: course.code, id: course.id }) }}" class="create-post-btn">
+            <a
+                href="{{ path('post_new', { id: course.id, code: course.code }) }}"
+                class="btn create-post-btn"
+            >
                 {{ 'course.show.new_post'|trans }}
             </a>
         {% endif %}
     </header>
-    
+
     <section class="posts-section">
         <h2>{{ 'course.show.posts_heading'|trans }}</h2>
         <ul class="posts-list">
             {% for post in course.posts %}
-                <li class="post-item">
+                <li
+                    id="post-{{ post.id }}"
+                    class="post-item{% if post.isPinned %} pinned{% endif %}"
+                >
+                    <div class="post-icons">
+                        {% if post.isPinned %}
+                            <span class="pin-icon" title="{{ 'Pinned'|trans }}">📌</span>
+                        {% endif %}
+                        {% if post.category %}
+                            <span class="category-label">{{ post.category.name|trans }}</span>
+                        {% endif %}
+                    </div>
+
                     <div class="post-header">
                         <strong class="post-title">{{ post.title }}</strong>
-                        <span class="post-type">({{ post.type }})</span>
+                        <span class="post-type">({{ post.type|trans }})</span>
                     </div>
+
                     {% if post.type == 'file' and post.filePath %}
-                        <a class="post-download" href="{{ asset('uploads/post_files/' ~ post.filePath) }}">
+                        <a
+                            class="post-download"
+                            href="{{ asset('uploads/post_files/' ~ post.filePath) }}"
+                        >
                             {{ 'course.show.download_file'|trans }}
                         </a>
                     {% endif %}
+
                     <div class="post-date">
                         <small>
-                            {{ 'course.show.posted_on'|trans({'%date%': post.createdAt|date('Y-m-d H:i')}) }}
+                            {{ 'course.show.posted_on'|trans({
+                                '%date%': post.createdAt|date('Y-m-d H:i')
+                            }) }}
                         </small>
                     </div>
+
+                    {% if is_granted('ROLE_PROFESSOR') %}
+                        <div class="post-actions">
+                            <button
+                                class="btn-pin"
+                                data-post-id="{{ post.id }}"
+                                title="{{ post.isPinned ? ('Unpin'|trans) : ('Pin'|trans) }}"
+                            >
+                                {{ post.isPinned ? ('Unpin'|trans) : ('Pin'|trans) }}
+                            </button>
+
+                            <select class="post-move" data-post-id="{{ post.id }}">
+                                <option value="end">{{ 'Move to end'|trans }}</option>
+                                {% for other in course.posts %}
+                                    {% if other.id != post.id %}
+                                        <option value="{{ other.position }}">
+                                            {{ 'Before %title%'|trans({'%title%': other.title}) }}
+                                        </option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+
+                            <a
+                                href="{{ path('post_edit', { id: post.id, code: course.code }) }}"
+                                class="btn-edit"
+                            >
+                                {{ 'course.show.edit'|trans }}
+                            </a>
+
+                            <button
+                                class="btn-delete"
+                                data-post-id="{{ post.id }}"
+                                title="{{ 'course.show.delete'|trans }}"
+                            >
+                                {{ 'course.show.delete'|trans }}
+                            </button>
+                        </div>
+                    {% endif %}
                 </li>
             {% else %}
-                <li class="no-posts">{{ 'course.show.no_posts'|trans }}</li>
+                <li class="no-posts">
+                    {{ 'course.show.no_posts'|trans }}
+                </li>
             {% endfor %}
         </ul>
     </section>

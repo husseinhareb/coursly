@@ -3,10 +3,11 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Post;
+use App\Repository\MessageCategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use App\Repository\MessageCategoryRepository;
+use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: MessageCategoryRepository::class)]
 #[ORM\Table(name: 'message_category')]
@@ -14,21 +15,20 @@ class MessageCategory
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type:'integer')]
+    #[ORM\Column(type: 'integer')]
     private ?int $id = null;
 
-    #[ORM\Column(type:'string', length:50, unique:true)]
+    #[ORM\Column(type: 'string', length: 50, unique: true)]
     private string $name;
 
     /**
      * @var Collection<int, Post>
      */
-    #[ORM\OneToMany(mappedBy: 'category', targetEntity: Post::class)]
+    #[ORM\OneToMany(mappedBy: 'category', targetEntity: Post::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
     private Collection $posts;
 
-    public function __construct(string $name)
+    public function __construct()
     {
-        $this->name  = ucfirst($name);
         $this->posts = new ArrayCollection();
     }
 
@@ -41,9 +41,10 @@ class MessageCategory
     {
         return $this->name;
     }
+
     public function setName(string $name): self
     {
-        $this->name = ucfirst($name);
+        $this->name = ucfirst(trim($name));
         return $this;
     }
 
@@ -54,6 +55,7 @@ class MessageCategory
     {
         return $this->posts;
     }
+
     public function addPost(Post $post): self
     {
         if (!$this->posts->contains($post)) {
@@ -62,9 +64,11 @@ class MessageCategory
         }
         return $this;
     }
+
     public function removePost(Post $post): self
     {
         if ($this->posts->removeElement($post)) {
+            // set the owning side to null (unless already changed)
             if ($post->getCategory() === $this) {
                 $post->setCategory(null);
             }

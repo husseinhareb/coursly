@@ -91,6 +91,7 @@ post:
     label: "Type"
     message: "Message"
     file: "File"
+    placeholder: "Pick the type"
   attachment:
     label: "Attachment (Optional)"
   new:
@@ -98,7 +99,11 @@ post:
     heading: "Create a New Post for %course%"
     submit: "Create Post"
     back_to_course: "Back to Course"
-
+  category:
+    label: "Category"
+    placeholder: "Pick the category"
+  pin:
+    label: "Pin"
 course:
   new:
     title: "New Course"
