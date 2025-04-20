@@ -46,6 +46,11 @@
                         <span class="post-type">({{ post.type|trans }})</span>
                     </div>
 
+                    {# Show content for inline editing #}
+                    <div class="post-content">
+                        {{ post.content|raw }}
+                    </div>
+
                     {% if post.type == 'file' and post.filePath %}
                         <a
                             class="post-download"
@@ -65,7 +70,9 @@
 
                     {% if is_granted('ROLE_PROFESSOR') %}
                         <div class="post-actions">
+                            {# Toggle Pin #}
                             <button
+                                type="button"
                                 class="btn-pin"
                                 data-post-id="{{ post.id }}"
                                 title="{{ post.isPinned ? ('Unpin'|trans) : ('Pin'|trans) }}"
@@ -73,6 +80,7 @@
                                 {{ post.isPinned ? ('Unpin'|trans) : ('Pin'|trans) }}
                             </button>
 
+                            {# Move dropdown #}
                             <select class="post-move" data-post-id="{{ post.id }}">
                                 <option value="end">{{ 'Move to end'|trans }}</option>
                                 {% for other in course.posts %}
@@ -84,14 +92,18 @@
                                 {% endfor %}
                             </select>
 
-                            <a
-                                href="{{ path('post_edit', { id: post.id, code: course.code }) }}"
-                                class="btn-edit"
+                            {# Inline edit button #}
+                            <button
+                                type="button"
+                                class="btn-edit-inline"
+                                data-post-id="{{ post.id }}"
                             >
                                 {{ 'course.show.edit'|trans }}
-                            </a>
+                            </button>
 
+                            {# Delete button (could be hooked up to AJAX too) #}
                             <button
+                                type="button"
                                 class="btn-delete"
                                 data-post-id="{{ post.id }}"
                                 title="{{ 'course.show.delete'|trans }}"
@@ -109,4 +121,9 @@
         </ul>
     </section>
 </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/posts.js') }}" defer></script>
 {% endblock %}
