@@ -31,6 +31,7 @@
                 <li
                     id="post-{{ post.id }}"
                     class="post-item{% if post.isPinned %} pinned{% endif %}"
+                    data-position="{{ post.position }}"
                 >
                     <div class="post-icons">
                         {% if post.isPinned %}
@@ -46,7 +47,6 @@
                         <span class="post-type">({{ post.type|trans }})</span>
                     </div>
 
-                    {# Show content for inline editing #}
                     <div class="post-content">
                         {{ post.content|raw }}
                     </div>
@@ -70,7 +70,7 @@
 
                     {% if is_granted('ROLE_PROFESSOR') %}
                         <div class="post-actions">
-                            {# Toggle Pin #}
+                            {# Pin/Unpin #}
                             <button
                                 type="button"
                                 class="btn-pin"
@@ -92,16 +92,7 @@
                                 {% endfor %}
                             </select>
 
-                            {# Inline edit button #}
-                            <button
-                                type="button"
-                                class="btn-edit-inline"
-                                data-post-id="{{ post.id }}"
-                            >
-                                {{ 'course.show.edit'|trans }}
-                            </button>
-
-                            {# Delete button (could be hooked up to AJAX too) #}
+                            {# Delete #}
                             <button
                                 type="button"
                                 class="btn-delete"

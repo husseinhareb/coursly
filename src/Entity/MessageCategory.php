@@ -19,17 +19,34 @@ class MessageCategory
     private ?int $id = null;
 
     #[ORM\Column(type: 'string', length: 50, unique: true)]
-    private string $name;
+    private string $name = '';
 
     /**
      * @var Collection<int, Post>
      */
-    #[ORM\OneToMany(mappedBy: 'category', targetEntity: Post::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
+    #[ORM\OneToMany(
+        mappedBy: 'category',
+        targetEntity: Post::class,
+        cascade: ['persist','remove'],
+        orphanRemoval: true
+    )]
     private Collection $posts;
 
-    public function __construct()
+    /**
+     * Allow an optional name to be passed when constructing,
+     * but also support Doctrine’s proxy/hydrator requiring a no-arg constructor.
+     */
+    public function __construct(?string $name = null)
     {
         $this->posts = new ArrayCollection();
+        if (null !== $name) {
+            $this->setName($name);
+        }
+    }
+
+    public function __toString(): string
+    {
+        return $this->name;
     }
 
     public function getId(): ?int
@@ -37,6 +54,10 @@ class MessageCategory
         return $this->id;
     }
 
+    /**
+     * The category name is required to be non-empty.
+     * We trim and ucfirst to standardize.
+     */
     public function getName(): string
     {
         return $this->name;
@@ -44,7 +65,11 @@ class MessageCategory
 
     public function setName(string $name): self
     {
-        $this->name = ucfirst(trim($name));
+        $normalized = trim($name);
+        if ($normalized === '') {
+            throw new \InvalidArgumentException('Category name cannot be empty.');
+        }
+        $this->name = ucfirst($normalized);
         return $this;
     }
 
@@ -68,7 +93,7 @@ class MessageCategory
     public function removePost(Post $post): self
     {
         if ($this->posts->removeElement($post)) {
-            // set the owning side to null (unless already changed)
+            // Unlink owning side if needed
             if ($post->getCategory() === $this) {
                 $post->setCategory(null);
             }
