@@ -4,6 +4,7 @@ namespace App\Controller;
 use App\Entity\Course;
 use App\Entity\UserCourseAccess;
 use App\Form\CourseType;
+use App\Repository\PostRepository;
 use App\Repository\CourseRepository;
 use App\Repository\UserCourseAccessRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -53,35 +54,48 @@ class CourseController extends AbstractController
     public function show(
         int $id,
         string $code,
-        CourseRepository $repo,
+        CourseRepository $courseRepo,
+        PostRepository $postRepo,
         ManagerRegistry $doctrine
     ): Response {
-        $course = $repo->find($id);
+        // 1. Load & validate course
+        $course = $courseRepo->find($id);
         if (!$course) {
             throw $this->createNotFoundException('Course not found');
         }
         if ($course->getCode() !== $code) {
             return $this->redirectToRoute('courses_show', [
                 'id'   => $id,
-                'code' => $course->getCode()
+                'code' => $course->getCode(),
             ], 301);
         }
 
+        // 2. Record user access timestamp
         if ($user = $this->getUser()) {
-            $em   = $doctrine->getManager();
-            $iar  = $em->getRepository(UserCourseAccess::class);
-            $access = $iar->findOneBy(['user' => $user, 'course' => $course]);
-            if (!$access) {
-                $access = new UserCourseAccess();
-                $access->setUser($user)->setCourse($course);
-            }
-            $access->setAccessedAt(new \DateTime());
+            $em      = $doctrine->getManager();
+            $ucRepo  = $em->getRepository(UserCourseAccess::class);
+            $access  = $ucRepo->findOneBy(['user' => $user, 'course' => $course]) 
+                       ?? new UserCourseAccess();
+            $access->setUser($user)
+                   ->setCourse($course)
+                   ->setAccessedAt(new \DateTime());
             $em->persist($access);
             $em->flush();
         }
 
+        // 3. Fetch posts: pinned first, then by position
+        $posts = $postRepo->createQueryBuilder('p')
+            ->andWhere('p.course = :course')
+            ->setParameter('course', $course)
+            ->orderBy('p.isPinned', 'DESC')
+            ->addOrderBy('p.position', 'ASC')
+            ->getQuery()
+            ->getResult();
+
+        // 4. Render, passing both course and the sorted posts
         return $this->render('courses/course.html.twig', [
             'course' => $course,
+            'posts'  => $posts,
         ]);
     }
 

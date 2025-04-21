@@ -1,10 +1,16 @@
 <?php
+// src/Repository/PostRepository.php
+
 namespace App\Repository;
 
 use App\Entity\Post;
+use App\Entity\Course;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+/**
+ * @extends ServiceEntityRepository<Post>
+ */
 class PostRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -12,5 +18,22 @@ class PostRepository extends ServiceEntityRepository
         parent::__construct($registry, Post::class);
     }
 
-    // (any custom query methods you need...)
+    /**
+     * Return the maximum position value among all Posts of a given Course.
+     * If there are no Posts yet, returns 0.
+     */
+    public function findMaxPositionForCourse(Course $course): int
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->select('MAX(p.position) as maxPos')
+            ->andWhere('p.course = :course')
+            ->setParameter('course', $course);
+
+        $max = $qb
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        // getSingleScalarResult() returns null if there are no rows
+        return (int) ($max ?? 0);
+    }
 }

@@ -1,4 +1,6 @@
 <?php
+// src/Controller/PostController.php
+
 namespace App\Controller;
 
 use App\Entity\Post;
@@ -24,7 +26,8 @@ class PostController extends AbstractController
         int $id,
         Request $request,
         CourseRepository $courseRepo,
-        ManagerRegistry $doctrine
+        ManagerRegistry $doctrine,
+        PostRepository $postRepo
     ): Response {
         $course = $courseRepo->find($id);
         if (!$course) {
@@ -41,6 +44,7 @@ class PostController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Handle file if needed
             if ($post->getType() === 'file') {
                 $attachment = $form->get('attachment')->getData();
                 if ($attachment) {
@@ -60,6 +64,10 @@ class PostController extends AbstractController
                     }
                 }
             }
+
+            // Determine the next position
+            $maxPos = $postRepo->findMaxPositionForCourse($course);
+            $post->setPosition($maxPos + 1);
 
             $em = $doctrine->getManager();
             $em->persist($post);
@@ -90,7 +98,7 @@ class PostController extends AbstractController
         if (!$post) {
             throw $this->createNotFoundException('Post not found');
         }
-        // ensure the URL’s id & code match the post’s course
+        // Redirect if URL params don’t match
         if ($post->getCourse()->getId() !== $id || $post->getCourse()->getCode() !== $code) {
             return $this->redirectToRoute('post_edit', [
                 'id'   => $post->getCourse()->getId(),
@@ -150,13 +158,10 @@ class PostController extends AbstractController
         return new JsonResponse(['pinned' => $newState]);
     }
 
-    #[Route('/posts/{id}/move', name: 'post_move', methods: ['POST'])]
+    #[Route('/posts/{id}/move-up', name: 'post_move_up', methods: ['POST'])]
     #[Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_PROFESSOR')")]
-    public function move(int $id, Request $request, ManagerRegistry $doctrine): JsonResponse
+    public function moveUp(int $id, ManagerRegistry $doctrine): JsonResponse
     {
-        $payload = json_decode($request->getContent(), true);
-        $before  = $payload['before'] ?? null;
-
         $em   = $doctrine->getManager();
         $repo = $em->getRepository(Post::class);
         $post = $repo->find($id);
@@ -164,27 +169,88 @@ class PostController extends AbstractController
             return new JsonResponse(['error' => 'Not found'], 404);
         }
 
-        $all     = $repo->findBy(['course' => $post->getCourse()], ['position' => 'ASC']);
-        $ordered = [];
-        foreach ($all as $p) {
-            if ($p->getId() === $post->getId()) {
-                continue;
-            }
-            if ($p->getPosition() === (int)$before) {
-                $ordered[] = $post;
-            }
-            $ordered[] = $p;
+        $course = $post->getCourse();
+        $pos    = $post->getPosition();
+        if ($pos <= 1) {
+            return new JsonResponse(['error' => 'Already at top'], 400);
         }
-        if (!in_array($post, $ordered, true)) {
-            $ordered[] = $post;
+
+        // find the post immediately above
+        $neighbor = $repo->findOneBy([
+            'course'   => $course,
+            'position' => $pos - 1,
+        ]);
+
+        if (!$neighbor) {
+            return new JsonResponse(['error' => 'Cannot move up'], 400);
         }
-        foreach ($ordered as $i => $p) {
-            $p->setPosition($i + 1);
-        }
+
+        // swap
+        $post->setPosition($pos - 1);
+        $neighbor->setPosition($pos);
         $em->flush();
 
-        return new JsonResponse(['success' => true]);
+        // rebuild the full order array
+        $ordered = $repo->findBy(['course' => $course], ['position' => 'ASC']);
+        $order = array_map(fn(Post $p) => [
+            'id'       => $p->getId(),
+            'position' => $p->getPosition(),
+        ], $ordered);
+
+        return new JsonResponse(['success' => true, 'order' => $order]);
     }
+
+    #[Route('/posts/{id}/move-down', name: 'post_move_down', methods: ['POST'])]
+    #[Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_PROFESSOR')")]
+    public function moveDown(int $id, ManagerRegistry $doctrine): JsonResponse
+    {
+        $em   = $doctrine->getManager();
+        $repo = $em->getRepository(Post::class);
+        $post = $repo->find($id);
+        if (!$post) {
+            return new JsonResponse(['error' => 'Not found'], 404);
+        }
+
+        $course = $post->getCourse();
+        $pos    = $post->getPosition();
+
+        // find maximum position
+        $max = (int)$repo->createQueryBuilder('p')
+            ->select('MAX(p.position)')
+            ->andWhere('p.course = :course')
+            ->setParameter('course', $course)
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        if ($pos >= $max) {
+            return new JsonResponse(['error' => 'Already at bottom'], 400);
+        }
+
+        $neighbor = $repo->findOneBy([
+            'course'   => $course,
+            'position' => $pos + 1,
+        ]);
+
+        if (!$neighbor) {
+            return new JsonResponse(['error' => 'Cannot move down'], 400);
+        }
+
+        // swap
+        $post->setPosition($pos + 1);
+        $neighbor->setPosition($pos);
+        $em->flush();
+
+        // rebuild the full order array
+        $ordered = $repo->findBy(['course' => $course], ['position' => 'ASC']);
+        $order = array_map(fn(Post $p) => [
+            'id'       => $p->getId(),
+            'position' => $p->getPosition(),
+        ], $ordered);
+
+        return new JsonResponse(['success' => true, 'order' => $order]);
+    }
+
+
 
     #[Route('/posts/{id}/inline-edit', name: 'post_inline_edit', methods: ['POST'])]
     #[Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_PROFESSOR')")]
@@ -213,7 +279,7 @@ class PostController extends AbstractController
             'content' => $post->getContent(),
         ]);
     }
-    
+
     #[Route('/posts/{id}/delete', name: 'post_delete', methods: ['DELETE'])]
     #[Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_PROFESSOR')")]
     public function delete(int $id, ManagerRegistry $doctrine): JsonResponse
@@ -228,5 +294,17 @@ class PostController extends AbstractController
         $em->flush();
 
         return new JsonResponse(['success'=>true]);
+    }
+
+    private function buildOrder($course): array
+    {
+        $all = $this->getDoctrine()
+            ->getRepository(Post::class)
+            ->findBy(['course' => $course], ['position'=>'ASC']);
+
+        return array_map(fn(Post $p) => [
+            'id'       => $p->getId(),
+            'position' => $p->getPosition()
+        ], $all);
     }
 }

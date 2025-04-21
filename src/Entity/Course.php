@@ -3,11 +3,11 @@
 
 namespace App\Entity;
 
+use App\Repository\CourseRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use App\Repository\CourseRepository;
 
 #[ORM\Entity(repositoryClass: CourseRepository::class)]
 #[ORM\Table(name: 'course')]
@@ -41,8 +41,12 @@ class Course
     #[ORM\OneToMany(mappedBy: 'course', targetEntity: Enrollment::class, cascade: ['persist', 'remove'])]
     private Collection $enrollments;
 
-    /** @var Collection<int, Post> */
-    #[ORM\OneToMany(mappedBy: 'course', targetEntity: Post::class, cascade: ['persist', 'remove'])]
+    /**
+     * @var Collection<int, Post>
+     * @see App\Entity\Post::$position
+     */
+    #[ORM\OneToMany(mappedBy: 'course', targetEntity: Post::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
+    #[ORM\OrderBy(['position' => 'ASC'])]
     private Collection $posts;
 
     /** @var Collection<int, AdminAlert> */
@@ -175,6 +179,8 @@ class Course
      */
     public function getPosts(): Collection
     {
+        // Thanks to #[ORM\OrderBy(['position'=>'ASC'])],
+        // this will *always* be sorted by position ascending.
         return $this->posts;
     }
 
