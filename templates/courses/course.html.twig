@@ -6,31 +6,42 @@
 {% block stylesheets %}
   {{ parent() }}
   <link rel="stylesheet" href="{{ asset('styles/course.css') }}">
+
+  {# ⚠ If Font-Awesome is already included globally in your layout, delete the line below. #}
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-u3sJg4w0R7G7kI6b6uWkrGgF1V6p7mC1HcbxA4fTxib0f/6Ck6UqjQ6kKD5pXy4y1CrO+6kdDk5JIq4Cs7YmgA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
 {% endblock %}
 
 {% block body %}
 <div class="course-page-container">
   <header class="course-header">
     <h1 class="course-title">{{ course.title }}</h1>
+
     {% if is_granted('ROLE_PROFESSOR') %}
-      <a href="{{ path('post_new',{id:course.id,code:course.code}) }}"
+      <a href="{{ path('post_new', { id: course.id, code: course.code }) }}"
          class="btn create-post-btn">
-        {{ 'course.show.new_post'|trans }}
+        <i class="fa-solid fa-plus"></i>&nbsp;{{ 'course.show.new_post'|trans }}
       </a>
     {% endif %}
   </header>
 
   <section class="posts-section">
     <h2>{{ 'course.show.posts_heading'|trans }}</h2>
+
     <ul class="posts-list">
-      {# now iterating `posts`, sorted pinned→first, then position ASC #}
+      {# posts come pre-sorted (pinned first, then position ASC) #}
       {% for post in posts %}
         <li id="post-{{ post.id }}"
             class="post-item{% if post.isPinned %} pinned{% endif %}"
             data-position="{{ post.position }}">
+
           <div class="post-icons">
             {% if post.isPinned %}
-              <span class="pin-icon" title="{{ 'Pinned'|trans }}">📌</span>
+              <span class="pin-icon" title="{{ 'Pinned'|trans }}">
+                <i class="fa-solid fa-thumbtack"></i>
+              </span>
             {% endif %}
             {% if post.category %}
               <span class="category-label">{{ post.category.name|trans }}</span>
@@ -46,7 +57,8 @@
 
           {% if post.type == 'file' and post.filePath %}
             <a class="post-download"
-               href="{{ asset('uploads/post_files/'~post.filePath) }}">
+               href="{{ asset('uploads/post_files/' ~ post.filePath) }}">
+              <i class="fa-solid fa-file-arrow-down"></i>&nbsp;
               {{ 'course.show.download_file'|trans }}
             </a>
           {% endif %}
@@ -59,28 +71,47 @@
 
           {% if is_granted('ROLE_PROFESSOR') %}
             <div class="post-actions">
-              {# pin / unpin #}
-              <button type="button" class="btn-pin"
-                      data-post-id="{{ post.id }}">
-                {{ post.isPinned ? 'Unpin'|trans : 'Pin'|trans }}
+
+              {# ── Pin / Un-pin ── #}
+              <button type="button"
+                      class="btn-pin"
+                      data-post-id="{{ post.id }}"
+                      title="{{ post.isPinned ? 'Unpin'|trans : 'Pin'|trans }}">
+                {% if post.isPinned %}
+                  <i class="fa-solid fa-circle-xmark"></i>
+                {% else %}
+                  <i class="fa-solid fa-thumbtack"></i>
+                {% endif %}
               </button>
 
-              {# move up #}
-              <button type="button" class="btn-move-up"
-                      data-post-id="{{ post.id }}">▲</button>
-
-              {# move down #}
-              <button type="button" class="btn-move-down"
-                      data-post-id="{{ post.id }}">▼</button>
-
-              {# inline edit & delete… #}
-              <button type="button" class="btn-edit-inline"
-                      data-post-id="{{ post.id }}">
-                {{ 'course.show.edit_inline'|trans }}
+              {# ── Move up / down ── #}
+              <button type="button"
+                      class="btn-move-up"
+                      data-post-id="{{ post.id }}"
+                      title="{{ 'Move up'|trans }}">
+                <i class="fa-solid fa-arrow-up"></i>
               </button>
-              <button type="button" class="btn-delete"
-                      data-post-id="{{ post.id }}">
-                {{ 'course.show.delete'|trans }}
+
+              <button type="button"
+                      class="btn-move-down"
+                      data-post-id="{{ post.id }}"
+                      title="{{ 'Move down'|trans }}">
+                <i class="fa-solid fa-arrow-down"></i>
+              </button>
+
+              {# ── Inline-edit & Delete ── #}
+              <button type="button"
+                      class="btn-edit-inline"
+                      data-post-id="{{ post.id }}"
+                      title="{{ 'course.show.edit_inline'|trans }}">
+                <i class="fa-solid fa-pen"></i>
+              </button>
+
+              <button type="button"
+                      class="btn-delete"
+                      data-post-id="{{ post.id }}"
+                      title="{{ 'course.show.delete'|trans }}">
+                <i class="fa-solid fa-trash"></i>
               </button>
             </div>
           {% endif %}

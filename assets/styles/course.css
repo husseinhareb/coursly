@@ -396,3 +396,114 @@
   color: #666;
 }
 
+
+/*───────────────────────────────────────────────*/
+/*  Post-level action buttons (pin / move / …)   */
+/*───────────────────────────────────────────────*/
+
+.post-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .35rem;
+  margin-top: .5rem;
+}
+
+.post-actions button {
+  --c-bg   : #ffffff;
+  --c-text : #333;
+  --c-brd  : #bbb;
+
+  padding: .35rem .55rem;
+  border: 1px solid var(--c-brd);
+  border-radius: 4px;
+  font-size: .85rem;
+  line-height: 1;
+  background: var(--c-bg);
+  color: var(--c-text);
+  cursor: pointer;
+  transition: background .15s, color .15s, transform .15s;
+}
+
+.post-actions button:hover {
+  background: #007BC0;
+  color: #fff;
+  border-color: #007BC0;
+  transform: translateY(-1px);
+}
+
+.post-actions .btn-pin      { font-weight: 600; }         /* Pin / Unpin */
+.post-actions .btn-move-up,
+.post-actions .btn-move-down{
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  width: 28px;
+  padding: .35rem 0;
+  text-align: center;
+}
+
+/* Give disabled-while-saving buttons a hint */
+.post-actions button:disabled {
+  opacity: .55;
+  cursor: default;
+  transform: none;
+}
+
+/*───────────────────────────────────────────────*/
+/*  Inline-edit mini-form                        */
+/*───────────────────────────────────────────────*/
+
+.edit-form{
+  margin-top: .75rem;
+  display: flex;
+  flex-direction: column;
+  gap: .45rem;
+  animation: fadeIn .2s ease-out;
+}
+
+.edit-form input.edit-title,
+.edit-form textarea.edit-body{
+  width: 100%;
+  font: inherit;
+  padding: .5rem .6rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+.edit-form textarea.edit-body{ min-height: 90px; }
+
+.edit-form .btn-save,
+.edit-form .btn-cancel{
+  align-self: flex-start;
+  padding: .4rem .9rem;
+  border-radius: 4px;
+  border: none;
+  font-size: .85rem;
+  cursor: pointer;
+  transition: background .15s;
+}
+
+.edit-form .btn-save  { background:#28a745; color:#fff; }
+.edit-form .btn-save:hover{ background:#218838; }
+
+.edit-form .btn-cancel{
+  background:#e0e0e0; color:#333; margin-left:.4rem;
+}
+.edit-form .btn-cancel:hover{ background:#cacaca; }
+
+@keyframes fadeIn{ from{opacity:0;transform:translateY(4px);} to{opacity:1;transform:none;} }
+
+/*───────────────────────────────────────────────*/
+/*  Visual hint for pinned posts                 */
+/*───────────────────────────────────────────────*/
+
+.post-item.pinned{
+  background:#fffbe6;
+  border-left: 4px solid #ffd54f;
+  position: relative;
+}
+
+.post-item.pinned::before{      /* subtle bar */
+  content:'';
+  position:absolute; left:-4px; top:0; bottom:0; width:4px;
+  background:#ffd54f;
+}
