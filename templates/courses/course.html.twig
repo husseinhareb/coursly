@@ -13,7 +13,6 @@
     <header class="course-header">
         <h1 class="course-title">{{ course.title }}</h1>
 
-        {# Add Post button for professors #}
         {% if is_granted('ROLE_PROFESSOR') %}
             <a
                 href="{{ path('post_new', { id: course.id, code: course.code }) }}"
@@ -70,17 +69,17 @@
 
                     {% if is_granted('ROLE_PROFESSOR') %}
                         <div class="post-actions">
-                            {# Pin/Unpin #}
+                            {# 1. Pin / Unpin #}
                             <button
                                 type="button"
                                 class="btn-pin"
                                 data-post-id="{{ post.id }}"
-                                title="{{ post.isPinned ? ('Unpin'|trans) : ('Pin'|trans) }}"
+                                title="{{ post.isPinned ? 'Unpin'|trans : 'Pin'|trans }}"
                             >
-                                {{ post.isPinned ? ('Unpin'|trans) : ('Pin'|trans) }}
+                                {{ post.isPinned ? 'Unpin'|trans : 'Pin'|trans }}
                             </button>
 
-                            {# Move dropdown #}
+                            {# 2. Move dropdown #}
                             <select class="post-move" data-post-id="{{ post.id }}">
                                 <option value="end">{{ 'Move to end'|trans }}</option>
                                 {% for other in course.posts %}
@@ -92,7 +91,17 @@
                                 {% endfor %}
                             </select>
 
-                            {# Delete #}
+                            {# 3. Inline-edit (AJAX) #}
+                            <button
+                                type="button"
+                                class="btn-edit-inline"
+                                data-post-id="{{ post.id }}"
+                                title="{{ 'course.show.edit_inline'|trans }}"
+                            >
+                                {{ 'course.show.edit_inline'|trans }}
+                            </button>
+
+                            {# 4. Delete (AJAX) #}
                             <button
                                 type="button"
                                 class="btn-delete"
