@@ -73,31 +73,31 @@
             <div class="post-actions">
 
               {# ── Pin / Un-pin ── #}
-              <button type="button"
-                      class="btn-pin"
-                      data-post-id="{{ post.id }}"
-                      title="{{ post.isPinned ? 'Unpin'|trans : 'Pin'|trans }}">
-                {% if post.isPinned %}
-                  <i class="fa-solid fa-circle-xmark"></i>
-                {% else %}
-                  <i class="fa-solid fa-thumbtack"></i>
-                {% endif %}
-              </button>
+            <button type="button"
+                    class="btn-pin"
+                    data-post-id="{{ post.id }}"
+                    data-is-pinned="{{ post.isPinned ? 1 : 0 }}"
+                    title="{{ post.isPinned ? 'Unpin'|trans : 'Pin'|trans }}">
+
+            <i class="fa-solid {{ post.isPinned ? 'fa-thumbtack-slash' : 'fa-thumbtack' }}"></i>
+            </button>
 
               {# ── Move up / down ── #}
-              <button type="button"
-                      class="btn-move-up"
-                      data-post-id="{{ post.id }}"
-                      title="{{ 'Move up'|trans }}">
-                <i class="fa-solid fa-arrow-up"></i>
-              </button>
+                {% if not post.isPinned %}
+                <button type="button"
+                        class="btn-move-up"
+                        data-post-id="{{ post.id }}"
+                        title="{{ 'Move up'|trans }}">
+                    <i class="fa-solid fa-arrow-up"></i>
+                </button>
 
-              <button type="button"
-                      class="btn-move-down"
-                      data-post-id="{{ post.id }}"
-                      title="{{ 'Move down'|trans }}">
-                <i class="fa-solid fa-arrow-down"></i>
-              </button>
+                <button type="button"
+                        class="btn-move-down"
+                        data-post-id="{{ post.id }}"
+                        title="{{ 'Move down'|trans }}">
+                    <i class="fa-solid fa-arrow-down"></i>
+                </button>
+                {% endif %}
 
               {# ── Inline-edit & Delete ── #}
               <button type="button"
