@@ -1,9 +1,12 @@
 <?php
+// src/Controller/CourseController.php
+
 namespace App\Controller;
 
 use App\Entity\Course;
 use App\Entity\UserCourseAccess;
 use App\Form\CourseType;
+use App\Repository\AdminAlertRepository;
 use App\Repository\PostRepository;
 use App\Repository\CourseRepository;
 use App\Repository\UserCourseAccessRepository;
@@ -20,23 +23,30 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class CourseController extends AbstractController
 {
+    // ───────────────────────────────
+    //  LISTE / TABLEAU DE BORD
+    // ───────────────────────────────
     #[Route('/courses', name: 'courses_index')]
     public function index(
-        Request $request,
         CourseRepository $repo,
-        ManagerRegistry $doctrine
+        ManagerRegistry  $doctrine
     ): Response {
-        $courses = $repo->findAll();
         $user    = $this->getUser();
+        $courses = $repo->findAll();
 
+        // si l’utilisateur n’est pas admin : ne lui montrer que ses UE
         if ($user && !$this->isGranted('ROLE_ADMIN')) {
-            $courses = array_filter($courses, fn(Course $c) => $c->getUsers()->contains($user));
+            $courses = array_filter(
+                $courses,
+                fn (Course $c) => $c->getUsers()->contains($user)
+            );
         }
 
-        $colors = [];
+        // Assurer une couleur de fond sur chaque carte
         $em     = $doctrine->getManager();
+        $colors = [];
         foreach ($courses as $course) {
-            if (empty($course->getBackground())) {
+            if (!$course->getBackground()) {
                 $course->setBackground($this->generateRandomColor());
                 $em->persist($course);
             }
@@ -50,40 +60,49 @@ class CourseController extends AbstractController
         ]);
     }
 
-    #[Route('/courses/{id}/{code}', name: 'courses_show', requirements: ['id' => '\d+', 'code' => '.+'])]
+    // ───────────────────────────────
+    //  PAGE D’UNE UE
+    // ───────────────────────────────
+    #[Route(
+        '/courses/{id}/{code}',
+        name: 'courses_show',
+        requirements: ['id' => '\d+', 'code' => '.+']
+    )]
     public function show(
-        int $id,
-        string $code,
-        CourseRepository $courseRepo,
-        PostRepository $postRepo,
-        ManagerRegistry $doctrine
+        int                    $id,
+        string                 $code,
+        CourseRepository       $courseRepo,
+        PostRepository         $postRepo,
+        AdminAlertRepository   $alertRepo,
+        ManagerRegistry        $doctrine
     ): Response {
-        // 1. Load & validate course
+        /* 1️⃣  ───────── Validation UE ───────── */
         $course = $courseRepo->find($id);
         if (!$course) {
             throw $this->createNotFoundException('Course not found');
         }
         if ($course->getCode() !== $code) {
+            // slug canonicalisation
             return $this->redirectToRoute('courses_show', [
                 'id'   => $id,
                 'code' => $course->getCode(),
             ], 301);
         }
 
-        // 2. Record user access timestamp
+        /* 2️⃣  ───────── Log accès utilisateur ───────── */
         if ($user = $this->getUser()) {
-            $em      = $doctrine->getManager();
-            $ucRepo  = $em->getRepository(UserCourseAccess::class);
-            $access  = $ucRepo->findOneBy(['user' => $user, 'course' => $course]) 
-                       ?? new UserCourseAccess();
-            $access->setUser($user)
-                   ->setCourse($course)
-                   ->setAccessedAt(new \DateTime());
+            $em     = $doctrine->getManager();
+            $ucRepo = $em->getRepository(UserCourseAccess::class);
+
+            $access = $ucRepo->findOneBy(['user' => $user, 'course' => $course])
+                   ?? (new UserCourseAccess())->setUser($user)->setCourse($course);
+
+            $access->setAccessedAt(new \DateTime());
             $em->persist($access);
             $em->flush();
         }
 
-        // 3. Fetch posts: pinned first, then by position
+        /* 3️⃣  ───────── Posts (pinned puis position ASC) ───────── */
         $posts = $postRepo->createQueryBuilder('p')
             ->andWhere('p.course = :course')
             ->setParameter('course', $course)
@@ -92,18 +111,39 @@ class CourseController extends AbstractController
             ->getQuery()
             ->getResult();
 
-        // 4. Render, passing both course and the sorted posts
+        /* 4️⃣  ───────── Alertes admin non lues ───────── */
+        $unreadAlerts = [];
+        $alertMap     = [];                       // post-id → AdminAlert
+        if ($user) {
+            $unreadAlerts = $alertRepo->findUnreadByCourseAndUser($course, $user);
+            foreach ($unreadAlerts as $a) {
+                if ($a->getPost()) {
+                    $alertMap[$a->getPost()->getId()] = $a;
+                }
+            }
+        }
+
+        /* 5️⃣  ───────── Render ───────── */
         return $this->render('courses/course.html.twig', [
-            'course' => $course,
-            'posts'  => $posts,
+            'course'       => $course,
+            'posts'        => $posts,
+            'unreadAlerts' => $unreadAlerts,
+            'alertMap'     => $alertMap,
         ]);
     }
 
-    #[Route('/courses/enrolled/{id}/{code}', name: 'courses_enrolled', requirements: ['id' => '\d+', 'code' => '.+'])]
+    // ───────────────────────────────
+    //  LISTE DES INSCRITS
+    // ───────────────────────────────
+    #[Route(
+        '/courses/enrolled/{id}/{code}',
+        name: 'courses_enrolled',
+        requirements: ['id' => '\d+', 'code' => '.+']
+    )]
     public function enrolled(
-        int $id,
-        string $code,
-        CourseRepository $repo,
+        int                        $id,
+        string                     $code,
+        CourseRepository           $repo,
         UserCourseAccessRepository $accessRepo
     ): Response {
         $course = $repo->find($id);
@@ -113,11 +153,11 @@ class CourseController extends AbstractController
         if ($course->getCode() !== $code) {
             return $this->redirectToRoute('courses_enrolled', [
                 'id'   => $id,
-                'code' => $course->getCode()
+                'code' => $course->getCode(),
             ], 301);
         }
 
-        $users        = $course->getUsers();
+        // dern. accès de chaque user
         $rows         = $accessRepo->findLatestAccessByCourse($course);
         $lastAccessed = [];
         foreach ($rows as $r) {
@@ -126,21 +166,26 @@ class CourseController extends AbstractController
 
         return $this->render('courses/enrolled.html.twig', [
             'course'       => $course,
-            'users'        => $users,
+            'users'        => $course->getUsers(),
             'lastAccessed' => $lastAccessed,
         ]);
     }
 
+    // ───────────────────────────────
+    //  AJAX Search (auto-complete)
+    // ───────────────────────────────
     #[Route('/search-courses', name: 'courses_search', methods: ['GET'])]
-    public function searchCourses(Request $request, CourseRepository $repo): JsonResponse
-    {
-        $term = $request->query->get('q', '');
-        if ('' === $term) {
+    public function searchCourses(
+        Request          $request,
+        CourseRepository $repo
+    ): JsonResponse {
+        $term = trim((string) $request->query->get('q', ''));
+        if ($term === '') {
             return new JsonResponse([]);
         }
 
         $found = $repo->searchCourses($term);
-        $data  = array_map(fn(Course $c) => [
+        $data  = array_map(fn (Course $c) => [
             'id'    => $c->getId(),
             'title' => $c->getTitle(),
             'code'  => $c->getCode(),
@@ -149,25 +194,30 @@ class CourseController extends AbstractController
         return new JsonResponse($data);
     }
 
+    // ───────────────────────────────
+    //  CRÉATION d’UE (admin only)
+    // ───────────────────────────────
     #[Route('/courses/new', name: 'courses_new')]
     #[IsGranted('ROLE_ADMIN')]
-    public function new(Request $request, ManagerRegistry $doctrine): Response
-    {
+    public function new(
+        Request          $request,
+        ManagerRegistry  $doctrine
+    ): Response {
         $course = new Course();
         $course->setCreatedAt(new \DateTimeImmutable())
                ->setUpdatedAt(new \DateTimeImmutable());
 
-        $form = $this->createForm(CourseType::class, $course);
-        $form->handleRequest($request);
+        $form = $this->createForm(CourseType::class, $course)->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // upload image éventuelle
             if ($img = $form->get('image')->getData()) {
-                $fn = uniqid() . '.' . $img->guessExtension();
+                $fn = uniqid('', true) . '.' . $img->guessExtension();
                 try {
                     $img->move($this->getParameter('course_pics_directory'), $fn);
                     $course->setBackground($fn);
-                } catch (FileException $e) {
-                    // optional: flash or log
+                } catch (FileException) {
+                    // flash ou log si besoin
                 }
             }
 
@@ -184,30 +234,29 @@ class CourseController extends AbstractController
         ]);
     }
 
+    // ───────────────────────────────
+    //  ÉDITION d’UE (admin only)
+    // ───────────────────────────────
     #[Route('/courses/edit/{id}', name: 'courses_edit')]
     #[IsGranted('ROLE_ADMIN')]
     public function edit(
-        int $id,
-        Request $request,
+        int              $id,
+        Request          $request,
         CourseRepository $repo,
-        ManagerRegistry $doctrine
+        ManagerRegistry  $doctrine
     ): Response {
-        $course = $repo->find($id);
-        if (!$course) {
-            throw $this->createNotFoundException('Course not found');
-        }
+        $course = $repo->find($id) ?? throw $this->createNotFoundException('Course not found');
 
-        $form = $this->createForm(CourseType::class, $course);
-        $form->handleRequest($request);
+        $form = $this->createForm(CourseType::class, $course)->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             if ($img = $form->get('image')->getData()) {
-                $fn = uniqid() . '.' . $img->guessExtension();
+                $fn = uniqid('', true) . '.' . $img->guessExtension();
                 try {
                     $img->move($this->getParameter('course_pics_directory'), $fn);
                     $course->setBackground($fn);
-                } catch (FileException $e) {
-                    // optional
+                } catch (FileException) {
+                    // silently ignore or flash
                 }
             }
             $doctrine->getManager()->flush();
@@ -224,6 +273,9 @@ class CourseController extends AbstractController
         ]);
     }
 
+    // ───────────────────────────────
+    //  Utils
+    // ───────────────────────────────
     private function generateRandomColor(): string
     {
         return sprintf('#%06X', mt_rand(0, 0xFFFFFF));

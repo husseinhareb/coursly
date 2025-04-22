@@ -3,16 +3,21 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use App\Repository\AdminAlertRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: AdminAlertRepository::class)]
 #[ORM\Table(name: 'admin_alert')]
 class AdminAlert
 {
+    // ────────────────────────────────
+    // Core columns
+    // ────────────────────────────────
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type:'integer')]
+    #[ORM\Column(type: 'integer')]
     private ?int $id = null;
 
     #[ORM\ManyToOne(targetEntity: Course::class, inversedBy: 'alerts')]
@@ -20,28 +25,77 @@ class AdminAlert
     private Course $course;
 
     #[ORM\ManyToOne(targetEntity: Post::class)]
-    #[ORM\JoinColumn(name: 'post_id', referencedColumnName: 'id', nullable: true, onDelete: 'SET NULL')]
+    #[ORM\JoinColumn(
+        name: 'post_id',
+        referencedColumnName: 'id',
+        nullable: true,
+        onDelete: 'SET NULL'
+    )]
     private ?Post $post = null;
 
     #[ORM\ManyToOne(targetEntity: User::class)]
     #[ORM\JoinColumn(nullable: false)]
     private User $admin;
 
-    #[ORM\Column(type:'string', length:20)]
-    private string $action; // 'created','updated','deleted'
+    /**
+     * `'created' | 'updated' | 'deleted'`
+     */
+    #[ORM\Column(type: 'string', length: 20)]
+    private string $action;
 
-    #[ORM\Column(type:'datetime_immutable')]
+    #[ORM\Column(type: 'datetime_immutable')]
     private \DateTimeImmutable $createdAt;
 
-    public function __construct(Course $course, User $admin, string $action, ?Post $post = null)
-    {
-        $this->course    = $course;
-        $this->admin     = $admin;
-        $this->action    = $action;
-        $this->post      = $post;
-        $this->createdAt = new \DateTimeImmutable();
+    // ────────────────────────────────
+    // Acknowledgements (per-professeur)
+    // ────────────────────────────────
+    /**
+     * @var Collection<int, AlertAcknowledgement>
+     */
+    #[ORM\OneToMany(
+        mappedBy: 'alert',
+        targetEntity: AlertAcknowledgement::class,
+        cascade: ['persist', 'remove'],
+        orphanRemoval: true
+    )]
+    private Collection $acknowledgements;
+
+    // ────────────────────────────────
+    // Constructor
+    // ────────────────────────────────
+    public function __construct(
+        Course $course,
+        User   $admin,
+        string $action,
+        ?Post  $post = null
+    ) {
+        $this->course          = $course;
+        $this->admin           = $admin;
+        $this->action          = $action;
+        $this->post            = $post;
+        $this->createdAt       = new \DateTimeImmutable();
+        $this->acknowledgements = new ArrayCollection();
     }
 
+    // ────────────────────────────────
+    // Helpers
+    // ────────────────────────────────
+    /**
+     * True si l’utilisateur a déjà cliqué « J’ai compris ».
+     */
+    public function isAcknowledgedBy(?User $user): bool
+    {
+        if (!$user) {
+            return false;
+        }
+        return $this->acknowledgements->exists(
+            fn ($k, AlertAcknowledgement $ack) => $ack->getUser() === $user
+        );
+    }
+
+    // ────────────────────────────────
+    // Getters / setters (fluent where pertinent)
+    // ────────────────────────────────
     public function getId(): ?int
     {
         return $this->id;
@@ -51,9 +105,9 @@ class AdminAlert
     {
         return $this->course;
     }
-    public function setCourse(Course $c): self
+    public function setCourse(Course $course): self
     {
-        $this->course = $c;
+        $this->course = $course;
         return $this;
     }
 
@@ -61,9 +115,9 @@ class AdminAlert
     {
         return $this->post;
     }
-    public function setPost(?Post $p): self
+    public function setPost(?Post $post): self
     {
-        $this->post = $p;
+        $this->post = $post;
         return $this;
     }
 
@@ -71,9 +125,9 @@ class AdminAlert
     {
         return $this->admin;
     }
-    public function setAdmin(User $u): self
+    public function setAdmin(User $admin): self
     {
-        $this->admin = $u;
+        $this->admin = $admin;
         return $this;
     }
 
@@ -90,5 +144,25 @@ class AdminAlert
     public function getCreatedAt(): \DateTimeImmutable
     {
         return $this->createdAt;
+    }
+
+    /**
+     * @return Collection<int, AlertAcknowledgement>
+     */
+    public function getAcknowledgements(): Collection
+    {
+        return $this->acknowledgements;
+    }
+    public function addAcknowledgement(AlertAcknowledgement $ack): self
+    {
+        if (!$this->acknowledgements->contains($ack)) {
+            $this->acknowledgements->add($ack);
+        }
+        return $this;
+    }
+    public function removeAcknowledgement(AlertAcknowledgement $ack): self
+    {
+        $this->acknowledgements->removeElement($ack);
+        return $this;
     }
 }

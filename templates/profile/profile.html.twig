@@ -1,3 +1,4 @@
+{# templates/profile/profile.html.twig #}
 {% extends 'base.html.twig' %}
 
 {% block title %}{{ 'profile.title'|trans }}{% endblock %}
@@ -8,75 +9,110 @@
 {% endblock %}
 
 {% block body %}
+{# ─────────────────────────────────────────────────────────────
+   “me” = utilisateur dont on affiche le profil
+   (toujours passé depuis le contrôleur)         ────────────── #}
+{% set me = user ?? null %}
+
 <main class="profile-content">
     <h1>{{ 'profile.header'|trans }}</h1>
 
-    {# Display any flash messages #}
+    {# ── Flash messages ── #}
     {% for label, flashes in app.flashes %}
         {% for flash in flashes %}
             <div class="alert alert-{{ label }}">{{ flash }}</div>
         {% endfor %}
     {% endfor %}
 
-    {# Profile Picture Section #}
-    <div class="profile-picture">
-        {% if user.profilePic %}
-            <img src="{{ asset('uploads/profile_pics/' ~ user.profilePic) }}" alt="{{ 'profile.picture_alt'|trans }}" class="profile-img">
-        {% else %}
-            <p class="no-picture">{{ 'profile.no_picture'|trans }}</p>
-        {% endif %}
-    </div>
+    {% if not me %}
+        <p class="alert alert-danger">{{ 'profile.not_found'|trans }}</p>
+    {% else %}
+        {# ──────────────────────────
+           Photo de profil
+        ────────────────────────── #}
+        <div class="profile-picture">
+            {% if me.profilePic %}
+                <img src="{{ asset('uploads/profile_pics/' ~ me.profilePic) }}"
+                     alt="{{ 'profile.picture_alt'|trans }}"
+                     class="profile-img">
+            {% else %}
+                <p class="no-picture">{{ 'profile.no_picture'|trans }}</p>
+            {% endif %}
+        </div>
 
-    {# Read-Only View Section #}
-    <div id="profile-view">
-        <ul class="user-info">
-            <li><strong>{{ 'profile.first_name'|trans }}:</strong> {{ user.firstName }}</li>
-            <li><strong>{{ 'profile.last_name'|trans }}:</strong> {{ user.lastName }}</li>
-            <li><strong>{{ 'profile.email'|trans }}:</strong> {{ user.email }}</li>
-            <li>
-                <strong>{{ 'profile.phone_number'|trans }}:</strong>
-                {{ user.phoneNumber ?: ('profile.not_provided'|trans) }}
-            </li>
-            <li>
-                <strong>{{ 'profile.address'|trans }}:</strong>
-                {{ user.address ?: ('profile.not_provided'|trans) }}
-            </li>
-            <li>
-                <strong>{{ 'profile.roles'|trans }}:</strong> {{ user.roles|join(', ') }}
-            </li>
-            <li>
-                <strong>{{ 'profile.enrolled_courses'|trans }}:</strong>
-                <a href="{{ path('admin_manage_enrollments', {'username': app.user.username, 'id': user.id}) }}" class="btn-manage-enrollments">
-                    {{ 'profile.manage_enrollments'|trans }}
+        {# ──────────────────────────
+           Vue lecture seule
+        ────────────────────────── #}
+        <div id="profile-view">
+            <ul class="user-info">
+                <li><strong>{{ 'profile.first_name'|trans }}:</strong> {{ me.firstName }}</li>
+                <li><strong>{{ 'profile.last_name'|trans  }}:</strong> {{ me.lastName  }}</li>
+                <li><strong>{{ 'profile.email'|trans      }}:</strong> {{ me.email     }}</li>
+
+                <li><strong>{{ 'profile.phone_number'|trans }}:</strong>
+                    {{ me.phoneNumber ?: ('profile.not_provided'|trans) }}
+                </li>
+                <li><strong>{{ 'profile.address'|trans }}:</strong>
+                    {{ me.address ?: ('profile.not_provided'|trans) }}
+                </li>
+                <li><strong>{{ 'profile.roles'|trans }}:</strong>
+                    {{ me.roles|join(', ') }}
+                </li>
+
+                {% if is_granted('ROLE_ADMIN') %}
+                    {# admins peuvent gérer les inscriptions utilisateur #}
+                    <li>
+                        <strong>{{ 'profile.enrolled_courses'|trans }}:</strong>
+                        <a href="{{ path('admin_manage_enrollments',
+                                      {username: me.username, id: me.id}) }}"
+                           class="btn-manage-enrollments">
+                            {{ 'profile.manage_enrollments'|trans }}
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+
+            {# boutons d’action uniquement pour le *propriétaire* du profil #}
+            {% if me is same as(app.user) %}
+                <button id="edit-button" class="btn btn-primary">
+                    {{ 'profile.edit_profile'|trans }}
+                </button>
+
+                <a href="{{ path('app_change_password', {username: me.username}) }}"
+                   class="btn btn-secondary">
+                    {{ 'profile.change_password'|trans }}
                 </a>
-            </li>
-        </ul>
-        <button type="button" id="edit-button" class="btn btn-primary">{{ 'profile.edit_profile'|trans }}</button>
-        <a href="{{ path('app_change_password', {'username': app.user.username}) }}" class="btn btn-secondary">{{ 'profile.change_password'|trans }}</a>
-    </div>
+            {% endif %}
+        </div>
 
-    {# Edit Form Section #}
-    <div id="profile-edit" style="display: none;">
-        {{ form_start(form) }}
-            {{ form_row(form.firstName) }}
-            {{ form_row(form.lastName) }}
-            {{ form_row(form.phoneNumber) }}
-            {{ form_row(form.address) }}
-            {{ form_row(form.profilePic) }}
-            <button type="submit" class="btn btn-success">{{ 'profile.save'|trans }}</button>
-        {{ form_end(form) }}
+        {# ──────────────────────────
+           Formulaire d’édition (caché par défaut)
+        ────────────────────────── #}
+        {% if me is same as(app.user) %}
+            <div id="profile-edit" style="display:none;">
+                {{ form_start(form) }}
+                    {{ form_row(form.firstName) }}
+                    {{ form_row(form.lastName)  }}
+                    {{ form_row(form.phoneNumber) }}
+                    {{ form_row(form.address)     }}
+                    {{ form_row(form.profilePic)  }}
+                    <button class="btn btn-success">{{ 'profile.save'|trans }}</button>
+                {{ form_end(form) }}
 
-        <button type="button" id="cancel-button" class="btn btn-secondary">{{ 'profile.cancel'|trans }}</button>
-    </div>
+                <button id="cancel-button" class="btn btn-secondary">
+                    {{ 'profile.cancel'|trans }}
+                </button>
+            </div>
+        {% endif %}
+    {% endif %}
 </main>
 
+{# ──────────────────────────────────
+   JS : toggle édition / lecture seule
+─────────────────────────────────── #}
 <script>
-    function initProfileToggle() {
-        document.body.removeEventListener('click', profileToggleHandler);
-        document.body.addEventListener('click', profileToggleHandler);
-    }
-
-    function profileToggleHandler(e) {
+(function () {
+    function toggle(e) {
         if (e.target.closest('#edit-button')) {
             document.getElementById('profile-view').style.display = 'none';
             document.getElementById('profile-edit').style.display = 'block';
@@ -86,8 +122,12 @@
             document.getElementById('profile-view').style.display = 'block';
         }
     }
-
-    document.addEventListener('turbo:load', initProfileToggle);
-    document.addEventListener('DOMContentLoaded', initProfileToggle);
+    function init() {
+        document.body.removeEventListener('click', toggle);
+        document.body.addEventListener('click', toggle);
+    }
+    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('turbo:load',  init);
+})();
 </script>
 {% endblock %}
