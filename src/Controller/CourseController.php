@@ -114,11 +114,14 @@ class CourseController extends AbstractController
         /* 4️⃣  ───────── Alertes admin non lues ───────── */
         $unreadAlerts = [];
         $alertMap     = [];                       // post-id → AdminAlert
-        if ($user) {
+        if ($user = $this->getUser()) {
             $unreadAlerts = $alertRepo->findUnreadByCourseAndUser($course, $user);
-            foreach ($unreadAlerts as $a) {
-                if ($a->getPost()) {
-                    $alertMap[$a->getPost()->getId()] = $a;
+        
+            foreach ($unreadAlerts as $alert) {
+                // un seul drapeau par post : on conserve la plus récente
+                $pid = $alert->getPost()?->getId();
+                if ($pid && !isset($alertMap[$pid])) {
+                    $alertMap[$pid] = $alert;
                 }
             }
         }
@@ -130,6 +133,7 @@ class CourseController extends AbstractController
             'unreadAlerts' => $unreadAlerts,
             'alertMap'     => $alertMap,
         ]);
+        
     }
 
     // ───────────────────────────────

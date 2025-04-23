@@ -182,3 +182,17 @@ admin:
       title: "Add Enrollment"
     all_enrolled: "All courses are already enrolled."
     back_to_profile: "Back to Profile"
+
+admin_alert:
+  banner: |
+    {0} No admin actions pending
+    {1} %count% admin action pending
+    ]1,Inf] %count% admin actions pending
+
+  tag:
+    created: "Created by %name%"
+    updated: "Modified by %name%"
+    deleted: "Deleted by %name%"
+
+  dismiss: "Dismiss"
+  history: "Admin alert history"
