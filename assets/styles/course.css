@@ -51,11 +51,6 @@
   border-radius: 4px;
 }
 
-.courses-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
 
 .courses-card {
   border: 1px solid #ccc;
@@ -431,7 +426,7 @@
   transform: translateY(-1px);
 }
 
-.post-actions .btn-pin      { font-weight: 600; }         /* Pin / Unpin */
+.post-actions .btn-pin      { font-weight: 600; }        
 .post-actions .btn-move-up,
 .post-actions .btn-move-down{
   font-family: ui-sans-serif, system-ui, sans-serif;
@@ -440,7 +435,6 @@
   text-align: center;
 }
 
-/* Give disabled-while-saving buttons a hint */
 .post-actions button:disabled {
   opacity: .55;
   cursor: default;
@@ -502,7 +496,7 @@
   position: relative;
 }
 
-.post-item.pinned::before{      /* subtle bar */
+.post-item.pinned::before{      
   content:'';
   position:absolute; left:-4px; top:0; bottom:0; width:4px;
   background:#ffd54f;
@@ -510,7 +504,6 @@
 
 
 
-/* ─── News feed card ─── */
 .news-feed.card {
   background: #fff;
   border: 1px solid #ccc;
@@ -520,7 +513,6 @@
   padding: 1rem 1.5rem;
 }
 
-/* Header styling */
 .news-header h2 {
   margin: 0 0 1rem;
   font-size: 1.5rem;
@@ -529,14 +521,12 @@
   padding-bottom: 0.5rem;
 }
 
-/* News list */
 .news-list {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-/* Each item as a flex “tile” */
 .news-item {
   display: flex;
   align-items: flex-start;
@@ -547,7 +537,6 @@
   border-bottom: none;
 }
 
-/* Bell icon */
 .news-icon {
   font-size: 1.2rem;
   margin-right: 0.75rem;
@@ -555,14 +544,12 @@
   flex-shrink: 0;
 }
 
-/* Body text */
 .news-body {
   line-height: 1.4;
   font-size: 0.95rem;
   color: #444;
 }
 
-/* Timestamps */
 .news-body time {
   display: inline-block;
   margin-left: 0.5rem;
@@ -570,10 +557,47 @@
   font-size: 0.85rem;
 }
 
-/* “No news” case */
 .news-empty {
   text-align: center;
   font-style: italic;
   color: #666;
   padding: 1rem 0;
+}
+
+
+
+.dashboard-content {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+
+.courses-card {
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+@media (max-width: 992px) {
+  .dashboard-content {
+    grid-template-columns: 1fr;
+  }
+  .courses-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .courses-grid {
+    grid-template-columns: 1fr;
+  }
 }

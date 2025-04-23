@@ -24,71 +24,69 @@
         <input type="text" id="search" class="search-input" placeholder="{{ 'courses.my.search_placeholder'|trans }}">
     </div>
 
-    <div class="courses-grid">
-        {% for course in courses %}
-            {% set bg = colors[loop.index0 % colors|length] %}
-            {% set alertCount = course.alerts|filter(a => not a.isAcknowledgedBy(app.user))|length %}
-            <div class="courses-card" style="display: inline-block; margin: 0.5rem; vertical-align: top;">
-                <div class="courses-header" 
-                     style="{% if bg starts with '#' %}background-color: {{ bg }};{% else %}background-image: url('{{ asset('uploads/course_pics/' ~ bg) }}');{% endif %}">
-                </div>
-                <div class="courses-content">
-                    <h5 class="courses-title">
-                        <a href="{{ path('courses_show', { id: course.id, code: course.code }) }}">
-                            {{ course.title }}
-                        </a>
-                        {% if alertCount > 0 %}
-                            <span id="badge-{{ course.id }}" class="alert-badge">{{ alertCount }}</span>
-                        {% endif %}
-                    </h5>
-                    <p class="courses-subtitle">{{ course.code }}</p>
-                    <div class="course-actions">
-                        {% if is_granted('ROLE_ADMIN') %}
-                            <a href="{{ path('courses_edit', { id: course.id }) }}" class="btn-edit">
-                                <i class="fa-solid fa-pen"></i>
-                                {{ 'courses.my.edit'|trans }}
+    <div class="dashboard-content">
+        {# Left column: news feed #}
+        <aside class="news-feed card">
+            <header class="news-header">
+                <h2>{{ 'courses.news.heading'|trans }}</h2>
+            </header>
+            <ul class="news-list">
+                {% for post in recentActivities %}
+                    <li class="news-item">
+                        <i class="fa-solid fa-bell news-icon"></i>
+                        <div class="news-body">
+                            <strong>{{ post.author.firstName ~ ' ' ~ post.author.lastName }}</strong>
+                            {% if post.type == 'file' %}
+                                {{ 'courses.news.posted_file'|trans }}
+                            {% else %}
+                                {{ 'courses.news.posted_message'|trans }}
+                            {% endif %}
+                            «<em>{{ post.title }}</em>»
+                            {{ 'courses.news.in_course'|trans }}
+                            <a href="{{ path('courses_show', {id: post.course.id, code: post.course.code}) }}">
+                                {{ post.course.code }}
                             </a>
-                        {% endif %}
-                        <a href="{{ path('courses_enrolled', { id: course.id, code: course.code }) }}" class="btn-info">
-                            <i class="fa-solid fa-circle-info"></i>
-                            {{ 'courses.my.infomessage'|trans }}
-                        </a>
+                            <time datetime="{{ post.createdAt|date('c') }}">{{ post.createdAt|date('Y-m-d H:i') }}</time>
+                        </div>
+                    </li>
+                {% else %}
+                    <li class="news-empty">{{ 'courses.news.none'|trans }}</li>
+                {% endfor %}
+            </ul>
+        </aside>
+
+        {# Right column: course cards grid #}
+        <section class="courses-grid">
+            {% for course in courses %}
+                {% set bg = colors[loop.index0 % colors|length] %}
+                {% set alertCount = course.alerts|filter(a => not a.isAcknowledgedBy(app.user))|length %}
+                <div class="courses-card">
+                    <div class="courses-header" style="{% if bg starts with '#' %}background-color: {{ bg }};{% else %}background-image: url('{{ asset('uploads/course_pics/' ~ bg) }}');{% endif %}"></div>
+                    <div class="courses-content">
+                        <h5 class="courses-title">
+                            <a href="{{ path('courses_show', { id: course.id, code: course.code }) }}">{{ course.title }}</a>
+                            {% if alertCount > 0 %}
+                                <span id="badge-{{ course.id }}" class="alert-badge">{{ alertCount }}</span>
+                            {% endif %}
+                        </h5>
+                        <p class="courses-subtitle">{{ course.code }}</p>
+                        <div class="course-actions">
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <a href="{{ path('courses_edit', { id: course.id }) }}" class="btn-edit">
+                                    <i class="fa-solid fa-pen"></i>{{ 'courses.my.edit'|trans }}
+                                </a>
+                            {% endif %}
+                            <a href="{{ path('courses_enrolled', { id: course.id, code: course.code }) }}" class="btn-info">
+                                <i class="fa-solid fa-circle-info"></i>{{ 'courses.my.infomessage'|trans }}
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        {% else %}
-            <p class="no-courses-message">{{ 'courses.my.no_courses'|trans }}</p>
-        {% endfor %}
+            {% else %}
+                <p class="no-courses-message">{{ 'courses.my.no_courses'|trans }}</p>
+            {% endfor %}
+        </section>
     </div>
-
-    {# ─── Fil d’actualités ─── #}
-    <section class="news-feed card">
-    <header class="news-header">
-        <h2>{{ 'courses.news.heading'|trans }}</h2>
-    </header>
-    <ul class="news-list">
-        {% for post in recentActivities %}
-        <li class="news-item">
-            <i class="fa-solid fa-bell news-icon"></i>
-            <div class="news-body">
-            <strong>{{ post.author.firstName ~ ' ' ~ post.author.lastName }}</strong>
-            {{ post.type == 'file' 
-                ? ('courses.news.posted_file'|trans) 
-                : ('courses.news.posted_message'|trans) }}
-            «<em>{{ post.title }}</em>»
-            {{ 'courses.news.in_course'|trans }}
-            <a href="{{ path('courses_show', {id: post.course.id, code: post.course.code}) }}">
-                {{ post.course.code }}
-            </a>
-            <time>{{ post.createdAt|date('Y-m-d H:i') }}</time>
-            </div>
-        </li>
-        {% else %}
-        <li class="news-empty">{{ 'courses.news.none'|trans }}</li>
-        {% endfor %}
-    </ul>
-    </section>
-
 </div>
 {% endblock %}
 
@@ -102,7 +100,7 @@
             document.querySelectorAll(".courses-card").forEach(card => {
                 const title = card.querySelector(".courses-title").textContent.toLowerCase();
                 const code = card.querySelector(".courses-subtitle").textContent.toLowerCase();
-                card.style.display = (title + ' ' + code).includes(query) ? 'inline-block' : 'none';
+                card.style.display = (title + ' ' + code).includes(query) ? 'block' : 'none';
             });
         });
     });
