@@ -68,7 +68,7 @@
             <ul class="news-list">
                 {% for post in recentActivities %}
                     <li class="news-item">
-                        <strong>{{ post.author.fullName }}</strong>
+                        <strong>{{ post.author.firstName ~ ' ' ~ post.author.lastName }}</strong>
                         {% if post.type == 'file' %}
                             {{ 'courses.news.posted_file'|trans }}
                         {% else %}

@@ -144,6 +144,12 @@ courses:
       enrolled_users: "Enrolled Users"
       no_enrolled_users: "No users enrolled yet."
       back_to_courses: "Back to Courses"
+  news:
+    heading:           "Latest announcements"
+    posted_file:       "posted a new file"
+    posted_message:    "posted a message"
+    in_course:         "in"
+    none:              "No recent announcements."
 
 admin:
   users:
@@ -196,3 +202,5 @@ admin_alert:
 
   dismiss: "Dismiss"
   history: "Admin alert history"
+
+
