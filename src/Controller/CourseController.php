@@ -28,22 +28,23 @@ class CourseController extends AbstractController
     // ───────────────────────────────
     #[Route('/courses', name: 'courses_index')]
     public function index(
-        CourseRepository $repo,
+        CourseRepository $courseRepo,
+        PostRepository   $postRepo,
         ManagerRegistry  $doctrine
     ): Response {
-        $user    = $this->getUser();
-        $courses = $repo->findAll();
-
-        // si l’utilisateur n’est pas admin : ne lui montrer que ses UE
-        if ($user && !$this->isGranted('ROLE_ADMIN')) {
-            $courses = array_filter(
-                $courses,
-                fn (Course $c) => $c->getUsers()->contains($user)
-            );
+        $user = $this->getUser();
+        $em   = $doctrine->getManager();
+    
+        // 1) Récupérer les UE visibles pour l’utilisateur
+        if ($this->isGranted('ROLE_ADMIN')) {
+            $courses = $courseRepo->findAll();
+        } else {
+            // Suppose you add this helper in CourseRepository:
+            // public function findByUser(User $user): array { … }
+            $courses = $courseRepo->findByUser($user);
         }
-
-        // Assurer une couleur de fond sur chaque carte
-        $em     = $doctrine->getManager();
+    
+        // 2) Assurer une couleur de fond sur chaque carte
         $colors = [];
         foreach ($courses as $course) {
             if (!$course->getBackground()) {
@@ -53,12 +54,18 @@ class CourseController extends AbstractController
             $colors[] = $course->getBackground();
         }
         $em->flush();
-
+    
+        // 3) Construire le fil d’actualité (10 derniers posts de ses UE)
+        $recentActivities = $postRepo->findRecentByUser($user, 10);
+    
+        // 4) Rendu
         return $this->render('courses/courses.html.twig', [
-            'courses' => $courses,
-            'colors'  => $colors,
+            'courses'          => $courses,
+            'colors'           => $colors,
+            'recentActivities' => $recentActivities,
         ]);
     }
+    
 
     // ───────────────────────────────
     //  PAGE D’UNE UE

@@ -72,5 +72,14 @@ class CourseRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+    public function findByUser(User $user): array
+    {
+        return $this->createQueryBuilder('c')
+            ->innerJoin('c.enrollments', 'e', 'WITH', 'e.user = :user')
+            ->setParameter('user', $user)
+            ->orderBy('c.title', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
 
 }
