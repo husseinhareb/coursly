@@ -62,31 +62,33 @@
     </div>
 
     {# ─── Fil d’actualités ─── #}
-    <section class="news-feed">
+    <section class="news-feed card">
+    <header class="news-header">
         <h2>{{ 'courses.news.heading'|trans }}</h2>
-        {% if recentActivities is not empty %}
-            <ul class="news-list">
-                {% for post in recentActivities %}
-                    <li class="news-item">
-                        <strong>{{ post.author.firstName ~ ' ' ~ post.author.lastName }}</strong>
-                        {% if post.type == 'file' %}
-                            {{ 'courses.news.posted_file'|trans }}
-                        {% else %}
-                            {{ 'courses.news.posted_message'|trans }}
-                        {% endif %}
-                        «<em>{{ post.title }}</em>»
-                        {{ 'courses.news.in_course'|trans }}
-                        <a href="{{ path('courses_show', {id: post.course.id, code: post.course.code}) }}">
-                            {{ post.course.code }}
-                        </a>
-                        <time datetime="{{ post.createdAt|date('c') }}">({{ post.createdAt|date('Y-m-d H:i') }})</time>
-                    </li>
-                {% endfor %}
-            </ul>
+    </header>
+    <ul class="news-list">
+        {% for post in recentActivities %}
+        <li class="news-item">
+            <i class="fa-solid fa-bell news-icon"></i>
+            <div class="news-body">
+            <strong>{{ post.author.firstName ~ ' ' ~ post.author.lastName }}</strong>
+            {{ post.type == 'file' 
+                ? ('courses.news.posted_file'|trans) 
+                : ('courses.news.posted_message'|trans) }}
+            «<em>{{ post.title }}</em>»
+            {{ 'courses.news.in_course'|trans }}
+            <a href="{{ path('courses_show', {id: post.course.id, code: post.course.code}) }}">
+                {{ post.course.code }}
+            </a>
+            <time>{{ post.createdAt|date('Y-m-d H:i') }}</time>
+            </div>
+        </li>
         {% else %}
-            <p class="no-news">{{ 'courses.news.none'|trans }}</p>
-        {% endif %}
+        <li class="news-empty">{{ 'courses.news.none'|trans }}</li>
+        {% endfor %}
+    </ul>
     </section>
+
 </div>
 {% endblock %}
 

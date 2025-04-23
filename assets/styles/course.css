@@ -510,3 +510,70 @@
 
 
 
+/* ─── News feed card ─── */
+.news-feed.card {
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-top: 2rem;
+  padding: 1rem 1.5rem;
+}
+
+/* Header styling */
+.news-header h2 {
+  margin: 0 0 1rem;
+  font-size: 1.5rem;
+  color: #333;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 0.5rem;
+}
+
+/* News list */
+.news-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Each item as a flex “tile” */
+.news-item {
+  display: flex;
+  align-items: flex-start;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #eee;
+}
+.news-item:last-child {
+  border-bottom: none;
+}
+
+/* Bell icon */
+.news-icon {
+  font-size: 1.2rem;
+  margin-right: 0.75rem;
+  color: #fd8c29;
+  flex-shrink: 0;
+}
+
+/* Body text */
+.news-body {
+  line-height: 1.4;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+/* Timestamps */
+.news-body time {
+  display: inline-block;
+  margin-left: 0.5rem;
+  color: #888;
+  font-size: 0.85rem;
+}
+
+/* “No news” case */
+.news-empty {
+  text-align: center;
+  font-style: italic;
+  color: #666;
+  padding: 1rem 0;
+}
