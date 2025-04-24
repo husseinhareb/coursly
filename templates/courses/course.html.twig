@@ -32,11 +32,11 @@
         <i class="fa-solid fa-triangle-exclamation"></i>
         {{ 'admin_alert.banner'|trans({ '%count%': unreadAlerts|length }) }}
       </div>
-      <ul class="alert-list">
+      <div class="alert-list">
         {% for alert in unreadAlerts %}
           {% if alert.post %}
             {% set adminName = alert.admin.firstName ~ ' ' ~ alert.admin.lastName %}
-            <li class="alert-item">
+            <div class="alert-item">
               <a href="#post-{{ alert.post.id }}" class="alert-link">
                 {{ ('admin_alert.tag.' ~ alert.action)|trans({ '%name%': adminName }) }}: “{{ alert.post.title }}”
               </a>
@@ -46,10 +46,10 @@
                       aria-label="{{ 'admin_alert.dismiss'|trans }}">
                 <i class="fa-solid fa-circle-xmark"></i>
               </button>
-            </li>
+            </div>
           {% endif %}
         {% endfor %}
-      </ul>
+      </div>
     </section>
   {% endif %}
 
