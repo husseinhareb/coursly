@@ -3,6 +3,16 @@
 
 {% block title %}New Announcement{% endblock %}
 
+{% block stylesheets %}
+  {{ parent() }}
+  <link rel="stylesheet" href="{{ asset('styles/announcement.css') }}">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-u3sJg4w0R7G7kI6b6uWkrGgF1V6p7mC1HcbxA4fTxib0f/6Ck6UqjQ6kKD5pXy4y1CrO+6kdDk5JIq4Cs7YmgA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+{% endblock %}
+
+
 {% block body %}
   <div class="container mt-4">
     <h1>Create Announcement</h1>

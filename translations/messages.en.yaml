@@ -200,4 +200,7 @@ admin_alert:
   dismiss: "Dismiss"
   history: "Admin alert history"
 
-
+announcement:
+  list:
+    heading: "Announcement"
+    new: "Add a new announcement"
