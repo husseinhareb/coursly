@@ -1,4 +1,5 @@
 <?php
+// src/Controller/AlertController.php
 namespace App\Controller;
 
 use App\Entity\AdminAlert;
@@ -15,14 +16,24 @@ class AlertController extends AbstractController
     #[IsGranted('ROLE_PROFESSOR')]
     public function ack(AdminAlert $alert, ManagerRegistry $doctrine): JsonResponse
     {
-        $user = $this->getUser();
+        $user   = $this->getUser();
+        $course = $alert->getCourse();
+    
+        // refuse if they’re not actually a prof on that course:
+        if (! $course->getUsers()->contains($user)) {
+            throw $this->createAccessDeniedException('You are not a professor on that course');
+        }
+    
         if ($alert->isAcknowledgedBy($user)) {
             return new JsonResponse(['ok'=>true]);
         }
-        $ack = new AlertAcknowledgement($alert,$user);
+    
+        $ack = new AlertAcknowledgement($alert, $user);
         $em  = $doctrine->getManager();
         $em->persist($ack);
         $em->flush();
+    
         return new JsonResponse(['ok'=>true]);
     }
+    
 }

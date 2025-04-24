@@ -190,10 +190,7 @@ admin:
     back_to_profile: "Back to Profile"
 
 admin_alert:
-  banner: |
-    {0} No admin actions pending
-    {1} %count% admin action pending
-    ]1,Inf] %count% admin actions pending
+  banner: "No admin actions pending|%count% admin action pending|%count% admin actions pending"
 
   tag:
     created: "Created by %name%"

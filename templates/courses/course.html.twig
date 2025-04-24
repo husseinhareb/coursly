@@ -13,30 +13,32 @@
 
 {% block body %}
 <div class="course-page-container">
+
+  {# ───────── Header ───────── #}
   <header class="course-header">
     <h1 class="course-title">{{ course.title }}</h1>
     {% if is_granted('ROLE_PROFESSOR') or is_granted('ROLE_ADMIN') %}
-      <a href="{{ path('post_new', { id: course.id, code: course.code }) }}"
-         class="btn create-post-btn">
+      <a href="{{ path('post_new', { id: course.id, code: course.code }) }}" class="btn create-post-btn">
         <i class="fa-solid fa-plus"></i>
         {{ 'course.show.new_post'|trans }}
       </a>
     {% endif %}
   </header>
 
-  {# Alerts Panel #}
+  {# ───────── Admin Alerts Panel ───────── #}
   {% if unreadAlerts|length %}
-    <section class="alert-banner">
+    <section class="alert-banner card">
       <div class="alert-banner-header">
         <i class="fa-solid fa-triangle-exclamation"></i>
-        <strong>{{ 'admin_alert.banner'|trans({'%n%': unreadAlerts|length}) }}</strong>
+        {{ 'admin_alert.banner'|trans({ '%count%': unreadAlerts|length }) }}
       </div>
       <ul class="alert-list">
         {% for alert in unreadAlerts %}
           {% if alert.post %}
+            {% set adminName = alert.admin.firstName ~ ' ' ~ alert.admin.lastName %}
             <li class="alert-item">
               <a href="#post-{{ alert.post.id }}" class="alert-link">
-                {{ ('admin_alert.' ~ alert.action)|trans }}: “{{ alert.post.title }}”
+                {{ ('admin_alert.tag.' ~ alert.action)|trans({ '%name%': adminName }) }}: “{{ alert.post.title }}”
               </a>
               <button class="btn-dismiss-alert"
                       data-alert-id="{{ alert.id }}"
@@ -51,6 +53,7 @@
     </section>
   {% endif %}
 
+  {# ───────── Posts Section ───────── #}
   <section class="posts-section">
     <h2 class="section-title">{{ 'course.show.posts_heading'|trans }}</h2>
     <ul class="posts-list">
@@ -58,13 +61,16 @@
         {% set alert = alertMap[post.id] ?? null %}
         <li id="post-{{ post.id }}" class="post-item{{ post.isPinned ? ' pinned' : '' }}">
 
-          {# subtle per-post icon #}
+          {# Per-post admin flag #}
           {% if alert %}
-            <span class="post-alert-icon" title="{{ 'admin_alert.tag'|trans }}">
+            {% set adminName = alert.admin.firstName ~ ' ' ~ alert.admin.lastName %}
+            <span class="post-alert-icon"
+                  title="{{ ('admin_alert.tag.' ~ alert.action)|trans({ '%name%': adminName }) }}">
               <i class="fa-solid fa-triangle-exclamation"></i>
             </span>
           {% endif %}
 
+          {# Pin & Category icons #}
           <div class="post-icons">
             {% if post.isPinned %}
               <span class="pin-icon" title="{{ 'Pinned'|trans }}">
@@ -76,34 +82,36 @@
             {% endif %}
           </div>
 
+          {# Title & Type #}
           <header class="post-header">
             <h3 class="post-title">{{ post.title }}</h3>
             <span class="post-type">({{ post.type|trans }})</span>
           </header>
 
+          {# Content #}
           <article class="post-content">
             {{ post.content|raw }}
           </article>
 
+          {# Download link for file posts #}
           {% if post.type == 'file' and post.filePath %}
-            <a class="post-download"
-               href="{{ asset('uploads/post_files/' ~ post.filePath) }}">
+            <a class="post-download" href="{{ asset('uploads/post_files/' ~ post.filePath) }}">
               <i class="fa-solid fa-file-arrow-down"></i>
               {{ 'course.show.download_file'|trans }}
             </a>
           {% endif %}
 
+          {# Posted date #}
           <footer class="post-meta">
             <time datetime="{{ post.createdAt|date('c') }}">
-              {{ 'course.show.posted_on'|trans({'%date%': post.createdAt|date('Y-m-d H:i')}) }}
+              {{ 'course.show.posted_on'|trans({ '%date%': post.createdAt|date('Y-m-d H:i') }) }}
             </time>
           </footer>
 
+          {# Actions for profs & admins #}
           {% if is_granted('ROLE_PROFESSOR') or is_granted('ROLE_ADMIN') %}
             <div class="post-actions">
-              <button class="btn-pin"
-                      data-post-id="{{ post.id }}"
-                      title="{{ post.isPinned ? 'Unpin'|trans : 'Pin'|trans }}">
+              <button class="btn-pin" data-post-id="{{ post.id }}" title="{{ post.isPinned ? 'Unpin'|trans : 'Pin'|trans }}">
                 <i class="fa-solid {{ post.isPinned ? 'fa-thumbtack-slash' : 'fa-thumbtack' }}"></i>
               </button>
               {% if not post.isPinned %}
@@ -122,13 +130,13 @@
               </button>
             </div>
           {% endif %}
-
         </li>
       {% else %}
         <li class="no-posts">{{ 'course.show.no_posts'|trans }}</li>
       {% endfor %}
     </ul>
   </section>
+
 </div>
 {% endblock %}
 

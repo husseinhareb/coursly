@@ -16,7 +16,7 @@ class AdminAlertRepository extends ServiceEntityRepository
     }
 
     /**
-     * Retourne les alertes d’un cours que $user n’a pas encore acquittées.
+     * Retourne les alertes NON acquittées pour $user sur $course.
      *
      * @return AdminAlert[]
      */
@@ -26,8 +26,8 @@ class AdminAlertRepository extends ServiceEntityRepository
             ->leftJoin('a.acknowledgements', 'ack', 'WITH', 'ack.user = :user')
             ->andWhere('a.course = :course')
             ->andWhere('ack.id IS NULL')
-            ->setParameter('course', $course)   // ← paramètre individuel
-            ->setParameter('user',   $user)     // ← paramètre individuel
+            ->setParameter('course', $course)
+            ->setParameter('user',   $user)
             ->orderBy('a.createdAt', 'DESC')
             ->getQuery()
             ->getResult();

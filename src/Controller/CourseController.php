@@ -119,19 +119,23 @@ class CourseController extends AbstractController
             ->getResult();
 
         /* 4️⃣  ───────── Alertes admin non lues ───────── */
+        // only if this user is a professor on *this* course:
         $unreadAlerts = [];
-        $alertMap     = [];                       // post-id → AdminAlert
-        if ($user = $this->getUser()) {
+        $alertMap     = [];
+        if (
+            $user
+            && $this->isGranted('ROLE_PROFESSOR')
+            && $course->getUsers()->contains($user)
+        ) {
             $unreadAlerts = $alertRepo->findUnreadByCourseAndUser($course, $user);
-        
             foreach ($unreadAlerts as $alert) {
-                // un seul drapeau par post : on conserve la plus récente
                 $pid = $alert->getPost()?->getId();
                 if ($pid && !isset($alertMap[$pid])) {
                     $alertMap[$pid] = $alert;
                 }
             }
         }
+
 
         /* 5️⃣  ───────── Render ───────── */
         return $this->render('courses/course.html.twig', [
