@@ -99,11 +99,7 @@ label {
 }
 
 /* assets/styles/announcement.css */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
+
 
 body {
   background: #e4e7ea;

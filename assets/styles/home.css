@@ -1,124 +1,180 @@
-/* assets/styles/home.css */
+/* assets/styles/home.css — Neumorphism revamp */
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-.main-content {
-  max-width: 1200px;
-  margin: 6rem auto 2rem;
-  padding: 0 1rem;
-}
-
-.welcome-heading {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  color: #1a365d;
-}
-
-.user-detail,
-.login-prompt {
-  font-size: 1.1rem;
-  color: #393c43;
-}
-
-.recent-courses {
-  margin-top: 2rem;
-}
-
-.recent-courses h2 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  color: #333;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.courses-grid {
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-  overflow-x: auto;
-  padding-bottom: 10px;
-}
-
-.courses-card {
-  flex: 0 0 300px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  overflow: hidden;
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease;
-}
-
-.courses-card:hover {
-  transform: translateY(-2px);
-}
-
-.courses-header {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
-.courses-content {
-  padding: 10px;
-}
-
-.courses-title {
-  margin: 0 0 5px;
-  font-size: 1.4rem;
-  color: #007BC0;
-}
-
-.courses-title a {
-  text-decoration: none;
-  color: inherit;
-}
-
-.courses-title a:hover {
-  text-decoration: underline;
-}
-
-.courses-subtitle {
-  margin-top: 5px;
-  font-size: 1.1rem;
-  color: #666;
-}
-
-.no-recent-courses {
-  text-align: center;
-  margin-top: 20px;
-  font-style: italic;
-  font-size: 1.1rem;
-}
-
-.announcements {
-  margin-top: 3rem;
-}
-.announcement-list {
-  list-style: none;
-  padding: 0;
-}
-.announcement-item {
-  border-bottom: 1px solid #e0e0e0;
-  padding: 1rem 0;
-}
-.announcement-title {
-  margin: 0 0 0.25rem;
-  font-size: 1.2rem;
-}
-.announcement-meta {
-  font-size: 0.9rem;
-  color: #777;
-  margin-bottom: 0.5rem;
-}
-.announcement-snippet {
-  margin: 0;
-  color: #555;
-}
+/* 1. Global reset & page background
+   ───────────────────────────────── */
+   *,
+   *::before,
+   *::after {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+   }
+   
+   body {
+     background: #e4e7ea;            /* same canvas tone as login screen */
+     font-family: Arial, sans-serif;
+     line-height: 1.5;
+     color: #393c43;
+   }
+   
+   /* 2. Layout containers
+      ──────────────────── */
+   .main-content {
+     max-width: 1200px;
+     margin: 6rem auto 2rem;
+     padding: 0 1rem;
+   }
+   
+   /* 3. Typography
+      ───────────── */
+   .welcome-heading {
+     font-size: 2.5rem;
+     margin-bottom: 1rem;
+     color: #1a365d;
+   }
+   
+   .user-detail,
+   .login-prompt,
+   .announcement-meta,
+   .no-recent-courses {
+     font-size: 1.1rem;
+   }
+   
+   .no-recent-courses {
+     text-align: center;
+     margin-top: 2rem;
+     font-style: italic;
+   }
+   
+   /* 4. Recent-courses section
+      ───────────────────────── */
+   .recent-courses {
+     margin-top: 2rem;
+   }
+   
+   .recent-courses h2 {
+     font-size: 2rem;
+     margin-bottom: 1rem;
+     color: #333;
+     text-transform: uppercase;
+     letter-spacing: 1px;
+   }
+   
+   /* horizontal scroll grid */
+   .courses-grid {
+     display: flex;
+     gap: 20px;
+     overflow-x: auto;
+     padding-bottom: 10px;
+     scroll-snap-type: x mandatory;
+   }
+   
+   /* neumorphic card */
+   .courses-card {
+     flex: 0 0 300px;
+     border-radius: 24px;
+     background: #e4e7ea;
+     box-shadow:
+       16px 16px 32px rgba(0, 0, 0, 0.25),
+       -16px -16px 32px rgba(255, 255, 255, 0.85);
+     transition: transform 0.2s, box-shadow 0.2s;
+     scroll-snap-align: start;
+   }
+   
+   .courses-card:hover {
+     transform: translateY(-4px);
+     box-shadow:
+       20px 20px 40px rgba(0, 0, 0, 0.3),
+       -20px -20px 40px rgba(255, 255, 255, 0.75);
+   }
+   
+   /* course thumbnail keeps neumorphic frame */
+   .courses-header {
+     width: 100%;
+     aspect-ratio: 16 / 9;
+     border-radius: 18px 18px 0 0;
+     background-position: center;
+     background-size: cover;
+     background-repeat: no-repeat;
+     overflow: hidden;
+   }
+   
+   /* inner content */
+   .courses-content {
+     padding: 18px 20px 22px;
+   }
+   
+   .courses-title {
+     margin: 0 0 6px;
+     font-size: 1.4rem;
+     color: #007BC0;
+   }
+   
+   .courses-title a {
+     text-decoration: none;
+     color: inherit;
+   }
+   
+   .courses-title a:hover {
+     text-decoration: underline;
+   }
+   
+   .courses-subtitle {
+     font-size: 1.1rem;
+     color: #666;
+   }
+   
+   /* 5. Announcements block
+      ────────────────────── */
+   .announcements {
+     margin-top: 3rem;
+   }
+   
+   .announcement-list {
+     list-style: none;
+     padding: 0;
+   }
+   
+   /* each item as a flat card with inset divider */
+   .announcement-item {
+     padding: 1.5rem 1.25rem;
+     border-radius: 20px;
+     background: #e4e7ea;
+     box-shadow:
+       12px 12px 24px rgba(0, 0, 0, 0.2),
+       -12px -12px 24px rgba(255, 255, 255, 0.8);
+     margin-bottom: 1.5rem;
+     transition: box-shadow 0.2s, transform 0.2s;
+   }
+   
+   .announcement-item:hover {
+     transform: translateY(-3px);
+     box-shadow:
+       16px 16px 32px rgba(0, 0, 0, 0.25),
+       -16px -16px 32px rgba(255, 255, 255, 0.85);
+   }
+   
+   .announcement-title {
+     margin: 0 0 0.35rem;
+     font-size: 1.25rem;
+     color: #1a365d;
+   }
+   
+   .announcement-snippet {
+     margin: 0;
+     color: #555;
+   }
+   
+   /* 6. Responsive tweaks
+      ──────────────────── */
+   @media (max-width: 768px) {
+     .welcome-heading   { font-size: 2rem; }
+     .recent-courses h2 { font-size: 1.6rem; }
+     .courses-card      { flex: 0 0 260px; }
+   }
+   
+   @media (max-width: 576px) {
+     .main-content { margin-top: 4rem; }
+     .courses-card { flex: 0 0 220px; }
+   }
+   
