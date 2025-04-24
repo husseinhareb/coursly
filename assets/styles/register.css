@@ -1,22 +1,33 @@
-/* assests/styles/register.css*/
+/* assets/styles/register.css */
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
 body {
-  min-height: 100vh;
+  background: #e4e7ea;
+  margin: 0;
+  padding: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  line-height: 1.5;
 }
 
 .registration-container {
-  background: #fff;
-  border-radius: 12px;
-  padding: 40px 30px;
-  max-width: 30%;
   width: 100%;
-  margin-top: 80px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  background: #e4e7ea;
+  border-radius: 24px;
+  padding: 40px 30px;
+  box-shadow:
+    16px 16px 32px rgba(0, 0, 0, 0.25),
+    -16px -16px 32px rgba(255, 255, 255, 0.85);
+  animation: fadeInUp 0.6s ease-out both;
 }
 
 @keyframes fadeInUp {
@@ -31,11 +42,10 @@ body {
 }
 
 .registration-container h1 {
-  text-align: center;
-  margin-bottom: 30px;
+  margin: 0 0 30px;
+  font-size: 1.8rem;
   color: #333;
-  font-weight: 600;
-  font-size: 2em;
+  text-align: center;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
@@ -44,32 +54,35 @@ body {
   margin-bottom: 20px;
 }
 
-.registration-container form label {
+.registration-container label {
   display: block;
   margin-bottom: 8px;
+  font-weight: bold;
   color: #555;
-  font-weight: 600;
 }
 
-.registration-container form input[type="text"],
-.registration-container form input[type="email"],
-registration-container form input[type="password"],
-.registration-container form select {
+.registration-container input[type="text"],
+.registration-container input[type="email"],
+.registration-container input[type="password"],
+.registration-container select {
   width: 100%;
-  padding: 12px 15px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 1em;
-  transition: all 0.3s ease;
+  padding: 14px;
+  border: none;
+  border-radius: 16px;
+  background: #e4e7ea;
+  box-shadow:
+    inset 8px 8px 20px rgba(0, 0, 0, 0.25),
+    inset -8px -8px 20px rgba(255, 255, 255, 0.85);
+  font-size: 1rem;
+  transition: box-shadow 0.2s;
 }
 
-.registration-container form input[type="text"]:focus,
-.registration-container form input[type="email"]:focus,
-registration-container form input[type="password"]:focus,
-registration-container form select:focus {
+.registration-container input:focus,
+.registration-container select:focus {
   outline: none;
-  border-color: #4ca1af;
-  box-shadow: 0 0 8px rgba(76, 161, 175, 0.3);
+  box-shadow:
+    inset 4px 4px 12px rgba(0, 0, 0, 0.35),
+    inset -4px -4px 12px rgba(255, 255, 255, 0.95);
 }
 
 .checkbox-group {
@@ -78,32 +91,98 @@ registration-container form select:focus {
 }
 
 .checkbox-group input[type="checkbox"] {
-  width: auto;
+  width: 18px;
+  height: 18px;
   margin-right: 10px;
-}
-
-.registration-container form button.btn {
-  background-color: #e77e23;
-  color: #fff;
-  padding: 15px;
-  border: none;
-  border-radius: 8px;
-  font-size: 1.1em;
-  font-weight: 600;
+  appearance: none;
+  border-radius: 6px;
+  background: #e4e7ea;
+  box-shadow:
+    inset 8px 8px 16px rgba(0, 0, 0, 0.25),
+    inset -8px -8px 16px rgba(255, 255, 255, 0.85);
+  position: relative;
   cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
-  text-transform: uppercase;
-  width: 100%;
+  transition: background 0.2s, box-shadow 0.2s;
 }
 
-.registration-container form button.btn:hover {
-  background-color: #fd8c29;
-  transform: translateY(-2px);
+.checkbox-group input[type="checkbox"]:checked {
+  background: #f87822;
+  box-shadow:
+    inset 6px 6px 16px rgba(0, 0, 0, 0.3),
+    inset -6px -6px 16px rgba(255, 255, 255, 0.7);
 }
 
-.form-error {
+.checkbox-group input[type="checkbox"]::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 6px;
+  width: 5px;
+  height: 9px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  opacity: 0;
+}
+
+.checkbox-group input[type="checkbox"]:checked::after {
+  opacity: 1;
+}
+
+.registration-container .form-error {
   color: #e74c3c;
   margin-bottom: 10px;
-  font-size: 0.9em;
+  font-size: 0.9rem;
   text-align: center;
+}
+
+.registration-container button.btn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 16px;
+  background: #f87822;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+  box-shadow:
+    10px 10px 24px rgba(0, 0, 0, 0.3),
+    -10px -10px 24px rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.registration-container button.btn:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    12px 12px 28px rgba(0, 0, 0, 0.35),
+    -12px -12px 28px rgba(255, 255, 255, 0.75);
+}
+
+.registration-container button.btn:active {
+  transform: translateY(0);
+  box-shadow:
+    inset 8px 8px 20px rgba(0, 0, 0, 0.3),
+    inset -8px -8px 20px rgba(255, 255, 255, 0.7);
+}
+
+@media (max-width: 768px) {
+  .registration-container {
+    padding: 30px 20px;
+    margin: 60px 15px;
+  }
+  .registration-container h1 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .registration-container {
+    padding: 20px 15px;
+    margin: 40px 10px;
+  }
+  .registration-container h1 {
+    font-size: 1.3rem;
+  }
 }
