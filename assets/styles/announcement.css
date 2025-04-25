@@ -1,17 +1,10 @@
 /* assets/styles/announcement.css */
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
 body {
   background: #e4e7ea;
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
-  line-height: 1.5;
+
 }
 
 .container {
@@ -65,30 +58,41 @@ label {
 }
 
 .btn-primary {
-  width: 100%;
-  padding: 14px;
-  background: #f87822;
-  border: none;
-  border-radius: 16px;
-  box-shadow: 10px 10px 24px rgba(0, 0, 0, 0.3),
-    -10px -10px 24px rgba(255, 255, 255, 0.7);
-  font-size: 1rem;
-  color: #fff;
-  cursor: pointer;
-  transition: transform 0.1s, box-shadow 0.1s;
-}
-
-.btn-primary:hover {
-  transform: translateY(-3px);
-  box-shadow: 12px 12px 28px rgba(0, 0, 0, 0.35),
-    -12px -12px 28px rgba(255, 255, 255, 0.75);
-}
-
-.btn-primary:active {
-  transform: translateY(0);
-  box-shadow: inset 8px 8px 20px rgba(0, 0, 0, 0.3),
-    inset -8px -8px 20px rgba(255, 255, 255, 0.7);
-}
+    padding: 14px;
+    background: #f87822;
+    border: none;
+    border-radius: 16px;
+    box-shadow: 10px 10px 24px rgba(0, 0, 0, 0.3),
+      -10px -10px 24px rgba(255, 255, 255, 0.7);
+    font-size: 1rem;
+    color: #fff;
+    cursor: pointer;
+    transition: transform 0.1s, box-shadow 0.1s;
+  }
+  
+  form .btn-primary {
+    display: block;
+    width: 100%;
+  }
+  
+  .page-header .btn-primary {
+    display: inline-flex;
+    width: auto;
+    padding: 0.5rem 1rem;
+  }
+  
+  .btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 12px 12px 28px rgba(0, 0, 0, 0.35),
+      -12px -12px 28px rgba(255, 255, 255, 0.75);
+  }
+  
+  .btn-primary:active {
+    transform: translateY(0);
+    box-shadow: inset 8px 8px 20px rgba(0, 0, 0, 0.3),
+      inset -8px -8px 20px rgba(255, 255, 255, 0.7);
+  }
+  
 
 /* Utility classes */
 .mt-4 {
@@ -109,7 +113,6 @@ body {
 }
 
 .announcement-page {
-  max-width: 800px;
   margin: 4rem auto;
   padding: 0 1rem;
 }
