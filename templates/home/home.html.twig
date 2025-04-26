@@ -20,23 +20,28 @@
                 <h2>{{ 'home.recent_courses_heading'|trans }}</h2>
                 <div class="courses-grid">
                     {% for course in recentCourses %}
-                        {% set bg = course.background is not empty ? course.background : '#ddd' %}
-                        <div class="courses-card">
-                            {% if bg|slice(0,1) == '#' %}
-                                <div class="courses-header" style="background-color: {{ bg }};"></div>
-                            {% else %}
-                                <div class="courses-header" style="background-image: url('{{ asset('uploads/course_pics/' ~ bg) }}');"></div>
-                            {% endif %}
-                            <div class="courses-content">
-                                <h5 class="courses-title">
-                                    <a href="{{ path('courses_show', { id: course.id, code: course.code }) }}">
-                                        {{ course.title }}
-                                    </a>
-                                </h5>
-                                <p class="courses-subtitle">{{ course.code }}</p>
-                            </div>
-                        </div>
-                    {% endfor %}
+                {% set title = course.title %}
+                {% set shortTitle = title|length > 30 
+                    ? title|slice(0, 30) ~ '…' 
+                    : title 
+                %}
+                <div class="courses-card">
+                    {% if course.background|default('')|slice(0,1) == '#' %}
+                        <div class="courses-header" style="background-color: {{ course.background }};"></div>
+                    {% else %}
+                        <div class="courses-header" style="background-image: url('{{ asset('uploads/course_pics/' ~ course.background) }}');"></div>
+                    {% endif %}
+                    <div class="courses-content">
+                        <h5 class="courses-title">
+                            <a href="{{ path('courses_show', { id: course.id, code: course.code }) }}">
+                                {{ shortTitle }}
+                            </a>
+                        </h5>
+                        <p class="courses-subtitle">{{ course.code }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+
                 </div>
             </section>
         {% else %}

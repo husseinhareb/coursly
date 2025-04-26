@@ -108,7 +108,8 @@
             document.querySelectorAll(".courses-card").forEach(card => {
                 const title = card.querySelector(".courses-title").textContent.toLowerCase();
                 const code = card.querySelector(".courses-subtitle").textContent.toLowerCase();
-                card.style.display = (title + ' ' + code).includes(query) ? 'block' : 'none';
+                const match = (title + ' ' + code).includes(query);
+                card.classList.toggle('hidden', !match);
             });
         });
     });

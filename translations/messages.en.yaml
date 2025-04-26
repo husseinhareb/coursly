@@ -203,4 +203,4 @@ admin_alert:
 announcement:
   list:
     heading: "Announcement"
-    new: "Add a new announcement"
+    new: "Add announcement"

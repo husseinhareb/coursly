@@ -60,9 +60,13 @@
   overflow: hidden;
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  display: flex;
+    display: none;
   flex-direction: column;
   transition: transform 0.2s ease-in-out;
+}
+
+.courses-card.hidden {
+  display: none;
 }
 
 .courses-card:hover {

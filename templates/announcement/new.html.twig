@@ -5,40 +5,48 @@
 
 {% block stylesheets %}
   {{ parent() }}
-  <link rel="stylesheet" href="{{ asset('styles/announcement.css') }}">
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-        integrity="sha512-u3sJg4w0R7G7kI6b6uWkrGgF1V6p7mC1HcbxA4fTxib0f/6Ck6UqjQ6kKD5pXy4y1CrO+6kdDk5JIq4Cs7YmgA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link
+    rel="stylesheet"
+    href="{{ asset('styles/announcement.css') }}"
+  >
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-u3sJg4w0R7G7kI6b6uWkrGgF1V6p7mC1HcbxA4fTxib0f/6Ck6UqjQ6kKD5pXy4y1CrO+6kdDk5JIq4Cs7YmgA=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  >
 {% endblock %}
-
 
 {% block body %}
   <div class="container mt-4">
     <h1>Create Announcement</h1>
 
-    {{ form_start(form, {attr: {enctype: 'multipart/form-data', class: 'mt-3'}}) }}
+    {{ form_start(form, {
+        attr: { enctype: 'multipart/form-data', class: 'mt-3' }
+    }) }}
+
       <div class="mb-3">
         {{ form_label(form.title) }}
-        {{ form_widget(form.title, {attr: {class: 'form-control'}}) }}
+        {{ form_widget(form.title, { attr: { class: 'form-control' } }) }}
         {{ form_errors(form.title) }}
       </div>
 
       <div class="mb-3">
         {{ form_label(form.content) }}
-        {{ form_widget(form.content, {attr: {class: 'form-control'}}) }}
+        {{ form_widget(form.content, { attr: { class: 'form-control' } }) }}
         {{ form_errors(form.content) }}
       </div>
 
       <div class="mb-3">
         {{ form_label(form.file) }}
-        {{ form_widget(form.file, {attr: {class: 'form-control-file'}}) }}
+        {{ form_widget(form.file, { attr: { class: 'form-control-file' } }) }}
         {{ form_errors(form.file) }}
       </div>
 
-      <button type="submit" class="btn btn-primary">
-        {{ form_widget(form.save) }}
-      </button>
+      {# Symfony will render exactly one <button class="btn btn-primary">Create Announcement</button> #}
+      {{ form_row(form.save) }}
+
     {{ form_end(form) }}
   </div>
 {% endblock %}
