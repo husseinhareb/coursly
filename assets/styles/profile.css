@@ -1,24 +1,35 @@
 /* assets/styles/profile.css */
-* {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+body {
+  background: #e4e7ea;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  line-height: 1.5;
+  color: #333;
+}
 
 .profile-content {
   max-width: 800px;
-  margin: 2rem auto;
-  background-color: #fff;
+  margin: 2rem auto 0;
+  background: #e4e7ea;
   padding: 2rem;
-  border-radius: 8px;
+  border-radius: 24px;
   margin-top: 80px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow:
+    16px 16px 32px rgba(0, 0, 0, 0.25),
+    -16px -16px 32px rgba(255, 255, 255, 0.85);
 }
 
 .profile-content h1 {
   text-align: center;
-  color: #333;
+  color: #1a365d;
   margin-bottom: 1.5rem;
 }
 
@@ -32,37 +43,52 @@
   height: 150px;
   object-fit: cover;
   border-radius: 50%;
-  border: 2px solid #ccc;
+  background: #e4e7ea;
+  box-shadow:
+    8px 8px 20px rgba(0, 0, 0, 0.25),
+    -8px -8px 20px rgba(255, 255, 255, 0.85);
   display: block;
   margin: 0 auto;
 }
 
 .no-picture {
+  text-align: center;
   font-style: italic;
   color: #777;
 }
 
 .alert {
+  width: 100%;
+  background: #e4e7ea;
+  box-shadow:
+    inset 8px 8px 20px rgba(0, 0, 0, 0.15),
+    inset -8px -8px 20px rgba(255, 255, 255, 0.7);
+  border-radius: 16px;
   padding: 0.75rem 1rem;
   margin-bottom: 1rem;
-  border-radius: 4px;
   font-size: 0.95rem;
 }
 
 .alert-success {
-  background-color: #d4edda;
+  border-left: 4px solid #155724;
   color: #155724;
+  background-color: #d4edda;
+  box-shadow: none;
 }
 
 .alert-error,
 .alert-danger {
-  background-color: #f8d7da;
+  border-left: 4px solid #721c24;
   color: #721c24;
+  background-color: #f8d7da;
+  box-shadow: none;
 }
 
 .alert-warning {
-  background-color: #fff3cd;
+  border-left: 4px solid #856404;
   color: #856404;
+  background-color: #fff3cd;
+  box-shadow: none;
 }
 
 #profile-view {
@@ -77,14 +103,19 @@
 }
 
 .user-info li {
+  background: #e4e7ea;
+  box-shadow:
+    inset 4px 4px 12px rgba(0, 0, 0, 0.1),
+    inset -4px -4px 12px rgba(255, 255, 255, 0.7);
+  border-radius: 12px;
   padding: 0.75rem;
-  border-bottom: 1px solid #e0e0e0;
   font-size: 1rem;
   color: #555;
+  margin-bottom: 1rem;
 }
 
 .user-info li:last-child {
-  border-bottom: none;
+  margin-bottom: 0;
 }
 
 .user-info strong {
@@ -94,41 +125,45 @@
 .btn {
   padding: 0.5rem 1rem;
   border: none;
-  border-radius: 4px;
+  border-radius: 16px;
+  background: #e4e7ea;
+  box-shadow:
+    10px 10px 24px rgba(0, 0, 0, 0.3),
+    -10px -10px 24px rgba(255, 255, 255, 0.7);
   font-size: 1rem;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: transform 0.1s, box-shadow 0.1s;
   margin: 0.5rem;
 }
 
-.btn-primary {
-  background-color: #fd8c29;
-  color: #fff;
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    12px 12px 28px rgba(0, 0, 0, 0.35),
+    -12px -12px 28px rgba(255, 255, 255, 0.75);
 }
 
-.btn-primary:hover {
-  background-color: #f5821e;
+.btn:active {
+  transform: translateY(0);
+  box-shadow:
+    inset 8px 8px 20px rgba(0, 0, 0, 0.3),
+    inset -8px -8px 20px rgba(255, 255, 255, 0.7);
+}
+
+.btn-primary {
+  background: #f87822;
+  color: #fff;
 }
 
 .btn-success {
-  background-color: #ff8113;
+  background: #ff8113;
   color: #fff;
-}
-
-.btn-success:hover {
-  background-color: #fc7805;
 }
 
 .btn-secondary {
-  background-color: #6c757d;
+  background: #6c757d;
   color: #fff;
 }
-
-.btn-secondary:hover {
-  background-color: #5a6268;
-}
-
-/* Edit Form Styles */
 
 #profile-edit {
   margin-top: 1.5rem;
@@ -154,17 +189,39 @@ form label {
 form input[type="text"],
 form input[type="email"],
 form input[type="file"],
-form textarea,
-form select {
+form textarea{
   width: 100%;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  padding: 14px;
+  border: none;
+  border-radius: 16px;
+  background: #e4e7ea;
+  box-shadow:
+    inset 8px 8px 20px rgba(0, 0, 0, 0.25),
+    inset -8px -8px 20px rgba(255, 255, 255, 0.85);
   font-size: 1rem;
+  transition: box-shadow 0.2s;
 }
 
 form input:focus,
 form textarea:focus,
 form select:focus {
   outline: none;
-  border-color: #fd8c29;
+  box-shadow:
+    inset 4px 4px 12px rgba(0, 0, 0, 0.35),
+    inset -4px -4px 12px rgba(255, 255, 255, 0.95);
+}
+
+@media (max-width: 600px) {
+  .profile-content {
+    padding: 1.5rem;
+  }
+
+  .profile-content h1 {
+    font-size: 1.6rem;
+  }
+
+  .profile-img {
+    width: 120px;
+    height: 120px;
+  }
 }
