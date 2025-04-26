@@ -15,6 +15,7 @@ body {
   padding: 40px 30px;
   max-width: 500px;
   margin: 80px auto;
+  margin-top: 80px;
 }
 
 h1 {
@@ -96,7 +97,7 @@ label {
 
 /* Utility classes */
 .mt-4 {
-  margin-top: 1.5rem;
+  margin-top: 80px;
 }
 .mt-3 {
   margin-top: 1rem;

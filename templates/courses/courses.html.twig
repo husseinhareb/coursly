@@ -63,11 +63,19 @@
                 <div class="courses-card">
                     <div class="courses-header" style="{% if bg starts with '#' %}background-color: {{ bg }};{% else %}background-image: url('{{ asset('uploads/course_pics/' ~ bg) }}');{% endif %}"></div>
                     <div class="courses-content">
+                        {% set title = course.title %}
+                        {% set shortTitle = title|length > 60
+                            ? title|slice(0, 60) ~ '…'
+                            : title
+                        %}
+
                         <h5 class="courses-title">
-                            <a href="{{ path('courses_show', { id: course.id, code: course.code }) }}">{{ course.title }}</a>
-                            {% if alertCount > 0 %}
-                                <span id="badge-{{ course.id }}" class="alert-badge">{{ alertCount }}</span>
-                            {% endif %}
+                        <a href="{{ path('courses_show', { id: course.id, code: course.code }) }}">
+                            {{ shortTitle }}
+                        </a>
+                        {% if alertCount > 0 %}
+                            <span id="badge-{{ course.id }}" class="alert-badge">{{ alertCount }}</span>
+                        {% endif %}
                         </h5>
                         <p class="courses-subtitle">{{ course.code }}</p>
                         <div class="course-actions">
