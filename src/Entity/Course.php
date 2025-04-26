@@ -50,7 +50,15 @@ class Course
     private Collection $posts;
 
     /** @var Collection<int, AdminAlert> */
-    #[ORM\OneToMany(mappedBy: 'course', targetEntity: AdminAlert::class, cascade: ['persist', 'remove'])]
+     /**
+     * @var Collection<int, AdminAlert>
+     */
+    #[ORM\OneToMany(
+        mappedBy: 'course',
+        targetEntity: AdminAlert::class,
+        cascade: ['persist','remove'],
+        orphanRemoval: true      // ← add this
+    )]
     private Collection $alerts;
 
     public function __construct()

@@ -147,6 +147,26 @@ class CourseController extends AbstractController
         
     }
 
+
+    #[Route('/courses/{id}/delete', name: 'courses_delete', methods: ['POST'])]
+    #[IsGranted('ROLE_ADMIN')]
+    public function delete(
+        Course $course,
+        ManagerRegistry $doctrine,
+        Request $request
+    ): Response {
+        // CSRF check
+        if (!$this->isCsrfTokenValid('delete'.$course->getId(), $request->request->get('_token'))) {
+            throw $this->createAccessDeniedException('Invalid CSRF token');
+        }
+
+        $em = $doctrine->getManager();
+        $em->remove($course);
+        $em->flush();
+
+        return $this->redirectToRoute('courses_index');
+    }
+
     // ───────────────────────────────
     //  LISTE DES INSCRITS
     // ───────────────────────────────

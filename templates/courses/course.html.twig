@@ -26,32 +26,42 @@
   </header>
 
   {# ───────── Admin Alerts Panel ───────── #}
-  {% if unreadAlerts|length %}
-    <section class="alert-banner card">
-      <div class="alert-banner-header">
-        <i class="fa-solid fa-triangle-exclamation"></i>
-        {{ 'admin_alert.banner'|trans({ '%count%': unreadAlerts|length }) }}
-      </div>
-      <div class="alert-list">
-        {% for alert in unreadAlerts %}
-          {% if alert.post %}
-            {% set adminName = alert.admin.firstName ~ ' ' ~ alert.admin.lastName %}
-            <div class="alert-item">
-              <a href="#post-{{ alert.post.id }}" class="alert-link">
-                {{ ('admin_alert.tag.' ~ alert.action)|trans({ '%name%': adminName }) }}: “{{ alert.post.title }}”
-              </a>
-              <button class="btn-dismiss-alert"
-                      data-alert-id="{{ alert.id }}"
-                      data-course-id="{{ course.id }}"
-                      aria-label="{{ 'admin_alert.dismiss'|trans }}">
-                <i class="fa-solid fa-circle-xmark"></i>
-              </button>
-            </div>
-          {% endif %}
-        {% endfor %}
-      </div>
-    </section>
-  {% endif %}
+{# Collect only the alerts that still reference a real course #}
+{% set validAlerts = unreadAlerts|filter(a => a.course is not null) %}
+
+{# Only render if there’s at least one real alert left #}
+{# Only keep alerts whose course *and* post still exist #}
+{% set validAlerts = unreadAlerts
+    |filter(a => a.course is not null and a.post is not null) 
+%}
+
+{% if validAlerts|length > 0 %}
+  <section class="alert-banner card">
+    <div class="alert-banner-header">
+      <i class="fa-solid fa-triangle-exclamation"></i>
+      {{ 'admin_alert.banner'|trans({ '%count%': validAlerts|length }) }}
+    </div>
+    <div class="alert-list">
+      {% for alert in validAlerts %}
+        {% set adminName = alert.admin.firstName ~ ' ' ~ alert.admin.lastName %}
+        <div class="alert-item">
+          <a href="#post-{{ alert.post.id }}" class="alert-link">
+            {{ ('admin_alert.tag.' ~ alert.action)|trans({ '%name%': adminName }) }}
+            : “{{ alert.post.title }}”
+          </a>
+          <button
+            class="btn-dismiss-alert"
+            data-alert-id="{{ alert.id }}"
+            data-course-id="{{ alert.course.id }}"
+            aria-label="{{ 'admin_alert.dismiss'|trans }}">
+            <i class="fa-solid fa-circle-xmark"></i>
+          </button>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+{% endif %}
+
 
   {# ───────── Posts Section ───────── #}
   <section class="posts-section">

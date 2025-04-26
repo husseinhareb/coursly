@@ -1,7 +1,9 @@
 {# templates/courses/courses.html.twig #}
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ 'courses.my.title'|trans }}{% endblock %}
+{% block title %}
+    {{ 'courses.my.title'|trans }}
+{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -10,6 +12,8 @@
 
 {% block body %}
 <div class="courses-page">
+
+    {# Header with Add Course button for admins #}
     <div class="courses-header-container">
         <h1 class="page-title">{{ 'courses.my.heading'|trans }}</h1>
         {% if is_granted('ROLE_ADMIN') %}
@@ -20,12 +24,18 @@
         {% endif %}
     </div>
 
+    {# Search bar #}
     <div class="search-bar">
-        <input type="text" id="search" class="search-input" placeholder="{{ 'courses.my.search_placeholder'|trans }}">
+        <input
+            type="text"
+            id="search"
+            class="search-input"
+            placeholder="{{ 'courses.my.search_placeholder'|trans }}"
+        >
     </div>
 
     <div class="dashboard-content">
-        {# Left column: news feed #}
+        {# News feed on the left #}
         <aside class="news-feed card">
             <header class="news-header">
                 <h2>{{ 'courses.news.heading'|trans }}</h2>
@@ -43,10 +53,12 @@
                             {% endif %}
                             «<em>{{ post.title }}</em>»
                             {{ 'courses.news.in_course'|trans }}
-                            <a href="{{ path('courses_show', {id: post.course.id, code: post.course.code}) }}">
+                            <a href="{{ path('courses_show', { id: post.course.id, code: post.course.code }) }}">
                                 {{ post.course.code }}
                             </a>
-                            <time datetime="{{ post.createdAt|date('c') }}">{{ post.createdAt|date('Y-m-d H:i') }}</time>
+                            <time datetime="{{ post.createdAt|date('c') }}">
+                                {{ post.createdAt|date('Y-m-d H:i') }}
+                            </time>
                         </div>
                     </li>
                 {% else %}
@@ -54,62 +66,73 @@
                 {% endfor %}
             </ul>
         </aside>
+ <section class="courses-grid">
+      {% for course in courses %}
+        {% set bg = colors[loop.index0 % colors|length] %}
+        {% set alertCount = course.alerts|filter(a => not a.isAcknowledgedBy(app.user))|length %}
 
-        {# Right column: course cards grid #}
-        <section class="courses-grid">
-            {% for course in courses %}
-                {% set bg = colors[loop.index0 % colors|length] %}
-                {% set alertCount = course.alerts|filter(a => not a.isAcknowledgedBy(app.user))|length %}
-                <div class="courses-card">
-                    <div class="courses-header" style="{% if bg starts with '#' %}background-color: {{ bg }};{% else %}background-image: url('{{ asset('uploads/course_pics/' ~ bg) }}');{% endif %}"></div>
-                    <div class="courses-content">
-                        {% set title = course.title %}
-                        {% set shortTitle = title|length > 60
-                            ? title|slice(0, 60) ~ '…'
-                            : title
-                        %}
+        <div class="courses-card">
+          <div class="courses-header"
+               style="{% if bg starts with '#' %}background-color: {{ bg }};{% else %}background-image: url('{{ asset('uploads/course_pics/' ~ bg) }}');{% endif %}">
+          </div>
+          <div class="courses-content">
+            {% set full = course.title %}
+            {% set shortTitle = full|length > 60 ? full|slice(0,60) ~ '…' : full %}
 
-                        <h5 class="courses-title">
-                        <a href="{{ path('courses_show', { id: course.id, code: course.code }) }}">
-                            {{ shortTitle }}
-                        </a>
-                        {% if alertCount > 0 %}
-                            <span id="badge-{{ course.id }}" class="alert-badge">{{ alertCount }}</span>
-                        {% endif %}
-                        </h5>
-                        <p class="courses-subtitle">{{ course.code }}</p>
-                        <div class="course-actions">
-                            {% if is_granted('ROLE_ADMIN') %}
-                                <a href="{{ path('courses_edit', { id: course.id }) }}" class="btn-edit">
-                                    <i class="fa-solid fa-pen"></i>{{ 'courses.my.edit'|trans }}
-                                </a>
-                            {% endif %}
-                            <a href="{{ path('courses_enrolled', { id: course.id, code: course.code }) }}" class="btn-info">
-                                <i class="fa-solid fa-circle-info"></i>{{ 'courses.my.infomessage'|trans }}
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            {% else %}
-                <p class="no-courses-message">{{ 'courses.my.no_courses'|trans }}</p>
-            {% endfor %}
-        </section>
-    </div>
+            <h5 class="courses-title">
+              <a href="{{ path('courses_show', { id: course.id, code: course.code }) }}">
+                {{ shortTitle }}
+              </a>
+              {% if alertCount > 0 %}
+                <span id="badge-{{ course.id }}" class="alert-badge">{{ alertCount }}</span>
+              {% endif %}
+            </h5>
+            <p class="courses-subtitle">{{ course.code }}</p>
+
+            <div class="course-actions">
+              {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{ path('courses_edit', { id: course.id }) }}" class="btn-edit">
+                  <i class="fa-solid fa-pen"></i>{{ 'courses.my.edit'|trans }}
+                </a>
+
+                <form method="post"
+                      action="{{ path('courses_delete', { id: course.id }) }}"
+                      onsubmit="return confirm('Are you sure you want to delete this course?');"
+                      style="display:inline-block;">
+                  <input type="hidden" name="_token"
+                         value="{{ csrf_token('delete' ~ course.id) }}">
+                  <button type="submit" class="btn-delete">
+                    <i class="fa-solid fa-trash"></i>Delete
+                  </button>
+                </form>
+              {% endif %}
+
+              <a href="{{ path('courses_enrolled', { id: course.id, code: course.code }) }}"
+                 class="btn-info">
+                <i class="fa-solid fa-circle-info"></i>{{ 'courses.my.infomessage'|trans }}
+              </a>
+            </div>
+          </div>
+        </div>
+      {% else %}
+        <p class="no-courses-message">{{ 'courses.my.no_courses'|trans }}</p>
+      {% endfor %}
+    </section>
+  </div>
 </div>
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
     <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const searchInput = document.getElementById("search");
-        searchInput.addEventListener("input", function () {
-            const query = this.value.toLowerCase().trim();
-            document.querySelectorAll(".courses-card").forEach(card => {
-                const title = card.querySelector(".courses-title").textContent.toLowerCase();
-                const code = card.querySelector(".courses-subtitle").textContent.toLowerCase();
-                const match = (title + ' ' + code).includes(query);
-                card.classList.toggle('hidden', !match);
+    document.addEventListener('DOMContentLoaded', () => {
+        const search = document.getElementById('search');
+        search.addEventListener('input', () => {
+            const q = search.value.toLowerCase().trim();
+            document.querySelectorAll('.courses-card').forEach(card => {
+                const t = card.querySelector('.courses-title').textContent.toLowerCase();
+                const c = card.querySelector('.courses-subtitle').textContent.toLowerCase();
+                card.classList.toggle('hidden', !(t + ' ' + c).includes(q));
             });
         });
     });

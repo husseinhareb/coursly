@@ -1,43 +1,60 @@
-{# templates/posts/new.html.twig #}
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ 'post.new.title'|trans({'%course%': course.title}) }}{% endblock %}
+{% block title %}
+  {% set fullCourse = course.title %}
+  {% set shortCourse = fullCourse|length > 30
+      ? fullCourse|slice(0, 30) ~ '…'
+      : fullCourse
+  %}
+  {{ 'post.new.title'|trans({'%course%': shortCourse}) }}
+{% endblock %}
 
 {% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('styles/post.css') }}">
+  {{ parent() }}
+  <link rel="stylesheet" href="{{ asset('styles/post.css') }}">
 {% endblock %}
 
 {% block body %}
-<div class="post-container">
-    <h1>{{ 'post.new.heading'|trans({'%course%': course.title}) }}</h1>
+  {% set fullCourse = course.title %}
+  {% set shortCourse = fullCourse|length > 30
+      ? fullCourse|slice(0, 30) ~ '…'
+      : fullCourse
+  %}
+  <div class="post-page">
+    <div class="post-container">
+      <h1>{{ 'post.new.heading'|trans({'%course%': shortCourse}) }}</h1>
 
-    {{ form_errors(form) }}
+      {{ form_errors(form) }}
 
-    {{ form_start(form, {'attr': {'data-turbo': 'false'}}) }}
+      {{ form_start(form, {'attr': {'data-turbo': 'false'}}) }}
         <div class="post-form-group">
-            {{ form_row(form.title, {'attr': {'id': 'post_form_title'}}) }}
+          {{ form_row(form.title) }}
         </div>
         <div class="post-form-group">
-            {{ form_row(form.content, {'attr': {'id': 'post_form_content', 'rows': 3}}) }}
+          {{ form_row(form.content) }}
         </div>
         <div class="post-form-group">
-            {{ form_row(form.type, {'attr': {'id': 'post_form_type'}}) }}
+          {{ form_row(form.type) }}
         </div>
         <div class="post-form-group">
-            {{ form_row(form.attachment, {'attr': {'id': 'post_form_attachment'}}) }}
+          {{ form_row(form.attachment) }}
         </div>
         <div class="post-form-group">
-            {{ form_row(form.category, {'attr': {'id': 'post_form_category'}}) }}
+          {{ form_row(form.category) }}
         </div>
-        <div class="post-form-group">
-            {{ form_row(form.isPinned, {'attr': {'id': 'post_form_pinned'}}) }}
+
+        <div class="checkbox-group">
+          {{ form_widget(form.isPinned) }}
+          {{ form_label(form.isPinned) }}
+          {{ form_errors(form.isPinned) }}
         </div>
+
         <button type="submit" class="btn">{{ 'post.new.submit'|trans }}</button>
-    {{ form_end(form) }}
+      {{ form_end(form) }}
 
-    <a href="{{ path('courses_show', { id: course.id, code: course.code }) }}">
+      <a href="{{ path('courses_show', { id: course.id, code: course.code }) }}">
         {{ 'post.new.back_to_course'|trans }}
-    </a>
-</div>
+      </a>
+    </div>
+  </div>
 {% endblock %}

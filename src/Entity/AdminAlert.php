@@ -21,7 +21,10 @@ class AdminAlert
     private ?int $id = null;
 
     #[ORM\ManyToOne(targetEntity: Course::class, inversedBy: 'alerts')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(
+        nullable: false,
+        onDelete: 'CASCADE'       
+    )]
     private Course $course;
 
     #[ORM\ManyToOne(targetEntity: Post::class)]
