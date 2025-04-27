@@ -127,7 +127,7 @@ course:
       code: "Code"
       image: "Course Image"
     submit: "Update Course"
-    back: "Back to Course"
+    back_to_courses: "Back to Courses"
 
 courses:
   my:
@@ -204,3 +204,4 @@ announcement:
   list:
     heading: "Announcement"
     new: "Add announcement"
+    none: "There is no announcements"

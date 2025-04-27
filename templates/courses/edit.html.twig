@@ -1,6 +1,9 @@
+{# templates/courses/edit.html.twig #}
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ 'course.edit.title'|trans({'%course%': course.title}) }}{% endblock %}
+{% block title %}
+    {{ 'course.edit.title'|trans({'%course%': course.title}) }}
+{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -34,8 +37,10 @@
         </div>
         <button type="submit" class="btn">{{ 'course.edit.submit'|trans }}</button>
     {{ form_end(form) }}
-    <a href="{{ path('courses_show', { id: course.id, code: course.code }) }}" class="back-link">
-        {{ 'course.edit.back'|trans }}
+
+    {# ← switched from courses_show to courses_index ↓ #}
+    <a href="{{ path('courses_index') }}" class="back-link">
+        {{ 'course.edit.back_to_courses'|trans }}
     </a>
 </div>
 {% endblock %}
