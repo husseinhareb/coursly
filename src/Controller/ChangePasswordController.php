@@ -14,7 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class ChangePasswordController extends AbstractController
 {
-    #[Route('/{username}/change-password', name: 'app_change_password')]
+    #[Route('/change-password', name: 'app_change_password')]
     public function changePassword(
         Request $request,
         UserPasswordHasherInterface $passwordHasher,

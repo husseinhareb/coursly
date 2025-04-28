@@ -147,24 +147,33 @@ class CourseController extends AbstractController
         
     }
 
-
     #[Route('/courses/{id}/delete', name: 'courses_delete', methods: ['POST'])]
     #[IsGranted('ROLE_ADMIN')]
     public function delete(
+        Request $request,
         Course $course,
-        ManagerRegistry $doctrine,
-        Request $request
-    ): Response {
-        // CSRF check
+        ManagerRegistry $doctrine
+    ): JsonResponse {
+        // Log for debug (you can remove this later)
+        $this->get('logger')->debug('Course delete called for ID '.$course->getId());
+
+        // 1) CSRF
         if (!$this->isCsrfTokenValid('delete'.$course->getId(), $request->request->get('_token'))) {
-            throw $this->createAccessDeniedException('Invalid CSRF token');
+            $this->get('logger')->warning('Invalid CSRF token on delete '.$course->getId());
+            return new JsonResponse(
+                ['success'=>false, 'error'=>'Invalid CSRF token'],
+                JsonResponse::HTTP_FORBIDDEN
+            );
         }
 
+        // 2) Remove
         $em = $doctrine->getManager();
         $em->remove($course);
         $em->flush();
+        $this->get('logger')->info('Course deleted: '.$course->getId());
 
-        return $this->redirectToRoute('courses_index');
+        // 3) Always JSON
+        return new JsonResponse(['success'=>true]);
     }
 
     // ───────────────────────────────
