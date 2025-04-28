@@ -7,7 +7,7 @@ login:
   button: "登录"
   logged_in_as: "您已以 %username% 登录"
   logout: "登出"
-  cookies_notice: "Cookies 通知"
+  cookies_notice: "Cookie 通知"
 
 home:
   title: "首页"
@@ -15,7 +15,7 @@ home:
   email: "您的邮箱：%email%"
   role: "您的角色：%role%"
   welcome: "欢迎来到主页！"
-  login_prompt: "请登录以查看您的帐户详细信息。"
+  login_prompt: "请登录以查看您的账户详情。"
   recent_courses_heading: "最近查看的课程"
   no_recent_courses: "暂无最近查看的课程。"
   announcements_heading: "最新公告"
@@ -23,14 +23,15 @@ home:
 navbar:
   title: "欢迎！"
   toggle_navigation: "切换导航"
-  logo_alt: "网站标志"
+  logo_alt: "站点标志"
   users: "用户"
   courses: "课程"
   profile_picture_alt: "头像"
-  profile_options: "个人选项"
+  profile_options: "个人设置"
   profile: "个人资料"
   logout: "登出"
   login: "登录"
+  announcement: "公告"
 
 registration:
   title: "注册"
@@ -39,34 +40,34 @@ registration:
   password_label: "密码（自动生成）"
   first_name:
     label: "名字"
-    not_blank: "请输入您的名字"
+    not_blank: "请输入名字"
   last_name:
     label: "姓氏"
-    not_blank: "请输入您的姓氏"
+    not_blank: "请输入姓氏"
   username:
     label: "用户名"
     not_blank: "请输入用户名"
-    min_length: "您的用户名至少应包含 {{ limit }} 个字符"
+    min_length: "用户名至少应包含 {{ limit }} 个字符"
   email:
     label: "电子邮箱"
-    not_blank: "请输入电子邮箱"
-    invalid: "请输入有效的电子邮箱地址"
+    not_blank: "请输入邮箱"
+    invalid: "请输入有效的邮箱地址"
   plain_password:
     label: "密码（自动生成）"
-    not_blank: "密码已自动生成"
-    min_length: "您的密码至少应包含 {{ limit }} 个字符"
+    not_blank: "密码由系统自动生成"
+    min_length: "密码至少应包含 {{ limit }} 个字符"
   role:
     label: "角色"
-    placeholder: "请选择角色"
+    placeholder: "选择您的角色"
     administrator: "管理员"
     student: "学生"
-    professor: "教师"
-    admin_professor: "管理员兼教师"
+    professor: "教授"
+    admin_professor: "管理员 & 教授"
 
 profile:
   title: "我的资料"
   header: "您的资料"
-  picture_alt: "个人头像"
+  picture_alt: "头像"
   no_picture: "暂无头像。"
   first_name: "名字"
   last_name: "姓氏"
@@ -91,6 +92,7 @@ post:
     label: "类型"
     message: "消息"
     file: "文件"
+    placeholder: "请选择类型"
   attachment:
     label: "附件（可选）"
   new:
@@ -98,6 +100,11 @@ post:
     heading: "为 %course% 创建新帖子"
     submit: "创建帖子"
     back_to_course: "返回课程"
+  category:
+    label: "分类"
+    placeholder: "请选择分类"
+  pin:
+    label: "置顶"
 
 course:
   new:
@@ -106,12 +113,12 @@ course:
     image_label: "课程图片（可选）"
     submit: "创建课程"
     description: "描述"
-    code: "课程代码"
+    code: "代码"
   show:
     new_post: "创建新帖子"
     posts_heading: "帖子"
     download_file: "下载文件"
-    posted_on: "发表于 %date%"
+    posted_on: "发布于 %date%"
     no_posts: "暂无帖子。"
   edit:
     title: "编辑课程：%course%"
@@ -119,34 +126,42 @@ course:
     label:
       title: "标题"
       description: "描述"
-      code: "课程代码"
+      code: "代码"
       image: "课程图片"
     submit: "更新课程"
-    back: "返回课程"
+    back_to_courses: "返回课程列表"
 
 courses:
   my:
     title: "我的课程"
     heading: "我的课程"
     add_course: "添加课程"
-    search_placeholder: "搜索课程…"
+    search_placeholder: "搜索课程..."
     no_courses: "暂无课程。"
     edit: "编辑"
     infomessage: "信息"
+    delete: "删除"
+    delete_confirm: "确定要删除此课程吗？"
     info:
       title: "课程信息"
       description: "描述"
       enrolled_users: "已选用户"
       no_enrolled_users: "暂无选课用户。"
       back_to_courses: "返回课程列表"
+  news:
+    heading: "最新公告"
+    posted_file: "发布了新文件"
+    posted_message: "发布了消息"
+    in_course: "于课程"
+    none: "暂无最近公告。"
 
 admin:
   users:
     title: "用户管理"
-    header: "用户"
+    header: "用户列表"
     add_user: "添加用户"
     table:
-      id: "编号"
+      id: "ID"
       profile_picture: "头像"
       first_name: "名字"
       last_name: "姓氏"
@@ -163,17 +178,32 @@ admin:
     no_address: "无"
     no_enrollments: "无"
     edit: "编辑"
-    no_users: "暂无用户。"
+    no_users: "未找到用户。"
   enrollments:
     title: "管理 %firstName% %lastName% 的选课"
     header: "管理 %firstName% %lastName% 的选课"
-    admin_warning: "管理员无法选课。"
-    current_heading: "当前选课"
-    none_current: "暂无选课。"
+    admin_warning: "管理员用户无法选课。"
+    current_heading: "当前已选"
+    none_current: "暂无已选课程。"
     remove:
       title: "移除选课"
     available_heading: "可选课程"
     add:
       title: "添加选课"
-    all_enrolled: "所有课程均已选课。"
-    back_to_profile: "返回资料页"
+    all_enrolled: "所有课程已选完。"
+    back_to_profile: "返回用户资料"
+
+admin_alert:
+  banner: "暂无待处理管理操作|%count% 个待处理管理操作"
+  tag:
+    created: "由 %name% 创建"
+    updated: "由 %name% 修改"
+    deleted: "由 %name% 删除"
+  dismiss: "关闭"
+  history: "管理操作历史"
+
+announcement:
+  list:
+    heading: "公告列表"
+    new: "添加公告"
+    none: "暂无公告。"

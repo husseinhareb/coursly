@@ -1,6 +1,6 @@
 login:
   title: "¡Iniciar sesión!"
-  sign_in: "Por favor, inicia sesión"
+  sign_in: "Por favor, inicie sesión"
   email_label: "Correo electrónico"
   password_label: "Contraseña"
   show_password: "Mostrar contraseña"
@@ -11,13 +11,13 @@ login:
 
 home:
   title: "Inicio"
-  hello: "Hola, %name%!"
+  hello: "¡Hola, %name%!"
   email: "Tu correo: %email%"
   role: "Tu rol: %role%"
-  welcome: "¡Bienvenido a la página de inicio!"
-  login_prompt: "Por favor, inicia sesión para ver los detalles de tu cuenta."
+  welcome: "¡Bienvenido a la página principal!"
+  login_prompt: "Por favor, inicie sesión para ver los detalles de su cuenta."
   recent_courses_heading: "Cursos vistos recientemente"
-  no_recent_courses: "No has visto cursos recientemente."
+  no_recent_courses: "No se han visto cursos recientemente."
   announcements_heading: "Últimos anuncios"
 
 navbar:
@@ -31,6 +31,7 @@ navbar:
   profile: "Perfil"
   logout: "Cerrar sesión"
   login: "Iniciar sesión"
+  announcement: "Anuncio"
 
 registration:
   title: "Registro"
@@ -39,29 +40,29 @@ registration:
   password_label: "Contraseña (generada automáticamente)"
   first_name:
     label: "Nombre"
-    not_blank: "Por favor, ingresa tu nombre"
+    not_blank: "Por favor, ingrese su nombre"
   last_name:
     label: "Apellido"
-    not_blank: "Por favor, ingresa tu apellido"
+    not_blank: "Por favor, ingrese su apellido"
   username:
     label: "Nombre de usuario"
-    not_blank: "Por favor, ingresa un nombre de usuario"
-    min_length: "Tu nombre de usuario debe tener al menos {{ limit }} caracteres"
+    not_blank: "Por favor, ingrese un nombre de usuario"
+    min_length: "Su nombre de usuario debe tener al menos {{ limit }} caracteres"
   email:
     label: "Correo electrónico"
-    not_blank: "Por favor, ingresa un correo electrónico"
-    invalid: "Por favor, ingresa una dirección de correo válida"
+    not_blank: "Por favor, ingrese un correo electrónico"
+    invalid: "Por favor, ingrese una dirección de correo electrónico válida"
   plain_password:
     label: "Contraseña (generada automáticamente)"
     not_blank: "La contraseña se genera automáticamente"
-    min_length: "Tu contraseña debe tener al menos {{ limit }} caracteres"
+    min_length: "Su contraseña debe tener al menos {{ limit }} caracteres"
   role:
     label: "Rol"
-    placeholder: "Elige tu rol"
+    placeholder: "Elija su rol"
     administrator: "Administrador"
     student: "Estudiante"
     professor: "Profesor"
-    admin_professor: "Administrador y profesor"
+    admin_professor: "Administrador y Profesor"
 
 profile:
   title: "Mi perfil"
@@ -91,6 +92,7 @@ post:
     label: "Tipo"
     message: "Mensaje"
     file: "Archivo"
+    placeholder: "Seleccione el tipo"
   attachment:
     label: "Adjunto (opcional)"
   new:
@@ -98,6 +100,11 @@ post:
     heading: "Crear una nueva publicación para %course%"
     submit: "Crear publicación"
     back_to_course: "Volver al curso"
+  category:
+    label: "Categoría"
+    placeholder: "Seleccione la categoría"
+  pin:
+    label: "Fijar"
 
 course:
   new:
@@ -112,7 +119,7 @@ course:
     posts_heading: "Publicaciones"
     download_file: "Descargar archivo"
     posted_on: "Publicado el %date%"
-    no_posts: "No hay publicaciones aún."
+    no_posts: "Aún no hay publicaciones."
   edit:
     title: "Editar curso: %course%"
     heading: "Editar curso"
@@ -122,23 +129,31 @@ course:
       code: "Código"
       image: "Imagen del curso"
     submit: "Actualizar curso"
-    back: "Volver al curso"
+    back_to_courses: "Volver a cursos"
 
 courses:
   my:
     title: "Mis cursos"
     heading: "Mis cursos"
-    add_course: "Añadir curso"
+    add_course: "Agregar curso"
     search_placeholder: "Buscar un curso..."
     no_courses: "No hay cursos disponibles."
     edit: "Editar"
-    infomessage: "Información"
+    infomessage: "Info"
+    delete: "Eliminar"
+    delete_confirm: "¿Está seguro de que desea eliminar este curso?"
     info:
       title: "Información del curso"
       description: "Descripción"
       enrolled_users: "Usuarios inscritos"
-      no_enrolled_users: "No hay usuarios inscritos aún."
+      no_enrolled_users: "Aún no hay usuarios inscritos."
       back_to_courses: "Volver a cursos"
+  news:
+    heading: "Últimos anuncios"
+    posted_file: "ha publicado un nuevo archivo"
+    posted_message: "ha publicado un mensaje"
+    in_course: "en"
+    none: "No hay anuncios recientes."
 
 admin:
   users:
@@ -161,15 +176,15 @@ admin:
     no_profile_picture: "N/D"
     no_phone: "N/D"
     no_address: "N/D"
-    no_enrollments: "Ninguna"
+    no_enrollments: "Ninguno"
     edit: "Editar"
     no_users: "No se encontraron usuarios."
   enrollments:
     title: "Gestionar inscripciones de %firstName% %lastName%"
     header: "Gestionar inscripciones de %firstName% %lastName%"
-    admin_warning: "Los administradores no pueden ser inscritos en cursos."
+    admin_warning: "Los usuarios administradores no pueden inscribirse en cursos."
     current_heading: "Inscripciones actuales"
-    none_current: "No hay cursos inscritos."
+    none_current: "Sin cursos inscritos."
     remove:
       title: "Eliminar inscripción"
     available_heading: "Cursos disponibles"
@@ -177,3 +192,18 @@ admin:
       title: "Agregar inscripción"
     all_enrolled: "Todos los cursos ya están inscritos."
     back_to_profile: "Volver al perfil"
+
+admin_alert:
+  banner: "No hay acciones de administración pendientes|%count% acción de administración pendiente|%count% acciones de administración pendientes"
+  tag:
+    created: "Creado por %name%"
+    updated: "Modificado por %name%"
+    deleted: "Eliminado por %name%"
+  dismiss: "Descartar"
+  history: "Historial de alertas de administración"
+
+announcement:
+  list:
+    heading: "Anuncios"
+    new: "Agregar anuncio"
+    none: "No hay anuncios"

@@ -1,27 +1,27 @@
 login:
-  title: "Se connecter !"
+  title: "Se connecter !"
   sign_in: "Veuillez vous connecter"
   email_label: "Email"
   password_label: "Mot de passe"
   show_password: "Afficher le mot de passe"
   button: "Se connecter"
   logged_in_as: "Vous êtes connecté en tant que %username%"
-  logout: "Déconnexion"
+  logout: "Se déconnecter"
   cookies_notice: "Avis sur les cookies"
 
 home:
   title: "Accueil"
-  hello: "Bonjour, %name% !"
-  email: "Votre email : %email%"
-  role: "Votre rôle : %role%"
-  welcome: "Bienvenue sur la page d’accueil !"
+  hello: "Bonjour, %name% !"
+  email: "Votre email : %email%"
+  role: "Votre rôle : %role%"
+  welcome: "Bienvenue sur la page d’accueil !"
   login_prompt: "Veuillez vous connecter pour voir les détails de votre compte."
   recent_courses_heading: "Cours récemment consultés"
   no_recent_courses: "Aucun cours consulté récemment."
   announcements_heading: "Dernières annonces"
 
 navbar:
-  title: "Bienvenue !"
+  title: "Bienvenue !"
   toggle_navigation: "Basculer la navigation"
   logo_alt: "Logo du site"
   users: "Utilisateurs"
@@ -31,6 +31,7 @@ navbar:
   profile: "Profil"
   logout: "Déconnexion"
   login: "Connexion"
+  announcement: "Annonce"
 
 registration:
   title: "Inscription"
@@ -41,12 +42,12 @@ registration:
     label: "Prénom"
     not_blank: "Veuillez entrer votre prénom"
   last_name:
-    label: "Nom"
+    label: "Nom de famille"
     not_blank: "Veuillez entrer votre nom de famille"
   username:
-    label: "Nom d'utilisateur"
-    not_blank: "Veuillez entrer un nom d'utilisateur"
-    min_length: "Votre nom d'utilisateur doit comporter au moins {{ limit }} caractères"
+    label: "Nom d’utilisateur"
+    not_blank: "Veuillez entrer un nom d’utilisateur"
+    min_length: "Votre nom d’utilisateur doit comporter au moins {{ limit }} caractères"
   email:
     label: "Email"
     not_blank: "Veuillez entrer un email"
@@ -61,7 +62,7 @@ registration:
     administrator: "Administrateur"
     student: "Étudiant"
     professor: "Professeur"
-    admin_professor: "Administrateur et professeur"
+    admin_professor: "Administrateur & Professeur"
 
 profile:
   title: "Mon profil"
@@ -69,7 +70,7 @@ profile:
   picture_alt: "Photo de profil"
   no_picture: "Aucune photo de profil disponible."
   first_name: "Prénom"
-  last_name: "Nom"
+  last_name: "Nom de famille"
   email: "Email"
   phone_number: "Numéro de téléphone"
   address: "Adresse"
@@ -91,30 +92,36 @@ post:
     label: "Type"
     message: "Message"
     file: "Fichier"
+    placeholder: "Choisissez le type"
   attachment:
-    label: "Pièce jointe (facultative)"
+    label: "Pièce jointe (optionnelle)"
   new:
-    title: "Nouveau post pour %course%"
-    heading: "Créer un nouveau post pour %course%"
-    submit: "Créer le post"
+    title: "Nouveau message pour %course%"
+    heading: "Créer un nouveau message pour %course%"
+    submit: "Créer le message"
     back_to_course: "Retour au cours"
+  category:
+    label: "Catégorie"
+    placeholder: "Choisissez la catégorie"
+  pin:
+    label: "Épingler"
 
 course:
   new:
     title: "Nouveau cours"
     heading: "Créer un nouveau cours"
-    image_label: "Image du cours (facultative)"
+    image_label: "Image du cours (optionnelle)"
     submit: "Créer le cours"
     description: "Description"
     code: "Code"
   show:
-    new_post: "Créer un nouveau post"
-    posts_heading: "Publications"
+    new_post: "Créer un nouveau message"
+    posts_heading: "Messages"
     download_file: "Télécharger le fichier"
     posted_on: "Publié le %date%"
-    no_posts: "Aucun post pour le moment."
+    no_posts: "Aucun message pour le moment."
   edit:
-    title: "Modifier le cours : %course%"
+    title: "Modifier le cours : %course%"
     heading: "Modifier le cours"
     label:
       title: "Titre"
@@ -122,23 +129,31 @@ course:
       code: "Code"
       image: "Image du cours"
     submit: "Mettre à jour le cours"
-    back: "Retour au cours"
+    back_to_courses: "Retour aux cours"
 
 courses:
   my:
     title: "Mes cours"
     heading: "Mes cours"
     add_course: "Ajouter un cours"
-    search_placeholder: "Rechercher un cours ..."
+    search_placeholder: "Rechercher un cours..."
     no_courses: "Aucun cours disponible."
     edit: "Modifier"
     infomessage: "Info"
+    delete: "Supprimer"
+    delete_confirm: "Êtes-vous sûr de vouloir supprimer ce cours ?"
     info:
       title: "Informations sur le cours"
       description: "Description"
       enrolled_users: "Utilisateurs inscrits"
       no_enrolled_users: "Aucun utilisateur inscrit pour le moment."
       back_to_courses: "Retour aux cours"
+  news:
+    heading: "Dernières annonces"
+    posted_file: "a posté un nouveau fichier"
+    posted_message: "a posté un message"
+    in_course: "dans"
+    none: "Aucune annonce récente."
 
 admin:
   users:
@@ -149,7 +164,7 @@ admin:
       id: "ID"
       profile_picture: "Photo de profil"
       first_name: "Prénom"
-      last_name: "Nom"
+      last_name: "Nom de famille"
       email: "Email"
       phone: "Téléphone"
       address: "Adresse"
@@ -158,22 +173,37 @@ admin:
       actions: "Actions"
     alt:
       profile_picture: "Photo de profil"
-    no_profile_picture: "N/A"
-    no_phone: "N/A"
-    no_address: "N/A"
+    no_profile_picture: "N/D"
+    no_phone: "N/D"
+    no_address: "N/D"
     no_enrollments: "Aucun"
     edit: "Modifier"
     no_users: "Aucun utilisateur trouvé."
   enrollments:
-    title: "Gérer les inscriptions pour %firstName% %lastName%"
-    header: "Gérer les inscriptions pour %firstName% %lastName%"
+    title: "Gérer les inscriptions de %firstName% %lastName%"
+    header: "Gérer les inscriptions de %firstName% %lastName%"
     admin_warning: "Les utilisateurs administrateurs ne peuvent pas être inscrits aux cours."
     current_heading: "Inscriptions actuelles"
     none_current: "Aucun cours inscrit."
     remove:
-      title: "Supprimer l'inscription"
+      title: "Supprimer l’inscription"
     available_heading: "Cours disponibles"
     add:
       title: "Ajouter une inscription"
     all_enrolled: "Tous les cours sont déjà inscrits."
     back_to_profile: "Retour au profil"
+
+admin_alert:
+  banner: "Aucune action d'administration en attente|Une action d'administration en attente|%count% actions d'administration en attente"
+  tag:
+    created: "Créé par %name%"
+    updated: "Modifié par %name%"
+    deleted: "Supprimé par %name%"
+  dismiss: "Fermer"
+  history: "Historique des alertes d'administration"
+
+announcement:
+  list:
+    heading: "Annonces"
+    new: "Ajouter une annonce"
+    none: "Il n’y a pas d’annonce"
