@@ -216,4 +216,29 @@ class PostController extends AbstractController
         $em->flush();
         return new JsonResponse(['success'=>true]);
     }
+
+    /**
+     * @Route("/posts/{id}/download", name="post_download", methods={"GET"})
+     * @Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_PROFESSOR') or post.getType() === 'file'")
+     */
+    public function download(Post $post): BinaryFileResponse
+    {
+        if ($post->getType() !== 'file' || !$post->getFilePath()) {
+            throw $this->createNotFoundException('No file attached to this post.');
+        }
+
+        $uploadDir = $this->getParameter('post_files_directory');
+        $filePath  = $uploadDir . '/' . $post->getFilePath();
+
+        $response = new BinaryFileResponse($filePath);
+        // force download and use the filename as label
+        $response->setContentDisposition(
+            ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+            // if you have $post->getOriginalFilename(), use that; otherwise, extract from path:
+            $post->getOriginalFilename() ?? basename($filePath)
+        );
+
+        return $response;
+    }
+
 }

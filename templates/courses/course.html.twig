@@ -26,14 +26,7 @@
   </header>
 
   {# ───────── Admin Alerts Panel ───────── #}
-{# Collect only the alerts that still reference a real course #}
-{% set validAlerts = unreadAlerts|filter(a => a.course is not null) %}
-
-{# Only render if there’s at least one real alert left #}
-{# Only keep alerts whose course *and* post still exist #}
-{% set validAlerts = unreadAlerts
-    |filter(a => a.course is not null and a.post is not null) 
-%}
+{% set validAlerts = unreadAlerts|filter(a => a.course is not null and a.post is not null) %}
 
 {% if validAlerts|length > 0 %}
   <section class="alert-banner card">
@@ -103,11 +96,12 @@
             {{ post.content|raw }}
           </article>
 
-          {# Download link for file posts #}
+          {# Download link for file posts - show filename instead of generic text #}
           {% if post.type == 'file' and post.filePath %}
+            {% set filename = post.filePath|split('/')|last %}
             <a class="post-download" href="{{ asset('uploads/post_files/' ~ post.filePath) }}">
               <i class="fa-solid fa-file-arrow-down"></i>
-              {{ 'course.show.download_file'|trans }}
+              {{ filename }}
             </a>
           {% endif %}
 
