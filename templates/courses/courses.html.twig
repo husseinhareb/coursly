@@ -89,9 +89,6 @@
                             <a href="{{ path('courses_show', { id: course.id, code: course.code }) }}">
                                 {{ shortTitle }}
                             </a>
-                            {% if alertCount > 0 %}
-                                <span id="badge-{{ course.id }}" class="alert-badge">{{ alertCount }}</span>
-                            {% endif %}
                         </h5>
                         <p class="courses-subtitle">{{ course.code }}</p>
 
