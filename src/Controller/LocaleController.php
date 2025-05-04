@@ -12,11 +12,11 @@ class LocaleController extends AbstractController
     #[Route('/change-language/{locale}', name: 'change_language')]
     public function changeLanguage(Request $request, string $locale): RedirectResponse
     {
-        // Save the locale in the session.
+        // Enregistrer la locale dans la session.
         $request->getSession()->set('_locale', $locale);
 
-        // Optionally, determine the page to redirect to.
-        // Here we redirect back to the referrer, or default to the homepage.
+        // Facultativement, déterminer la page vers laquelle rediriger
+        // Ici, nous redirigeons vers la page de provenance, ou par défaut vers la page d'accueil
         $referer = $request->headers->get('referer');
         return new RedirectResponse($referer ?: $this->generateUrl('app_home'));
     }

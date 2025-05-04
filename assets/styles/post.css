@@ -1,4 +1,4 @@
-/* 1) reset + neumorphic basics */
+/* 1) Réinitialisation + bases du neumorphisme */
 *,
 *::before,
 *::after {
@@ -12,11 +12,11 @@ body {
   font-family: Arial, sans-serif;
   line-height: 1.5;
   color: #333;
-  /* allow page to scroll if content is tall */
+  /* Permettre le défilement de la page si le contenu est trop haut */
   overflow-y: auto;
 }
 
-/* 2) center the container horizontally only */
+/* 2) Centrer le conteneur uniquement horizontalement */
 .post-page {
   display: flex;
   justify-content: center;
@@ -24,7 +24,7 @@ body {
   padding: 20px 0;
 }
 
-/* 3) the neumorphic form card */
+/* 3) La carte de type neumorphisme */
 .post-container {
   background: #e4e7ea;
   border-radius: 24px;
@@ -46,7 +46,7 @@ body {
   margin-bottom: 30px;
 }
 
-/* 4) form fields */
+/* 4) Champs de formulaire */
 .post-form-group {
   margin-bottom: 20px;
 }
@@ -92,7 +92,7 @@ body {
     inset -4px -4px 12px rgba(255, 255, 255, 0.95);
 }
 
-/* 5) checkbox + label aligned */
+/* 5)Case à cocher + étiquette alignées */
 .checkbox-group {
   display: flex;
   align-items: center;
@@ -100,7 +100,7 @@ body {
   margin-bottom: 20px;
 }
 
-/* 6) submit button */
+/* 6) Bouton de soumission */
 .post-container form button[type="submit"] {
   width: 100%;
   padding: 14px;
@@ -134,7 +134,7 @@ body {
     inset -8px -8px 20px rgba(255, 255, 255, 0.7);
 }
 
-/* 7) back link */
+/* 7) Lien de retour */
 .post-container a {
   display: inline-block;
   margin-top: 20px;

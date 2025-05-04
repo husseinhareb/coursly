@@ -18,17 +18,17 @@ class AnnouncementController extends AbstractController
     #[Security("is_granted('ROLE_ADMIN')")]
     public function new(Request $request, ManagerRegistry $doctrine): Response
     {
-        // 1) Create the Announcement entity and associate form
+        // 1) Créer l'entité Announcement (Annonce) et le formulaire associé
         $announcement = new Announcement();
         $form = $this->createForm(AnnouncementType::class, $announcement);
         $form->handleRequest($request);
 
-        // 2) Process submission
+        // 2) Traiter la soumission.
         if ($form->isSubmitted() && $form->isValid()) {
-            // a) Set the author to the currently logged‐in user
+            // a) Définir l'auteur sur l'utilisateur actuellement connecté
             $announcement->setAuthor($this->getUser());
 
-            // b) Handle optional file upload
+            // b) Gérer le téléchargement de fichier optionnel
             $uploaded = $form->get('file')->getData();
             if ($uploaded) {
                 $newFilename = uniqid('annc_') . '.' . $uploaded->guessExtension();
@@ -39,7 +39,7 @@ class AnnouncementController extends AbstractController
                     );
                     $announcement->setFilePath($newFilename);
                 } catch (FileException $e) {
-                    // flash error and re-render form
+                    // Afficher l'erreur et re-render le formulaire
                     $this->addFlash('error', 'announcement.upload_error');
                     return $this->render('announcement/new.html.twig', [
                         'form' => $form->createView(),
@@ -47,17 +47,17 @@ class AnnouncementController extends AbstractController
                 }
             }
 
-            // c) Persist and flush
+            // c) Persister et flush
             $em = $doctrine->getManager();
             $em->persist($announcement);
             $em->flush();
 
             $this->addFlash('success', 'announcement.created_success');
-            // Redirect to the list of announcements (you should have an index route)
+            // Rediriger vers la liste des annonces (vous devriez avoir une route d'index)
             return $this->redirectToRoute('announcement_index');
         }
 
-        // 3) Render the creation form
+        // 3) Rendre le formulaire de création
         return $this->render('announcement/new.html.twig', [
             'form' => $form->createView(),
         ]);

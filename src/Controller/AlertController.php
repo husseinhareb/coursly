@@ -19,7 +19,7 @@ class AlertController extends AbstractController
         $user   = $this->getUser();
         $course = $alert->getCourse();
     
-        // refuse if they’re not actually a prof on that course:
+        // Refuser s'ils ne sont pas réellement un professeur pour ce cours.
         if (! $course->getUsers()->contains($user)) {
             throw $this->createAccessDeniedException('You are not a professor on that course');
         }

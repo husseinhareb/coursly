@@ -47,11 +47,11 @@ class Post
     #[ORM\Column(type: 'datetime_immutable', nullable: true)]
     private ?\DateTimeImmutable $pinnedAt = null;
 
-    // — Custom ordering
+    // — Tri personnalisé
     #[ORM\Column(type: 'integer')]
     private int $position = 0;
 
-    // — Category lookup
+    // — Recherche de catégorie
     #[ORM\ManyToOne(targetEntity: MessageCategory::class)]
     #[ORM\JoinColumn(name: 'category_id', referencedColumnName: 'id', nullable: true)]
     private ?MessageCategory $category = null;
@@ -76,7 +76,7 @@ class Post
         return $this->id;
     }
 
-    // — Title
+    // — Titre
     public function getTitle(): ?string
     {
         return $this->title;
@@ -88,7 +88,7 @@ class Post
         return $this;
     }
 
-    // — Content
+    // — Contenu
     public function getContent(): ?string
     {
         return $this->content;
@@ -100,7 +100,7 @@ class Post
         return $this;
     }
 
-    // — Type (message vs file)
+    // — Type (message ou fichier)
     public function getType(): ?string
     {
         return $this->type;
@@ -112,7 +112,7 @@ class Post
         return $this;
     }
 
-    // — File path
+    // — Chemin du fichier
     public function getFilePath(): ?string
     {
         return $this->filePath;
@@ -124,7 +124,7 @@ class Post
         return $this;
     }
 
-    // — Timestamps
+    // — Horodatages
     public function getCreatedAt(): \DateTimeImmutable
     {
         return $this->createdAt;
@@ -139,7 +139,7 @@ class Post
         return $this;
     }
 
-    // — Pin/unpin
+    // — Épinglez/Désépingler
     public function isPinned(): bool
     {
         return $this->isPinned;
@@ -160,7 +160,7 @@ class Post
         return $this->pinnedAt;
     }
 
-    // — Custom ordering
+    // — Tri personnalisé
     public function getPosition(): int
     {
         return $this->position;
@@ -171,7 +171,7 @@ class Post
         return $this;
     }
 
-    // — Category
+    // — Categorie
     public function getCategory(): ?MessageCategory
     {
         return $this->category;
@@ -182,7 +182,7 @@ class Post
         return $this;
     }
 
-    // — Course relation
+    // — relation entre les cours
     public function getCourse(): Course
     {
         return $this->course;
@@ -193,7 +193,7 @@ class Post
         return $this;
     }
 
-    // — Author relation
+    // — relations entre les auteurs
     public function getAuthor(): User
     {
         return $this->author;
@@ -204,7 +204,7 @@ class Post
         return $this;
     }
 
-    // — Internal helper to update updatedAt
+    // — Fonction utilitaire interne pour mettre à jour updatedAt
     private function touch(): void
     {
         $this->updatedAt = new \DateTimeImmutable();

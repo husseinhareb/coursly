@@ -208,7 +208,7 @@
 }
 
 /*----------------------------------*/
-/* edit and new course style page   */
+/* Modifier et créer une nouvelle page de style de cours  */
 /*----------------------------------*/
 
 
@@ -693,7 +693,7 @@ body {
 
 
 /*───────────────────────────────────────────────*/
-/*  Visual hint for pinned posts                 */
+/*  Indice visuel pour les publications épinglées                */
 /*───────────────────────────────────────────────*/
 
 
@@ -852,7 +852,7 @@ body {
   color: #8a6d3b;
   margin-bottom: 0.5rem;
 
-  /* NEW: just a little bar on the left of the header text */
+  /* juste une petite barre à gauche du texte de l'en-tête */
   border-left: 6px solid #ffb74d;
   padding-left: 0.75rem;
 }

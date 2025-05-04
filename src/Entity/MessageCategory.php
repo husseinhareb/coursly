@@ -33,8 +33,8 @@ class MessageCategory
     private Collection $posts;
 
     /**
-     * Allow an optional name to be passed when constructing,
-     * but also support Doctrine’s proxy/hydrator requiring a no-arg constructor.
+     * Permettre de passer un nom optionnel lors de la construction
+     * Mais aussi prendre en charge le proxy/hydrateur de Doctrine, qui nécessite un constructeur sans argument
      */
     public function __construct(?string $name = null)
     {
@@ -55,8 +55,8 @@ class MessageCategory
     }
 
     /**
-     * The category name is required to be non-empty.
-     * We trim and ucfirst to standardize.
+     * Le nom de la catégorie doit être non vide
+     * Nous appliquons trim et ucfirst pour standardiser
      */
     public function getName(): string
     {
@@ -93,7 +93,7 @@ class MessageCategory
     public function removePost(Post $post): self
     {
         if ($this->posts->removeElement($post)) {
-            // Unlink owning side if needed
+            // Détacher le côté propriétaire si nécessaire
             if ($post->getCategory() === $this) {
                 $post->setCategory(null);
             }

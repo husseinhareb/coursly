@@ -11,7 +11,7 @@ class MessageCategoryFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        // The minimum two from the spec, plus a few extras:
+        // Les deux minimums de la spécification, plus quelques extras :
         $names = [
             'Information',
             'Important',

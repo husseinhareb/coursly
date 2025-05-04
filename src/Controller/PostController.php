@@ -1,9 +1,9 @@
 <?php
 // src/Controller/PostController.php
 //
-// FULL IMPLEMENTATION – every operation (create, edit, delete,
-// pin/un-pin, re-order, inline-edit) triggers an AdminAlert so that
-// professors always see a moderation notice.
+// IMPLEMENTATION COMPLÈTE – chaque opération (création, modification, suppression)
+// pin/un-pin, re-order, inline-edit)déclenche une AdminAlert afin que
+// les professeurs voient toujours un avis de modération
 
 namespace App\Controller;
 
@@ -25,7 +25,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 class PostController extends AbstractController
 {
     /* ───────────────────────────────
-     |  CREATE
+     |  CREER
      ─────────────────────────────── */
     #[Route('/posts/{id}/{code}/new', name: 'post_new')]
     #[Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_PROFESSOR')")]
@@ -80,7 +80,7 @@ class PostController extends AbstractController
     }
 
     /* ───────────────────────────────
-     |  EDIT (Form)
+     |  MODIFIER (Form)
      ─────────────────────────────── */
     #[Route('/posts/{id}/edit', name: 'post_edit')]
     #[Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_PROFESSOR')")]
@@ -121,7 +121,7 @@ class PostController extends AbstractController
     }
 
     /* ───────────────────────────────
-     |  INLINE-EDIT (AJAX)
+     |  ÉDITER EN LIGNE (AJAX)
      ─────────────────────────────── */
     #[Route('/posts/{id}/inline-edit', name: 'post_inline_edit', methods:['POST'])]
     #[Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_PROFESSOR')")]
@@ -146,7 +146,7 @@ class PostController extends AbstractController
     }
 
     /* ───────────────────────────────
-     |  TOGGLE PIN
+     |  BASCULER L'ÉPINGLE
      ─────────────────────────────── */
     #[Route('/posts/{id}/toggle-pin', name: 'post_toggle_pin', methods:['POST'])]
     #[Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_PROFESSOR')")]
@@ -163,7 +163,7 @@ class PostController extends AbstractController
     }
 
     /* ───────────────────────────────
-     |  MOVE UP / DOWN
+     |  MONTER / DESCENDRE
      ─────────────────────────────── */
     #[Route('/posts/{id}/move-up',   name:'post_move_up',   methods:['POST'])]
     #[Route('/posts/{id}/move-down', name:'post_move_down', methods:['POST'])]
@@ -201,7 +201,7 @@ class PostController extends AbstractController
     }
 
     /* ───────────────────────────────
-     |  DELETE
+     |  SUPPRIMER
      ─────────────────────────────── */
     #[Route('/posts/{id}/delete', name:'post_delete', methods:['DELETE'])]
     #[Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_PROFESSOR')")]
@@ -219,7 +219,7 @@ class PostController extends AbstractController
 
     /**
      * @Route("/posts/{id}/download", name="post_download", methods={"GET"})
-     * @Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_PROFESSOR') or post.getType() === 'file'")
+     * @Security("is_granted('ROLE_ADMIN') ou is_granted('ROLE_PROFESSOR') ou post.getType() === 'file'")
      */
     public function download(Post $post): BinaryFileResponse
     {
@@ -231,10 +231,10 @@ class PostController extends AbstractController
         $filePath  = $uploadDir . '/' . $post->getFilePath();
 
         $response = new BinaryFileResponse($filePath);
-        // force download and use the filename as label
+        // forcer le téléchargement et utiliser le nom du fichier comme libellé
         $response->setContentDisposition(
             ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-            // if you have $post->getOriginalFilename(), use that; otherwise, extract from path:
+            // Si vous avez $post->getOriginalFilename(), utilisez-le ; sinon, extrayez-le du chemin :
             $post->getOriginalFilename() ?? basename($filePath)
         );
 

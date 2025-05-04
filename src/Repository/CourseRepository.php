@@ -19,7 +19,7 @@ class CourseRepository extends ServiceEntityRepository
     }
 
     /**
-     * Search courses by title or code using raw SQL.
+     * Rechercher des cours par titre ou code en utilisant du SQL brut
      *
      * @param string $term
      * @return Course[]
@@ -29,7 +29,7 @@ class CourseRepository extends ServiceEntityRepository
         $em = $this->getEntityManager();
         $conn = $em->getConnection();
 
-        // Build a ResultSetMapping to hydrate Course entities
+        // Construire un ResultSetMapping pour hydrater les entités Course
         $rsm = new ResultSetMappingBuilder($em);
         $rsm->addRootEntityFromClassMetadata(Course::class, 'c');
 
@@ -47,7 +47,7 @@ class CourseRepository extends ServiceEntityRepository
     }
 
     /**
-     * Find all courses a given user is enrolled in, via raw SQL.
+     * Trouver tous les cours auxquels un utilisateur donné est inscrit, via SQL brut
      *
      * @param User $user
      * @return Course[]
@@ -75,7 +75,7 @@ class CourseRepository extends ServiceEntityRepository
     }
 
     /**
-     * Find all courses for a user, ordered by title, using raw SQL.
+     * Trouver tous les cours pour un utilisateur, triés par titre, en utilisant du SQL brut
      *
      * @param User $user
      * @return Course[]
@@ -103,7 +103,7 @@ class CourseRepository extends ServiceEntityRepository
     }
 
     /**
-     * Find courses with duration lower than or equal to given value, raw SQL.
+     * Trouver les cours avec une durée inférieure ou égale à la valeur donnée, en utilisant du SQL brut
      *
      * @param int $duration
      * @param int|null $limit

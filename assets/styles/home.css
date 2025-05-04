@@ -1,6 +1,6 @@
 /* assets/styles/home.css — Neumorphism revamp */
 
-/* 1. Global reset & page background
+/* 1. Réinitialisation globale & arrière-plan de la page
    ───────────────────────────────── */
    *,
    *::before,
@@ -11,13 +11,13 @@
    }
    
    body {
-     background: #e4e7ea;            /* same canvas tone as login screen */
+     background: #e4e7ea;            /* Même ton de canevas que l'écran de connexion */
      font-family: Arial, sans-serif;
      line-height: 1.5;
      color: #393c43;
    }
    
-   /* 2. Layout containers
+   /* 2. Conteneurs de mise en page
       ──────────────────── */
    .main-content {
      max-width: 1200px;
@@ -25,7 +25,7 @@
      padding: 0 1rem;
    }
    
-   /* 3. Typography
+   /* 3. Typographie
       ───────────── */
    .welcome-heading {
      font-size: 2.5rem;
@@ -46,7 +46,7 @@
      font-style: italic;
    }
    
-   /* 4. Recent-courses section
+   /* 4. Section des cours récents
       ───────────────────────── */
    .recent-courses {
      margin-top: 2rem;
@@ -60,7 +60,7 @@
      letter-spacing: 1px;
    }
    
-   /* horizontal scroll grid */
+   /* Section des cours récents */
    .courses-grid {
      display: flex;
      gap: 20px; 
@@ -70,7 +70,7 @@
      background-color: #e4e7ea; 
    }
    
-   /* neumorphic card */
+   /* Carte neumorphique */
    .courses-card {
      flex: 0 0 300px;
      border-radius: 24px;
@@ -87,7 +87,7 @@
        20px 20px 40px rgba(0, 0, 0, 0.3);
    }
    
-   /* course thumbnail keeps neumorphic frame */
+   /* La miniature du cours garde le cadre neumorphique */
    .courses-header {
      width: 100%;
      aspect-ratio: 16 / 9;
@@ -98,7 +98,7 @@
      overflow: hidden;
    }
    
-   /* inner content */
+   /* contenu interne */
    .courses-content {
      padding: 18px 20px 22px;
    }
@@ -134,7 +134,7 @@
      padding: 0;
    }
    
-   /* each item as a flat card with inset divider */
+   /* Chaque élément présenté sous forme de carte plate avec un séparateur en retrait */
    .announcement-item {
      padding: 1.5rem 1.25rem;
      border-radius: 20px;
@@ -164,7 +164,7 @@
      color: #555;
    }
    
-   /* 6. Responsive tweaks
+   /* 6. Ajustements responsives
       ──────────────────── */
    @media (max-width: 768px) {
      .welcome-heading   { font-size: 2rem; }

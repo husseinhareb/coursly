@@ -21,6 +21,6 @@ class RoleRepository extends ServiceEntityRepository
         parent::__construct($registry, Role::class);
     }
 
-    // Add any custom query methods here, e.g.:
+    // Ajoutez ici toutes les méthodes de requête personnalisées, par exemple :
     // public function findByName(string $name): ?Role { … }
 }

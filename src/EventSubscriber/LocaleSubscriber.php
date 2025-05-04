@@ -12,7 +12,7 @@ class LocaleSubscriber implements EventSubscriberInterface
     {
         $request = $event->getRequest();
 
-        // If the locale is set in the session, update the request locale.
+        // Si la locale est définie dans la session, mettre à jour la locale de la requête
         if ($locale = $request->getSession()->get('_locale')) {
             $request->setLocale($locale);
         }

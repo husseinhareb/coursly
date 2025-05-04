@@ -14,5 +14,5 @@ class MessageCategoryRepository extends ServiceEntityRepository
         parent::__construct($registry, MessageCategory::class);
     }
 
-    // (optional) add your own finders here
+    
 }

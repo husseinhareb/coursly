@@ -37,7 +37,7 @@ class Role
     }
 
     /**
-     * The “ROLE_*” string, e.g. ROLE_ADMIN, ROLE_PROF.
+     * La chaîne "ROLE_*", par exemple ROLE_ADMIN, ROLE_PROF
      */
     public function getName(): string
     {
@@ -45,8 +45,8 @@ class Role
     }
 
     /**
-     * @param string $name  The name **without** “ROLE_” prefix, or with it—
-     *                      we’ll uppercase it anyway.
+     * @param string $name  Le nom sans le préfixe "ROLE_", ou avec —
+     *                      Nous le mettrons de toute façon en majuscules
      */
     public function setName(string $name): self
     {

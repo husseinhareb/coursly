@@ -20,8 +20,8 @@ class PostRepository extends ServiceEntityRepository
     }
 
     /**
-     * Return the maximum position value among all Posts of a given Course.
-     * If there are no Posts yet, returns 0.
+     * Retourner la valeur maximale de la position parmi tous les posts d'un cours donné
+     * Si aucun post n'existe encore, retourner 0
      */
     public function findMaxPositionForCourse(Course $course): int
     {
@@ -34,7 +34,7 @@ class PostRepository extends ServiceEntityRepository
             ->getQuery()
             ->getSingleScalarResult();
 
-        // getSingleScalarResult() returns null if there are no rows
+        // getSingleScalarResult() Retourne null s'il n'y a pas de lignes
         return (int) ($max ?? 0);
     }
 

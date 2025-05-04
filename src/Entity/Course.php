@@ -57,7 +57,7 @@ class Course
         mappedBy: 'course',
         targetEntity: AdminAlert::class,
         cascade: ['persist','remove'],
-        orphanRemoval: true      // ← add this
+        orphanRemoval: true      
     )]
     private Collection $alerts;
 
@@ -173,7 +173,7 @@ class Course
     }
 
     /**
-     * Convenience: get all User entities enrolled in this course
+     * Convenience: récupérer tous les utilisateurs inscrits à ce cours
      *
      * @return Collection<int, User>
      */
@@ -187,8 +187,8 @@ class Course
      */
     public function getPosts(): Collection
     {
-        // Thanks to #[ORM\OrderBy(['position'=>'ASC'])],
-        // this will *always* be sorted by position ascending.
+        // grace a #[ORM\OrderBy(['position'=>'ASC'])],
+        // Cela sera toujours trié par position ascendante
         return $this->posts;
     }
 

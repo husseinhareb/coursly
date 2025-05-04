@@ -23,19 +23,19 @@ class PostType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            // Title of the post
+            // titre du post
             ->add('title', TextType::class, [
                 'label'       => 'post.title.label',
                 'constraints' => [
                     new NotBlank(['message' => 'post.title.not_blank']),
                 ],
             ])
-            // Main content/body
+            // Contenu principal/corps
             ->add('content', TextareaType::class, [
                 'label' => 'post.content.label',
                 'attr'  => ['rows' => 5],
             ])
-            // Type: message vs file
+            // Type: message ou fichier
             ->add('type', ChoiceType::class, [
                 'label'   => 'post.type.label',
                 'choices' => [
@@ -44,13 +44,13 @@ class PostType extends AbstractType
                 ],
                 'placeholder' => 'post.type.placeholder',
             ])
-            // File upload (only used when type === 'file')
+            // seulement pour les fichier
             ->add('attachment', FileType::class, [
                 'label'    => 'post.attachment.label',
                 'mapped'   => false,
                 'required' => false,
             ])
-            // New: category lookup
+            // Nouveau : recherche de catégorie
             ->add('category', EntityType::class, [
                 'class'         => MessageCategory::class,
                 'choice_label'  => 'name',
@@ -58,7 +58,7 @@ class PostType extends AbstractType
                 'placeholder'   => 'post.category.placeholder',
                 'required'      => false,
             ])
-            // New: pin/unpin checkbox
+            // case à cocher pour épingler/désépingler
             ->add('isPinned', CheckboxType::class, [
                 'label'    => 'post.pin.label',
                 'required' => false,

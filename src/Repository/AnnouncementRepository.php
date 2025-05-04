@@ -21,7 +21,7 @@ class AnnouncementRepository extends ServiceEntityRepository
         parent::__construct($registry, Announcement::class);
     }
 
-    // You can add your own custom query methods here, e.g.:
+    // pour ajouter d'autres méthodes de requête personnalisées ici
     //
     // /**
     //  * @return Announcement[]

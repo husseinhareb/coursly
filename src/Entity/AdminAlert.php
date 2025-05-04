@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class AdminAlert
 {
     // ────────────────────────────────
-    // Core columns
+    // Colonnes principales
     // ────────────────────────────────
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -41,7 +41,7 @@ class AdminAlert
     private User $admin;
 
     /**
-     * `'created' | 'updated' | 'deleted'`
+     * `'créé' | 'mis à jour' | 'supprimé'
      */
     #[ORM\Column(type: 'string', length: 20)]
     private string $action;
@@ -50,7 +50,7 @@ class AdminAlert
     private \DateTimeImmutable $createdAt;
 
     // ────────────────────────────────
-    // Acknowledgements (per-professeur)
+    // Accusés de réception (per-professeur)
     // ────────────────────────────────
     /**
      * @var Collection<int, AlertAcknowledgement>
@@ -64,7 +64,7 @@ class AdminAlert
     private Collection $acknowledgements;
 
     // ────────────────────────────────
-    // Constructor
+    // Constructeur
     // ────────────────────────────────
     public function __construct(
         Course $course,
@@ -84,7 +84,7 @@ class AdminAlert
     // Helpers
     // ────────────────────────────────
     /**
-     * True si l’utilisateur a déjà cliqué « J’ai compris ».
+     * vrai si l’utilisateur a déjà cliqué « J’ai compris ».
      */
     public function isAcknowledgedBy(?User $user): bool
     {

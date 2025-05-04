@@ -39,7 +39,7 @@ class CourseController extends AbstractController
         if ($this->isGranted('ROLE_ADMIN')) {
             $courses = $courseRepo->findAll();
         } else {
-            // Suppose you add this helper in CourseRepository:
+            // Supposons que vous ajoutiez ce helper dans CourseRepository :
             // public function findByUser(User $user): array { … }
             $courses = $courseRepo->findByUser($user);
         }
@@ -120,7 +120,7 @@ class CourseController extends AbstractController
             ->getResult();
 
         /* 4️⃣  ───────── Alertes admin non lues ───────── */
-        // only if this user is a professor on *this* course:
+        // Uniquement si cet utilisateur est professeur dans ce cours :
         $unreadAlerts = [];
         $alertMap     = [];
         if (
@@ -155,7 +155,7 @@ class CourseController extends AbstractController
         Course          $course,
         ManagerRegistry $doctrine
     ): JsonResponse {
-        // Clear any stray output
+        // Effacer toute sortie résiduelle
         while (ob_get_level()) {
             ob_end_clean();
         }
@@ -170,14 +170,14 @@ class CourseController extends AbstractController
     
         $em = $doctrine->getManager();
     
-        // 1) Remove all UserCourseAccess for this course
+        // 1) Supprimer tous les UserCourseAccess pour ce cours
         $accessRepo = $em->getRepository(UserCourseAccess::class);
         $accesses   = $accessRepo->findBy(['course' => $course]);
         foreach ($accesses as $access) {
             $em->remove($access);
         }
     
-        // 2) Now remove the course itself
+        // 2) Maintenant, supprimez le cours lui-même
         $em->remove($course);
         $em->flush();
     
@@ -248,7 +248,7 @@ class CourseController extends AbstractController
     }
 
     // ───────────────────────────────
-    //  CRÉATION d’UE (admin only)
+    //  CRÉATION d’UE (sauf admin)
     // ───────────────────────────────
     #[Route('/courses/new', name: 'courses_new')]
     #[IsGranted('ROLE_ADMIN')]
@@ -309,7 +309,7 @@ class CourseController extends AbstractController
                     $img->move($this->getParameter('course_pics_directory'), $fn);
                     $course->setBackground($fn);
                 } catch (FileException) {
-                    // silently ignore or flash
+                    // Ignorer silencieusement ou afficher un message flash
                 }
             }
             $doctrine->getManager()->flush();
