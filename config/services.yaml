@@ -7,6 +7,7 @@ parameters:
     profile_pics_directory: '%kernel.project_dir%/public/uploads/profile_pics'
     course_pics_directory: '%kernel.project_dir%/public/uploads/course_pics'
     post_files_directory: '%kernel.project_dir%/public/uploads/post_files'
+    announcement_files_directory: '%kernel.project_dir%/public/uploads/announcement_files'
 services:
     App\EventSubscriber\AdminUserSubscriber:
         tags:
