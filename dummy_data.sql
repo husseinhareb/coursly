@@ -5,9 +5,10 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- Dummy data for Course
 -- ------------------------------------------------------------------
 INSERT INTO `course` (`id`, `title`, `description`, `code`, `created_at`, `updated_at`) VALUES
-  (1, 'Introduction to Computer Science', 'An overview of fundamental programming concepts and computer systems.', 'CS101', '2024-09-01 08:00:00', '2024-09-01 08:00:00'),
-  (2, 'Calculus I',                       'Differential and integral calculus of one variable.',                          'MATH201', '2024-09-01 08:00:00', '2024-09-01 08:00:00'),
-  (3, 'World History',                    'A survey of world history from ancient to modern times.',                      'HIST210', '2024-09-01 08:00:00', '2024-09-01 08:00:00');
+  (1, 'Introduction to Computer Science', 'An overview of fundamental programming concepts and computer systems.', 'CS101',  '2024-09-01 08:00:00', '2024-09-01 08:00:00'),
+  (2, 'Calculus I',                       'Differential and integral calculus of one variable.',                          'MATH201','2024-09-01 08:00:00', '2024-09-01 08:00:00'),
+  (3, 'World History',                    'A survey of world history from ancient to modern times.',                      'HIST210','2024-09-01 08:00:00', '2024-09-01 08:00:00'),
+  (4, 'Physics I',                        'Mechanics and thermodynamics of classical physics.',                           'PHYS101','2024-09-01 08:00:00', '2024-09-01 08:00:00');
 
 -- ------------------------------------------------------------------
 -- Dummy data for User
@@ -17,16 +18,16 @@ INSERT INTO `user` (
   `id`, `username`, `email`, `password`, `first_name`, `last_name`,
   `password_auto_generated`, `phone_number`, `address`, `created_at`, `updated_at`
 ) VALUES
-  (1, 'asmith',    'alice.smith@example.com',   '$2b$12$tf5Addu/9/vAdR18aFinWeDizswlBoNGgOTXWW32l8vctctKPMJw6', 'Alice',   'Smith',   FALSE, '555-1234', '123 Maple St, Springfield', '2025-01-10 09:00:00', '2025-01-10 09:00:00'),
-  (2, 'bjohnson',  'bob.johnson@example.com',   '$2b$12$EsYGFCyRIv670i.enPMSQebQWwAjlP1FvnCj2hFIpYgre5gYJjsCm', 'Bob',     'Johnson', FALSE, '555-5678', '456 Oak Ave, Riverside',    '2025-01-15 10:30:00', '2025-01-15 10:30:00'),
-  (3, 'cwilliams', 'carol.williams@example.com','$2b$12$iVvQDGd2UgLevmbye.tnDe8yCXgusLP3v9uauyrF4lpCbsK/tUY/a','Carol',  'Williams',TRUE, '555-9012', '789 Pine Rd, Centerville',   '2025-02-01 14:45:00', '2025-02-01 14:45:00'),
-  (4, 'dbrown',    'david.brown@example.com',   '$2b$12$F3l30xznIqdMxieECe4aVeD5Rh1MzPvL2ew4dXnexLqV7ehR5f4Ni','David',  'Brown',   FALSE, '555-3456', '321 Birch Ln, Lakeside',     '2025-02-10 08:20:00', '2025-02-10 08:20:00'),
-  (5, 'edavis',    'emily.davis@example.com',   '$2b$12$6DlIrmAibSVXz7Bh8RFReOAR/VMNKCYavY0BX3xXQmCQxawGVP9xy','Emily',  'Davis',   TRUE, NULL,       '654 Cedar Blvd, Hillcrest',  '2025-02-20 11:10:00', '2025-02-20 11:10:00');
+  (1, 'asmith',    'alice.smith@example.com',    '$2b$12$tf5Addu/9/vAdR18aFinWeDizswlBoNGgOTXWW32l8vctctKPMJw6', 'Alice',   'Smith',   FALSE, '555-1234', '123 Maple St, Springfield', '2025-01-10 09:00:00', '2025-01-10 09:00:00'),
+  (2, 'bjohnson',  'bob.johnson@example.com',    '$2b$12$EsYGFCyRIv670i.enPMSQebQWwAjlP1FvnCj2hFIpYgre5gYJjsCm', 'Bob',     'Johnson', FALSE, '555-5678', '456 Oak Ave, Riverside',    '2025-01-15 10:30:00', '2025-01-15 10:30:00'),
+  (3, 'cwilliams', 'carol.williams@example.com', '$2b$12$iVvQDGd2UgLevmbye.tnDe8yCXgusLP3v9uauyrF4lpCbsK/tUY/a','Carol',  'Williams',TRUE, '555-9012', '789 Pine Rd, Centerville',   '2025-02-01 14:45:00', '2025-02-01 14:45:00'),
+  (4, 'dbrown',    'david.brown@example.com',    '$2b$12$F3l30xznIqdMxieECe4aVeD5Rh1MzPvL2ew4dXnexLqV7ehR5f4Ni','David',  'Brown',   FALSE, '555-3456', '321 Birch Ln, Lakeside',     '2025-02-10 08:20:00', '2025-02-10 08:20:00'),
+  (5, 'edavis',    'emily.davis@example.com',    '$2b$12$6DlIrmAibSVXz7Bh8RFReOAR/VMNKCYavY0BX3xXQmCQxawGVP9xy','Emily',  'Davis',   TRUE, NULL,       '654 Cedar Blvd, Hillcrest',  '2025-02-20 11:10:00', '2025-02-20 11:10:00');
 
 -- ------------------------------------------------------------------
 -- Dummy data for User–Role join table
 -- ------------------------------------------------------------------
--- (Assuming roles already exist in `role` table)
+-- (Assuming roles already exist in `role` table: 1=Administrator, 2=Instructor, 3=Student)
 INSERT INTO `user_role` (`user_id`, `role_id`) VALUES
   (1, 1),  -- Alice → Administrator
   (2, 2),  -- Bob   → Instructor
@@ -45,15 +46,19 @@ INSERT INTO `post` (
   (1, 'Welcome to CS101',
       'This is the first post for CS101. Please introduce yourselves.',
       'general', '2024-09-02 10:00:00', '2024-09-02 10:00:00',
-      FALSE, 0, 1, 1, 2),
+      FALSE, 1, 1, 1, 2),
   (2, 'Homework 1 Released',
       'Homework 1 is now available and due next Friday.',
       'homework', '2024-09-05 09:00:00', '2024-09-05 09:00:00',
-      FALSE, 0, 2, 1, 2),
+      FALSE, 2, 2, 1, 2),
   (3, 'Exam Schedule',
       'The midterm exam will be on October 15th.',
       'exam',    '2024-10-01 08:30:00', '2024-10-01 08:30:00',
-      FALSE, 0, 3, 2, 3);
+      FALSE, 3, 3, 2, 3),
+  (4, 'Welcome to Physics I',
+      'This is the introductory forum for Physics I. Feel free to ask questions about mechanics and thermodynamics.',
+      'general', '2024-09-03 11:15:00', '2024-09-03 11:15:00',
+      FALSE, 1, 1, 4, 2);
 
 -- ------------------------------------------------------------------
 -- Dummy data for Enrollment
@@ -62,7 +67,11 @@ INSERT INTO `enrollments` (`id`, `user_id`, `course_id`) VALUES
   (1, 4, 1),  -- David enrolled in CS101
   (2, 4, 2),  -- David enrolled in MATH201
   (3, 5, 1),  -- Emily enrolled in CS101
-  (4, 5, 3);  -- Emily enrolled in HIST210
+  (4, 5, 3),  -- Emily enrolled in HIST210
+  (5, 2, 1),  -- Bob (Instructor) assigned to CS101
+  (6, 2, 4),  -- Bob (Instructor) assigned to Physics I
+  (7, 3, 3),  -- Carol (Instructor) assigned to World History
+  (8, 3, 2);  -- Carol (Instructor) assigned to Calculus I
 
 -- ------------------------------------------------------------------
 -- Dummy data for UserCourseAccess
@@ -71,7 +80,9 @@ INSERT INTO `user_course_access` (`id`, `user_id`, `course_id`, `accessed_at`) V
   (1, 4, 1, '2025-02-15 14:23:00'),
   (2, 5, 1, '2025-02-16 10:05:00'),
   (3, 4, 2, '2025-02-17 11:45:00'),
-  (4, 5, 3, '2025-02-20 09:30:00');
+  (4, 5, 3, '2025-02-20 09:30:00'),
+  (5, 2, 1, '2025-03-01 09:00:00'),  -- Bob accessed CS101
+  (6, 3, 2, '2025-03-02 10:30:00');  -- Carol accessed Calculus I
 
 -- ------------------------------------------------------------------
 -- Dummy data for AdminAlert
