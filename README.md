@@ -1,3 +1,15 @@
+# Coursly
+
+Ce projet Symfony nécessite quelques étapes avant de pouvoir le lancer en local.
+
+## Prérequis
+
+* PHP (>= 8.0)
+* Composer
+* Symfony CLI
+* Un serveur de base de données (MySQL ou MariaDB)
+* phpMyAdmin (ou tout autre outil d’administration)
+
 ## Installation
 
 1. **Créer la base de données**
@@ -9,7 +21,7 @@
    ```bash
    cd coursly
    composer install
-````
+   ```
 
 3. **Mettre à jour le schéma de la base**
 
@@ -23,13 +35,7 @@
    php bin/console doctrine:fixtures:load --append
    ```
 
-5. **Lancer le serveur de développement**
-
-   ```bash
-   symfony serve
-   ```
-
-6. **Importer les données dummy**
+5. **Importer les données dummy**
 
    Dans phpMyAdmin (ou votre outil d’administration préféré) :
 
@@ -37,15 +43,20 @@
    * Allez dans l’onglet **Import**.
    * Cliquez sur **Parcourir**, choisissez le fichier `dummy_data.sql`.
    * Laissez les options par défaut et cliquez sur **Exécuter**.
+   
+6. **Lancer le serveur de développement**
+
+   ```bash
+   symfony serve
+   ```
 
 Le projet est maintenant accessible à l’adresse indiquée par Symfony CLI (par défaut : [http://127.0.0.1:8000](http://127.0.0.1:8000)).
 
-## Connexion à l’administrateur
+## Connexion à l'administrateur
 
-Le premier utilisateur créé est l’administrateur :
+Le premier utilisateur créé est l'administrateur :
 
-* **Email :** `admin@coursly.com`
-* **Mot de passe :** `admincoursly`
+* **Email :** `admin@coursly.com`
+* **Mot de passe :** `admincoursly`
 
-Utilisez ces identifiants pour vous connecter et accéder à la zone d’administration.
-
+Utilisez ces identifiants pour vous connecter et accéder à la zone d'administration.
