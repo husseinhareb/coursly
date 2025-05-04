@@ -62,7 +62,7 @@ class CourseRepository extends ServiceEntityRepository
         $sql = '
             SELECT c.*
             FROM course c
-            INNER JOIN enrollment e
+            INNER JOIN enrollments e
                 ON c.id = e.course_id
             WHERE e.user_id = :userId
             ORDER BY c.title ASC
@@ -90,7 +90,7 @@ class CourseRepository extends ServiceEntityRepository
         $sql = '
             SELECT c.*
             FROM course c
-            INNER JOIN enrollment e
+            INNER JOIN enrollments e
                 ON c.id = e.course_id
             WHERE e.user_id = :userId
             ORDER BY c.title ASC
