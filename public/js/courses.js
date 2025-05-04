@@ -1,43 +1,48 @@
 // assets/js/courses.js
 console.log('[courses.js] loaded');
 
-document.addEventListener('submit', async e => {
-  // only intercept our delete forms
-  if (!e.target.matches('.delete-course-form')) return;
+document.addEventListener('click', async e => {
+  const btn = e.target.closest('button.btn-delete');
+  if (!btn) return;
+
   e.preventDefault();
-
-  console.log('[courses.js] delete form submitted', e.target);
-
   if (!confirm('Are you sure you want to delete this course?')) {
     console.log('[courses.js] user cancelled delete');
     return;
   }
 
+  const form = btn.closest('form.delete-course-form');
+  const url  = form.action;
+  const formData = new FormData(form);
+
   try {
-    const form = e.target;
-    const url  = form.action;
-    const res  = await fetch(url, {
+    const res = await fetch(url, {
       method: 'POST',
       credentials: 'same-origin',
-      headers: { 'X-Requested-With': 'XMLHttpRequest' },
-      body: new FormData(form),
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest',
+        'Accept': 'application/json'
+      },
+      body: formData,
     });
-
     console.log('[courses.js] response status', res.status);
 
-    let data;
-    try {
-      data = await res.json();
-      console.log('[courses.js] JSON payload', data);
-    } catch (jsonErr) {
-      console.error('[courses.js] failed to parse JSON', jsonErr);
+    const text = await res.text();
+    console.log('[courses.js] raw response text:', text);
+
+    // try to extract the first {...} block in case Symfony's debug toolbar
+    // or stray whitespace got tacked on
+    const match = text.match(/^\s*(\{[\s\S]*\})/);
+    if (!match) {
+      console.error('[courses.js] no JSON object found in response');
       throw new Error('Invalid server response');
     }
 
+    const data = JSON.parse(match[1]);
+    console.log('[courses.js] parsed JSON:', data);
+
     if (!res.ok || data.success !== true) {
-      const msg = data.error || `HTTP ${res.status}`;
-      console.error('[courses.js] delete failed:', msg);
-      return alert(`Could not delete course: ${msg}`);
+      throw new Error(data.error || `HTTP ${res.status}`);
     }
 
     // success!
@@ -47,7 +52,7 @@ document.addEventListener('submit', async e => {
       card.remove();
     }
   } catch (err) {
-    console.error('[courses.js] fetch error', err);
+    console.error('[courses.js] delete failed', err);
     alert(`Could not delete course: ${err.message}`);
   }
 });

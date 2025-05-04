@@ -40,12 +40,18 @@
                         <form id="language-form" action="" method="get">
                             <select name="locale"
                                     onchange="window.location.href = '{{ path('change_language', {'locale': 'PLACEHOLDER'}) }}'.replace('PLACEHOLDER', this.value)">
-                                <option value="en" {% if app.request.locale == 'en' %}selected{% endif %}>English (en)</option>
-                                <option value="fr" {% if app.request.locale == 'fr' %}selected{% endif %}>Français (fr)</option>
-                                <option value="es" {% if app.request.locale == 'es' %}selected{% endif %}>Español (es)</option>
-                                <option value="zh" {% if app.request.locale == 'zh' %}selected{% endif %}>中国人 (zh)</option>
-                                <!-- Add more languages as needed -->
-                            </select>
+                                    <option value="en" {% if app.request.locale == 'en' %}selected{% endif %}>English (en)</option>
+                                    <option value="fr" {% if app.request.locale == 'fr' %}selected{% endif %}>Français (fr)</option>
+                                    <option value="es" {% if app.request.locale == 'es' %}selected{% endif %}>Español (es)</option>
+                                    <option value="zh" {% if app.request.locale == 'zh' %}selected{% endif %}>中文 (zh)</option>
+                                    <option value="ar" {% if app.request.locale == 'ar' %}selected{% endif %}>العربية (ar)</option>
+                                    <option value="hi" {% if app.request.locale == 'hi' %}selected{% endif %}>हिन्दी (hi)</option>
+                                    <option value="bn" {% if app.request.locale == 'bn' %}selected{% endif %}>বাংলা (bn)</option>
+                                    <option value="pt" {% if app.request.locale == 'pt' %}selected{% endif %}>Português (pt)</option>
+                                    <option value="ru" {% if app.request.locale == 'ru' %}selected{% endif %}>Русский (ru)</option>
+                                    <option value="ja" {% if app.request.locale == 'ja' %}selected{% endif %}>日本語 (ja)</option>
+                                    <option value="pa" {% if app.request.locale == 'pa' %}selected{% endif %}>ਪੰਜਾਬੀ (pa)</option>
+                                    <option value="uk" {% if app.request.locale == 'uk' %}selected{% endif %}>Українська (uk)</option>                            </select>
                         </form>
                     </div>
 

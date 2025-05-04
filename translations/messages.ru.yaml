@@ -1,0 +1,219 @@
+login:
+  title: "Войти!"
+  sign_in: "Пожалуйста, войдите"
+  email_label: "Электронная почта"
+  password_label: "Пароль"
+  show_password: "Показать пароль"
+  button: "Войти"
+  logged_in_as: "Вы вошли как %username%"
+  logout: "Выйти"
+  cookies_notice: "Уведомление о файлах cookie"
+
+home:
+  title: "Главная"
+  hello: "Здравствуйте, %name%!"
+  email: "Ваша почта: %email%"
+  role: "Ваша роль: %role%"
+  welcome: "Добро пожаловать на главную страницу!"
+  login_prompt: "Пожалуйста, войдите, чтобы увидеть данные вашего аккаунта."
+  recent_courses_heading: "Недавно просмотренные курсы"
+  no_recent_courses: "Нет недавно просмотренных курсов."
+  announcements_heading: "Последние объявления"
+
+navbar:
+  title: "Добро пожаловать!"
+  toggle_navigation: "Переключить навигацию"
+  logo_alt: "Логотип сайта"
+  users: "Пользователи"
+  courses: "Курсы"
+  profile_picture_alt: "Фото профиля"
+  profile_options: "Параметры профиля"
+  profile: "Профиль"
+  logout: "Выйти"
+  login: "Войти"
+  announcement: "Объявление"
+
+registration:
+  title: "Регистрация"
+  header: "Регистрация"
+  button: "Зарегистрироваться"
+  password_label: "Пароль (генерируется автоматически)"
+  first_name:
+    label: "Имя"
+    not_blank: "Пожалуйста, введите имя"
+  last_name:
+    label: "Фамилия"
+    not_blank: "Пожалуйста, введите фамилию"
+  username:
+    label: "Имя пользователя"
+    not_blank: "Пожалуйста, введите имя пользователя"
+    min_length: "Имя пользователя должно быть не менее {{ limit }} символов"
+  email:
+    label: "Электронная почта"
+    not_blank: "Пожалуйста, введите адрес электронной почты"
+    invalid: "Пожалуйста, введите действительный адрес электронной почты"
+  plain_password:
+    label: "Пароль (генерируется автоматически)"
+    not_blank: "Пароль генерируется автоматически"
+    min_length: "Пароль должен быть не менее {{ limit }} символов"
+  role:
+    label: "Роль"
+    placeholder: "Выберите вашу роль"
+    administrator: "Администратор"
+    student: "Студент"
+    professor: "Преподаватель"
+    admin_professor: "Администратор и преподаватель"
+
+profile:
+  title: "Мой профиль"
+  header: "Ваш профиль"
+  profile_pic: "Фото профиля"
+  no_picture: "Фото профиля отсутствует."
+  first_name: "Имя"
+  last_name: "Фамилия"
+  email: "Электронная почта"
+  phone_number: "Номер телефона"
+  address: "Адрес"
+  roles: "Роли"
+  not_provided: "Не указано"
+  enrolled_courses: "Записанные курсы"
+  manage_enrollments: "Управление записями"
+  edit_profile: "Редактировать профиль"
+  change_password: "Сменить пароль"
+  save: "Сохранить"
+  cancel: "Отмена"
+
+post:
+  title:
+    label: "Заголовок"
+  content:
+    label: "Содержимое"
+  type:
+    label: "Тип"
+    message: "Сообщение"
+    file: "Файл"
+    placeholder: "Выберите тип"
+  attachment:
+    label: "Вложение (необязательно)"
+  new:
+    title: "Новая запись для %course%"
+    heading: "Создать новую запись для %course%"
+    submit: "Создать запись"
+    back_to_course: "Назад к курсу"
+  category:
+    label: "Категория"
+    placeholder: "Выберите категорию"
+  pin:
+    label: "Закрепить"
+
+course:
+  new:
+    title: "Новый курс"
+    heading: "Создать новый курс"
+    image_label: "Изображение курса (необязательно)"
+    submit: "Создать курс"
+    description: "Описание"
+    code: "Код"
+  show:
+    new_post: "Создать новую запись"
+    posts_heading: "Записи"
+    download_file: "Скачать файл"
+    posted_on: "Опубликовано %date%"
+    no_posts: "Записей пока нет."
+  edit:
+    title: "Редактировать курс: %course%"
+    heading: "Редактировать курс"
+    label:
+      title: "Заголовок"
+      description: "Описание"
+      code: "Код"
+      image: "Изображение курса"
+    submit: "Обновить курс"
+    back_to_courses: "Назад к курсам"
+
+courses:
+  my:
+    title: "Мои курсы"
+    heading: "Мои курсы"
+    add_course: "Добавить курс"
+    search_placeholder: "Поиск курса..."
+    no_courses: "Курсов нет."
+    edit: "Редактировать"
+    infomessage: "Информация"
+    delete: "Удалить"
+    delete_confirm: "Вы уверены, что хотите удалить этот курс?"
+    info:
+      title: "Информация о курсе"
+      description: "Описание"
+      enrolled_users: "Записанные пользователи"
+      no_enrolled_users: "Пользователи не записаны."
+      back_to_courses: "Назад к курсам"
+  news:
+    heading: "Последние объявления"
+    posted_file: "опубликовал новый файл"
+    posted_message: "опубликовал сообщение"
+    in_course: "в курсе"
+    none: "Нет новых объявлений."
+
+admin:
+  users:
+    title: "Пользователи"
+    header: "Пользователи"
+    add_user: "Добавить пользователя"
+    table:
+      id: "ID"
+      profile_picture: "Фото профиля"
+      first_name: "Имя"
+      last_name: "Фамилия"
+      email: "Электронная почта"
+      phone: "Телефон"
+      address: "Адрес"
+      roles: "Роли"
+      enrolled_courses: "Записанные курсы"
+      actions: "Действия"
+    alt:
+      profile_picture: "Фото профиля"
+    no_profile_picture: "Нет"
+    no_phone: "Нет"
+    no_address: "Нет"
+    no_enrollments: "Нет"
+    edit: "Редактировать"
+    no_users: "Пользователи не найдены."
+  enrollments:
+    title: "Управление записями для %firstName% %lastName%"
+    header: "Управление записями для %firstName% %lastName%"
+    admin_warning: "Администраторы не могут быть записаны на курсы."
+    current_heading: "Текущие записи"
+    none_current: "Нет записей."
+    remove:
+      title: "Удалить запись"
+    available_heading: "Доступные курсы"
+    add:
+      title: "Добавить запись"
+    all_enrolled: "Все курсы уже записаны."
+    back_to_profile: "Назад к профилю"
+
+admin_alert:
+  banner: "Нет ожидающих действий администратора|%count% ожидающее действие администратора|%count% ожидающих действий администратора"
+  tag:
+    created: "Создано %name%"
+    updated: "Изменено %name%"
+    deleted: "Удалено %name%"
+  dismiss: "Скрыть"
+  history: "История предупреждений администратора"
+
+announcement:
+  list:
+    heading: "Объявление"
+    new: "Добавить объявление"
+    none: "Объявлений нет"
+
+change_password:
+  title: "Сменить пароль"
+  heading: "Смените ваш пароль"
+  auto_generated: "Вы используете автоматически сгенерированный пароль. Пожалуйста, измените его на новый безопасный пароль."
+  prompt: "Пожалуйста, измените свой пароль ниже."
+  new_password:
+    first_label: "Новый пароль"
+    second_label: "Подтвердите новый пароль"
+  submit: "Обновить пароль"

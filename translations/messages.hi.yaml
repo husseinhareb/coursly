@@ -1,0 +1,219 @@
+login:
+  title: "लॉग इन!"
+  sign_in: "कृपया साइन इन करें"
+  email_label: "ईमेल"
+  password_label: "पासवर्ड"
+  show_password: "पासवर्ड दिखाएँ"
+  button: "साइन इन"
+  logged_in_as: "आप %username% के रूप में लॉग इन हैं"
+  logout: "लॉग आउट"
+  cookies_notice: "कुकी नोटिस"
+
+home:
+  title: "मुखपृष्ठ"
+  hello: "नमस्ते, %name%!"
+  email: "आपका ईमेल: %email%"
+  role: "आपकी भूमिका: %role%"
+  welcome: "होमपेज में आपका स्वागत है!"
+  login_prompt: "कृपया अपना खाता विवरण देखने के लिए लॉग इन करें।"
+  recent_courses_heading: "हाल ही में देखे गए पाठ्यक्रम"
+  no_recent_courses: "कोई हाल ही में देखे गए पाठ्यक्रम नहीं।"
+  announcements_heading: "नवीनतम घोषणाएँ"
+
+navbar:
+  title: "स्वागत है!"
+  toggle_navigation: "नेविगेशन टॉगल करें"
+  logo_alt: "साइट लोगो"
+  users: "उपयोगकर्ता"
+  courses: "पाठ्यक्रम"
+  profile_picture_alt: "प्रोफ़ाइल चित्र"
+  profile_options: "प्रोफ़ाइल विकल्प"
+  profile: "प्रोफ़ाइल"
+  logout: "लॉग आउट"
+  login: "लॉग इन"
+  announcement: "घोषणा"
+
+registration:
+  title: "पंजीकरण"
+  header: "पंजीकरण"
+  button: "पंजीकरण करें"
+  password_label: "पासवर्ड (स्वतः उत्पन्न)"
+  first_name:
+    label: "पहला नाम"
+    not_blank: "कृपया अपना पहला नाम दर्ज करें"
+  last_name:
+    label: "अंतिम नाम"
+    not_blank: "कृपया अपना अंतिम नाम दर्ज करें"
+  username:
+    label: "उपयोगकर्ता नाम"
+    not_blank: "कृपया एक उपयोगकर्ता नाम दर्ज करें"
+    min_length: "आपका उपयोगकर्ता नाम कम से कम {{ limit }} वर्ण का होना चाहिए"
+  email:
+    label: "ईमेल"
+    not_blank: "कृपया एक ईमेल दर्ज करें"
+    invalid: "कृपया एक मान्य ईमेल पता दर्ज करें"
+  plain_password:
+    label: "पासवर्ड (स्वतः उत्पन्न)"
+    not_blank: "पासवर्ड स्वचालित रूप से उत्पन्न होता है"
+    min_length: "आपका पासवर्ड कम से कम {{ limit }} वर्ण का होना चाहिए"
+  role:
+    label: "भूमिका"
+    placeholder: "अपनी भूमिका चुनें"
+    administrator: "व्यवस्थापक"
+    student: "छात्र"
+    professor: "प्रोफेसर"
+    admin_professor: "व्यवस्थापक एवं प्रोफ़ेसर"
+
+profile:
+  title: "मेरी प्रोफ़ाइल"
+  header: "आपकी प्रोफ़ाइल"
+  profile_pic: "प्रोफ़ाइल चित्र"
+  no_picture: "कोई प्रोफ़ाइल चित्र उपलब्ध नहीं।"
+  first_name: "पहला नाम"
+  last_name: "अंतिम नाम"
+  email: "ईमेल"
+  phone_number: "फ़ोन नंबर"
+  address: "पता"
+  roles: "भूमिकाएँ"
+  not_provided: "प्रदान नहीं किया गया"
+  enrolled_courses: "नामांकित पाठ्यक्रम"
+  manage_enrollments: "नामांकन प्रबंधित करें"
+  edit_profile: "प्रोफ़ाइल संपादित करें"
+  change_password: "पासवर्ड बदलें"
+  save: "सहेजें"
+  cancel: "रद्द करें"
+
+post:
+  title:
+    label: "शीर्षक"
+  content:
+    label: "सामग्री"
+  type:
+    label: "प्रकार"
+    message: "संदेश"
+    file: "फ़ाइल"
+    placeholder: "प्रकार चुनें"
+  attachment:
+    label: "संलग्नक (वैकल्पिक)"
+  new:
+    title: "%course% के लिए नया पोस्ट"
+    heading: "%course% के लिए नया पोस्ट बनाएँ"
+    submit: "पोस्ट बनाएँ"
+    back_to_course: "पाठ्यक्रम पर लौटें"
+  category:
+    label: "श्रेणी"
+    placeholder: "श्रेणी चुनें"
+  pin:
+    label: "पिन"
+
+course:
+  new:
+    title: "नया पाठ्यक्रम"
+    heading: "नया पाठ्यक्रम बनाएँ"
+    image_label: "पाठ्यक्रम चित्र (वैकल्पिक)"
+    submit: "पाठ्यक्रम बनाएँ"
+    description: "विवरण"
+    code: "कोड"
+  show:
+    new_post: "नया पोस्ट बनाएँ"
+    posts_heading: "पोस्ट"
+    download_file: "फ़ाइल डाउनलोड करें"
+    posted_on: "%date% को पोस्ट किया गया"
+    no_posts: "कोई पोस्ट नहीं।"
+  edit:
+    title: "पाठ्यक्रम संपादित करें: %course%"
+    heading: "पाठ्यक्रम संपादित करें"
+    label:
+      title: "शीर्षक"
+      description: "विवरण"
+      code: "कोड"
+      image: "पाठ्यक्रम चित्र"
+    submit: "पाठ्यक्रम अपडेट करें"
+    back_to_courses: "पाठ्यक्रमों पर लौटें"
+
+courses:
+  my:
+    title: "मेरे पाठ्यक्रम"
+    heading: "मेरे पाठ्यक्रम"
+    add_course: "पाठ्यक्रम जोड़ें"
+    search_placeholder: "पाठ्यक्रम खोजें..."
+    no_courses: "कोई पाठ्यक्रम उपलब्ध नहीं।"
+    edit: "संपादित करें"
+    infomessage: "सूचना"
+    delete: "हटाएँ"
+    delete_confirm: "क्या आप वाकई इस पाठ्यक्रम को हटाना चाहते हैं?"
+    info:
+      title: "पाठ्यक्रम जानकारी"
+      description: "विवरण"
+      enrolled_users: "नामांकित उपयोगकर्ता"
+      no_enrolled_users: "कोई नामांकित उपयोगकर्ता नहीं।"
+      back_to_courses: "पाठ्यक्रमों पर लौटें"
+  news:
+    heading: "नवीनतम घोषणाएँ"
+    posted_file: "नए फ़ाइल पोस्ट की"
+    posted_message: "संदेश पोस्ट किया"
+    in_course: "में"
+    none: "कोई हालिया घोषणाएँ नहीं।"
+
+admin:
+  users:
+    title: "उपयोगकर्ता"
+    header: "उपयोगकर्ता"
+    add_user: "उपयोगकर्ता जोड़ें"
+    table:
+      id: "आईडी"
+      profile_picture: "प्रोफ़ाइल चित्र"
+      first_name: "पहला नाम"
+      last_name: "अंतिम नाम"
+      email: "ईमेल"
+      phone: "फ़ोन"
+      address: "पता"
+      roles: "भूमिकाएँ"
+      enrolled_courses: "नामांकित पाठ्यक्रम"
+      actions: "क्रियाएँ"
+    alt:
+      profile_picture: "प्रोफ़ाइल चित्र"
+    no_profile_picture: "उपलब्ध नहीं"
+    no_phone: "उपलब्ध नहीं"
+    no_address: "उपलब्ध नहीं"
+    no_enrollments: "कोई नहीं"
+    edit: "संपादित करें"
+    no_users: "कोई उपयोगकर्ता नहीं मिला।"
+  enrollments:
+    title: "%firstName% %lastName% के लिए नामांकन प्रबंधित करें"
+    header: "%firstName% %lastName% के लिए नामांकन प्रबंधित करें"
+    admin_warning: "व्यवस्थापक उपयोगकर्ताओं को पाठ्यक्रम में नामांकित नहीं किया जा सकता।"
+    current_heading: "वर्तमान नामांकन"
+    none_current: "कोई नामांकन नहीं।"
+    remove:
+      title: "नामांकन हटाएँ"
+    available_heading: "उपलब्ध पाठ्यक्रम"
+    add:
+      title: "नामांकन जोड़ें"
+    all_enrolled: "सभी पाठ्यक्रम पहले से नामांकित हैं।"
+    back_to_profile: "प्रोफ़ाइल पर लौटें"
+
+admin_alert:
+  banner: "कोई व्यवस्थापक क्रिया शेष नहीं|%count% व्यवस्थापक क्रिया शेष है|%count% व्यवस्थापक क्रियाएँ शेष हैं"
+  tag:
+    created: "द्वारा बनाया गया %name%"
+    updated: "द्वारा संशोधित %name%"
+    deleted: "द्वारा हटाया गया %name%"
+  dismiss: "अस्वीकार करें"
+  history: "व्यवस्थापक चेतावनी इतिहास"
+
+announcement:
+  list:
+    heading: "घोषणा"
+    new: "घोषणा जोड़ें"
+    none: "कोई घोषणाएँ नहीं हैं"
+
+change_password:
+  title: "पासवर्ड बदलें"
+  heading: "अपना पासवर्ड बदलें"
+  auto_generated: "आप वर्तमान में स्वत: उत्पन्न पासवर्ड का उपयोग कर रहे हैं। कृपया इसे एक नए, सुरक्षित पासवर्ड में बदलें।"
+  prompt: "कृपया नीचे अपना पासवर्ड बदलें।"
+  new_password:
+    first_label: "नया पासवर्ड"
+    second_label: "नए पासवर्ड की पुष्टि"
+  submit: "पासवर्ड अपडेट करें"

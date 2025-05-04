@@ -1,0 +1,219 @@
+login:
+  title: "ログイン！"
+  sign_in: "サインインしてください"
+  email_label: "メールアドレス"
+  password_label: "パスワード"
+  show_password: "パスワードを表示"
+  button: "サインイン"
+  logged_in_as: "%username% としてログインしています"
+  logout: "ログアウト"
+  cookies_notice: "クッキー通知"
+
+home:
+  title: "ホーム"
+  hello: "こんにちは、%name%！"
+  email: "あなたのメール：%email%"
+  role: "あなたの役割：%role%"
+  welcome: "ホームページへようこそ！"
+  login_prompt: "アカウント情報を見るにはログインしてください。"
+  recent_courses_heading: "最近見たコース"
+  no_recent_courses: "最近見たコースはありません。"
+  announcements_heading: "最新のお知らせ"
+
+navbar:
+  title: "ようこそ！"
+  toggle_navigation: "ナビゲーション切り替え"
+  logo_alt: "サイトのロゴ"
+  users: "ユーザー"
+  courses: "コース"
+  profile_picture_alt: "プロフィール画像"
+  profile_options: "プロフィールオプション"
+  profile: "プロフィール"
+  logout: "ログアウト"
+  login: "ログイン"
+  announcement: "お知らせ"
+
+registration:
+  title: "登録"
+  header: "登録"
+  button: "登録"
+  password_label: "パスワード（自動生成）"
+  first_name:
+    label: "名"
+    not_blank: "名を入力してください"
+  last_name:
+    label: "姓"
+    not_blank: "姓を入力してください"
+  username:
+    label: "ユーザー名"
+    not_blank: "ユーザー名を入力してください"
+    min_length: "ユーザー名は最低 {{ limit }} 文字必要です"
+  email:
+    label: "メールアドレス"
+    not_blank: "メールアドレスを入力してください"
+    invalid: "有効なメールアドレスを入力してください"
+  plain_password:
+    label: "パスワード（自動生成）"
+    not_blank: "パスワードは自動的に生成されます"
+    min_length: "パスワードは最低 {{ limit }} 文字必要です"
+  role:
+    label: "役割"
+    placeholder: "役割を選択してください"
+    administrator: "管理者"
+    student: "学生"
+    professor: "教授"
+    admin_professor: "管理者＆教授"
+
+profile:
+  title: "マイプロフィール"
+  header: "あなたのプロフィール"
+  profile_pic: "プロフィール写真"
+  no_picture: "プロフィール写真がありません。"
+  first_name: "名"
+  last_name: "姓"
+  email: "メールアドレス"
+  phone_number: "電話番号"
+  address: "住所"
+  roles: "役割"
+  not_provided: "未設定"
+  enrolled_courses: "登録済みコース"
+  manage_enrollments: "登録管理"
+  edit_profile: "プロフィール編集"
+  change_password: "パスワード変更"
+  save: "保存"
+  cancel: "キャンセル"
+
+post:
+  title:
+    label: "タイトル"
+  content:
+    label: "内容"
+  type:
+    label: "タイプ"
+    message: "メッセージ"
+    file: "ファイル"
+    placeholder: "タイプを選択"
+  attachment:
+    label: "添付ファイル（任意）"
+  new:
+    title: "%course% の新しい投稿"
+    heading: "%course% の新しい投稿を作成"
+    submit: "投稿作成"
+    back_to_course: "コースに戻る"
+  category:
+    label: "カテゴリー"
+    placeholder: "カテゴリーを選択"
+  pin:
+    label: "固定"
+
+course:
+  new:
+    title: "新しいコース"
+    heading: "新しいコースを作成"
+    image_label: "コース画像（任意）"
+    submit: "コース作成"
+    description: "説明"
+    code: "コード"
+  show:
+    new_post: "新しい投稿を作成"
+    posts_heading: "投稿"
+    download_file: "ファイルをダウンロード"
+    posted_on: "%date% に投稿"
+    no_posts: "投稿はまだありません。"
+  edit:
+    title: "コース編集：%course%"
+    heading: "コースを編集"
+    label:
+      title: "タイトル"
+      description: "説明"
+      code: "コード"
+      image: "コース画像"
+    submit: "コースを更新"
+    back_to_courses: "コース一覧に戻る"
+
+courses:
+  my:
+    title: "マイコース"
+    heading: "マイコース"
+    add_course: "コース追加"
+    search_placeholder: "コースを検索..."
+    no_courses: "利用可能なコースがありません。"
+    edit: "編集"
+    infomessage: "情報"
+    delete: "削除"
+    delete_confirm: "本当にこのコースを削除しますか？"
+    info:
+      title: "コース情報"
+      description: "説明"
+      enrolled_users: "登録ユーザー"
+      no_enrolled_users: "登録ユーザーがいません。"
+      back_to_courses: "コース一覧に戻る"
+  news:
+    heading: "最新のお知らせ"
+    posted_file: "新しいファイルを投稿しました"
+    posted_message: "メッセージを投稿しました"
+    in_course: "コースで"
+    none: "最近のお知らせはありません。"
+
+admin:
+  users:
+    title: "ユーザー"
+    header: "ユーザー"
+    add_user: "ユーザー追加"
+    table:
+      id: "ID"
+      profile_picture: "プロフィール写真"
+      first_name: "名"
+      last_name: "姓"
+      email: "メールアドレス"
+      phone: "電話"
+      address: "住所"
+      roles: "役割"
+      enrolled_courses: "登録コース"
+      actions: "操作"
+    alt:
+      profile_picture: "プロフィール写真"
+    no_profile_picture: "なし"
+    no_phone: "なし"
+    no_address: "なし"
+    no_enrollments: "なし"
+    edit: "編集"
+    no_users: "ユーザーが見つかりません。"
+  enrollments:
+    title: "%firstName% %lastName% の登録管理"
+    header: "%firstName% %lastName% の登録管理"
+    admin_warning: "管理者ユーザーはコースに登録できません。"
+    current_heading: "現在の登録"
+    none_current: "登録がありません。"
+    remove:
+      title: "登録を削除"
+    available_heading: "利用可能なコース"
+    add:
+      title: "登録を追加"
+    all_enrolled: "すべてのコースは既に登録されています。"
+    back_to_profile: "プロフィールに戻る"
+
+admin_alert:
+  banner: "保留中の管理アクションはありません|%count% 件の管理アクションが保留中です|%count% 件の管理アクションが保留中です"
+  tag:
+    created: "%name% によって作成"
+    updated: "%name% によって変更"
+    deleted: "%name% によって削除"
+  dismiss: "閉じる"
+  history: "管理アラート履歴"
+
+announcement:
+  list:
+    heading: "お知らせ"
+    new: "お知らせを追加"
+    none: "お知らせはありません"
+
+change_password:
+  title: "パスワード変更"
+  heading: "パスワードを変更"
+  auto_generated: "現在自動生成されたパスワードを使用しています。安全な新しいパスワードに変更してください。"
+  prompt: "以下でパスワードを変更してください。"
+  new_password:
+    first_label: "新しいパスワード"
+    second_label: "新しいパスワードを確認"
+  submit: "パスワード更新"

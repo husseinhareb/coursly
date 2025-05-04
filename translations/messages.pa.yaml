@@ -1,0 +1,219 @@
+login:
+  title: "ਲੌਗ ਇਨ!"
+  sign_in: "ਕਿਰਪਾ ਕਰਕੇ ਸਾਇਨ ਇਨ ਕਰੋ"
+  email_label: "ਈਮੇਲ"
+  password_label: "ਪਾਸਵਰਡ"
+  show_password: "ਪਾਸਵਰਡ ਦਿਖਾਓ"
+  button: "ਸਾਇਨ ਇਨ"
+  logged_in_as: "ਤੁਸੀਂ %username% ਵਜੋਂ ਲੌਗ ਇਨ ਹੋ"
+  logout: "ਲੌਗ ਆਉਟ"
+  cookies_notice: "ਕੂਕੀਜ਼ ਨੋਟਿਸ"
+
+home:
+  title: "ਮੁੱਖ ਸਫ਼ਾ"
+  hello: "ਸਤ ਸ੍ਰੀ ਅਕਾਲ, %name%!"
+  email: "ਤੁਹਾਡਾ ਈਮੇਲ: %email%"
+  role: "ਤੁਹਾਡੀ ਭੂਮਿਕਾ: %role%"
+  welcome: "ਮੁੱਖ ਸਫ਼ੇ ਤੇ ਤੁਹਾਡਾ ਸਵਾਗਤ ਹੈ!"
+  login_prompt: "ਆਪਣੇ ਖਾਤੇ ਦੇ ਵੇਰਵੇ ਵੇਖਣ ਲਈ ਕਿਰਪਾ ਕਰਕੇ ਲੌਗ ਇਨ ਕਰੋ।"
+  recent_courses_heading: "ਹਾਲ ਹੀ ਵਿੱਚ ਦੇਖੇ ਕੋਰਸ"
+  no_recent_courses: "ਕੋਈ ਹਾਲੀਆ ਕੋਰਸ ਨਹੀਂ ਵੇਖਿਆ ਗਿਆ।"
+  announcements_heading: "ਨਵੇਂ ਘੋਸ਼ਣਾਂ"
+
+navbar:
+  title: "ਸਵਾਗਤ ਹੈ!"
+  toggle_navigation: "ਨੈਵੀਗੇਸ਼ਨ ਟੌਗਲ ਕਰੋ"
+  logo_alt: "ਸਾਈਟ ਲੋਗੋ"
+  users: "ਉਪਭੋਗਤਾ"
+  courses: "ਕੋਰਸ"
+  profile_picture_alt: "ਪ੍ਰੋਫ਼ਾਈਲ ਤਸਵੀਰ"
+  profile_options: "ਪ੍ਰੋਫ਼ਾਈਲ ਵਿਕਲਪ"
+  profile: "ਪ੍ਰੋਫ਼ਾਈਲ"
+  logout: "ਲੌਗ ਆਉਟ"
+  login: "ਲੌਗ ਇਨ"
+  announcement: "ਘੋਸ਼ਣਾ"
+
+registration:
+  title: "ਰਜਿਸਟਰ"
+  header: "ਰਜਿਸਟਰ"
+  button: "ਰਜਿਸਟਰ"
+  password_label: "ਪਾਸਵਰਡ (ਆਟੋ-ਜਨਰੇਟ)"
+  first_name:
+    label: "ਪਹਿਲਾ ਨਾਮ"
+    not_blank: "ਕਿਰਪਾ ਕਰਕੇ ਆਪਣਾ ਪਹਿਲਾ ਨਾਮ ਦਰਜ ਕਰੋ"
+  last_name:
+    label: "ਆਖਰੀ ਨਾਮ"
+    not_blank: "ਕਿਰਪਾ ਕਰਕੇ ਆਪਣਾ ਆਖਰੀ ਨਾਮ ਦਰਜ ਕਰੋ"
+  username:
+    label: "ਉਪਯੋਗਕਰਤਾ ਨਾਮ"
+    not_blank: "ਕਿਰਪਾ ਕਰਕੇ ਇਕ ਉਪਯੋਗਕਰਤਾ ਨਾਮ ਦਿਓ"
+    min_length: "ਤੁਹਾਡਾ ਉਪਯੋਗਕਰਤਾ ਨਾਮ ਘੱਟੋ-ਘੱਟ {{ limit }} ਅੱਖਰਾਂ ਦਾ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ"
+  email:
+    label: "ਈਮੇਲ"
+    not_blank: "ਕਿਰਪਾ ਕਰਕੇ ਇੱਕ ਈਮੇਲ ਦਰਜ ਕਰੋ"
+    invalid: "ਕਿਰਪਾ ਕਰਕੇ ਇੱਕ ਵੈਧ ਈਮੇਲ ਪਤਾ ਦਰਜ ਕਰੋ"
+  plain_password:
+    label: "ਪਾਸਵਰਡ (ਆਟੋ-ਜਨਰੇਟ)"
+    not_blank: "ਪਾਸਵਰਡ ਆਟੋ-ਜਨਰੇਟ ਕੀਤਾ ਜਾਂਦਾ ਹੈ"
+    min_length: "ਤੁਹਾਡਾ ਪਾਸਵਰਡ ਘੱਟੋ-ਘੱਟ {{ limit }} ਅੱਖਰਾਂ ਦਾ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ"
+  role:
+    label: "ਭੂਮਿਕਾ"
+    placeholder: "ਆਪਣੀ ਭੂਮਿਕਾ ਚੁਣੋ"
+    administrator: "ਐਡਮਿਨ"
+    student: "ਵਿਦਿਆਰਥੀ"
+    professor: "ਪ੍ਰੋਫੈਸਰ"
+    admin_professor: "ਐਡਮਿਨ ਅਤੇ ਪ੍ਰੋਫੈਸਰ"
+
+profile:
+  title: "ਮੇਰੀ ਪ੍ਰੋਫ਼ਾਈਲ"
+  header: "ਤੁਹਾਡੀ ਪ੍ਰੋਫ਼ਾਈਲ"
+  profile_pic: "ਪ੍ਰੋਫ਼ਾਈਲ ਤਸਵੀਰ"
+  no_picture: "ਕੋਈ ਪ੍ਰੋਫ਼ਾਈਲ ਤਸਵੀਰ ਉਪਲਬਧ ਨਹੀਂ।"
+  first_name: "ਪਹਿਲਾ ਨਾਮ"
+  last_name: "ਆਖਰੀ ਨਾਮ"
+  email: "ਈਮੇਲ"
+  phone_number: "ਫੋਨ ਨੰਬਰ"
+  address: "ਪਤਾ"
+  roles: "ਭੂਮਿਕਾਂ"
+  not_provided: "ਦਰਜ ਨਹੀਂ ਕੀਤਾ"
+  enrolled_courses: "ਦਾਖਲਾ ਲਏ ਕੋਰਸ"
+  manage_enrollments: "ਦਾਖਲੇ ਪ੍ਰਬੰਧਤ ਕਰੋ"
+  edit_profile: "ਪਰੋਫ਼ਾਈਲ ਸੋਧੋ"
+  change_password: "ਪਾਸਵਰਡ ਬਦਲੋ"
+  save: "ਸੇਵ"
+  cancel: "ਰੱਦ ਕਰੋ"
+
+post:
+  title:
+    label: "ਸਿਰਲੇਖ"
+  content:
+    label: "ਸਮੱਗਰੀ"
+  type:
+    label: "ਕਿਸਮ"
+    message: "ਸਨੇਹਾ"
+    file: "ਫਾਇਲ"
+    placeholder: "ਕਿਸਮ ਚੁਣੋ"
+  attachment:
+    label: "ਸੰਲਗਨ (ਇੱਛਿਕ)"
+  new:
+    title: "%course% ਲਈ ਨਵਾਂ ਪੋਸਟ"
+    heading: "%course% ਲਈ ਨਵਾਂ ਪੋਸਟ ਬਣਾਓ"
+    submit: "ਪੋਸਟ ਬਣਾਓ"
+    back_to_course: "ਕੋਰਸ 'ਤੇ ਵਾਪਸ ਜਾਓ"
+  category:
+    label: "ਸ਼੍ਰੇਣੀ"
+    placeholder: "ਸ਼੍ਰੇਣੀ ਚੁਣੋ"
+  pin:
+    label: "ਪਿਨ"
+
+course:
+  new:
+    title: "ਨਵਾਂ ਕੋਰਸ"
+    heading: "ਨਵਾਂ ਕੋਰਸ ਬਣਾਓ"
+    image_label: "ਕੋਰਸ ਚਿੱਤਰ (ਇੱਛਿਕ)"
+    submit: "ਕੋਰਸ ਬਣਾਓ"
+    description: "ਵਰਣਨ"
+    code: "ਕੋਡ"
+  show:
+    new_post: "ਨਵਾਂ ਪੋਸਟ ਬਣਾਓ"
+    posts_heading: "ਪੋਸਟ"
+    download_file: "ਫਾਇਲ ਡਾਊਨਲੋਡ ਕਰੋ"
+    posted_on: "%date% 'ਤੇ ਪੋਸਟ ਕੀਤਾ"
+    no_posts: "ਹੁਣ ਤੱਕ ਕੋਈ ਪੋਸਟ ਨਹੀਂ।"
+  edit:
+    title: "ਕੋਰਸ ਸੋਧੋ: %course%"
+    heading: "ਕੋਰਸ ਸੋਧੋ"
+    label:
+      title: "ਸਿਰਲੇਖ"
+      description: "ਵਰਣਨ"
+      code: "ਕੋਡ"
+      image: "ਕੋਰਸ ਚਿੱਤਰ"
+    submit: "ਕੋਰਸ ਅਪਡੇਟ ਕਰੋ"
+    back_to_courses: "ਕੋਰਸਾਂ ਵਾਪਸ ਜਾਓ"
+
+courses:
+  my:
+    title: "ਮੇਰੇ ਕੋਰਸ"
+    heading: "ਮੇਰੇ ਕੋਰਸ"
+    add_course: "ਕੋਰਸ ਸ਼ਾਮਿਲ ਕਰੋ"
+    search_placeholder: "ਕੋਰਸ ਖੋਜੋ..."
+    no_courses: "ਕੋਈ ਕੋਰਸ ਉਪਲਬਧ ਨਹੀਂ।"
+    edit: "ਸੋਧ"
+    infomessage: "ਸੂਚਨਾ"
+    delete: "ਹਟਾਓ"
+    delete_confirm: "ਕੀ ਤੁਸੀਂ ਇਸ ਕੋਰਸ ਨੂੰ ਹਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
+    info:
+      title: "ਕੋਰਸ ਜਾਣਕਾਰੀ"
+      description: "ਵਰਣਨ"
+      enrolled_users: "ਦਾਖਲਾ ਲਏ ਉਪਭੋਗਤਾ"
+      no_enrolled_users: "ਹੁਣ ਤਕ ਕੋਈ ਉਪਭੋਗਤਾ ਦਾਖਲਾ ਨਹੀਂ ਲਏ।"
+      back_to_courses: "ਕੋਰਸਾਂ ਵਾਪਸ ਜਾਓ"
+  news:
+    heading: "ਨਵੀਂਆਂ ਘੋਸ਼ਣਾਂ"
+    posted_file: "ਨਵੀਂ ਫਾਇਲ ਪੋਸਟ ਕੀਤੀ"
+    posted_message: "ਸਨੇਹਾ ਪੋਸਟ ਕੀਤਾ"
+    in_course: "ਵਿੱਚ"
+    none: "ਕੋਈ ਹਾਲੀਆ ਘੋਸ਼ਣਾਂ ਨਹੀਂ।"
+
+admin:
+  users:
+    title: "ਉਪਭੋਗਤਾ"
+    header: "ਉਪਭੋਗਤਾ"
+    add_user: "ਉਪਭੋਗਤਾ ਸ਼ਾਮਿਲ ਕਰੋ"
+    table:
+      id: "ਆਈਡੀ"
+      profile_picture: "ਪ੍ਰੋਫ਼ਾਈਲ ਤਸਵੀਰ"
+      first_name: "ਪਹਿਲਾ ਨਾਮ"
+      last_name: "ਆਖਰੀ ਨਾਮ"
+      email: "ਈਮੇਲ"
+      phone: "ਫੋਨ"
+      address: "ਪਤਾ"
+      roles: "ਭੂਮਿਕਾਂ"
+      enrolled_courses: "ਦਾਖਲਾ ਲਏ ਕੋਰਸ"
+      actions: "ਕ੍ਰਿਆਵਾਂ"
+    alt:
+      profile_picture: "ਪ੍ਰੋਫ਼ਾਈਲ ਤਸਵੀਰ"
+    no_profile_picture: "ਉਪਲਬਧ ਨਹੀਂ"
+    no_phone: "ਉਪਲਬਧ ਨਹੀਂ"
+    no_address: "ਉਪਲਬਧ ਨਹੀਂ"
+    no_enrollments: "ਕੋਈ ਨਹੀਂ"
+    edit: "ਸੋਧ"
+    no_users: "ਕੋਈ ਉਪਭੋਗਤਾ ਨਹੀਂ ਲੱਭਿਆ।"
+  enrollments:
+    title: "%firstName% %lastName% ਲਈ ਦਾਖਲੇ ਪ੍ਰਬੰਧਿਤ ਕਰੋ"
+    header: "%firstName% %lastName% ਲਈ ਦਾਖਲੇ ਪ੍ਰਬੰਧਿਤ ਕਰੋ"
+    admin_warning: "ਐਡਮਿਨ ਉਪਭੋਗਤਾਵਾਂ ਨੂੰ ਕੋਰਸਾਂ ਵਿੱਚ ਦਾਖਲਾ ਨਹੀਂ ਮਿਲ ਸਕਦਾ।"
+    current_heading: "ਮੌਜੂਦਾ ਦਾਖਲੇ"
+    none_current: "ਕੋਈ ਦਾਖਲਾ ਨਹੀਂ।"
+    remove:
+      title: "ਦਾਖਲਾ ਹਟਾਓ"
+    available_heading: "ਉਪਲਬਧ ਕੋਰਸ"
+    add:
+      title: "ਦਾਖਲਾ ਸ਼ਾਮਿਲ ਕਰੋ"
+    all_enrolled: "ਸਾਰੇ ਕੋਰਸ ਪਹਿਲਾਂ ਹੀ ਦਾਖਲਾ ਲਏ ਜਾ ਚੁੱਕੇ ਹਨ।"
+    back_to_profile: "ਪ੍ਰੋਫ਼ਾਈਲ ਵਾਪਸ ਜਾਓ"
+
+admin_alert:
+  banner: "ਕੋਈ ਐਡਮਿਨ ਕਾਰਵਾਈ ਬਕਾਇਆ ਨਹੀਂ|%count% ਐਡਮਿਨ ਕਾਰਵਾਈ ਬਕਾਇਆ ਹੈ|%count% ਐਡਮਿਨ ਕਾਰਵਾਈਆਂ ਬਕਾਇਆ ਹਨ"
+  tag:
+    created: "%name% ਵਲੋਂ ਬਣਾਇਆ"
+    updated: "%name% ਵਲੋਂ ਸੋਧਿਆ"
+    deleted: "%name% ਵਲੋਂ ਮਿਟਾਇਆ"
+  dismiss: "ਬੰਦ ਕਰੋ"
+  history: "ਐਡਮਿਨ ਅਲਰਟ ਇਤਿਹਾਸ"
+
+announcement:
+  list:
+    heading: "ਘੋਸ਼ਣਾ"
+    new: "ਘੋਸ਼ਣਾ ਸ਼ਾਮਿਲ ਕਰੋ"
+    none: "ਕੋਈ ਘੋਸ਼ਣਾ ਨਹੀਂ ਹੈ"
+
+change_password:
+  title: "ਪਾਸਵਰਡ ਬਦਲੋ"
+  heading: "ਆਪਣਾ ਪਾਸਵਰਡ ਬਦਲੋ"
+  auto_generated: "ਤੁਸੀਂ ਇਸ ਸਮੇਂ ਆਟੋ-ਜਨਰੇਟ ਕੀਤਾ ਪਾਸਵਰਡ ਵਰਤ ਰਹੇ ਹੋ। ਕਿਰਪਾ ਕਰਕੇ ਇਸਨੂੰ ਇੱਕ ਨਵਾਂ, ਸੁਰੱਖਿਅਤ ਪਾਸਵਰਡ ਨਾਲ ਬਦਲੋ।"
+  prompt: "ਕਿਰਪਾ ਕਰਕੇ ਹੇਠਾਂ ਆਪਣਾ ਪਾਸਵਰਡ ਬਦਲੋ।"
+  new_password:
+    first_label: "ਨਵਾਂ ਪਾਸਵਰਡ"
+    second_label: "ਨਵੇਂ ਪਾਸਵਰਡ ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ"
+  submit: "ਪਾਸਵਰਡ ਅਪਡੇਟ ਕਰੋ"

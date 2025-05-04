@@ -1,0 +1,219 @@
+login:
+  title: "Entrar!"
+  sign_in: "Por favor, faça login"
+  email_label: "Email"
+  password_label: "Senha"
+  show_password: "Mostrar senha"
+  button: "Entrar"
+  logged_in_as: "Você está logado como %username%"
+  logout: "Sair"
+  cookies_notice: "Aviso de cookies"
+
+home:
+  title: "Início"
+  hello: "Olá, %name%!"
+  email: "Seu email: %email%"
+  role: "Sua função: %role%"
+  welcome: "Bem-vindo à página inicial!"
+  login_prompt: "Por favor, faça login para ver os detalhes da sua conta."
+  recent_courses_heading: "Cursos visualizados recentemente"
+  no_recent_courses: "Nenhum curso visualizado recentemente."
+  announcements_heading: "Últimos anúncios"
+
+navbar:
+  title: "Bem-vindo!"
+  toggle_navigation: "Alternar navegação"
+  logo_alt: "Logotipo do site"
+  users: "Usuários"
+  courses: "Cursos"
+  profile_picture_alt: "Foto de perfil"
+  profile_options: "Opções de perfil"
+  profile: "Perfil"
+  logout: "Sair"
+  login: "Entrar"
+  announcement: "Anúncio"
+
+registration:
+  title: "Registrar"
+  header: "Registrar"
+  button: "Registrar"
+  password_label: "Senha (gerada automaticamente)"
+  first_name:
+    label: "Nome"
+    not_blank: "Por favor, insira seu nome"
+  last_name:
+    label: "Sobrenome"
+    not_blank: "Por favor, insira seu sobrenome"
+  username:
+    label: "Nome de usuário"
+    not_blank: "Por favor, insira um nome de usuário"
+    min_length: "Seu nome de usuário deve ter pelo menos {{ limit }} caracteres"
+  email:
+    label: "Email"
+    not_blank: "Por favor, insira um email"
+    invalid: "Por favor, insira um endereço de email válido"
+  plain_password:
+    label: "Senha (gerada automaticamente)"
+    not_blank: "A senha é gerada automaticamente"
+    min_length: "Sua senha deve ter pelo menos {{ limit }} caracteres"
+  role:
+    label: "Função"
+    placeholder: "Escolha sua função"
+    administrator: "Administrador"
+    student: "Aluno"
+    professor: "Professor"
+    admin_professor: "Admin & Professor"
+
+profile:
+  title: "Meu Perfil"
+  header: "Seu Perfil"
+  profile_pic: "Foto de Perfil"
+  no_picture: "Nenhuma foto de perfil disponível."
+  first_name: "Nome"
+  last_name: "Sobrenome"
+  email: "Email"
+  phone_number: "Telefone"
+  address: "Endereço"
+  roles: "Funções"
+  not_provided: "Não fornecido"
+  enrolled_courses: "Cursos Inscritos"
+  manage_enrollments: "Gerenciar Inscrições"
+  edit_profile: "Editar Perfil"
+  change_password: "Alterar Senha"
+  save: "Salvar"
+  cancel: "Cancelar"
+
+post:
+  title:
+    label: "Título"
+  content:
+    label: "Conteúdo"
+  type:
+    label: "Tipo"
+    message: "Mensagem"
+    file: "Arquivo"
+    placeholder: "Escolha o tipo"
+  attachment:
+    label: "Anexo (Opcional)"
+  new:
+    title: "Novo post para %course%"
+    heading: "Criar novo post para %course%"
+    submit: "Criar Post"
+    back_to_course: "Voltar ao Curso"
+  category:
+    label: "Categoria"
+    placeholder: "Escolha a categoria"
+  pin:
+    label: "Fixar"
+
+course:
+  new:
+    title: "Novo Curso"
+    heading: "Criar Novo Curso"
+    image_label: "Imagem do Curso (Opcional)"
+    submit: "Criar Curso"
+    description: "Descrição"
+    code: "Código"
+  show:
+    new_post: "Criar Novo Post"
+    posts_heading: "Posts"
+    download_file: "Baixar Arquivo"
+    posted_on: "Publicado em %date%"
+    no_posts: "Nenhum post ainda."
+  edit:
+    title: "Editar Curso: %course%"
+    heading: "Editar Curso"
+    label:
+      title: "Título"
+      description: "Descrição"
+      code: "Código"
+      image: "Imagem do Curso"
+    submit: "Atualizar Curso"
+    back_to_courses: "Voltar aos Cursos"
+
+courses:
+  my:
+    title: "Meus Cursos"
+    heading: "Meus Cursos"
+    add_course: "Adicionar Curso"
+    search_placeholder: "Buscar um curso..."
+    no_courses: "Nenhum curso disponível."
+    edit: "Editar"
+    infomessage: "Informação"
+    delete: "Excluir"
+    delete_confirm: "Tem certeza de que deseja excluir este curso?"
+    info:
+      title: "Informações do Curso"
+      description: "Descrição"
+      enrolled_users: "Usuários Inscritos"
+      no_enrolled_users: "Nenhum usuário inscrito ainda."
+      back_to_courses: "Voltar aos Cursos"
+  news:
+    heading: "Últimos anúncios"
+    posted_file: "postou um novo arquivo"
+    posted_message: "postou uma mensagem"
+    in_course: "em"
+    none: "Nenhum anúncio recente."
+
+admin:
+  users:
+    title: "Usuários"
+    header: "Usuários"
+    add_user: "Adicionar Usuário"
+    table:
+      id: "ID"
+      profile_picture: "Foto de Perfil"
+      first_name: "Nome"
+      last_name: "Sobrenome"
+      email: "Email"
+      phone: "Telefone"
+      address: "Endereço"
+      roles: "Funções"
+      enrolled_courses: "Cursos Inscritos"
+      actions: "Ações"
+    alt:
+      profile_picture: "Foto de Perfil"
+    no_profile_picture: "N/A"
+    no_phone: "N/A"
+    no_address: "N/A"
+    no_enrollments: "Nenhum"
+    edit: "Editar"
+    no_users: "Nenhum usuário encontrado."
+  enrollments:
+    title: "Gerenciar Inscrições de %firstName% %lastName%"
+    header: "Gerenciar Inscrições de %firstName% %lastName%"
+    admin_warning: "Usuários administradores não podem ser inscritos em cursos."
+    current_heading: "Inscrições Atuais"
+    none_current: "Nenhuma inscrição."
+    remove:
+      title: "Remover Inscrição"
+    available_heading: "Cursos Disponíveis"
+    add:
+      title: "Adicionar Inscrição"
+    all_enrolled: "Todos os cursos já estão inscritos."
+    back_to_profile: "Voltar ao Perfil"
+
+admin_alert:
+  banner: "Nenhuma ação administrativa pendente|%count% ação administrativa pendente|%count% ações administrativas pendentes"
+  tag:
+    created: "Criado por %name%"
+    updated: "Modificado por %name%"
+    deleted: "Excluído por %name%"
+  dismiss: "Dispensar"
+  history: "Histórico de alertas administrativos"
+
+announcement:
+  list:
+    heading: "Anúncio"
+    new: "Adicionar anúncio"
+    none: "Não há anúncios"
+
+change_password:
+  title: "Alterar Senha"
+  heading: "Altere sua senha"
+  auto_generated: "Você está usando uma senha gerada automaticamente. Por favor, altere-a para uma nova senha segura."
+  prompt: "Por favor, altere sua senha abaixo."
+  new_password:
+    first_label: "Nova senha"
+    second_label: "Confirme a nova senha"
+  submit: "Atualizar Senha"

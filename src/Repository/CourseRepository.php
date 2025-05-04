@@ -6,6 +6,7 @@ use App\Entity\Course;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\Query\ResultSetMappingBuilder;
 
 /**
  * @extends ServiceEntityRepository<Course>
@@ -18,69 +19,118 @@ class CourseRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param int $duration
+     * Search courses by title or code using raw SQL.
+     *
+     * @param string $term
      * @return Course[]
      */
-    /*public function findWithDurationLowerThan(int $duration): array
-    {
-        return $this->createQueryBuilder('c')
-            ->where('c.duration <= :duration')
-            ->orderBy('c.duration', 'ASC')
-            ->setMaxResults()
-            ->setParameter('duration', $duration)
-            ->getQuery()
-            ->getResult();
-    }
-    */
-
-    // /**
-    //  * @return Course[] Returns an array of Course objects
-    //  */
-    // public function findByExampleField($value): array
-    // {
-    //     return $this->createQueryBuilder('c')
-    //         ->andWhere('c.exampleField = :val')
-    //         ->setParameter('val', $value)
-    //         ->orderBy('c.id', 'ASC')
-    //         ->setMaxResults(10)
-    //         ->getQuery()
-    //         ->getResult();
-    // }
-    //
-    // public function findOneBySomeField($value): ?Course
-    // {
-    //     return $this->createQueryBuilder('c')
-    //         ->andWhere('c.exampleField = :val')
-    //         ->setParameter('val', $value)
-    //         ->getQuery()
-    //         ->getOneOrNullResult();
-    // }
-    
     public function searchCourses(string $term): array
     {
-        return $this->createQueryBuilder('c')
-            ->where('c.title LIKE :term OR c.code LIKE :term')
-            ->setParameter('term', '%' . $term . '%')
-            ->getQuery()
-            ->getResult();
-    }
-    public function findCoursesForUser(User $user): array
-    {
-        return $this->createQueryBuilder('c')
-            ->join('c.enrollments', 'e')
-            ->where('e.user = :user')
-            ->setParameter('user', $user)
-            ->getQuery()
-            ->getResult();
-    }
-    public function findByUser(User $user): array
-    {
-        return $this->createQueryBuilder('c')
-            ->innerJoin('c.enrollments', 'e', 'WITH', 'e.user = :user')
-            ->setParameter('user', $user)
-            ->orderBy('c.title', 'ASC')
-            ->getQuery()
-            ->getResult();
+        $em = $this->getEntityManager();
+        $conn = $em->getConnection();
+
+        // Build a ResultSetMapping to hydrate Course entities
+        $rsm = new ResultSetMappingBuilder($em);
+        $rsm->addRootEntityFromClassMetadata(Course::class, 'c');
+
+        $sql = '
+            SELECT c.*
+            FROM course c
+            WHERE c.title LIKE :term
+               OR c.code  LIKE :term
+        ';
+
+        $query = $em->createNativeQuery($sql, $rsm);
+        $query->setParameter('term', '%' . $term . '%');
+
+        return $query->getResult();
     }
 
+    /**
+     * Find all courses a given user is enrolled in, via raw SQL.
+     *
+     * @param User $user
+     * @return Course[]
+     */
+    public function findCoursesForUser(User $user): array
+    {
+        $em = $this->getEntityManager();
+
+        $rsm = new ResultSetMappingBuilder($em);
+        $rsm->addRootEntityFromClassMetadata(Course::class, 'c');
+
+        $sql = '
+            SELECT c.*
+            FROM course c
+            INNER JOIN enrollment e
+                ON c.id = e.course_id
+            WHERE e.user_id = :userId
+        ';
+
+        $query = $em->createNativeQuery($sql, $rsm);
+        $query->setParameter('userId', $user->getId());
+
+        return $query->getResult();
+    }
+
+    /**
+     * Find all courses for a user, ordered by title, using raw SQL.
+     *
+     * @param User $user
+     * @return Course[]
+     */
+    public function findByUser(User $user): array
+    {
+        $em = $this->getEntityManager();
+
+        $rsm = new ResultSetMappingBuilder($em);
+        $rsm->addRootEntityFromClassMetadata(Course::class, 'c');
+
+        $sql = '
+            SELECT c.*
+            FROM course c
+            INNER JOIN enrollment e
+                ON c.id = e.course_id
+            WHERE e.user_id = :userId
+            ORDER BY c.title ASC
+        ';
+
+        $query = $em->createNativeQuery($sql, $rsm);
+        $query->setParameter('userId', $user->getId());
+
+        return $query->getResult();
+    }
+
+    /**
+     * Find courses with duration lower than or equal to given value, raw SQL.
+     *
+     * @param int $duration
+     * @param int|null $limit
+     * @return Course[]
+     */
+    public function findWithDurationLowerThan(int $duration, ?int $limit = null): array
+    {
+        $em = $this->getEntityManager();
+
+        $rsm = new ResultSetMappingBuilder($em);
+        $rsm->addRootEntityFromClassMetadata(Course::class, 'c');
+
+        $sql = '
+            SELECT c.*
+            FROM course c
+            WHERE c.duration <= :duration
+            ORDER BY c.duration ASC
+        ';
+        if ($limit !== null) {
+            $sql .= ' LIMIT :limit';
+        }
+
+        $query = $em->createNativeQuery($sql, $rsm);
+        $query->setParameter('duration', $duration);
+        if ($limit !== null) {
+            $query->setParameter('limit', $limit);
+        }
+
+        return $query->getResult();
+    }
 }

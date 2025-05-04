@@ -1,12 +1,12 @@
 login:
-  title: "Se connecter !"
-  sign_in: "Veuillez vous connecter"
+  title: "Connectez-vous !"
+  sign_in: "Veuillez vous identifier"
   email_label: "Email"
   password_label: "Mot de passe"
   show_password: "Afficher le mot de passe"
   button: "Se connecter"
   logged_in_as: "Vous êtes connecté en tant que %username%"
-  logout: "Se déconnecter"
+  logout: "Déconnexion"
   cookies_notice: "Avis sur les cookies"
 
 home:
@@ -35,19 +35,19 @@ navbar:
 
 registration:
   title: "Inscription"
-  header: "Inscription"
+  header: "S’inscrire"
   button: "S’inscrire"
   password_label: "Mot de passe (généré automatiquement)"
   first_name:
     label: "Prénom"
     not_blank: "Veuillez entrer votre prénom"
   last_name:
-    label: "Nom de famille"
-    not_blank: "Veuillez entrer votre nom de famille"
+    label: "Nom"
+    not_blank: "Veuillez entrer votre nom"
   username:
     label: "Nom d’utilisateur"
     not_blank: "Veuillez entrer un nom d’utilisateur"
-    min_length: "Votre nom d’utilisateur doit comporter au moins {{ limit }} caractères"
+    min_length: "Votre nom d’utilisateur doit contenir au moins {{ limit }} caractères"
   email:
     label: "Email"
     not_blank: "Veuillez entrer un email"
@@ -55,24 +55,24 @@ registration:
   plain_password:
     label: "Mot de passe (généré automatiquement)"
     not_blank: "Le mot de passe est généré automatiquement"
-    min_length: "Votre mot de passe doit comporter au moins {{ limit }} caractères"
+    min_length: "Votre mot de passe doit contenir au moins {{ limit }} caractères"
   role:
     label: "Rôle"
     placeholder: "Choisissez votre rôle"
     administrator: "Administrateur"
     student: "Étudiant"
     professor: "Professeur"
-    admin_professor: "Administrateur & Professeur"
+    admin_professor: "Admin & Professeur"
 
 profile:
   title: "Mon profil"
   header: "Votre profil"
-  picture_alt: "Photo de profil"
+  profile_pic: "Photo de profil"
   no_picture: "Aucune photo de profil disponible."
   first_name: "Prénom"
-  last_name: "Nom de famille"
+  last_name: "Nom"
   email: "Email"
-  phone_number: "Numéro de téléphone"
+  phone_number: "Téléphone"
   address: "Adresse"
   roles: "Rôles"
   not_provided: "Non renseigné"
@@ -94,7 +94,7 @@ post:
     file: "Fichier"
     placeholder: "Choisissez le type"
   attachment:
-    label: "Pièce jointe (optionnelle)"
+    label: "Pièce jointe (optionnel)"
   new:
     title: "Nouveau message pour %course%"
     heading: "Créer un nouveau message pour %course%"
@@ -115,11 +115,11 @@ course:
     description: "Description"
     code: "Code"
   show:
-    new_post: "Créer un nouveau message"
+    new_post: "Créer un message"
     posts_heading: "Messages"
     download_file: "Télécharger le fichier"
     posted_on: "Publié le %date%"
-    no_posts: "Aucun message pour le moment."
+    no_posts: "Pas encore de messages."
   edit:
     title: "Modifier le cours : %course%"
     heading: "Modifier le cours"
@@ -136,7 +136,7 @@ courses:
     title: "Mes cours"
     heading: "Mes cours"
     add_course: "Ajouter un cours"
-    search_placeholder: "Rechercher un cours..."
+    search_placeholder: "Rechercher un cours…"
     no_courses: "Aucun cours disponible."
     edit: "Modifier"
     infomessage: "Info"
@@ -146,11 +146,11 @@ courses:
       title: "Informations sur le cours"
       description: "Description"
       enrolled_users: "Utilisateurs inscrits"
-      no_enrolled_users: "Aucun utilisateur inscrit pour le moment."
+      no_enrolled_users: "Aucun utilisateur inscrit pour l’instant."
       back_to_courses: "Retour aux cours"
   news:
     heading: "Dernières annonces"
-    posted_file: "a posté un nouveau fichier"
+    posted_file: "a ajouté un nouveau fichier"
     posted_message: "a posté un message"
     in_course: "dans"
     none: "Aucune annonce récente."
@@ -164,7 +164,7 @@ admin:
       id: "ID"
       profile_picture: "Photo de profil"
       first_name: "Prénom"
-      last_name: "Nom de famille"
+      last_name: "Nom"
       email: "Email"
       phone: "Téléphone"
       address: "Adresse"
@@ -173,20 +173,20 @@ admin:
       actions: "Actions"
     alt:
       profile_picture: "Photo de profil"
-    no_profile_picture: "N/D"
-    no_phone: "N/D"
-    no_address: "N/D"
-    no_enrollments: "Aucun"
+    no_profile_picture: "N/A"
+    no_phone: "N/A"
+    no_address: "N/A"
+    no_enrollments: "Aucune"
     edit: "Modifier"
     no_users: "Aucun utilisateur trouvé."
   enrollments:
     title: "Gérer les inscriptions de %firstName% %lastName%"
     header: "Gérer les inscriptions de %firstName% %lastName%"
-    admin_warning: "Les utilisateurs administrateurs ne peuvent pas être inscrits aux cours."
+    admin_warning: "Les administrateurs ne peuvent pas être inscrits à des cours."
     current_heading: "Inscriptions actuelles"
-    none_current: "Aucun cours inscrit."
+    none_current: "Aucune inscription."
     remove:
-      title: "Supprimer l’inscription"
+      title: "Retirer l’inscription"
     available_heading: "Cours disponibles"
     add:
       title: "Ajouter une inscription"
@@ -194,16 +194,26 @@ admin:
     back_to_profile: "Retour au profil"
 
 admin_alert:
-  banner: "Aucune action d'administration en attente|Une action d'administration en attente|%count% actions d'administration en attente"
+  banner: "Aucune action admin en attente|%count% action admin en attente|%count% actions admin en attente"
   tag:
     created: "Créé par %name%"
     updated: "Modifié par %name%"
     deleted: "Supprimé par %name%"
-  dismiss: "Fermer"
-  history: "Historique des alertes d'administration"
+  dismiss: "Ignorer"
+  history: "Historique des alertes admin"
 
 announcement:
   list:
-    heading: "Annonces"
+    heading: "Annonce"
     new: "Ajouter une annonce"
-    none: "Il n’y a pas d’annonce"
+    none: "Il n’y a pas d’annonces."
+
+change_password:
+  title: "Changer le mot de passe"
+  heading: "Changez votre mot de passe"
+  auto_generated: "Vous utilisez actuellement le mot de passe généré automatiquement. Veuillez le remplacer par un mot de passe sécurisé."
+  prompt: "Veuillez changer votre mot de passe ci-dessous."
+  new_password:
+    first_label: "Nouveau mot de passe"
+    second_label: "Confirmez le nouveau mot de passe"
+  submit: "Mettre à jour le mot de passe"

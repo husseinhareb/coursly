@@ -1,0 +1,219 @@
+login:
+  title: "تسجيل الدخول!"
+  sign_in: "يرجى تسجيل الدخول"
+  email_label: "البريد الإلكتروني"
+  password_label: "كلمة المرور"
+  show_password: "عرض كلمة المرور"
+  button: "تسجيل الدخول"
+  logged_in_as: "أنت مسجل الدخول كـ %username%"
+  logout: "تسجيل الخروج"
+  cookies_notice: "إشعار الكوكيز"
+
+home:
+  title: "الصفحة الرئيسية"
+  hello: "مرحبًا، %name%!"
+  email: "بريدك الإلكتروني: %email%"
+  role: "دورك: %role%"
+  welcome: "مرحبًا بك في الصفحة الرئيسية!"
+  login_prompt: "يرجى تسجيل الدخول لعرض تفاصيل حسابك."
+  recent_courses_heading: "الدورات التي تمت مشاهدتها مؤخرًا"
+  no_recent_courses: "لم يتم مشاهدة أي دورات مؤخرًا."
+  announcements_heading: "أحدث الإعلانات"
+
+navbar:
+  title: "مرحبًا!"
+  toggle_navigation: "تبديل التنقل"
+  logo_alt: "شعار الموقع"
+  users: "المستخدمون"
+  courses: "الدورات"
+  profile_picture_alt: "صورة الملف الشخصي"
+  profile_options: "خيارات الملف الشخصي"
+  profile: "الملف الشخصي"
+  logout: "تسجيل الخروج"
+  login: "تسجيل الدخول"
+  announcement: "إعلان"
+
+registration:
+  title: "التسجيل"
+  header: "إنشاء حساب"
+  button: "تسجيل"
+  password_label: "كلمة المرور (مولدة تلقائيًا)"
+  first_name:
+    label: "الاسم الأول"
+    not_blank: "يرجى إدخال الاسم الأول"
+  last_name:
+    label: "اسم العائلة"
+    not_blank: "يرجى إدخال اسم العائلة"
+  username:
+    label: "اسم المستخدم"
+    not_blank: "يرجى إدخال اسم مستخدم"
+    min_length: "يجب أن يتكون اسم المستخدم من {{ limit }} أحرف على الأقل"
+  email:
+    label: "البريد الإلكتروني"
+    not_blank: "يرجى إدخال البريد الإلكتروني"
+    invalid: "يرجى إدخال عنوان بريد إلكتروني صالح"
+  plain_password:
+    label: "كلمة المرور (مولدة تلقائيًا)"
+    not_blank: "كلمة المرور مولدة تلقائيًا"
+    min_length: "يجب أن تتكون كلمة المرور من {{ limit }} أحرف على الأقل"
+  role:
+    label: "الدور"
+    placeholder: "اختر دورك"
+    administrator: "مدير"
+    student: "طالب"
+    professor: "أستاذ"
+    admin_professor: "مدير وأستاذ"
+
+profile:
+  title: "ملفي الشخصي"
+  header: "ملفك الشخصي"
+  profile_pic: "صورة الملف الشخصي"
+  no_picture: "لا توجد صورة للملف الشخصي."
+  first_name: "الاسم الأول"
+  last_name: "اسم العائلة"
+  email: "البريد الإلكتروني"
+  phone_number: "رقم الهاتف"
+  address: "العنوان"
+  roles: "الأدوار"
+  not_provided: "لم يتم التحديد"
+  enrolled_courses: "الدورات المسجلة"
+  manage_enrollments: "إدارة التسجيلات"
+  edit_profile: "تعديل الملف الشخصي"
+  change_password: "تغيير كلمة المرور"
+  save: "حفظ"
+  cancel: "إلغاء"
+
+post:
+  title:
+    label: "العنوان"
+  content:
+    label: "المحتوى"
+  type:
+    label: "النوع"
+    message: "رسالة"
+    file: "ملف"
+    placeholder: "اختر النوع"
+  attachment:
+    label: "مرفق (اختياري)"
+  new:
+    title: "منشور جديد لـ %course%"
+    heading: "إنشاء منشور جديد لـ %course%"
+    submit: "إنشاء المنشور"
+    back_to_course: "العودة إلى الدورة"
+  category:
+    label: "الفئة"
+    placeholder: "اختر الفئة"
+  pin:
+    label: "تثبيت"
+
+course:
+  new:
+    title: "دورة جديدة"
+    heading: "إنشاء دورة جديدة"
+    image_label: "صورة الدورة (اختيارية)"
+    submit: "إنشاء الدورة"
+    description: "الوصف"
+    code: "الرمز"
+  show:
+    new_post: "إنشاء منشور جديد"
+    posts_heading: "المنشورات"
+    download_file: "تحميل الملف"
+    posted_on: "نُشر في %date%"
+    no_posts: "لا توجد منشورات بعد."
+  edit:
+    title: "تعديل الدورة: %course%"
+    heading: "تعديل الدورة"
+    label:
+      title: "العنوان"
+      description: "الوصف"
+      code: "الرمز"
+      image: "صورة الدورة"
+    submit: "تحديث الدورة"
+    back_to_courses: "العودة إلى الدورات"
+
+courses:
+  my:
+    title: "دوراتي"
+    heading: "دوراتي"
+    add_course: "إضافة دورة"
+    search_placeholder: "ابحث عن دورة..."
+    no_courses: "لا توجد دورات."
+    edit: "تعديل"
+    infomessage: "معلومات"
+    delete: "حذف"
+    delete_confirm: "هل أنت متأكد أنك تريد حذف هذه الدورة؟"
+    info:
+      title: "معلومات الدورة"
+      description: "الوصف"
+      enrolled_users: "المستخدمون المسجلون"
+      no_enrolled_users: "لا يوجد مستخدمون مسجلون بعد."
+      back_to_courses: "العودة إلى الدورات"
+  news:
+    heading: "أحدث الإعلانات"
+    posted_file: "قام بتحميل ملف جديد"
+    posted_message: "قام بنشر رسالة"
+    in_course: "في الدورة"
+    none: "لا توجد إعلانات حديثة."
+
+admin:
+  users:
+    title: "المستخدمون"
+    header: "قائمة المستخدمين"
+    add_user: "إضافة مستخدم"
+    table:
+      id: "المعرف"
+      profile_picture: "صورة الملف الشخصي"
+      first_name: "الاسم الأول"
+      last_name: "اسم العائلة"
+      email: "البريد الإلكتروني"
+      phone: "الهاتف"
+      address: "العنوان"
+      roles: "الأدوار"
+      enrolled_courses: "الدورات المسجلة"
+      actions: "الإجراءات"
+    alt:
+      profile_picture: "صورة الملف الشخصي"
+    no_profile_picture: "غير متوفر"
+    no_phone: "غير متوفر"
+    no_address: "غير متوفر"
+    no_enrollments: "لا شيء"
+    edit: "تعديل"
+    no_users: "لا يوجد مستخدمون."
+  enrollments:
+    title: "إدارة تسجيلات %firstName% %lastName%"
+    header: "إدارة تسجيلات %firstName% %lastName%"
+    admin_warning: "لا يمكن للمسؤولين التسجيل في الدورات."
+    current_heading: "التسجيلات الحالية"
+    none_current: "لا توجد تسجيلات."
+    remove:
+      title: "إلغاء التسجيل"
+    available_heading: "الدورات المتاحة"
+    add:
+      title: "إضافة تسجيل"
+    all_enrolled: "تم تسجيل جميع الدورات بالفعل."
+    back_to_profile: "العودة إلى الملف الشخصي"
+
+admin_alert:
+  banner: "لا توجد إجراءات إدارية معلقة|%count% إجراء إداري معلق|%count% إجراءات إدارية معلقة"
+  tag:
+    created: "أنشأ بواسطة %name%"
+    updated: "تم التعديل بواسطة %name%"
+    deleted: "تم الحذف بواسطة %name%"
+  dismiss: "تجاهل"
+  history: "سجل التنبيهات الإدارية"
+
+announcement:
+  list:
+    heading: "الإعلان"
+    new: "إضافة إعلان"
+    none: "لا توجد إعلانات."
+
+change_password:
+  title: "تغيير كلمة المرور"
+  heading: "قم بتغيير كلمة المرور الخاصة بك"
+  auto_generated: "أنت تستخدم حاليًا كلمة مرور مولدة تلقائيًا. الرجاء تغييرها إلى كلمة مرور أكثر أمانًا."
+  prompt: "يرجى تغيير كلمة المرور الخاصة بك أدناه."
+  new_password:
+    first_label: "كلمة المرور الجديدة"
+    second_label: "تأكيد كلمة المرور الجديدة"
+  submit: "تحديث كلمة المرور"

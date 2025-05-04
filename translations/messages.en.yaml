@@ -66,7 +66,7 @@ registration:
 profile:
   title: "My Profile"
   header: "Your Profile"
-  picture_alt: "Profile Picture"
+  profile_pic: "Profile Picture"
   no_picture: "No profile picture available."
   first_name: "First Name"
   last_name: "Last Name"
@@ -208,3 +208,13 @@ announcement:
     heading: "Announcement"
     new: "Add announcement"
     none: "There is no announcements"
+
+change_password:
+  title:             "Change Password"
+  heading:           "Change Your Password"
+  auto_generated:    "You are currently using the auto-generated password. Please change it to a new, secure password."
+  prompt:            "Please change your password below."
+  new_password:
+    first_label:     "New password"
+    second_label:    "Confirm new password"
+  submit:            "Update Password"

@@ -1,0 +1,219 @@
+login:
+  title: "লগ ইন!"
+  sign_in: "অনুগ্রহ করে সাইন ইন করুন"
+  email_label: "ইমেল"
+  password_label: "পাসওয়ার্ড"
+  show_password: "পাসওয়ার্ড দেখান"
+  button: "সাইন ইন"
+  logged_in_as: "আপনি %username% হিসেবে লগ ইন করেছেন"
+  logout: "লগ আউট"
+  cookies_notice: "কুকিজ বিজ্ঞপ্তি"
+
+home:
+  title: "হোম"
+  hello: "হ্যালো, %name%!"
+  email: "আপনার ইমেল: %email%"
+  role: "আপনার ভূমিকা: %role%"
+  welcome: "হোমপেজে স্বাগতম!"
+  login_prompt: "আপনার অ্যাকাউন্টের বিবরণ দেখতে লগ ইন করুন।"
+  recent_courses_heading: "সাম্প্রতিক দেখানো কোর্স"
+  no_recent_courses: "কোনো সাম্প্রতিক কোর্স দেখা হয়নি।"
+  announcements_heading: "সর্বশেষ ঘোষণা"
+
+navbar:
+  title: "স্বাগতম!"
+  toggle_navigation: "নেভিগেশন টগল করুন"
+  logo_alt: "সাইট লোগো"
+  users: "ব্যবহারকারীরা"
+  courses: "কোর্সসমূহ"
+  profile_picture_alt: "প্রোফাইল ছবি"
+  profile_options: "প্রোফাইল বিকল্প"
+  profile: "প্রোফাইল"
+  logout: "লগ আউট"
+  login: "লগ ইন"
+  announcement: "ঘোষণা"
+
+registration:
+  title: "রেজিস্ট্রেশন"
+  header: "রেজিস্ট্রেশন"
+  button: "রেজিস্টার"
+  password_label: "পাসওয়ার্ড (স্বয়ংক্রিয়ভাবে তৈরি)"
+  first_name:
+    label: "প্রথম নাম"
+    not_blank: "অনুগ্রহ করে আপনার প্রথম নাম দিন"
+  last_name:
+    label: "শেষ নাম"
+    not_blank: "অনুগ্রহ করে আপনার শেষ নাম দিন"
+  username:
+    label: "ব্যবহারকারী নাম"
+    not_blank: "অনুগ্রহ করে একটি ব্যবহারকারী নাম দিন"
+    min_length: "আপনার ব্যবহারকারী নাম অন্তত {{ limit }} অক্ষরের হতে হবে"
+  email:
+    label: "ইমেল"
+    not_blank: "অনুগ্রহ করে একটি ইমেল দিন"
+    invalid: "অনুগ্রহ করে একটি বৈধ ইমেল ঠিকানা দিন"
+  plain_password:
+    label: "পাসওয়ার্ড (স্বয়ংক্রিয়ভাবে তৈরি)"
+    not_blank: "পাসওয়ার্ড স্বয়ংক্রিয়ভাবে তৈরি করা হয়"
+    min_length: "আপনার পাসওয়ার্ড অন্তত {{ limit }} অক্ষরের হতে হবে"
+  role:
+    label: "ভূমিকা"
+    placeholder: "আপনার ভূমিকা নির্বাচন করুন"
+    administrator: "প্রশাসক"
+    student: "ছাত্র"
+    professor: "প্রোফেসর"
+    admin_professor: "প্রশাসক ও অধ্যাপক"
+
+profile:
+  title: "আমার প্রোফাইল"
+  header: "আপনার প্রোফাইল"
+  profile_pic: "প্রোফাইল ছবি"
+  no_picture: "কোনো প্রোফাইল ছবি পাওয়া যায়নি।"
+  first_name: "প্রথম নাম"
+  last_name: "শেষ নাম"
+  email: "ইমেল"
+  phone_number: "ফোন নম্বর"
+  address: "ঠিকানা"
+  roles: "ভূমিকা"
+  not_provided: "দেওয়া হয়নি"
+  enrolled_courses: "নথিভুক্ত কোর্স"
+  manage_enrollments: "নথিভুক্তি পরিচালনা করুন"
+  edit_profile: "প্রোফাইল সম্পাদনা করুন"
+  change_password: "পাসওয়ার্ড পরিবর্তন করুন"
+  save: "সংরক্ষণ করুন"
+  cancel: "বাতিল করুন"
+
+post:
+  title:
+    label: "শিরোনাম"
+  content:
+    label: "কন্টেন্ট"
+  type:
+    label: "ধরন"
+    message: "বার্তা"
+    file: "ফাইল"
+    placeholder: "ধরন নির্বাচন করুন"
+  attachment:
+    label: "সংযুক্তি (ঐচ্ছিক)"
+  new:
+    title: "%course% এর জন্য নতুন পোস্ট"
+    heading: "%course% এর জন্য নতুন পোস্ট তৈরি করুন"
+    submit: "পোস্ট তৈরি করুন"
+    back_to_course: "কোর্সে ফিরে যান"
+  category:
+    label: "শ্রেণী"
+    placeholder: "শ্রেণী নির্বাচন করুন"
+  pin:
+    label: "পিন"
+
+course:
+  new:
+    title: "নতুন কোর্স"
+    heading: "নতুন কোর্স তৈরি করুন"
+    image_label: "কোর্স ছবি (ঐচ্ছিক)"
+    submit: "কোর্স তৈরি করুন"
+    description: "বর্ণনা"
+    code: "কোড"
+  show:
+    new_post: "নতুন পোস্ট তৈরি করুন"
+    posts_heading: "পোস্টসমূহ"
+    download_file: "ফাইল ডাউনলোড করুন"
+    posted_on: "%date% তারিখে পোস্ট করা হয়েছে"
+    no_posts: "কোনো পোস্ট নেই।"
+  edit:
+    title: "কোর্স সম্পাদনা করুন: %course%"
+    heading: "কোর্স সম্পাদনা করুন"
+    label:
+      title: "শিরোনাম"
+      description: "বর্ণনা"
+      code: "কোড"
+      image: "কোর্স ছবি"
+    submit: "কোর্স আপডেট করুন"
+    back_to_courses: "কোর্সসমূহে ফিরে যান"
+
+courses:
+  my:
+    title: "আমার কোর্সসমূহ"
+    heading: "আমার কোর্সসমূহ"
+    add_course: "কোর্স যোগ করুন"
+    search_placeholder: "কোর্স খুঁজুন..."
+    no_courses: "কোনো কোর্স পাওয়া যায়নি।"
+    edit: "সম্পাদনা করুন"
+    infomessage: "তথ্য"
+    delete: "মুছুন"
+    delete_confirm: "আপনি কি এই কোর্সটি মুছে ফেলতে চান?"
+    info:
+      title: "কোর্স তথ্য"
+      description: "বর্ণনা"
+      enrolled_users: "নথিভুক্ত ব্যবহারকারী"
+      no_enrolled_users: "কোনো ব্যবহারকারী নথিভুক্ত নয়।"
+      back_to_courses: "কোর্সসমূহে ফিরে যান"
+  news:
+    heading: "সর্বশেষ ঘোষণা"
+    posted_file: "নতুন ফাইল পোস্ট করেছেন"
+    posted_message: "বার্তা পোস্ট করেছেন"
+    in_course: "কোর্সে"
+    none: "কোনো সাম্প্রতিক ঘোষণা নেই।"
+
+admin:
+  users:
+    title: "ব্যবহারকারীরা"
+    header: "ব্যবহারকারীরা"
+    add_user: "ব্যবহারকারী যোগ করুন"
+    table:
+      id: "আইডি"
+      profile_picture: "প্রোফাইল ছবি"
+      first_name: "প্রথম নাম"
+      last_name: "শেষ নাম"
+      email: "ইমেল"
+      phone: "ফোন"
+      address: "ঠিকানা"
+      roles: "ভূমিকা"
+      enrolled_courses: "নথিভুক্ত কোর্স"
+      actions: "কর্ম"
+    alt:
+      profile_picture: "প্রোফাইল ছবি"
+    no_profile_picture: "যাবতীয় নয়"
+    no_phone: "যাবতীয় নয়"
+    no_address: "যাবতীয় নয়"
+    no_enrollments: "কোনো নেই"
+    edit: "সম্পাদনা"
+    no_users: "কোনো ব্যবহারকারী পাওয়া যায়নি।"
+  enrollments:
+    title: "%firstName% %lastName% এর জন্য নামকরণ পরিচালনা করুন"
+    header: "%firstName% %lastName% এর জন্য নামকরণ পরিচালনা করুন"
+    admin_warning: "প্রশাসক ব্যবহারকারীদের কোর্সে নামকরণ করা যাবে না।"
+    current_heading: "বর্তমান নামকরণ"
+    none_current: "কোনো নামকরণ নেই।"
+    remove:
+      title: "নামকরণ অপসারণ করুন"
+    available_heading: "উপলব্ধ কোর্সসমূহ"
+    add:
+      title: "নামকরণ যোগ করুন"
+    all_enrolled: "সকল কোর্স ইতিমধ্যেই নামকরণ করা হয়েছে।"
+    back_to_profile: "প্রোফাইলে ফিরে যান"
+
+admin_alert:
+  banner: "কোনো প্রশাসনিক কাজ বাকি নেই|%count% প্রশাসনিক কাজ বাকি আছে|%count% প্রশাসনিক কাজ বাকি আছে"
+  tag:
+    created: "%name% দ্বারা তৈরি"
+    updated: "%name% দ্বারা সংশোধিত"
+    deleted: "%name% দ্বারা মুছে ফেলা"
+  dismiss: "বাতিল করুন"
+  history: "প্রশাসনিক সতর্কতা ইতিহাস"
+
+announcement:
+  list:
+    heading: "ঘোষণা"
+    new: "ঘোষণা যোগ করুন"
+    none: "কোনো ঘোষণা নেই"
+
+change_password:
+  title: "পাসওয়ার্ড পরিবর্তন করুন"
+  heading: "আপনার পাসওয়ার্ড পরিবর্তন করুন"
+  auto_generated: "আপনি বর্তমানে স্বয়ংক্রিয়ভাবে তৈরি হওয়া পাসওয়ার্ড ব্যবহার করছেন। দয়া করে এটি একটি নতুন, নিরাপদ পাসওয়ার্ডে পরিবর্তন করুন।"
+  prompt: "অনুগ্রহ করে নিচে আপনার পাসওয়ার্ড পরিবর্তন করুন।"
+  new_password:
+    first_label: "নতুন পাসওয়ার্ড"
+    second_label: "নতুন পাসওয়ার্ড নিশ্চিত করুন"
+  submit: "পাসওয়ার্ড আপডেট করুন"

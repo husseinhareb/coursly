@@ -1,0 +1,219 @@
+login:
+  title: "Увійти!"
+  sign_in: "Будь ласка, увійдіть"
+  email_label: "Електронна пошта"
+  password_label: "Пароль"
+  show_password: "Показати пароль"
+  button: "Увійти"
+  logged_in_as: "Ви увійшли як %username%"
+  logout: "Вийти"
+  cookies_notice: "Повідомлення про файли cookie"
+
+home:
+  title: "Головна"
+  hello: "Привіт, %name%!"
+  email: "Ваш email: %email%"
+  role: "Ваша роль: %role%"
+  welcome: "Ласкаво просимо на головну сторінку!"
+  login_prompt: "Будь ласка, увійдіть, щоб побачити деталі вашого облікового запису."
+  recent_courses_heading: "Нещодавно переглянуті курси"
+  no_recent_courses: "Немає нещодавно переглянутих курсів."
+  announcements_heading: "Останні оголошення"
+
+navbar:
+  title: "Ласкаво просимо!"
+  toggle_navigation: "Переключити навігацію"
+  logo_alt: "Логотип сайту"
+  users: "Користувачі"
+  courses: "Курси"
+  profile_picture_alt: "Світлина профілю"
+  profile_options: "Параметри профілю"
+  profile: "Профіль"
+  logout: "Вийти"
+  login: "Увійти"
+  announcement: "Оголошення"
+
+registration:
+  title: "Реєстрація"
+  header: "Реєстрація"
+  button: "Зареєструватися"
+  password_label: "Пароль (згенеровано автоматично)"
+  first_name:
+    label: "Ім'я"
+    not_blank: "Будь ласка, введіть ваше ім'я"
+  last_name:
+    label: "Прізвище"
+    not_blank: "Будь ласка, введіть ваше прізвище"
+  username:
+    label: "Ім'я користувача"
+    not_blank: "Будь ласка, введіть ім'я користувача"
+    min_length: "Ваше ім'я користувача повинно містити щонайменше {{ limit }} символів"
+  email:
+    label: "Електронна пошта"
+    not_blank: "Будь ласка, введіть email"
+    invalid: "Будь ласка, введіть дійсну електронну адресу"
+  plain_password:
+    label: "Пароль (згенеровано автоматично)"
+    not_blank: "Пароль генерується автоматично"
+    min_length: "Ваш пароль повинен містити щонайменше {{ limit }} символів"
+  role:
+    label: "Роль"
+    placeholder: "Оберіть вашу роль"
+    administrator: "Адміністратор"
+    student: "Студент"
+    professor: "Професор"
+    admin_professor: "Адмін і професор"
+
+profile:
+  title: "Мій профіль"
+  header: "Ваш профіль"
+  profile_pic: "Світлина профілю"
+  no_picture: "Світлина профілю недоступна."
+  first_name: "Ім'я"
+  last_name: "Прізвище"
+  email: "Електронна пошта"
+  phone_number: "Номер телефону"
+  address: "Адреса"
+  roles: "Ролі"
+  not_provided: "Не вказано"
+  enrolled_courses: "Зареєстровані курси"
+  manage_enrollments: "Керувати записами"
+  edit_profile: "Редагувати профіль"
+  change_password: "Змінити пароль"
+  save: "Зберегти"
+  cancel: "Скасувати"
+
+post:
+  title:
+    label: "Заголовок"
+  content:
+    label: "Зміст"
+  type:
+    label: "Тип"
+    message: "Повідомлення"
+    file: "Файл"
+    placeholder: "Оберіть тип"
+  attachment:
+    label: "Вкладення (необов'язково)"
+  new:
+    title: "Новий запис для %course%"
+    heading: "Створити новий запис для %course%"
+    submit: "Створити запис"
+    back_to_course: "Повернутися до курсу"
+  category:
+    label: "Категорія"
+    placeholder: "Оберіть категорію"
+  pin:
+    label: "Закріпити"
+
+course:
+  new:
+    title: "Новий курс"
+    heading: "Створити новий курс"
+    image_label: "Зображення курсу (необов'язково)"
+    submit: "Створити курс"
+    description: "Опис"
+    code: "Код"
+  show:
+    new_post: "Створити новий запис"
+    posts_heading: "Записи"
+    download_file: "Завантажити файл"
+    posted_on: "Опубліковано %date%"
+    no_posts: "Ще немає записів."
+  edit:
+    title: "Редагувати курс: %course%"
+    heading: "Редагувати курс"
+    label:
+      title: "Заголовок"
+      description: "Опис"
+      code: "Код"
+      image: "Зображення курсу"
+    submit: "Оновити курс"
+    back_to_courses: "Повернутися до курсів"
+
+courses:
+  my:
+    title: "Мої курси"
+    heading: "Мої курси"
+    add_course: "Додати курс"
+    search_placeholder: "Шукати курс..."
+    no_courses: "Немає доступних курсів."
+    edit: "Редагувати"
+    infomessage: "Інформація"
+    delete: "Видалити"
+    delete_confirm: "Ви впевнені, що хочете видалити цей курс?"
+    info:
+      title: "Інформація про курс"
+      description: "Опис"
+      enrolled_users: "Зареєстровані користувачі"
+      no_enrolled_users: "Ще немає зареєстрованих користувачів."
+      back_to_courses: "Повернутися до курсів"
+  news:
+    heading: "Останні оголошення"
+    posted_file: "додав новий файл"
+    posted_message: "додав повідомлення"
+    in_course: "у"
+    none: "Немає останніх оголошень."
+
+admin:
+  users:
+    title: "Користувачі"
+    header: "Користувачі"
+    add_user: "Додати користувача"
+    table:
+      id: "ID"
+      profile_picture: "Світлина профілю"
+      first_name: "Ім'я"
+      last_name: "Прізвище"
+      email: "Електронна пошта"
+      phone: "Телефон"
+      address: "Адреса"
+      roles: "Ролі"
+      enrolled_courses: "Зареєстровані курси"
+      actions: "Дії"
+    alt:
+      profile_picture: "Світлина профілю"
+    no_profile_picture: "N/A"
+    no_phone: "N/A"
+    no_address: "N/A"
+    no_enrollments: "Немає"
+    edit: "Редагувати"
+    no_users: "Користувачів не знайдено."
+  enrollments:
+    title: "Керувати записами для %firstName% %lastName%"
+    header: "Керувати записами для %firstName% %lastName%"
+    admin_warning: "Адміністраторів не можна записувати на курси."
+    current_heading: "Поточні записи"
+    none_current: "Немає записів."
+    remove:
+      title: "Видалити запис"
+    available_heading: "Доступні курси"
+    add:
+      title: "Додати запис"
+    all_enrolled: "Усі курси вже записані."
+    back_to_profile: "Повернутися до профілю"
+
+admin_alert:
+  banner: "Немає очікуваних дій адміністратора|%count% очікувана дія адміністратора|%count% очікуваних дій адміністратора"
+  tag:
+    created: "Створено %name%"
+    updated: "Змінено %name%"
+    deleted: "Видалено %name%"
+  dismiss: "Скасувати"
+  history: "Історія адмін-попереджень"
+
+announcement:
+  list:
+    heading: "Оголошення"
+    new: "Додати оголошення"
+    none: "Повідомлень немає"
+
+change_password:
+  title: "Змінити пароль"
+  heading: "Змініть свій пароль"
+  auto_generated: "Ви використовуєте автоматично згенерований пароль. Будь ласка, змініть його на новий, безпечний."
+  prompt: "Будь ласка, змініть свій пароль нижче."
+  new_password:
+    first_label: "Новий пароль"
+    second_label: "Підтвердьте новий пароль"
+  submit: "Оновити пароль"
