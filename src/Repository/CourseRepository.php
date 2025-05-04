@@ -65,6 +65,7 @@ class CourseRepository extends ServiceEntityRepository
             INNER JOIN enrollment e
                 ON c.id = e.course_id
             WHERE e.user_id = :userId
+            ORDER BY c.title ASC
         ';
 
         $query = $em->createNativeQuery($sql, $rsm);
