@@ -1,62 +1,60 @@
-# Coursly
+## Coursly
 
-Ce projet Symfony nécessite quelques étapes avant de pouvoir le lancer en local.
+This Symfony project requires a few steps before you can run it locally.
 
-## Prérequis
+## Prerequisites
 
 * PHP (>= 8.0)
 * Composer
 * Symfony CLI
-* Un serveur de base de données (MySQL ou MariaDB)
-* phpMyAdmin (ou tout autre outil d’administration)
+* A database server (MySQL or MariaDB)
+* phpMyAdmin (or any other database administration tool)
 
 ## Installation
 
-1. **Créer la base de données**
+1. **Create the database**
+   Using phpMyAdmin (or another tool), create a database named `coursly`.
 
-   Avec phpMyAdmin (ou un autre outil), créez une base de données nommée : `coursly`.
-
-2. **Cloner et installer les dépendances**
+2. **Clone the repository and install dependencies**
 
    ```bash
    cd coursly
    composer install
    ```
 
-3. **Mettre à jour le schéma de la base**
+3. **Update the database schema**
 
    ```bash
    php bin/console doctrine:schema:update --force
    ```
 
-4. **Charger les fixtures**
+4. **Load the fixtures**
 
    ```bash
    php bin/console doctrine:fixtures:load --append
    ```
 
-5. **Importer les données dummy**
+5. **Import the dummy data**
+   In phpMyAdmin (or your preferred admin tool):
 
-   Dans phpMyAdmin (ou votre outil d’administration préféré) :
+   * Select the `coursly` database.
+   * Go to the **Import** tab.
+   * Click **Browse**, choose the `dummy_data.sql` file.
+   * Leave the default options and click **Go**.
 
-   * Sélectionnez la base `coursly`.
-   * Allez dans l’onglet **Import**.
-   * Cliquez sur **Parcourir**, choisissez le fichier `dummy_data.sql`.
-   * Laissez les options par défaut et cliquez sur **Exécuter**.
-   
-6. **Lancer le serveur de développement**
+6. **Start the development server**
 
    ```bash
    symfony serve
    ```
 
-Le projet est maintenant accessible à l’adresse indiquée par Symfony CLI (par défaut : [http://127.0.0.1:8000](http://127.0.0.1:8000)).
+The project will now be accessible at the address shown by the Symfony CLI (by default: [http://127.0.0.1:8000](http://127.0.0.1:8000)).
 
-## Connexion à l'administrateur
+## Administrator Login
 
-Le premier utilisateur créé est l'administrateur :
+The first user created is the administrator:
 
-* **Email :** `admin@coursly.com`
-* **Mot de passe :** `admincoursly`
+* **Email:** `admin@coursly.com`
+* **Password:** `admincoursly`
 
-Utilisez ces identifiants pour vous connecter et accéder à la zone d'administration.
+Use these credentials to log in and access the admin area.
