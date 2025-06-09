@@ -58,3 +58,15 @@ The first user created is the administrator:
 * **Password:** `admincoursly`
 
 Use these credentials to log in and access the admin area.
+
+## Screenshots
+
+Below are some example screenshots to help you get started.
+![Screenshot 2025-06-09 at 23-20-44 My Courses](https://github.com/user-attachments/assets/ec22fb4f-230a-49d5-b2cd-79d15ea6fb23)
+![Screenshot 2025-06-09 at 23-15-33 Home](https://github.com/user-attachments/assets/7b67eee6-9243-4c29-afb5-52ee42ffdb31)
+![Screenshot 2025-06-09 at 23-15-28 announcement list title](https://github.com/user-attachments/assets/b3356a8d-ee33-43eb-9f1a-b9ceb80c28e5)
+![Screenshot 2025-06-09 at 23-14-20 Users](https://github.com/user-attachments/assets/c53d2e07-4911-43aa-8844-9f2addff3764)
+![Screenshot 2025-06-09 at 23-12-35 Manage Enrollments for Joe Filler](https://github.com/user-attachments/assets/38b52a53-1d30-498d-8307-a00884236cf1)
+
+
+
